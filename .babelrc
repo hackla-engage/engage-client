@@ -1,0 +1,10 @@
+{
+  // Presets are preset packages of plugins
+  "presets": ["env", "react"],
+  // Plugins are modules for transpiling
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-regenerator"
+  ]
+}

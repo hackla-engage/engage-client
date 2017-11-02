@@ -1,0 +1,46 @@
+// @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,500');
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic");
+$primary-font-color: white;
+$secondary-font-color: #04a9f4;
+$primary-nav-color: #2c3e50;
+$primary-bg-color:#18bc9c;
+$secondary-bg-color:white;
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: $primary-font-color;
+}
+body {
+  padding-top: 5rem;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  background-color: $primary-bg-color;
+}
+#app {
+  height: 100%;
+  width: 100%;
+  height: 100vh;
+  width: 100vw;
+}
+.navbar {
+  background-color: $primary-nav-color;
+}
+.about {
+  color: $secondary-font-color;
+  background-color: $secondary-bg-color;
+}
+
+footer {
+  background-color: $primary-nav-color
+}

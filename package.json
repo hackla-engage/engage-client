@@ -1,0 +1,43 @@
+{
+  "name": "CouncilTag",
+  "version": "1.0.0",
+  "description": "Simple and modern React boilerplate",
+  "main": "client/src/app.js",
+  "repository": "https://github.com/hackla-engage/CouncilTag-Django",
+  "author": "Hack for LA",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server client/public",
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "live-server": "^1.2.0",
+    "lodash": "^4.17.4",
+    "node-sass": "^4.5.3",
+    "query-string": "^5.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "webpack-dev-server": "^2.8.2"
+  }
+}
