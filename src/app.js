@@ -5,9 +5,10 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import Landing from './component/Landing.jsx'
 import CounterContainer from './container/CounterContainer.jsx'
+import { configureStore, history} from './store/configureStore'
 import 'babel-polyfill';
 
-const store = createStore(reducer)
+const store = configureStore()
 
 render(
   <Provider store={store}>
