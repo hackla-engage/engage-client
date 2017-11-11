@@ -1,14 +1,14 @@
 {
-  "name": "CouncilTag",
-  "version": "1.0.0",
-  "description": "Simple and modern React boilerplate",
+  "name": "engage-client",
+  "version": "0.1.0",
+  "description": "",
   "main": "client/src/app.js",
-  "repository": "https://github.com/hackla-engage/CouncilTag-Django",
+  "repository": "https://github.com/hackla-engage/engage-client",
   "author": "Hack for LA",
   "license": "MIT",
   "scripts": {
     "serve": "live-server client/public",
-    "build": "webpack",
+    "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.6.0"
   },
   "devDependencies": {
