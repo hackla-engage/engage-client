@@ -7,12 +7,17 @@ import Landing from './component/Landing.jsx'
 import CounterContainer from './container/CounterContainer.jsx'
 import { configureStore, history} from './store/configureStore'
 import 'babel-polyfill';
+import { Switch } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux';
+import Routes from './routes';
 
 const store = configureStore()
 
 render(
   <Provider store={store}>
-    <Landing />
+    <ConnectedRouter history={history}>
+      <Routes />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
 )

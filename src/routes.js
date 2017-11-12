@@ -1,14 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import App from './containers/App';
+import App from './container/App.jsx';
 import Landing from './component/Landing.jsx';
-import CounterContainer from './containers/CounterContainer.jsx';
+import CounterContainer from './container/CounterContainer.jsx';
 
 export default () => (
-  <App>
-    <Switch>
-      <Route path="/counterContainer" component={CounterContainer} />
-      <Route path="/" ccomponents={Landing} />
-    </Switch>
-  </App>
+  <Switch>
+    <Route exact path="/" component={Landing} />
+    <Route path="/redux" component={CounterContainer} />
+  </Switch>
 );

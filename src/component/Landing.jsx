@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import styles from './Landing.scss'
 import CounterContainer from '../container/CounterContainer.jsx'
 
-      // <CounterContainer />
 const Landing = (props) =>{
   return (
     <div>
-      <CounterContainer />
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
         <div className="container">
           <a className="navbar-brand js-scroll-trigger" href="#page-top">Engage</a>
@@ -16,6 +14,9 @@ const Landing = (props) =>{
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link js-scroll-trigger" href="#redux">redux</a>
+              </li>
               <li className="nav-item">
                 <a className="nav-link js-scroll-trigger" href="#about">about</a>
               </li>

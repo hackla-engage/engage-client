@@ -15,13 +15,17 @@ class Counter extends Component {
         </div>
         <div className={styles.btnGroup}>
           <button className={styles.btn} onClick={increment} data-tclass="btn">
-            <i className="fa fa-plus" />
+            INCREMENT
           </button>
           <button className={styles.btn} onClick={decrement} data-tclass="btn">
-            <i className="fa fa-minus" />
+            DECREMENT
           </button>
-          <button className={styles.btn} onClick={incrementIfOdd} data-tclass="btn">odd</button>
-          <button className={styles.btn} onClick={() => incrementAsync()} data-tclass="btn">async</button>
+          <button className={styles.btn} onClick={incrementIfOdd} data-tclass="btn">
+            INCREMENT IF ODD
+          </button>
+          <button className={styles.btn} onClick={() => incrementAsync()} data-tclass="btn">
+            ASYNC INCREMENT
+          </button>
         </div>
       </div>
     );
