@@ -7,12 +7,12 @@ import CounterContainer from './container/CounterContainer.jsx';
 const Routes = () => {
 	return (
 		<div>
-              <Route component={ Header } />
-              <Switch>
-              	<Route exact path="/" component={ Landing } />
-                <Route path="/redux" component={CounterContainer} />
-              </Switch>
-        </div>
+      <Route component={ Header } />
+      <Switch>
+        <Route exact path="/" component={ Landing } />
+        <Route path="/redux" component={CounterContainer} />
+      </Switch>
+    </div>
 	);
 };
 
