@@ -1,14 +1,14 @@
 {
-  "name": "CouncilTag",
-  "version": "1.0.0",
-  "description": "Simple and modern React boilerplate",
+  "name": "engage-client",
+  "version": "0.1.0",
+  "description": "",
   "main": "client/src/app.js",
-  "repository": "https://github.com/hackla-engage/CouncilTag-Django",
+  "repository": "https://github.com/hackla-engage/engage-client",
   "author": "Hack for LA",
   "license": "MIT",
   "scripts": {
     "serve": "live-server client/public",
-    "build": "webpack",
+    "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server"
   },
   "dependencies": {
@@ -24,12 +24,21 @@
     "query-string": "^5.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.8",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-polyfill": "^6.26.0",
