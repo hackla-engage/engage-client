@@ -19,6 +19,9 @@ class Header extends Component {
                   <Link className="nav-link js-scroll-trigger" to="/redux">redux</Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link js-scroll-trigger" to="/preference">preference</Link>
+                </li>
+                <li className="nav-item">
                   <a className="nav-link js-scroll-trigger" href="#about">about</a>
                 </li>
                 <li className="nav-item">
