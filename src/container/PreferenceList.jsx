@@ -1,11 +1,19 @@
 import Preference from '../component/Preference.jsx'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { preference_selected } from '../actions/Preference';
+
+
 
 function mapStateToProps(state) {
-    console.log('state: ', state)
     return {
         preferenceList: state.preferenceList,
+        PreferenceSelected: state.PreferenceSelected,
     };
 }
 
-export default connect(mapStateToProps)(Preference)
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ preference_selected }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Preference)
