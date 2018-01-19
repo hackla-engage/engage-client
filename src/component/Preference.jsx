@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 
 class Preference extends Component {
     renderList() {
-        return this.props.preferenceList.map(preference => {
+        return this.props.preferenceList.map((preference, index) => {
+            let item = `item-${index}`;
             return (
-                <li 
-                    key={ preference.title } 
-                    onClick = { () => this.props.preference_selected(preference) }
-                    style={{ "color":"black", "textAlign": "center" }}
-                    className='list-group-item'>
-                    { preference.title }
-                </li>
+                <div key={ index }  className="panel panel-default">
+                    <div className="panel-heading" role="tab">
+                        <h4 className="panel-title">{ preference.title }<a role="button" data-toggle="collapse" data-parent="#accordion-1" aria-expanded="false" href={ `#accordion-1 .${item}` }><span className="fa fa-info" onClick = { () => this.props.preference_selected(preference) } style={{ "float":"right", "width":"10%" }}></span></a></h4>
+                    </div>
+                    <div className={ `panel-collapse collapse ${item}` } style={{ "backgroundColor":"white", "color":"#18bc9c", "borderRadius": "10px", "padding": "10px" }} role="tabpanel">
+                        <div className="panel-body"><span>{ preference.info }</span></div>
+                    </div>
+                </div>
             )
         })
     }
@@ -25,12 +27,12 @@ class Preference extends Component {
     }
 
     render() {
-
+        console.log(this.props)
         return (
-            <div>
-                <ul className='list-group col-sm-4'>
+            <div className="container">
+                <div className="panel-group" role="tablist" aria-multiselectable="true" id="accordion-1">
                     { this.renderList() }
-                </ul>
+                </div>
                 <hr />
                 <div style={{ "textAlign":"center" }}>
                     { this.selected() }
