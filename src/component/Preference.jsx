@@ -9,8 +9,8 @@ class Preference extends Component {
                     <div className="panel-heading" role="tab">
                         <h4 className="panel-title">{ preference.title }<a role="button" data-toggle="collapse" data-parent="#accordion-1" aria-expanded="false" href={ `#accordion-1 .${item}` }><span className="fa fa-info" onClick = { () => this.props.preference_selected(preference) } style={{ "float":"right", "width":"10%" }}></span></a></h4>
                     </div>
-                    <div className={ `panel-collapse collapse ${item}` } style={{ "backgroundColor":"white", "color":"#18bc9c", "borderRadius": "10px", "padding": "10px" }} role="tabpanel">
-                        <div className="panel-body"><span>{ preference.info }</span></div>
+                    <div className={ `panel-collapse collapse ${item}` } style={{ "backgroundColor":"white", "color":"#18bc9c", "borderRadius": "10px" }} role="tabpanel">
+                        <div className="panel-body" style={{ "paddingLeft": "25px", "paddingRight": "25px" }}><span>{ preference.info }</span></div>
                     </div>
                 </div>
             )
