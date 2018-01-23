@@ -73,15 +73,6 @@ const Landing = (props) =>{
             </div>
           </div>
         </div>
-        <div className="footer-below">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
-                Copyright &copy; Your Website 2017
-              </div>
-            </div>
-          </div>
-        </div>
       </footer>
     </div>
   );
