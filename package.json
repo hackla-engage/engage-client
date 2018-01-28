@@ -8,7 +8,8 @@
   "scripts": {
     "serve": "live-server public",
     "build": "webpack --config webpack.config.prod.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
