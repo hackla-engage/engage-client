@@ -28,6 +28,26 @@ module.exports = {
           'sass-loader',
         ]
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.svg/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {}
+          }
+        ]
+      }
     ]
   },
   // Dev tools are provided by webpack
