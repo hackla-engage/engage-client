@@ -2,12 +2,11 @@
   "name": "engage-client",
   "version": "0.1.0",
   "description": "",
-  "main": "client/src/app.js",
   "repository": "https://github.com/hackla-engage/engage-client",
   "author": "Hack for LA",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server client/public",
+    "serve": "live-server public",
     "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server"
   },
