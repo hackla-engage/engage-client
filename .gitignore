@@ -2,5 +2,5 @@
 .idea
 node_modules
 sandbox
-
 bundle.js
+package-lock.json
