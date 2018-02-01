@@ -5,14 +5,15 @@ import styles from './Header.scss';
 
 const breakPointSize = 767
 const Header = () => (
-  <Menu inverted style={{
+  <Menu style={{
     paddingLeft: '1rem',
     paddingRight: '1rem',
     margin: 0,
+    backgroundColor: '#30C5FF'
   }}>
     <Responsive as={Container} maxWidth={breakPointSize}>
-      <Dropdown closeOnChange  item simple text='Menu'>
-        <Dropdown.Menu style={{backgroundColor: '#000'}} >
+      <Dropdown closeOnChange style={{ color: '#FFF' }} item simple text='Menu'>
+        <Dropdown.Menu style={{color: '#FFF', backgroundColor: '#30C5FF'}} >
           <Dropdown.Item>
             <Link to="/redux">redux</Link>
           </Dropdown.Item>
@@ -30,7 +31,7 @@ const Header = () => (
     </Responsive>
 
     <Menu.Item name='browse'>
-      <Link to="/">Engage</Link>
+      <Link style={{ color: '#FFF' }}to="/">Engage</Link>
     </Menu.Item>
 
     <Responsive as={Container} minWidth={breakPointSize}>

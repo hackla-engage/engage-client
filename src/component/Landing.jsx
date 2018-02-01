@@ -25,15 +25,16 @@ const Landing = (props) =>{
             as='h1'
             content='Engage'
             inverted
-            style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '3em' }}
+            style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '2.5em' }}
           />
           <Header
             as='h2'
             content='Engage helps you voice your opinions at Santa Monica City Council'
             inverted
-            style={{ fontSize: '1.7em', fontWeight: 'normal' }}
+            style={{ fontSize: '1.7em', fontWeight: 'normal', color: '#000', }}
           />
-          <Button primary size='huge'>
+          <Button primary size='huge' style=
+          {{ backgroundColor: '#7FB800' }}>
           Click to Engage
             <Icon name='right arrow' />
           </Button>
@@ -49,7 +50,7 @@ const Landing = (props) =>{
               left: 0,
               zIndex: -1,
               width: '100%',
-              opacity: 0.5,
+              opacity: 0.4,
               height: 'auto',
               minHeight: '700px',
               objectFit: 'cover',
