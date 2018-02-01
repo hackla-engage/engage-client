@@ -5,7 +5,11 @@ import styles from './Header.scss';
 
 const breakPointSize = 767
 const Header = () => (
-  <Menu inverted style={{ paddingLeft: '1rem', paddingRight: '1rem'}}>
+  <Menu inverted style={{
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+    margin: 0,
+  }}>
     <Responsive as={Container} maxWidth={breakPointSize}>
       <Dropdown closeOnChange  item simple text='Menu'>
         <Dropdown.Menu style={{backgroundColor: '#000'}} >

@@ -16,39 +16,53 @@ const Landing = (props) =>{
   return (
     <div>
       <Segment
-        inverted
         textAlign='center'
-        style={{ minHeight: 700, padding: '1em 0em' }}
+        style={{ position: 'relative', minHeight: 700, padding: '1em 0em' }}
         vertical
       >
-        <Container text>
+        <Container text style={{}}>
           <Header
             as='h1'
             content='Engage'
             inverted
-            style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0, marginTop: '3em' }}
-          />
-          <Image
-            bordered
-            rounded
-            size='medium'
-            src="http://d33wubrfki0l68.cloudfront.net/ac40c001c60109040dc17c9b42d270616cd9e711/2ac65/images/logo-hfla.svg"
+            style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '3em' }}
           />
           <Header
             as='h2'
-            content='Voice your opinions at Santa Monica City Council'
+            content='Engage helps you voice your opinions at Santa Monica City Council'
             inverted
             style={{ fontSize: '1.7em', fontWeight: 'normal' }}
           />
           <Button primary size='huge'>
-            Get Started
+          Click to Engage
             <Icon name='right arrow' />
           </Button>
         </Container>
+        <div style={{
+          width: '100%',
+        }}>
+          <Image 
+            src="/static/image/city-council.jpg"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              zIndex: -1,
+              width: '100%',
+              opacity: 0.5,
+              height: 'auto',
+              minHeight: '700px',
+              objectFit: 'cover',
+            }}
+          />
+        </div>
       </Segment>
-      <Segment style={{ padding: '8em 0em' }} vertical>
-        <Container text>
-          <Header as='h3' style={{ fontSize: '2em' }}>Engage helps you voice your opinions at local goverment meetings
+      <Segment style={{
+        padding: '8em 0em',
+        backgroundImage: 'linear-gradient(180deg, #80C3F3, #4A90E2)',
+        }} vertical>
+        <Container text style={{}}>
+          <Header as='h3' style={{ fontSize: '2em' }}>Engage helps you voice your opinions at city council meetings
           </Header>
 
           <p style={{ fontSize: '1.33em' }}>
@@ -64,9 +78,9 @@ Engage helps you voice your opinions at local goverment meetings
           >
             {/* <a href='#'>Case Studies</a> */}
           </Divider>
-          <Header as='h3' style={{ fontSize: '2em' }}>How do I start?</Header>
+          <Header as='h3' style={{ fontSize: '2em' }}>How do I get started?</Header>
           <p style={{ fontSize: '1.33em' }}>
-            Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.
+            Simply click to engage above and sign up with your email!
           </p>
           <Divider
             as='h4'
@@ -78,11 +92,12 @@ Engage helps you voice your opinions at local goverment meetings
           </Divider>
           <Header as='h3' style={{ fontSize: '2em' }}>How does City Council work?</Header>
           <p style={{ fontSize: '1.33em' }}>
-            It's a bit daunting but we are here to help
+            It may seem daunting, but we are here to help!
           </p>
-          <p>Tutorial</p>
+          <p>Click for more</p>
         </Container>
       </Segment>
+
     </div>
   );
 }

@@ -36,7 +36,7 @@ footer {
     // height: 50px;
   }
   .icon-meetup {
-    background: url('../static/image/meetup.png');
+    background: url('/static/image/meetup.png');
     // height: 50px;
     // width: 50px;
     filter: invert(100%);
@@ -46,12 +46,12 @@ footer {
     // height: auto;
   }
   .icon-slack {
-    background: url('../static/image/slack-light.svg');
+    background: url('/static/image/slack-light.svg');
     height: 50px;
     width: 50px;
   }
   .icon-github {
-    background: url('../static/image/github-light.png');
+    background: url('/static/image/github-light.png');
     height: 50px;
     width: 50px;
 
