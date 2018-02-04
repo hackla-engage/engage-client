@@ -1,0 +1,59 @@
+footer {
+  background-color: black; 
+
+}
+.social-links {
+
+  &__links_container {
+    display: flex;
+
+  }
+  &__link {
+    display: block;
+    max-width: 100px;
+    width: 100px;
+    height: 100px;
+  }
+  .sr-only {
+    border: 0;
+    clip: rect(0,0,0,0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  &__icon-wrapper {
+    width: 100px;
+
+  }
+  &__icon {
+    display: block;
+    height: auto;
+    width: 100%;
+    // width: 50px;
+    // height: 50px;
+  }
+  .icon-meetup {
+    background: url('/static/image/meetup.png');
+    // height: 50px;
+    // width: 50px;
+    filter: invert(100%);
+    height: 50px;
+    width: 50px;
+    // width: 100%;
+    // height: auto;
+  }
+  .icon-slack {
+    background: url('/static/image/slack-light.svg');
+    height: 50px;
+    width: 50px;
+  }
+  .icon-github {
+    background: url('/static/image/github-light.png');
+    height: 50px;
+    width: 50px;
+
+  }
+}

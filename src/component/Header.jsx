@@ -1,42 +1,57 @@
 import React, { Component } from 'react';
-import styles from './Landing.scss';
 import { Link } from 'react-router-dom';
+import { Menu, Dropdown, Responsive, Container } from 'semantic-ui-react'
+import styles from './Header.scss';
 
-class Header extends Component {
-	render() {
-		return (
-			<div>
-        <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
-          <div className="container">
-            <a className="navbar-brand js-scroll-trigger" href="#">Engage</a>
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              Menu
-              <i className="fa fa-bars"></i>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link js-scroll-trigger" to="/redux">redux</Link>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="#about">about</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="#tutorial">tutorial</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="#contact">contact</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="./signin">signin</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-			</div>
-		)
-	}
-}
+const breakPointSize = 767
+const Header = () => (
+  <Menu style={{
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+    margin: 0,
+    backgroundColor: '#30C5FF'
+  }}>
+    <Responsive as={Container} maxWidth={breakPointSize}>
+      <Dropdown closeOnChange style={{ color: '#FFF' }} item simple text='Menu'>
+        <Dropdown.Menu style={{color: '#FFF', backgroundColor: '#30C5FF'}} >
+          <Dropdown.Item>
+            <Link to="/redux">redux</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/preference">preference</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/about">about</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/signin">signin</Link>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Responsive>
+
+    <Menu.Item name='browse'>
+      <Link style={{ color: '#FFF' }}to="/">Engage</Link>
+    </Menu.Item>
+
+    <Responsive as={Container} minWidth={breakPointSize}>
+      <Menu.Menu position='right'>
+        <Menu.Item name='redux'>
+          <Link to="/redux">redux</Link>
+        </Menu.Item>
+        <Menu.Item name='preference'>
+          <Link to="/preference">preference</Link>
+        </Menu.Item>
+        <Menu.Item name='about'>
+          <Link to="/about">about</Link>
+        </Menu.Item>
+        <Menu.Item name='signin'>
+          <Link to="/signin">signin</Link>
+        </Menu.Item>
+      </Menu.Menu>
+    </Responsive>
+    
+  </Menu>
+)
 
 export default Header;

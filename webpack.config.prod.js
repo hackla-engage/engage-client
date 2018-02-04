@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
@@ -29,13 +30,36 @@ module.exports = {
           'sass-loader',
         ]
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.svg/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {}
+          }
+        ]
+      }
     ]
   },
   plugins: [
     new UglifyJSPlugin({
       uglifyOptions: {
-        sourcemap: false
-      }
+        sourcemap: true
+      },
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   // Dev tools are provided by webpack
