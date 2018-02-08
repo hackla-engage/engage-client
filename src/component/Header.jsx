@@ -1,56 +1,65 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Container } from 'semantic-ui-react'
+import {
+  Menu,
+  Dropdown,
+  Responsive,
+  Container,
+  Segment
+} from 'semantic-ui-react'
 import styles from './Header.scss';
+
+styles.link = {
+  color: '#FFF',
+};
 
 const breakPointSize = 767
 const Header = () => (
-  <Menu style={{
+  <Menu borderless style={{
     paddingLeft: '1rem',
     paddingRight: '1rem',
     margin: 0,
-    backgroundColor: '#30C5FF'
+    backgroundColor: '#7FB800'
   }}>
-    <Responsive as={Container} maxWidth={breakPointSize}>
-      <Dropdown closeOnChange style={{ color: '#FFF' }} item simple text='Menu'>
-        <Dropdown.Menu style={{color: '#FFF', backgroundColor: '#30C5FF'}} >
-          <Dropdown.Item>
-            <Link to="/redux">redux</Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/preference">preference</Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/about">about</Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link to="/signin">signin</Link>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Responsive>
-
     <Menu.Item name='browse'>
-      <Link style={{ color: '#FFF' }}to="/">Engage</Link>
+      <Link style={ styles.link } to="/">Engage</Link>
     </Menu.Item>
 
     <Responsive as={Container} minWidth={breakPointSize}>
       <Menu.Menu position='right'>
         <Menu.Item name='redux'>
-          <Link to="/redux">redux</Link>
+          <Link style={ styles.link } to="/redux">redux</Link>
         </Menu.Item>
         <Menu.Item name='preference'>
-          <Link to="/preference">preference</Link>
+          <Link style={ styles.link } to="/preference">preference</Link>
         </Menu.Item>
         <Menu.Item name='about'>
-          <Link to="/about">about</Link>
+          <Link style={ styles.link } to="/about">about</Link>
         </Menu.Item>
         <Menu.Item name='signin'>
-          <Link to="/signin">signin</Link>
+          <Link style={ styles.link } to="/signin">signin</Link>
         </Menu.Item>
       </Menu.Menu>
     </Responsive>
-    
+
+    <Responsive as={ Menu.Menu} position='right' maxWidth={breakPointSize}>
+      <Dropdown style={{ backgroundColor: '#7FB800', color: '#fff' }} item simple text='Menu'>
+        <Dropdown.Menu style={{color: '#FFF', backgroundColor: '#7FB800'}} >
+          <Dropdown.Item>
+            <Link style={ styles.link } to="/redux">redux</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link style={ styles.link } to="/preference">preference</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link style={ styles.link } to="/about">about</Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link style={ styles.link } to="/signin">signin</Link>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Responsive>   
   </Menu>
 )
 

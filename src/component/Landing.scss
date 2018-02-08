@@ -1,9 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic");
+@import url("https://fonts.googleapis.com/css?family=Bitter:400,700|Open+Sans:400,700");
+
 $primary-font-color: white;
 $secondary-font-color: #04a9f4;
 $primary-nav-color: #2c3e50;
 $primary-bg-color:#18bc9c;
 $secondary-bg-color:white;
+
+
 
 *, *:before, *:after {
   box-sizing: inherit;
@@ -16,11 +19,8 @@ body {
   width: 100vw;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: $primary-font-color;
-}
-body {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
 #app {
@@ -29,3 +29,4 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
