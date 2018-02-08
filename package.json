@@ -7,7 +7,7 @@
   "author": "Hack for LA",
   "license": "MIT",
   "scripts": {
-    "serve": "live-serverpublic",
+    "serve": "live-server public",
     "build": "webpack --config webpack.config.prod.js",
     "dev": "webpack-dev-server",
     "postinstall": "npm run build"
