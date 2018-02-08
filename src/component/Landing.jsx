@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './Landing.scss';
-// import styles from './Header.scss';
 import {
   Button,
   Container,
@@ -9,23 +8,27 @@ import {
   Header,
   Icon,
   Image,
+  Responsive,
   Segment,
 } from 'semantic-ui-react'
+
+const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
+const breakPointSize = 767
 
 const Landing = (props) =>{
   return (
     <div>
       <Segment
         textAlign='center'
-        style={{ position: 'relative', minHeight: 700, padding: '1em 0em' }}
+        style={{ position: 'relative', minHeight: 536, padding: '1em 0em' }}
         vertical
       >
-        <Container text style={{}}>
+        <Container text>
           <Header
             as='h1'
             content='Engage'
             inverted
-            style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '2.5em' }}
+            style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '1.5em' }}
           />
           <Header
             as='h2'
@@ -34,28 +37,46 @@ const Landing = (props) =>{
             style={{ fontSize: '1.7em', fontWeight: 'normal', color: '#000', }}
           />
           <Button primary size='huge' style=
-          {{ backgroundColor: '#7FB800' }}>
-          Click to Engage
+          {{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
+          <a href={ appLink } style={{ color: '#FFF' }} >Click to Engage
             <Icon name='right arrow' />
+          </a>
           </Button>
         </Container>
         <div style={{
           width: '100%',
         }}>
-          <Image 
-            src="/static/image/city-council.jpg"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              zIndex: -1,
-              width: '100%',
-              opacity: 0.4,
-              height: 'auto',
-              minHeight: '700px',
-              objectFit: 'cover',
-            }}
-          />
+          
+          <Responsive minWidth={ breakPointSize }>
+            <Image 
+              src="/static/image/city-council@2x.jpg"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: -1,
+                width: '100%',
+                height: 'auto',
+                minHeight: '536px',
+                objectFit: 'cover',
+              }}
+            />
+          </Responsive>
+          <Responsive maxWidth={ breakPointSize }>
+            <Image 
+              src="/static/image/city-council-mobile@3x.jpg"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: -1,
+                width: '100%',
+                height: 'auto',
+                minHeight: '536px',
+                objectFit: 'cover',
+              }}
+            />
+          </Responsive>
         </div>
       </Segment>
       <Segment style={{
@@ -77,7 +98,6 @@ Engage helps you voice your opinions at local goverment meetings
             horizontal
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
-            {/* <a href='#'>Case Studies</a> */}
           </Divider>
           <Header as='h3' style={{ fontSize: '2em' }}>How do I get started?</Header>
           <p style={{ fontSize: '1.33em' }}>
@@ -89,7 +109,6 @@ Engage helps you voice your opinions at local goverment meetings
             horizontal
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
-            {/* <a href='#'>Case Studies</a> */}
           </Divider>
           <Header as='h3' style={{ fontSize: '2em' }}>How does City Council work?</Header>
           <p style={{ fontSize: '1.33em' }}>
