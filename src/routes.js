@@ -7,8 +7,8 @@ import CounterContainer from './container/CounterContainer.jsx';
 import PreferenceList from './container/PreferenceList.jsx';
 
 const Routes = () => {
-	return (
-		<div>
+  return (
+    <div>
       <Route component={ Header } />
       <Switch>
         <Route exact path="/" component={ Landing } />
@@ -17,7 +17,7 @@ const Routes = () => {
       </Switch>
       <Route component={ Footer } />
     </div>
-	);
+  );
 };
 
 export default Routes;
