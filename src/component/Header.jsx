@@ -33,6 +33,9 @@ const Header = () => (
         <Menu.Item name='preference'>
           <Link style={ styles.link } to="/preference">preference</Link>
         </Menu.Item>
+        <Menu.Item name='feed'>
+          <Link style={ styles.link } to="/feed">feed</Link>
+        </Menu.Item>
         <Menu.Item name='about'>
           <Link style={ styles.link } to="/about">about</Link>
         </Menu.Item>
