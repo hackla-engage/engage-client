@@ -27,17 +27,14 @@ const Header = () => (
 
     <Responsive as={Container} minWidth={breakPointSize}>
       <Menu.Menu position='right'>
-        <Menu.Item name='redux'>
-          <Link style={ styles.link } to="/redux">redux</Link>
-        </Menu.Item>
         <Menu.Item name='preference'>
-          <Link style={ styles.link } to="/preference">preference</Link>
+          <Link style={ styles.link } to="/preference">Preference</Link>
         </Menu.Item>
         <Menu.Item name='feed'>
-          <Link style={ styles.link } to="/feed">feed</Link>
+          <Link style={ styles.link } to="/feed">Feed</Link>
         </Menu.Item>
         <Menu.Item name='about'>
-          <Link style={ styles.link } to="/about">about</Link>
+          <Link style={ styles.link } to="/about">About</Link>
         </Menu.Item>
         <Menu.Item name='signin'>
           <Link style={ styles.link } to="/signin">Sign In</Link>
@@ -49,16 +46,16 @@ const Header = () => (
       <Dropdown style={{ backgroundColor: '#7FB800', color: '#fff' }} item simple text='Menu'>
         <Dropdown.Menu style={{color: '#FFF', backgroundColor: '#7FB800'}} >
           <Dropdown.Item>
-            <Link style={ styles.link } to="/redux">redux</Link>
+            <Link style={ styles.link } to="/preference">Preference</Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link style={ styles.link } to="/preference">preference</Link>
+            <Link style={ styles.link } to="/feed">Feed</Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link style={ styles.link } to="/about">about</Link>
+            <Link style={ styles.link } to="/about">About</Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link style={ styles.link } to="/signin">signin</Link>
+            <Link style={ styles.link } to="/signin">Sign In</Link>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
