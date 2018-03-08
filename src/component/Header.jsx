@@ -40,7 +40,7 @@ const Header = () => (
           <Link style={ styles.link } to="/about">about</Link>
         </Menu.Item>
         <Menu.Item name='signin'>
-          <Link style={ styles.link } to="/signin">signin</Link>
+          <Link style={ styles.link } to="/signin">Sign In</Link>
         </Menu.Item>
       </Menu.Menu>
     </Responsive>
