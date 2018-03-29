@@ -6,6 +6,7 @@ import Footer from './component/Footer.jsx';
 import PreferenceList from './container/PreferenceList.jsx';
 import FeedContainer from './container/FeedContainer.jsx';
 import SignIn from './component/SignIn.jsx'
+import Faq from './component/Faq.jsx'
 
 const Routes = () => {
   return (
@@ -14,8 +15,9 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={ Landing } />
         <Route path="/preference" component={PreferenceList} />
-        <Route exact path="/feed" component={ FeedContainer } />
+        <Route path="/feed" component={ FeedContainer } />
         <Route path="/signin" component={SignIn} />
+        <Route path="/faq" component={Faq} />
       </Switch>
       <Route component={ Footer } />
     </div>
