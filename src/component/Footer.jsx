@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './Footer.scss';
 import { Link } from 'react-router-dom';
 import { 
+  Button,
   Container,
   Image,
   Grid,
@@ -17,7 +18,10 @@ const Footer = () => (
     backgroundColor: "#7FB800"
   }}>
     <Container textAlign='center'>
-      <h2 className="social-links__title">Follow us</h2>
+      <h2 className="social-links__title">Have a question? <br/>Want to help?</h2>
+      <p>Join us at <a href="https://www.meetup.com/hackforla/">Hack for LA</a>, Wednesdays at 6:30pm in Santa Monica</p>
+
+      <a style={{ display: 'block', marginBottom: "1rem" }} href="mailto:engagelosangeles@gmail.com"><Button primary>Send us a message</Button></a>
       <Grid verticalAlign='middle' centered>
         <Grid.Column mobile={4} tablet={2} computer={2}>
           <a className="social-links__link" href="https://www.meetup.com/hackforla/" target="_blank">
@@ -53,6 +57,8 @@ const Footer = () => (
         </a>
         </Grid.Column>
       </Grid>
+    
+      <p>This is an open source project<br/>You can download or contribute to the code on GitHub</p>
     </Container>
 
   </Segment>

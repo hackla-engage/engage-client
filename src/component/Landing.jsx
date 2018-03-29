@@ -103,7 +103,7 @@ const Landing = (props) =>{
             The team is still working hard to make an app!
             But we would love to hear from you about our prototype and any questions you have for us.
             <br/>
-            <a href="engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
+            <a href="mailto:engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
           </p>
           <Divider
             as='h4'
