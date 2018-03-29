@@ -32,9 +32,9 @@ const Landing = (props) =>{
           />
           <Header
             as='h2'
-            content='Engage helps you voice your opinions at Santa Monica City Council'
+            content='We help you voice your opinions at Santa Monica City Council'
             inverted
-            style={{ fontSize: '1.7em', fontWeight: 'normal', color: '#000', }}
+            style={{ fontSize: '1.7em', fontWeight: 'normal', color: '#000', marginBottom: '1em' }}
           />
           <Button primary size='huge' style=
           {{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
@@ -88,9 +88,8 @@ const Landing = (props) =>{
           </Header>
 
           <p style={{ fontSize: '1.33em' }}>
-            We can give your company superpowers to do things that they never thought possible. Let us delight
-            your customers and empower your needs... through pure data analytics.
-Engage helps you voice your opinions at local goverment meetings
+            Imagine an app that allows  
+
           </p>
           <Divider
             as='h4'
@@ -101,7 +100,10 @@ Engage helps you voice your opinions at local goverment meetings
           </Divider>
           <Header as='h3' style={{ fontSize: '2em' }}>How do I get started?</Header>
           <p style={{ fontSize: '1.33em' }}>
-            Simply click to engage above and sign up with your email!
+            The team is still working hard to make an app!
+            But we would love to hear from you about our prototype and any questions you have for us.
+            <br/>
+            <a href="engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
           </p>
           <Divider
             as='h4'
