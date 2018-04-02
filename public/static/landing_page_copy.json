@@ -1,0 +1,18 @@
+{
+    "page_header": {
+        "header_text": "Engage",
+        "body_text":"We help you voice your opinions at Santa Monica City Council"
+    },
+    "what_is_engage": {
+        "header_text": "Engage helps you voice your opinions at city council meetings",
+        "body_text": "Imagine an app that allows you to stay up-to-date with the local issues that you care about, just as easily as checking your Facebook status. And allows you to voice your concerns about a particular issue directly to the  Santa Monica City Council member responsible for it, just as easily as messaging a friend."
+    },
+    "use_engage": {
+        "header_text": "How do I get started?",
+        "body_text": "The team is still working hard to make an app! But we would love to hear from you about our prototype and any questions you have for us."
+    },
+    "city_council": {
+        "header_text": "How does City Council Work?",
+        "body_text": "It may seem daunting, but we are here to help!"
+    }
+}
