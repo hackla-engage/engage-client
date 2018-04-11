@@ -2,9 +2,9 @@
 /**
  * Interact with the Engage API
  */
-import { getResource } from './async';
+import { getResourceDEVMODEONLY } from './async';
 
-const HOST = 'https://council-tag/herokuapp.com/api';
+const HOST = 'http://council-tag.herokuapp.com/api';
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
@@ -22,5 +22,5 @@ const HEADERS = new Headers({
  *  example: '/tags'
  */
 export function getJSON(endpointUrl) {
-    return getResource(HEADERS, HOST, endpointUrl);
+    return getResourceDEVMODEONLY([], HOST, endpointUrl);
 }
