@@ -28,6 +28,7 @@
     "core-js": "^2.5.3",
     "css-loader": "^0.28.7",
     "font-awesome": "^4.7.0",
+    "formik": "^0.11.11",
     "live-server": "^1.2.0",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.3",
