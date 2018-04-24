@@ -6,7 +6,10 @@
  */
 
 export function getResource(headers, host, endpointUrl) {
-    return fetch(`${host}/${endpointUrl}`, {headers: headers})
+    return fetch(`${host}/${endpointUrl}/`, {
+        headers: headers,
+        mode: 'cors'
+    })
         .then(handleErrors)
         .then(response => response.json());
 }
@@ -15,7 +18,7 @@ export function getResource(headers, host, endpointUrl) {
 export function getResourceDEVMODEONLY(headers, host, endpointUrl) {
     const opts = {
         headers: headers,
-        mode: 'no-cors'
+        mode: 'cors'
     };
     return fetch(`${host}/${endpointUrl}`,opts)
         .then(handleErrors)
