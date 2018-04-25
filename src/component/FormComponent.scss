@@ -1,0 +1,23 @@
+@import "./Landing.scss";
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.vote-title {
+  color: $primary-font-color;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.vote-recommendations {
+  color: $primary-font-color;
+  font-weight: bold;
+}
+
+.form-background {
+  min-width: 300px;
+  background-color: $primary-bg-color;
+  padding: 20px;
+}

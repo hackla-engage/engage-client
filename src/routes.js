@@ -7,7 +7,7 @@ import PreferenceList from './container/PreferenceList.jsx';
 import FeedContainer from './container/FeedContainer.jsx';
 import SignIn from './component/SignIn.jsx'
 import Faq from './component/Faq.jsx'
-
+import FormContainer from "./container/FormContainer.jsx"
 const Routes = () => {
   return (
     <div>
@@ -18,6 +18,7 @@ const Routes = () => {
         <Route path="/feed" component={ FeedContainer } />
         <Route path="/signin" component={SignIn} />
         <Route path="/faq" component={Faq} />
+        <Route path="/form" component={FormContainer} />
       </Switch>
       <Route component={ Footer } />
     </div>
