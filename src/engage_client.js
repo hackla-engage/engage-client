@@ -4,7 +4,7 @@
  */
 import { getResource } from './async';
 
-const HOST = 'http://council-tag.herokuapp.com/api';
+const HOST = 'https://council-tag.herokuapp.com/api';
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
