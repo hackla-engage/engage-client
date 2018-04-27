@@ -45,11 +45,6 @@ const Header = () => (
             Sign In
           </Link>
         </Menu.Item>
-        <Menu.Item>
-          <Link style={styles.link} to="/form">
-            Just testing
-          </Link>
-        </Menu.Item>
       </Menu.Menu>
     </Responsive>
 

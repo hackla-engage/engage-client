@@ -12,7 +12,6 @@ import {
   Segment,
 } from 'semantic-ui-react'
 const copyText = require('../../public/static/landing_page_copy.json');
-
 const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
 const breakPointSize = 767
 

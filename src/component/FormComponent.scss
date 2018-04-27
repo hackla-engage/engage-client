@@ -3,21 +3,33 @@
 .error {
   color: red;
   font-weight: bold;
+  margin-top: -10px;
+}
+.vote-title-holder {
+  color: black;
 }
 
-.vote-title {
-  color: $primary-font-color;
-  font-weight: bold;
-  font-size: 1.5rem;
+.vote-title-title {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.vote-recommendations {
-  color: $primary-font-color;
-  font-weight: bold;
+.vote-recommendations-holder {
+  color: black;
+  margin-bottom: 20px;
 }
 
-.form-background {
-  min-width: 300px;
-  background-color: $primary-bg-color;
+.vote-recommendations-keyword {
+  font-weight: 400;
+  font-size: 1.05rem;
+  text-decoration: underline;
+}
+.vote-recommendations-recommendations {
+  font-size: 0.95rem;
+}
+.ui.segment.form-background {
+  //background-color: $primary-bg-color;
   padding: 20px;
+  margin: 0px;
+  min-height: 95vh;
 }
