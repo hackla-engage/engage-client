@@ -19,13 +19,14 @@ import {
 import "./FormComponent.scss";
 const ethOptions = [
   { key: "s", value: "", flag: "", text: "Select an ethnicity/race" },
-  { key: "AIAN", value: "AIAN", text: "American Indian or Alaska Native" },
+  { key: "AA", value: "AA", text: "American Indian or Alaska Native" },
   { key: "AS", value: "AS", text: "Asian" },
   { key: "B", value: "B", text: "Black or African American" },
   { key: "H", value: "H", text: "Hispanic/Latino" },
   { key: "P", value: "P", text: "Native Hawaiian or other Pacific Islander" },
-  { key: "M", value: "M", text: "Multiracial" },
-  { key: "W", value: "W", text: "White" }
+  { key: "M", value: "M", text: "Multiracial or Mixed ethnicities" },
+  { key: "W", value: "W", text: "White" },
+  { key: "N", value: "N", text: "Prefer not to answer" }
 ];
 class FormComponent extends Component {
   constructor(props) {
@@ -40,13 +41,18 @@ class FormComponent extends Component {
     this.state = {
       yesNoValue: false,
       textValue: "",
+      textError: false,
       nameValue: "",
-      nameError: false,
+      nameError: true,
+      nameTouched: false,
       zipError: false,
       zipValue: "90401",
-      emailError: false,
+      zipTouched: false,
+      emailError: true,
       emailValue: "",
+      emailTouched: false,
       ethValue: null,
+      ethTouched: false,
       submitEnabled: true
     };
   }
@@ -74,12 +80,14 @@ class FormComponent extends Component {
       this.setState({
         zipValue: evt.currentTarget.value,
         zipError: true,
+        zipTouched: true,
         submitEnabled: false
       });
     } else if (parseInt(evt.currentTarget.value) < 99999) {
       this.setState({
         zipValue: evt.currentTarget.value,
         zipError: false,
+        zipTouched: true,
         submitEnabled: !(
           this.state.emailError ||
           this.state.nameError ||
@@ -91,6 +99,7 @@ class FormComponent extends Component {
       this.setState({
         zipValue: "99999",
         zipError: true,
+        zipTouched: true,
         submitEnabled: false
       });
     }
@@ -105,11 +114,16 @@ class FormComponent extends Component {
   }
   handleNameChange(evt) {
     if (evt.currentTarget.value === "") {
-      this.setState({ submitEnabled: false, nameError: true });
+      this.setState({
+        submitEnabled: false,
+        nameError: true,
+        nameTouched: true
+      });
     } else {
       this.setState({
         nameValue: evt.currentTarget.value,
         nameError: false,
+        nameTouched: true,
         submitEnabled: !(
           this.state.zipError ||
           this.state.ethValue === null ||
@@ -127,12 +141,14 @@ class FormComponent extends Component {
       this.setState({
         emailValue: evt.currentTarget.value,
         emailError: true,
+        emailTouched: true,
         submitEnabled: false
       });
     } else {
       this.setState({
         emailValue: evt.currentTarget.value,
         emailError: false,
+        emailTouched: true,
         submitEnabled: !(
           this.state.zipError ||
           this.state.nameError ||
@@ -145,6 +161,7 @@ class FormComponent extends Component {
   handleEthChange(evt) {
     this.setState({
       ethValue: evt.currentTarget.value,
+      ethTouched: true,
       submitEnabled: !(
         this.state.zipError ||
         this.state.nameError ||
@@ -155,19 +172,20 @@ class FormComponent extends Component {
   }
 
   handleChangeText(evt) {
-    this.setState({ textValue: evt.currentTarget.value });
+    if (evt.currentTarget.value.length <= 200) {
+        this.setState({ textValue: evt.currentTarget.value, textError: false });
+    }
   }
 
   render() {
     return (
       <Segment className="form-background">
         <Form onSubmit={this.handleSubmit} size="Large">
-          <div className="vote-title-holder">
-            <div className="vote-title-title">{this.props.Title}</div>
-          </div>
+          <div className="vote-title-holder" />
           <div className="vote-recommendations-holder">
             <div className="vote-recommendations-keyword">
               Recommended Actions:
+              <div className="vote-title-title">{this.props.Title}</div>
             </div>
             <div className="vote-recommendations-recommendations">
               {this.props.Recommendations}
@@ -206,6 +224,10 @@ class FormComponent extends Component {
             value={this.state.name}
             onChange={this.handleNameChange}
           />
+          {this.state.nameTouched &&
+            this.state.nameError && (
+              <div className="error">Name is required</div>
+            )}
           <Form.Field
             label="Email*"
             control="input"
@@ -216,7 +238,10 @@ class FormComponent extends Component {
             value={this.state.emailValue}
             onChange={this.handleEmailChange}
           />
-          {this.state.emailError && <div className="error">Error in email</div>}
+          {this.state.emailTouched &&
+            this.state.emailError && (
+              <div className="error">Error in email</div>
+            )}
           <Form.Field
             label="Zipcode (optional)"
             type="text"
@@ -227,11 +252,12 @@ class FormComponent extends Component {
             value={this.state.zipValue}
             onChange={this.handleZipChange}
           />
-          {this.state.zipError && (
-            <div className="error">
-              Error in zipcode... It is optional<br />
-            </div>
-          )}
+          {this.state.zipTouched &&
+            this.state.zipError && (
+              <div className="error">
+                Error in zipcode... It is optional<br />
+              </div>
+            )}
           <Form.Field
             control="select"
             label="Ethnicity*"
@@ -247,13 +273,27 @@ class FormComponent extends Component {
               );
             })}
           </Form.Field>
-          <br />
+          {this.state.ethTouched &&
+            this.state.ethValue === "" && (
+              <div className="error">
+                Please select one of the above<br />
+              </div>
+            )}
           <Form.Field
-            label="Let the council know what you think about this item (optional):"
+            label="Let the council know what you think about this item. The actual text you write may not go to the council, but an analysis will (optional):"
             control="textarea"
             rows="3"
             onChange={this.handleChangeText}
           />
+          <div className="chars">
+            {200 - this.state.textValue.length} characters left
+          </div>
+          <br />
+          {this.state.textError === true && (
+            <div className="error">
+              Profanity or potentially threatening words are not allowed<br />
+            </div>
+          )}
           {!this.state.submitEnabled && (
             <div className="error">Form has errors, submit is disabled</div>
           )}
