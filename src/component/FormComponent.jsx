@@ -2,21 +2,18 @@ import React, { Component } from "react";
 import {
   Button,
   Checkbox,
-  Container,
-  Divider,
   Form,
-  Grid,
-  Header,
+  FormField,
   Icon,
-  Image,
   Input,
   Responsive,
   Segment,
-  FormField,
   Select,
   TextArea
 } from "semantic-ui-react";
+import superagent from "superagent";
 import "./FormComponent.scss";
+const HOST = "http";
 const ethOptions = [
   { key: "s", value: "", flag: "", text: "Select an ethnicity/race" },
   { key: "AA", value: "AA", text: "American Indian or Alaska Native" },
@@ -68,6 +65,7 @@ class FormComponent extends Component {
       this.setState({ submitEnabled: false });
       return false;
     }
+    superagent.post(HOST + "/");
   }
   handleCancel(evt) {
     // redirect back, how?
@@ -173,7 +171,7 @@ class FormComponent extends Component {
 
   handleChangeText(evt) {
     if (evt.currentTarget.value.length <= 200) {
-        this.setState({ textValue: evt.currentTarget.value, textError: false });
+      this.setState({ textValue: evt.currentTarget.value, textError: false });
     }
   }
 
@@ -280,6 +278,7 @@ class FormComponent extends Component {
               </div>
             )}
           <Form.Field
+            autoHeight
             label="Let the council know what you think about this item. The actual text you write may not go to the council, but an analysis will (optional):"
             control="textarea"
             rows="3"
