@@ -19,7 +19,8 @@ export default function reducer(state = {}, action) {
         case REQUEST_AGENDAS:
             return {
                 ...state,
-                agendaItems: action.payload,
+                agendaItems: action.payload.agendas,
+                agendaIDs: action.payload.agendaIDs,
             };
         default:
             return state;
@@ -32,11 +33,30 @@ export function requestAgendas() {
         getJSON('agendas')
             .then((json) => {
                 console.log('requestAgendas: ', json);
-                let firstMeetingAgendas = json.results[0].items;
+                if(!json || !json.results || json.results.length === 0){ 
+                    return;
+                }
+
+                let agendaList = json.results.reduce((acc, result)=>{
+                    return [...acc, ...result.items];
+                }, [])
+
+                let agendaIDs = agendaList.reduce((acc, agenda)=>{
+                    return [...acc, ...agenda.id];
+                }, [])
+
+                let agendas = agendaList.reduce((acc, agenda)=>{
+                    if(acc[agenda.id]){
+                        console.log('duplicate agenda id', agenda.id);
+                    }
+                    acc[agenda.id] = agenda;
+                    return acc;
+                }, {})
+
 
                 dispatch({
                     type: REQUEST_AGENDAS,
-                    payload: firstMeetingAgendas,
+                    payload: {agendas, agendaIDs}
                 })
             })
     }

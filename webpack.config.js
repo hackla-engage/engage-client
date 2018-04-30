@@ -57,6 +57,7 @@ module.exports = {
 
   // Configuration for webpack-dev-server
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    compress: true
   }
 };

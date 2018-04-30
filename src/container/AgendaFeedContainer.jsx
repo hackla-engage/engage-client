@@ -3,32 +3,27 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
     requestAgendas,
-    requestAgendas2
 } from '../ducks/agendas';
+import AgendaItem from '../component/AgendaItem.jsx';
 
 class AgendaFeed extends Component {
     componentDidMount() {
         // Kick off action to make async call to our server for tags/topics.
         // This will then get stored in our redux state.
-        const { requestAgendas, requestAgendas2} = this.props;
+        const { requestAgendas } = this.props;
         requestAgendas();
     }
     render () {
         const { agendaItems } = this.props;
       
-        if(!agendaItems || agendaItems.length === 0){
+        if(!agendaItems || Object.keys(agendaItems).length === 0){
             return (<div style={{color: 'black'}}>Error: retrieving agenda items</div>)
         }
+        Object.values
         return (
             <div style={{color: 'black'}}>
-                {agendaItems.map(agenda => {
-                    return (
-                        <div>
-                            <h1>{agenda.title}</h1>
-                            <div>{agenda.body[0]}</div>
-                            <div>{agenda.body[1]}</div>
-                        </div>
-                    )
+                {Object.values(agendaItems).map(agenda => {
+                    return <AgendaItem key={agenda.id} {...agenda} />
                 })}
             </div>
         );
@@ -38,11 +33,12 @@ class AgendaFeed extends Component {
 function mapStateToProps(state) {
     return {
         agendaItems: state.agendas.agendaItems,
+        agendaIDs: state.agendas.agendaIDs,
     };
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ requestAgendas, requestAgendas2 }, dispatch)
+    return bindActionCreators({ requestAgendas }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(AgendaFeed)

@@ -9,7 +9,7 @@
   "scripts": {
     "serve": "live-server public",
     "build": "webpack --mode production --config webpack.config.prod.js",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --mode development --open",
     "postinstall": "npm run build"
   },
   "dependencies": {
