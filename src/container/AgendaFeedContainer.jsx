@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
     requestAgendas,
 } from '../ducks/agendas';
-import AgendaItem from '../component/AgendaItem.jsx';
+import AgendaItemContainer from '../container/AgendaItemContainer';
 
 class AgendaFeed extends Component {
     componentDidMount() {
@@ -23,7 +23,7 @@ class AgendaFeed extends Component {
         return (
             <div style={{color: 'black'}}>
                 {Object.values(agendaItems).map(agenda => {
-                    return <AgendaItem key={agenda.id} {...agenda} />
+                    return <AgendaItemContainer key={agenda.id} {...agenda} />
                 })}
             </div>
         );
