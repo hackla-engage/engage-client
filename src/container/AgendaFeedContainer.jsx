@@ -15,15 +15,15 @@ class AgendaFeed extends Component {
     }
     render () {
         const { agendaItems } = this.props;
-      
+
         if(!agendaItems || agendaItems.length === 0){
             return (<div style={{color: 'black'}}>Error: retrieving agenda items</div>)
         }
         return (
             <div style={{color: 'black'}}>
-                {agendaItems.map(agenda => {
+                {agendaItems.map((agenda, i) => {
                     return (
-                        <div>
+                        <div key={i}>
                             <h1>{agenda.title}</h1>
                             <div>{agenda.body[0]}</div>
                             <div>{agenda.body[1]}</div>
