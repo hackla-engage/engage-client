@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import {
     requestAgendas,
 } from '../ducks/agendas';
+import {
+  Container,
+  Header,
+  Segment,
+} from 'semantic-ui-react'
 
 class AgendaItemContainer extends Component {
     componentDidMount() {
@@ -26,11 +31,20 @@ class AgendaItemContainer extends Component {
             meeting_time
         } = this.props;
 
-        return (<div>
-            <h1>{title}</h1>
-            <div>{body[0]}</div>
-            <div>{body[1]}</div>
-        </div>)
+        return (
+        <Container text>
+
+            <Segment.Group>
+                <Header
+                    as='h3'
+                    content={title}
+                    textAlign='center'
+                />
+                <Segment>{title}</Segment>
+                <Segment>{body[0]}</Segment>
+                <Segment>{body[1]}</Segment>
+            </Segment.Group>
+        </Container>)
     }
 }
 

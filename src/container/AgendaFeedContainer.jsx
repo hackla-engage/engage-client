@@ -4,18 +4,23 @@ import { connect } from 'react-redux';
 import {
     requestAgendas,
 } from '../ducks/agendas';
-import AgendaItemContainer from '../container/AgendaItemContainer';
+import AgendaItemContainer from './AgendaItemContainer.jsx';
+const queryString = require('query-string');
+
 
 class AgendaFeed extends Component {
     componentDidMount() {
         // Kick off action to make async call to our server for tags/topics.
         // This will then get stored in our redux state.
+
+        const parsed = queryString.parse(this.props.location.search);
+        console.log('search', parsed)
+
         const { requestAgendas } = this.props;
         requestAgendas();
     }
     render () {
         const { agendaItems } = this.props;
-      
         if(!agendaItems || Object.keys(agendaItems).length === 0){
             return (<div style={{color: 'black'}}>Error: retrieving agenda items</div>)
         }
