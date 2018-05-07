@@ -12,6 +12,7 @@ module.exports = {
       {
         loader: 'babel-loader',
         test: /\.js$|\.jsx$/,
+        resolve: { extensions: [".js", ".jsx"] },
         exclude: /node_modules/
       },
       {
@@ -57,6 +58,7 @@ module.exports = {
 
   // Configuration for webpack-dev-server
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    compress: true
   }
 };

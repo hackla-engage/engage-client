@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Landing.scss';
 import {
   Button,
@@ -12,7 +13,9 @@ import {
   Segment,
 } from 'semantic-ui-react'
 const copyText = require('../../public/static/landing_page_copy.json');
-const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
+
+//const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
+const appLink = "#/feed";
 const breakPointSize = 767
 
 const Landing = (props) =>{
@@ -38,17 +41,16 @@ const Landing = (props) =>{
           />
           <Button primary size='huge' style=
           {{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
-          <a href={ appLink } style={{ color: '#FFF' }} >Click to Engage
+          <Link style={{color: '#FFF'}} to="/feed">Click to Engage</Link>
             <Icon name='right arrow' />
-          </a>
           </Button>
         </Container>
         <div style={{
           width: '100%',
         }}>
-          
+
           <Responsive minWidth={ breakPointSize }>
-            <Image 
+            <Image
               src="/static/image/city-council@2x.jpg"
               style={{
                 position: 'absolute',
@@ -63,7 +65,7 @@ const Landing = (props) =>{
             />
           </Responsive>
           <Responsive maxWidth={ breakPointSize }>
-            <Image 
+            <Image
               src="/static/image/city-council-mobile@3x.jpg"
               style={{
                 position: 'absolute',
