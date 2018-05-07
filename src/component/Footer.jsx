@@ -19,7 +19,7 @@ const Footer = () => (
   }}>
     <Container textAlign='center'>
       <h2 className="social-links__title">Have a question? <br/>Want to help?</h2>
-      <p>Join us at <a href="https://www.meetup.com/hackforla/">Hack for LA</a>, Wednesdays at 6:30pm in Santa Monica</p>
+      <p>Join us at <a href="https://www.meetup.com/hackforla/">Hack for LA</a>, Mondays at 6:00pm in Santa Monica</p>
 
       <a style={{ display: 'block', marginBottom: "1rem" }} href="mailto:engagelosangeles@gmail.com"><Button primary>Send us a message</Button></a>
       <Grid verticalAlign='middle' centered>
