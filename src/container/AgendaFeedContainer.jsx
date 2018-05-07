@@ -19,6 +19,10 @@ class AgendaFeed extends Component {
         // Kick off action to make async call to our server for tags/topics.
         // This will then get stored in our redux state.
 
+        gtag('config', 'UA-116538234-1', {
+            'page_title' : 'feed',
+            'page_path': '/feed'
+        });
         const parsed = qs.parse(this.props.location.search);
         if (parsed && parsed.id){
             this.requestedID = parseInt(parsed.id);
