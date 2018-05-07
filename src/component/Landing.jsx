@@ -12,11 +12,16 @@ import {
   Responsive,
   Segment,
 } from 'semantic-ui-react'
+
 const copyText = require('../../public/static/landing_page_copy.json');
 
 //const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
 const appLink = "#/feed";
 const breakPointSize = 767
+
+const linkStyle = {
+  color: '#074d91',
+}
 
 const Landing = (props) =>{
   return (
@@ -104,7 +109,8 @@ const Landing = (props) =>{
           <p style={{ fontSize: '1.33em' }}>
               {copyText.use_engage.body_text}
             <br/>
-            <a href="mailto:engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
+
+            <a style={linkStyle}href="mailto:engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
           </p>
           <Divider
             as='h4'
@@ -117,7 +123,6 @@ const Landing = (props) =>{
           <p style={{ fontSize: '1.33em' }}>
               {copyText.city_council.body_text}
           </p>
-          <p>Click for more</p>
         </Container>
       </Segment>
 

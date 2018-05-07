@@ -12,7 +12,12 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
+import copyText from '../../public/static/landing_page_copy.json';
+
 const breakPointSize = 767
+const linkStyle = {
+  color: '#074d91',
+}
 
 const Faq = (props) =>{
   return (
@@ -23,13 +28,12 @@ const Faq = (props) =>{
         }} vertical>
         <Container text style={{}}>
           <Header as="h1">FAQ</Header>
-          <Header as='h3' style={{ fontSize: '2em' }}>Engage helps you voice your opinions at city council meetings
+          <Header as='h3' style={{ fontSize: '2em' }}>
+            {copyText.what_is_engage.header_text}
           </Header>
 
           <p style={{ fontSize: '1.33em' }}>
-            We can give your company superpowers to do things that they never thought possible. Let us delight
-            your customers and empower your needs... through pure data analytics.
-Engage helps you voice your opinions at local goverment meetings
+            {copyText.what_is_engage.body_text}
           </p>
           <Divider
             as='h4'
@@ -38,9 +42,11 @@ Engage helps you voice your opinions at local goverment meetings
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
           </Divider>
-          <Header as='h3' style={{ fontSize: '2em' }}>How do I get started?</Header>
+          <Header as='h3' style={{ fontSize: '2em' }}>{copyText.use_engage.header_text}</Header>
           <p style={{ fontSize: '1.33em' }}>
-            Simply click to engage above and sign up with your email!
+            {copyText.use_engage.body_text}
+            <br />
+            <a style={linkStyle}href="mailto:engagelosangeles@gmail.com">engagelosangeles@gmail.com</a>
           </p>
           <Divider
             as='h4'
@@ -49,11 +55,10 @@ Engage helps you voice your opinions at local goverment meetings
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
           </Divider>
-          <Header as='h3' style={{ fontSize: '2em' }}>How does City Council work?</Header>
+          <Header as='h3' style={{ fontSize: '2em' }}>{copyText.city_council.header_text}</Header>
           <p style={{ fontSize: '1.33em' }}>
-            It may seem daunting, but we are here to help!
+            {copyText.city_council.body_text}
           </p>
-          <p>Click for more</p>
         </Container>
       </Segment>
 
