@@ -7,6 +7,7 @@ import PreferenceList from './container/PreferenceList.jsx';
 import AgendaFeedContainer from './container/AgendaFeedContainer.jsx';
 import SignIn from './component/SignIn.jsx'
 import Faq from './component/Faq.jsx'
+import About from './component/About.jsx'
 import TopicsSelectorContainer from './container/TopicsSelectorContainer.jsx'
 
 const Routes = () => {
