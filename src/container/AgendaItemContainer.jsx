@@ -68,11 +68,12 @@ class AgendaItemContainer extends Component {
         
         return  (
             <Modal
-                trigger={container}
-                style={{ color: 'black'}}
+                closeIcon
                 defaultOpen={defaultOpen}
                 onOpen={()=> {addId(id)}}
                 onClose={removeId}
+                style={{ color: 'black'}}
+                trigger={container}
             >
                 <Modal.Header>{title}</Modal.Header>
                 <Modal.Content>
