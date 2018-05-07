@@ -14,31 +14,44 @@ class AgendaFeed extends Component {
         // This will then get stored in our redux state.
 
         const parsed = queryString.parse(this.props.location.search);
-        console.log('search', parsed)
+        if (parsed && parsed.id){
+            this.requestedID = parseInt(parsed.id);
+        }
 
         const { requestAgendas } = this.props;
         requestAgendas();
     }
     render () {
-        const { agendaItems } = this.props;
-        if(!agendaItems || Object.keys(agendaItems).length === 0){
+        const {
+            agendaItems,
+            agendaLoading,
+            agendaLoadError,
+        } = this.props;
+
+        if(agendaLoadError.error){
             return (<div style={{color: 'black'}}>Error: retrieving agenda items</div>)
+        } else if(agendaLoading){
+            return (<div style={{color: 'black'}}>Loading agenda items..</div>)
+        } else {
+            return (
+                <div style={{color: 'black'}}>
+                    {Object.values(agendaItems).map((agenda, i) => {
+                        console.log('this', this.requestedID, agenda.id)
+                        return <AgendaItemContainer key={agenda.id} {...agenda} defaultOpen={agenda.id === this.requestedID} />
+                    })}
+                </div>
+            );
         }
-        Object.values
-        return (
-            <div style={{color: 'black'}}>
-                {Object.values(agendaItems).map(agenda => {
-                    return <AgendaItemContainer key={agenda.id} {...agenda} />
-                })}
-            </div>
-        );
     }
 }
 
 function mapStateToProps(state) {
+    const agendas = state.agendas;
     return {
-        agendaItems: state.agendas.agendaItems,
-        agendaIDs: state.agendas.agendaIDs,
+        agendaItems: agendas.agendaItems,
+        agendaIDs: agendas.agendaIDs,
+        agendaLoading: agendas.agendaLoading,
+        agendaLoadError: agendas.agendaLoadError,
     };
 }
 
