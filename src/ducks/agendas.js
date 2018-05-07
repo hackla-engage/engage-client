@@ -12,15 +12,32 @@ import { getJSON } from '../engage_client.js';
 
 // Actions
 const REQUEST_AGENDAS = 'REQUEST_AGENDAS';
+const REQUEST_LOADING = 'REQUEST_LOADING';
 
 // Reducer
-export default function reducer(state = {}, action) {
+const defaultState = {
+    agendaIDs: [],
+    agendaItems: {},
+    agendaLoading: false,
+    agendaLoadError: {
+        error: false,
+        content: '',
+    },
+}
+export default function reducer(state = defaultState, action) {
     switch (action.type) {
         case REQUEST_AGENDAS:
             return {
                 ...state,
-                agendaItems: action.payload,
+                agendaItems: action.payload.agendas,
+                agendaIDs: action.payload.agendaIDs,
+                agendaLoading: false,
             };
+        case REQUEST_LOADING:
+            return {
+                ...state,
+                agendaLoading: true,
+            }
         default:
             return state;
     }
@@ -29,14 +46,38 @@ export default function reducer(state = {}, action) {
 // Action Creators
 export function requestAgendas() {
     return (dispatch) => {
+        dispatch({
+            type: REQUEST_LOADING
+        });
         getJSON('agendas')
             .then((json) => {
                 console.log('requestAgendas: ', json);
-                let firstMeetingAgendas = json.results[0].items;
+                if(!json || !json.results || json.results.length === 0){ 
+                    return;
+                }
+
+                let agendaList = json.results.reduce((acc, result)=>{
+                    return [...acc, ...result.items];
+                }, [])
+
+                let agendaIDs = agendaList.reduce((acc, agenda)=>{
+                    return [...acc, ...agenda.id];
+                }, [])
+
+                let agendas = agendaList.reduce((acc, agenda)=>{
+                    if(acc[agenda.id]){
+                        console.log('duplicate agenda id', agenda.id);
+                    }
+                    acc[agenda.id] = agenda;
+                    return acc;
+                }, {})
 
                 dispatch({
                     type: REQUEST_AGENDAS,
-                    payload: firstMeetingAgendas,
+                    payload: {
+                        agendas,
+                        agendaIDs,
+                    }
                 })
             })
     }

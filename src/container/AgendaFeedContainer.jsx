@@ -3,46 +3,87 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
     requestAgendas,
-    requestAgendas2
 } from '../ducks/agendas';
+import AgendaItemContainer from './AgendaItemContainer.jsx';
+import qs from 'query-string';
+
 
 class AgendaFeed extends Component {
+    constructor(props){
+        super(props);
+        this.addId = this.addId.bind(this);
+        this.removeId = this.removeId.bind(this);
+    }
+
     componentDidMount() {
         // Kick off action to make async call to our server for tags/topics.
         // This will then get stored in our redux state.
-        const { requestAgendas, requestAgendas2} = this.props;
+
+        const parsed = qs.parse(this.props.location.search);
+        if (parsed && parsed.id){
+            this.requestedID = parseInt(parsed.id);
+        }
+
+        const { requestAgendas } = this.props;
         requestAgendas();
     }
-    render () {
-        const { agendaItems } = this.props;
 
-        if(!agendaItems || agendaItems.length === 0){
+    addId(id){
+        const parsed = qs.parse(this.props.location.search);
+        parsed['id'] = id;
+        this.props.history.push('/feed?' + qs.stringify(parsed))
+    }
+
+    removeId() {
+        const parsed = qs.parse(this.props.location.search);
+        delete parsed.id;
+        this.props.history.push('/feed?' + qs.stringify(parsed))
+    }
+
+    render () {
+        const {
+            agendaItems,
+            agendaLoading,
+            agendaLoadError,
+        } = this.props;
+
+        if(agendaLoadError.error){
             return (<div style={{color: 'black'}}>Error: retrieving agenda items</div>)
+        } else if(agendaLoading){
+            return (<div style={{color: 'black'}}>Loading agenda items..</div>)
+        } else {
+            return (
+                <div style={{color: 'black'}}>
+                    {Object.values(agendaItems).map((agenda, i) => {
+                        return (
+                            <AgendaItemContainer
+                                key={agenda.id}
+                                addId={this.addId}
+                                {...agenda}
+                                defaultOpen={agenda.id === this.requestedID}
+                                removeId={this.removeId}
+                                searchParams={this.props.location.search}
+                                />
+                        )
+                    })}
+                </div>
+            );
         }
-        return (
-            <div style={{color: 'black'}}>
-                {agendaItems.map((agenda, i) => {
-                    return (
-                        <div key={i}>
-                            <h1>{agenda.title}</h1>
-                            <div>{agenda.body[0]}</div>
-                            <div>{agenda.body[1]}</div>
-                        </div>
-                    )
-                })}
-            </div>
-        );
     }
 }
 
 function mapStateToProps(state) {
+    const agendas = state.agendas;
     return {
-        agendaItems: state.agendas.agendaItems,
+        agendaItems: agendas.agendaItems,
+        agendaIDs: agendas.agendaIDs,
+        agendaLoading: agendas.agendaLoading,
+        agendaLoadError: agendas.agendaLoadError,
     };
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ requestAgendas, requestAgendas2 }, dispatch)
+    return bindActionCreators({ requestAgendas }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(AgendaFeed)
