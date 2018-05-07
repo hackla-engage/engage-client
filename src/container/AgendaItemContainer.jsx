@@ -10,6 +10,13 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
+import {
+  Button,
+  Icon,
+  Image,
+  Modal
+} from 'semantic-ui-react'
+
 class AgendaItemContainer extends Component {
     componentDidMount() {
 
@@ -26,13 +33,13 @@ class AgendaItemContainer extends Component {
     render () {
         const {
             id,
-            title,
             body,
-            meeting_time
+            meeting_time,
+            recommendations,
+            title,
         } = this.props;
 
-        return (
-        <Container text>
+        const container = (<Container text>
 
             <Segment.Group>
                 <Header
@@ -44,7 +51,30 @@ class AgendaItemContainer extends Component {
                 <Segment>{body[0]}</Segment>
                 <Segment>{body[1]}</Segment>
             </Segment.Group>
-        </Container>)
+        </Container>);
+
+        return  (
+            <Modal trigger={container}>
+                <Modal.Header>{title}</Modal.Header>
+                <Modal.Content>
+                    <Modal.Description>
+                        <p>{body[0]}</p>
+                        <p>{body[1]}</p>
+                        <p>Recommendation</p>
+                        <p>{recommendations[0]}</p>
+                    </Modal.Description>
+                    <p>What is your stance on the recommended action?</p>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button primary>
+                        Pro <Icon name='right chevron' />
+                    </Button>
+                    <Button primary>
+                        Con <Icon name='right chevron' />
+                    </Button>
+                </Modal.Actions>
+            </Modal>
+        )
     }
 }
 
