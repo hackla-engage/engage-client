@@ -5,15 +5,21 @@ import {
     requestAgendas,
 } from '../ducks/agendas';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
-const queryString = require('query-string');
+import qs from 'query-string';
 
 
 class AgendaFeed extends Component {
+    constructor(props){
+        super(props);
+        this.addId = this.addId.bind(this);
+        this.removeId = this.removeId.bind(this);
+    }
+
     componentDidMount() {
         // Kick off action to make async call to our server for tags/topics.
         // This will then get stored in our redux state.
 
-        const parsed = queryString.parse(this.props.location.search);
+        const parsed = qs.parse(this.props.location.search);
         if (parsed && parsed.id){
             this.requestedID = parseInt(parsed.id);
         }
@@ -21,6 +27,19 @@ class AgendaFeed extends Component {
         const { requestAgendas } = this.props;
         requestAgendas();
     }
+
+    addId(id){
+        const parsed = qs.parse(this.props.location.search);
+        parsed['id'] = id;
+        this.props.history.push('/feed?' + qs.stringify(parsed))
+    }
+
+    removeId() {
+        const parsed = qs.parse(this.props.location.search);
+        delete parsed.id;
+        this.props.history.push('/feed?' + qs.stringify(parsed))
+    }
+
     render () {
         const {
             agendaItems,
@@ -36,8 +55,16 @@ class AgendaFeed extends Component {
             return (
                 <div style={{color: 'black'}}>
                     {Object.values(agendaItems).map((agenda, i) => {
-                        console.log('this', this.requestedID, agenda.id)
-                        return <AgendaItemContainer key={agenda.id} {...agenda} defaultOpen={agenda.id === this.requestedID} />
+                        return (
+                            <AgendaItemContainer
+                                key={agenda.id}
+                                addId={this.addId}
+                                {...agenda}
+                                defaultOpen={agenda.id === this.requestedID}
+                                removeId={this.removeId}
+                                searchParams={this.props.location.search}
+                                />
+                        )
                     })}
                 </div>
             );

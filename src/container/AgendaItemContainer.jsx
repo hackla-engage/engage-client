@@ -13,25 +13,19 @@ import {
   Segment,
 } from 'semantic-ui-react'
 import moment from 'moment';
+import qs from 'query-string';
 
 class AgendaItemContainer extends Component {
-    componentDidMount() {
-
-        if(!this.props.id){
-            // Kick off action to make async call to our server for tags/topics.
-            // This will then get stored in our redux state.
-            const { requestAgendas } = this.props;
-            requestAgendas();
-        }
-    }
-
     render () {
         const {
+            addId,
             id,
             body,
             defaultOpen,
+            location,
             meeting_time,
             recommendations,
+            removeId,
             title,
         } = this.props;
 
@@ -71,9 +65,15 @@ class AgendaItemContainer extends Component {
                     <p>No recommended Action</p>
                 </div>
             );
-
+        
         return  (
-            <Modal trigger={container} style={{ color: 'black'}} defaultOpen={defaultOpen}>
+            <Modal
+                trigger={container}
+                style={{ color: 'black'}}
+                defaultOpen={defaultOpen}
+                onOpen={()=> {addId(id)}}
+                onClose={removeId}
+            >
                 <Modal.Header>{title}</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
