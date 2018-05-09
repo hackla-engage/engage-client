@@ -2,72 +2,62 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import FormComponent from "../component/FormComponent.jsx";
-const Recaptcha = require("react-recaptcha");
-<<<<<<< HEAD
-=======
-import agenda_item_received from "../actions/Form";
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
+import ReactDOM from "react-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 class FormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recaptchaSuccess: false
+      recaptchaSuccess: false,
+      showForm: false,
+      captchaHidden: "block"
     };
-<<<<<<< HEAD
+    this.loadedForm = this.loadedForm.bind(this);
     this.returnToAgendaItem = this.returnToAgendaItem.bind(this);
+    this.onVerify = this.onVerify.bind(this);
   }
-  componentDidMount() {
-    console.log(this.props);
+  onVerify(evt) {
+    this.setState({ showForm: true, captchaHidden: "none" });
   }
-=======
-  }
-
-  /////// DEBUGGING! XXX
-  componentDidMount() {
-    this.props.agenda_item_received({
-      Title: "Strategic Goals and SMART Metrics",
-      Recommendations:
-        "Staff recommends that the City Council establish three to five priority strategic goals with measurable three to five  year outcomes, with the goal of identifying game changing priorities that will make a difference in community safety, wellbeing, prosperity, quality of life, and sustainability.",
-      Summary: null,
-      Id: "5abdd46f02f4b99c11cc39a9"
-    });
-  }
-  ///////
-
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
-  verifyCallback(evt) {
-    console.log(evt);
-  }
-  loadCallback(evt) {
-    console.log("loaded");
-  }
-<<<<<<< HEAD
   returnToAgendaItem() {
-    this.props.history.goBack()
+    console.log(this.props);
+    this.props.history.goBack();
   }
-=======
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
+
+  loadedForm(ref) {
+    // Super ugly! and non-performant, but window scrollTo would not work
+    // If you find a better way, please do it! It may be at the router level
+    // At every route change, the menu should be scrolled into view!
+    let node = ReactDOM.findDOMNode(ref);
+    if (node) {
+      node.scrollIntoView();
+    }
+  }
+
   render() {
     return (
       <div>
-        <Recaptcha
-          sitekey="6LcnmVUUAAAAAKaVa9eHX41Nxpzg42_yEsGh0IOH"
-          render="explicit"
-          verifyCallback={this.verifyCallback}
-          onloadCallback={this.loadCallback}
-        />
-        <FormComponent
-          Title={this.props.Title}
-          Recommendations={this.props.Recommendations}
-          Summary={this.props.Summary}
-          Id={this.props.Id}
-<<<<<<< HEAD
-          Pro={this.props.Pro}
-          returnToAgendaItem={this.returnToAgendaItem}
-=======
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
-        />
+        <div style={{ position: "relative", display: this.state.captchaHidden }}>
+          <ReCAPTCHA
+            ref="recaptcha"
+            sitekey="6LcnmVUUAAAAAKaVa9eHX41Nxpzg42_yEsGh0IOH"
+            onChange={this.onVerify}
+          />
+        </div>
+        {this.state.showForm && (
+          <div style={{ position: "relative", zIndex: 50 }}>
+            <FormComponent
+              ref={this.loadedForm}
+              Title={this.props.Title}
+              Recommendations={this.props.Recommendations}
+              Summary={this.props.Summary}
+              Id={this.props.Id}
+              Pro={this.props.Pro}
+              returnToAgendaItem={this.returnToAgendaItem}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -75,7 +65,6 @@ class FormContainer extends Component {
 
 function mapStateToProps(state) {
   console.log(state);
-<<<<<<< HEAD
   const { Form } = state;
   if (state.Form) {
     return {
@@ -87,24 +76,11 @@ function mapStateToProps(state) {
     };
   } else {
     return {};
-=======
-  if (state.Form) {
-    return {
-      Title: state.Form.Title,
-      Recommendations: state.Form.Recommendations,
-      Summary: state.Form.Summary,
-      Id: state.Form.Id
-    };
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
   }
 }
 
 function matchDispatchToProps(dispatch) {
-<<<<<<< HEAD
   return bindActionCreators({}, dispatch);
-=======
-  return bindActionCreators({ agenda_item_received }, dispatch);
->>>>>>> a81eec8f7f8f1ed8cadfe15e1aea7757b1416654
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(FormContainer);

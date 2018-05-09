@@ -200,29 +200,6 @@ class FormComponent extends Component {
               />
             </div>
           </div>
-          <Form.Group inline>
-            <label>Do you agree with the recommended actions*:</label>
-            <Form.Field>
-              <Checkbox
-                radio
-                label="Yes"
-                name="YesNo"
-                value="yes"
-                checked={this.state.yesNoValue}
-                onChange={this.handleRadio}
-              />
-            </Form.Field>
-            <Form.Field>
-              <Checkbox
-                radio
-                label="No"
-                name="YesNo"
-                value="no"
-                checked={!this.state.yesNoValue}
-                onChange={this.handleRadio}
-              />
-            </Form.Field>
-          </Form.Group>
           Tell us a little about yourself:
           <Form.Field
             label="Name*"

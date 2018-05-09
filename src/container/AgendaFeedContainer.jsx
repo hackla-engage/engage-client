@@ -13,6 +13,7 @@ class AgendaFeed extends Component {
     this.removeId = this.removeId.bind(this);
     this.showForm = this.showForm.bind(this);
     this.recommendationReducer = this.recommendationReducer.bind(this);
+    this.goToForm = this.goToForm.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +26,7 @@ class AgendaFeed extends Component {
     }
 
     const { requestAgendas } = this.props;
+    this.gotBackground = false
     requestAgendas();
   }
 
@@ -34,8 +36,8 @@ class AgendaFeed extends Component {
 
   summaryReducer = (acc, curr) => {
     if (!this.gotBackground) {
-      if (curr.toLowerCase().includes("summary")){
-        return acc;
+      if (acc.toLowerCase().includes("summary")) {
+        return curr;
       } else if (curr.toLowerCase().includes("background")) {
         this.gotBackground = true;
         return acc;
@@ -43,29 +45,45 @@ class AgendaFeed extends Component {
         return acc + "<br />" + curr;
       }
     } else {
+      return acc
     }
   };
   showForm(proCon) {
-    const { id, body, recommendations, title } = this.props.agendaItems[
-      this.requestedID
-    ];
-    const recommendationsString = recommendations
-      .map(rec => {
-        return rec.recommendation;
-      })
-      .reduce(this.recommendationReducer);
-    const bodyString = body.slice(1, 4).reduce(this.summaryReducer);
-    // Configure form content
-    this.props.agenda_item_received({
-      Title: title,
-      Recommendations: recommendationsString,
-      Summary: bodyString,
-      Id: id,
-      Pro: proCon === "pro"
-    });
+    // this.requestedID is only useful at loading lifecycle event not afterward
+    const parsed = qs.parse(this.props.location.search);
+    if (parsed && parsed.id) {
+      const { id, body, recommendations, title } = this.props.agendaItems[
+        parsed.id
+      ];
+      let recommendationsString = "";
+      // map to get recommendation from object and reduce array to string concatenated with <br />s
+      if (recommendations.length > 0) {
+        recommendationsString = recommendations
+          .map(rec => {
+            return rec.recommendation;
+          })
+          .reduce(this.recommendationReducer);
+      }
+      let summaryString = "";
+      // slice and reduce array to string concatenated with <br />s
+      if (body.length > 0) {
+        summaryString = body.slice(0, 4).reduce(this.summaryReducer);
+      }
+      console.log(summaryString)
+      // Configure form content
+      this.props.agenda_item_received({
+        Title: title,
+        Recommendations: recommendationsString,
+        Summary: summaryString,
+        Id: id,
+        Pro: proCon === "pro"
+      });
+      setTimeout(this.goToForm, 200);
+    }
+  }
+  goToForm() {
     this.props.history.push("/form"); // already set up!
   }
-
   addId(id) {
     const parsed = qs.parse(this.props.location.search);
     parsed["id"] = id;
@@ -111,7 +129,9 @@ class AgendaFeed extends Component {
 
 function mapStateToProps(state) {
   const agendas = state.agendas;
+  const { Form } = state;
   return {
+    agendaTitle: Form ? Form.Title : null,
     agendaItems: agendas.agendaItems,
     agendaIDs: agendas.agendaIDs,
     agendaLoading: agendas.agendaLoading,
