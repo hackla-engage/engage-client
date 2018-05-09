@@ -7,7 +7,7 @@ import PreferenceList from './container/PreferenceList.jsx';
 import AgendaFeedContainer from './container/AgendaFeedContainer.jsx';
 import SignIn from './component/SignIn.jsx'
 import Faq from './component/Faq.jsx'
-import About from './component/About.jsx'
+import FormContainer from "./container/FormContainer.jsx"
 import TopicsSelectorContainer from './container/TopicsSelectorContainer.jsx'
 
 const Routes = () => {
@@ -20,6 +20,7 @@ const Routes = () => {
         <Route path="/feed" component={ AgendaFeedContainer } />
         <Route path="/signin" component={SignIn} />
         <Route path="/faq" component={Faq} />
+        <Route path="/form" component={FormContainer} />
         <Route path="/topics" component={TopicsSelectorContainer} />
       </Switch>
       <Route component={ Footer } />

@@ -1,15 +1,21 @@
-'use strict';
+"use strict";
 /**
  * Interact with the Engage API
  */
-import { getResource } from './async';
+import { getResource } from "./async";
 
-const HOST = 'https://council-tag.herokuapp.com/api';
+let HOST = "";
+if (process.env.NODE_ENV === "production") {
+  HOST = "https://council-tag.herokuapp.com/api";
+} else {
+  HOST = "http://localhost:8000/api";
+}
+export default HOST
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
-    'Content-Type': 'json',
-    'Accept': 'json',
+  "Content-Type": "json",
+  Accept: "json"
 });
 
 /**
@@ -22,5 +28,5 @@ const HEADERS = new Headers({
  *  example: '/tags'
  */
 export function getJSON(endpointUrl) {
-    return getResource([], HOST, endpointUrl);
+  return getResource([], HOST, endpointUrl);
 }

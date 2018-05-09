@@ -12,8 +12,7 @@
         "body_text": "The team is still working hard to make an app! But we would love to hear from you about our prototype and any questions you have for us."
     },
     "city_council": {
-        "header_text": "How does the City Council Work?",
-        "body_text": "It may seem confusing, but we are here to help! We will be creating a page to describe the process of how decisions are made at the City Council."
-
+        "header_text": "How does City Council Work?",
+        "body_text": "It may seem daunting, but we are here to help!"
     }
 }

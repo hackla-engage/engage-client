@@ -1,5 +1,6 @@
 const path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: ["babel-polyfill", "./src/app.js"],
