@@ -11,7 +11,7 @@ import {
   Select,
   TextArea
 } from "semantic-ui-react";
-import superagent from "superagent";
+import request from "superagent";
 import "./FormComponent.scss";
 import HOST from "../engage_client";
 const ethOptions = [
@@ -30,19 +30,22 @@ class FormComponent extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    this.handleRadio = this.handleRadio.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
     this.handleZipChange = this.handleZipChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleEthChange = this.handleEthChange.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.state = {
       yesNoValue: false,
       textValue: "",
       textError: false,
-      nameValue: "",
-      nameError: true,
-      nameTouched: false,
+      firstValue: "",
+      firstError: true,
+      firstTouched: false,
+      lastValue: "",
+      lastError: true,
+      lastTouched: false,
       zipError: false,
       zipValue: "90401",
       zipTouched: false,
@@ -59,16 +62,38 @@ class FormComponent extends Component {
     // hit endpoint here to consolidate info on agenda items
     this.setState({ isSubmitting: true });
     if (
-      this.state.nameError ||
       this.state.zipError ||
       this.state.emailError ||
       this.state.ethValue === null ||
-      this.state.ethValue === ""
+      this.state.ethValue === "" ||
+      this.state.firstError ||
+      this.state.lastError
     ) {
       this.setState({ isSubmitting: false, submitEnabled: false });
       return false;
     }
-    superagent.post(HOST + "/");
+    console.log("PROPSTATE:", this.props, this.state, HOST);
+    request
+      .agent()
+      .post(HOST + "/add/message/")
+      .set("Content-Type", "application/json")
+      .send({
+        committee: "Santa Monica City Council",
+        ag_item: this.props.Id,
+        token: this.props.verify,
+        content: this.state.textValue,
+        first: this.state.firstValue,
+        last: this.state.lastValue,
+        ethnicity: this.state.ethValue,
+        zip: this.state.zipValue,
+        email: this.state.emailValue
+      })
+      .then(res => {
+        console.log("success", res);
+      })
+      .catch(err => {
+        console.log("ERR SENDING RECTS", err);
+      });
   }
   handleCancel(evt) {
     // redirect back, how?
@@ -93,7 +118,8 @@ class FormComponent extends Component {
         zipTouched: true,
         submitEnabled: !(
           this.state.emailError ||
-          this.state.nameError ||
+          this.state.firstError ||
+          this.state.lastError ||
           this.state.ethValue === null ||
           this.state.ethValue === ""
         )
@@ -108,7 +134,7 @@ class FormComponent extends Component {
     }
   }
 
-  handleNameChange(evt) {
+  handleFirstNameChange(evt) {
     if (evt.currentTarget.value === "") {
       this.setState({
         submitEnabled: false,
@@ -117,18 +143,43 @@ class FormComponent extends Component {
       });
     } else {
       this.setState({
-        nameValue: evt.currentTarget.value,
-        nameError: false,
-        nameTouched: true,
+        firstValue: evt.currentTarget.value,
+        firstError: false,
+        firstTouched: true,
         submitEnabled: !(
           this.state.zipError ||
           this.state.ethValue === null ||
           this.state.ethValue === "" ||
+          this.state.firstError ||
+          this.state.lastError ||
           this.state.emailError
         )
       });
     }
   }
+  handleLastNameChange(evt) {
+    if (evt.currentTarget.value === "") {
+      this.setState({
+        submitEnabled: false,
+        lastError: true,
+        lastTouched: true
+      });
+    } else {
+      this.setState({
+        lastValue: evt.currentTarget.value,
+        lastError: false,
+        lastTouched: true,
+        submitEnabled: !(
+          this.state.zipError ||
+          this.state.ethValue === null ||
+          this.state.ethValue === "" ||
+          this.state.firstError ||
+          this.state.emailError
+        )
+      });
+    }
+  }
+
   handleEmailChange(evt) {
     if (
       evt.currentTarget.value !== "" &&
@@ -147,7 +198,8 @@ class FormComponent extends Component {
         emailTouched: true,
         submitEnabled: !(
           this.state.zipError ||
-          this.state.nameError ||
+          this.state.firstError ||
+          this.state.lastError ||
           this.state.ethValue === null ||
           this.state.ethValue === ""
         )
@@ -160,8 +212,9 @@ class FormComponent extends Component {
       ethTouched: true,
       submitEnabled: !(
         this.state.zipError ||
-        this.state.nameError ||
         this.state.emailError ||
+        this.state.firstError ||
+        this.state.lastError ||
         evt.currentTarget.value === ""
       )
     });
@@ -170,13 +223,6 @@ class FormComponent extends Component {
   handleChangeText(evt) {
     if (evt.currentTarget.value.length <= 200) {
       this.setState({ textValue: evt.currentTarget.value, textError: false });
-      if (this.textView) {
-        // this is handling some odd scroll events that keep happening on setState
-        let node = ReactDOM.findDOMNode(this.textView);
-        if (node) {
-          node.scrollIntoView();
-        }
-      }
     }
   }
 
@@ -201,15 +247,30 @@ class FormComponent extends Component {
             </div>
           </div>
           Tell us a little about yourself:
-          <Form.Field
-            label="Name*"
-            control="input"
-            type="text"
-            autoComplete="name"
-            placeholder="name"
-            value={this.state.name}
-            onChange={this.handleNameChange}
-          />
+          <br />
+          <div className="form-label">Name*</div>
+          <Form.Group inline>
+            <Form.Field
+              control="input"
+              type="text"
+              autoComplete="first-name"
+              placeholder="first name"
+              value={this.state.firstValue}
+              onChange={this.handleFirstNameChange}
+            />
+            <Form.Field
+              control="input"
+              type="text"
+              autoComplete="last-name"
+              placeholder="last name"
+              value={this.state.lastValue}
+              onChange={this.handleLastNameChange}
+            />
+          </Form.Group>
+          {this.state.firstNameTouched &&
+            this.state.firstNameError && (
+              <div className="error">Name is required</div>
+            )}
           {this.state.nameTouched &&
             this.state.nameError && (
               <div className="error">Name is required</div>
@@ -272,7 +333,6 @@ class FormComponent extends Component {
             control="textarea"
             rows="3"
             onChange={this.handleChangeText}
-            ref={ref => (this.textView = ref)}
           />
           <div className="chars">
             {200 - this.state.textValue.length} characters left

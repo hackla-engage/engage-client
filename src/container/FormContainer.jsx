@@ -18,7 +18,7 @@ class FormContainer extends Component {
     this.onVerify = this.onVerify.bind(this);
   }
   onVerify(evt) {
-    this.setState({ showForm: true, captchaHidden: "none" });
+    this.setState({ showForm: true, captchaHidden: "none", captchaVerify: evt });
   }
   returnToAgendaItem() {
     this.props.history.goBack();
@@ -53,6 +53,7 @@ class FormContainer extends Component {
               Id={this.props.Id}
               Pro={this.props.Pro}
               returnToAgendaItem={this.returnToAgendaItem}
+              verify={this.state.captchaVerify}
             />
           </div>
         )}
