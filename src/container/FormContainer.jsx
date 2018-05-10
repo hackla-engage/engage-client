@@ -10,8 +10,8 @@ class FormContainer extends Component {
     super(props);
     this.state = {
       recaptchaSuccess: false,
-      showForm: false,
-      captchaHidden: "block"
+      showForm: true,
+      captchaHidden: "none"
     };
     this.loadedForm = this.loadedForm.bind(this);
     this.returnToAgendaItem = this.returnToAgendaItem.bind(this);
@@ -21,7 +21,6 @@ class FormContainer extends Component {
     this.setState({ showForm: true, captchaHidden: "none" });
   }
   returnToAgendaItem() {
-    console.log(this.props);
     this.props.history.goBack();
   }
 
@@ -46,9 +45,8 @@ class FormContainer extends Component {
           />
         </div>
         {this.state.showForm && (
-          <div style={{ position: "relative", zIndex: 50 }}>
+          <div style={{ position: "relative", zIndex: 50 }} ref={this.loadedForm}>
             <FormComponent
-              ref={this.loadedForm}
               Title={this.props.Title}
               Recommendations={this.props.Recommendations}
               Summary={this.props.Summary}
@@ -64,7 +62,6 @@ class FormContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   const { Form } = state;
   if (state.Form) {
     return {

@@ -69,7 +69,6 @@ class AgendaFeed extends Component {
       if (body.length > 0) {
         summaryString = body.slice(0, 4).reduce(this.summaryReducer);
       }
-      console.log(summaryString)
       // Configure form content
       this.props.agenda_item_received({
         Title: title,

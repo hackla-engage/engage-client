@@ -108,13 +108,6 @@ class FormComponent extends Component {
     }
   }
 
-  handleRadio(evt) {
-    if (evt.currentTarget.children[0].value === "yes") {
-      this.setState({ yesNoValue: true });
-    } else {
-      this.setState({ yesNoValue: false });
-    }
-  }
   handleNameChange(evt) {
     if (evt.currentTarget.value === "") {
       this.setState({
@@ -177,6 +170,13 @@ class FormComponent extends Component {
   handleChangeText(evt) {
     if (evt.currentTarget.value.length <= 200) {
       this.setState({ textValue: evt.currentTarget.value, textError: false });
+      if (this.textView) {
+        // this is handling some odd scroll events that keep happening on setState
+        let node = ReactDOM.findDOMNode(this.textView);
+        if (node) {
+          node.scrollIntoView();
+        }
+      }
     }
   }
 
@@ -272,6 +272,7 @@ class FormComponent extends Component {
             control="textarea"
             rows="3"
             onChange={this.handleChangeText}
+            ref={ref => (this.textView = ref)}
           />
           <div className="chars">
             {200 - this.state.textValue.length} characters left
