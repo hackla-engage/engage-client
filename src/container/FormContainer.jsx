@@ -10,8 +10,8 @@ class FormContainer extends Component {
     super(props);
     this.state = {
       recaptchaSuccess: false,
-      showForm: true,
-      captchaHidden: "none"
+      showForm: false,
+      captchaHidden: "block"
     };
     this.loadedForm = this.loadedForm.bind(this);
     this.returnToAgendaItem = this.returnToAgendaItem.bind(this);
