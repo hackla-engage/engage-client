@@ -86,6 +86,7 @@ class FormComponent extends Component {
         last: this.state.lastValue,
         ethnicity: this.state.ethValue,
         zip: this.state.zipValue,
+        pro: this.props.Pro,
         email: this.state.emailValue
       })
       .then(res => {
@@ -229,6 +230,7 @@ class FormComponent extends Component {
   render() {
     return (
       <Segment className="form-background">
+      <div className={this.props.Pro ? "pro" : "con"}>{this.props.Pro ? "Pro" : "Con"}</div>
         <Form onSubmit={this.handleSubmit} size="large">
           <div className="vote-title-holder" />
           <div className="vote-recommendations-holder">
