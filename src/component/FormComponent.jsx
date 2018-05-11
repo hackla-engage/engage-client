@@ -91,6 +91,7 @@ class FormComponent extends Component {
       })
       .then(res => {
         console.log("success", res);
+        this.props.thankYou();    
       })
       .catch(err => {
         console.log("ERR SENDING RECTS", err);
@@ -99,7 +100,8 @@ class FormComponent extends Component {
   handleCancel(evt) {
     // redirect back, how?
     evt.preventDefault();
-    this.props.returnToAgendaItem();
+    console.log("prevent default")
+    this.props.thankYou();
   }
   handleZipChange(evt) {
     if (
