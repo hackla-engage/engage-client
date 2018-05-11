@@ -1,7 +1,7 @@
 import Preference from '../component/Preference.jsx'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { preference_selected } from '../actions/Preference';
+import { preference_selected } from '../ducks/preference.js';
 
 
 
