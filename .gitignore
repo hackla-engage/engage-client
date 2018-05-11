@@ -3,3 +3,7 @@
 node_modules
 sandbox
 bundle.js
+
+log
+yarn-error.log
+npm-debug*
