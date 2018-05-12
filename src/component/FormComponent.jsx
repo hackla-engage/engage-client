@@ -85,7 +85,7 @@ class FormComponent extends Component {
         first: this.state.firstValue,
         last: this.state.lastValue,
         ethnicity: this.state.ethValue,
-        zip: this.state.zipValue,
+        zip: parseInt(this.state.zipValue),
         pro: this.props.Pro,
         email: this.state.emailValue
       })
