@@ -106,7 +106,8 @@ class FormComponent extends Component {
   handleZipChange(evt) {
     if (
       isNaN(parseInt(evt.currentTarget.value)) ||
-      parseInt(evt.currentTarget.value) < 501
+      parseInt(evt.currentTarget.value) < 501 ||
+      !/[0-9]{5}/.test(evt.currentTarget.value)
     ) {
       this.setState({
         zipValue: evt.currentTarget.value,
@@ -140,6 +141,7 @@ class FormComponent extends Component {
   handleFirstNameChange(evt) {
     if (evt.currentTarget.value === "") {
       this.setState({
+        firstValue: evt.currentTarget.value,
         submitEnabled: false,
         nameError: true,
         nameTouched: true
@@ -163,6 +165,7 @@ class FormComponent extends Component {
   handleLastNameChange(evt) {
     if (evt.currentTarget.value === "") {
       this.setState({
+        lastValue: evt.currentTarget.value,
         submitEnabled: false,
         lastError: true,
         lastTouched: true
@@ -271,8 +274,9 @@ class FormComponent extends Component {
               onChange={this.handleLastNameChange}
             />
           </Form.Group>
-          {this.state.firstNameTouched &&
-            this.state.firstNameError && (
+          {((this.state.firstNameTouched &&
+            this.state.firstNameError) || ((this.state.lastNameTouched &&
+              this.state.lasttNameError))) && (
               <div className="error">Name is required</div>
             )}
           {this.state.nameTouched &&
@@ -300,6 +304,8 @@ class FormComponent extends Component {
             placeholder="zipcode"
             autoComplete="postal-code"
             pattern="[0-9]{5}"
+            maxLength="5"
+            minLength="5"
             value={this.state.zipValue}
             onChange={this.handleZipChange}
           />
@@ -333,7 +339,7 @@ class FormComponent extends Component {
             )}
           <Form.Field
             autoheight="true"
-            label="Let the council know what you think about this item. The actual text you write may not go to the council, but an analysis will (optional):"
+            label="Let the council know what you think about this item. The actual text you write will NOT go to the council, but an analysis will (optional):"
             control="textarea"
             rows="3"
             onChange={this.handleChangeText}
@@ -342,11 +348,6 @@ class FormComponent extends Component {
             {200 - this.state.textValue.length} characters left
           </div>
           <br />
-          {this.state.textError === true && (
-            <div className="error">
-              Profanity or potentially threatening words are not allowed<br />
-            </div>
-          )}
           {!this.state.submitEnabled && (
             <div className="error">Form has errors, submit is disabled</div>
           )}
