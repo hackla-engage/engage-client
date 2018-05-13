@@ -1,5 +1,6 @@
 const path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 // default runs data from ducks
 let NODE_ENV = 'development'
