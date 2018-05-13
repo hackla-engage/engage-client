@@ -27,6 +27,7 @@ class AgendaItemContainer extends Component {
             recommendations,
             removeId,
             title,
+            showForm
         } = this.props;
 
         const meetingDate = () => {
@@ -85,14 +86,24 @@ class AgendaItemContainer extends Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button primary>
-                        Pro <Icon name='right chevron' />
+                   <Button
+                      primary
+                      onClick={evt => {
+                        showForm("pro");
+                      }}
+                    >
+                      Pro <Icon name="right chevron" />
                     </Button>
-                    <Button primary>
-                        Con <Icon name='right chevron' />
+                    <Button
+                      primary
+                      onClick={evt => {
+                        showForm("con");
+                      }}
+                    >
+                      Con <Icon name="right chevron" />
                     </Button>
-                </Modal.Actions>
-            </Modal>
+                  </Modal.Actions>
+                    </Modal>
         )
     }
 }

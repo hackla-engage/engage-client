@@ -1,0 +1,54 @@
+@import "./Landing.scss";
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: -10px;
+}
+.vote-title-holder {
+  color: black;
+}
+
+.vote-title-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.vote-recommendations-holder {
+  color: black;
+  margin-bottom: 20px;
+}
+
+.vote-recommendations-keyword {
+  font-weight: 400;
+  font-size: 1.05rem;
+  text-decoration: underline;
+}
+.vote-recommendations-recommendations {
+  font-size: 0.95rem;
+  color: $secondary-font-color;
+}
+.ui.segment.form-background {
+  //background-color: $primary-bg-color;
+  padding: 20px;
+  margin: 0px;
+  min-height: 95vh;
+}
+
+.chars {
+  margin-top: -10px;
+  color: black;
+}
+.form-label {
+  font-weight: 600;
+  color: black;
+
+}
+.pro {
+  padding: 8px;
+  background: linear-gradient(to right, blue, white) 
+}
+.con {
+  padding: 8px;
+  background: linear-gradient(to right, red, white) 
+}
