@@ -32,7 +32,7 @@ class AgendaItemContainer extends Component {
 
     const meetingDate = () => {
       let meetTime = moment(meeting_time * 1000);
-      return <div style={{ marginBottom: "2%" }}>
+      return <div style={{ marginBottom: "3%" }}>
           <div
             style={{
               width: "70%",
@@ -40,19 +40,24 @@ class AgendaItemContainer extends Component {
               padding: "1%"
             }}
           >
-            <p style={{ margin: "0" }}>Hearing Date: {meetTime.format("M/D/YYYY")}</p>
-            <p>Hearing Time: {meetTime.format("h:mm a")}</p>
+            <h3
+              style={{
+                textDecoration: "underline"
+              }}
+            >
+              {title}
+            </h3>
           </div>
           <div
             style={{
               width: "30%",
               float: "left",
               padding: "1%",
-              textAlign: "center"
+              textAlign: "right"
             }}
           >
-            <Icon name="add to calendar" />
-            <h4 style={{ margin: "0" }}>Add to Calendar</h4>
+            <p style={{ margin: "0" }}>Hearing Date: {meetTime.format("M/D/YYYY")}</p>
+            <p>Hearing Time: {meetTime.format("h:mm a")}</p>
           </div>
         </div>;
     };
@@ -67,13 +72,6 @@ class AgendaItemContainer extends Component {
             {meetingDate()}
           </Card.Content>
           <Card.Content>
-            <h3
-              style={{
-                textDecoration: "underline"
-              }}
-            >
-              {title}
-            </h3>
             {body[0]}
             {body[1]}
           </Card.Content>
@@ -81,26 +79,14 @@ class AgendaItemContainer extends Component {
           <div
             style={{
               textAlign: "center",
-              marginBottom: "2%"
+              padding: "0 5% 3% 5%"
             }}
           >
             <Button
-              inverted
+              fluid
               color="blue"
-              style={{
-                width: "40%",
-                marginRight: "5%"
-              }}
             >
               <Icon name="list layout"/>View Item
-            </Button>
-            <Button
-              style={{
-                width: "40%",
-                marginLeft: "5%"
-              }}
-            >
-              <Icon name="share alternate"/>Share
             </Button>
             </div>
         </Card>
@@ -130,15 +116,13 @@ class AgendaItemContainer extends Component {
       >
         <div
           style={{
-            padding: "2%",
-            paddingBottom: "3%"
+            padding: "2%"
           }}
         >
           {meetingDate()}
         </div>
         <Divider />
         <Modal.Content>
-          <h3 style={{ textDecoration: "underline" }}>{title}</h3>
           <p>{body[0]}</p>
           <p>{body[1]}</p>
           {recommendation}
