@@ -14,17 +14,6 @@ import {
 import request from "superagent";
 import "./FormComponent.scss";
 import HOST from "../engage_client";
-const ethOptions = [
-  { key: "s", value: "", flag: "", text: "Select an ethnicity/race" },
-  { key: "AA", value: "AA", text: "American Indian or Alaska Native" },
-  { key: "AS", value: "AS", text: "Asian" },
-  { key: "B", value: "B", text: "Black or African American" },
-  { key: "H", value: "H", text: "Hispanic/Latino" },
-  { key: "P", value: "P", text: "Native Hawaiian or other Pacific Islander" },
-  { key: "M", value: "M", text: "Multiracial or Mixed ethnicities" },
-  { key: "W", value: "W", text: "White" },
-  { key: "N", value: "N", text: "Prefer not to answer" }
-];
 class FormComponent extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +22,6 @@ class FormComponent extends Component {
     this.handleChangeText = this.handleChangeText.bind(this);
     this.handleZipChange = this.handleZipChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleEthChange = this.handleEthChange.bind(this);
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.state = {
@@ -52,8 +40,6 @@ class FormComponent extends Component {
       emailError: true,
       emailValue: "",
       emailTouched: false,
-      ethValue: "",
-      ethTouched: false,
       submitEnabled: true,
       isSubmitting: false
     };
@@ -64,8 +50,6 @@ class FormComponent extends Component {
     if (
       this.state.zipError ||
       this.state.emailError ||
-      this.state.ethValue === null ||
-      this.state.ethValue === "" ||
       this.state.firstError ||
       this.state.lastError
     ) {
@@ -84,7 +68,6 @@ class FormComponent extends Component {
         content: this.state.textValue,
         first: this.state.firstValue,
         last: this.state.lastValue,
-        ethnicity: this.state.ethValue,
         zip: parseInt(this.state.zipValue),
         pro: this.props.Pro,
         email: this.state.emailValue
@@ -123,9 +106,7 @@ class FormComponent extends Component {
         submitEnabled: !(
           this.state.emailError ||
           this.state.firstError ||
-          this.state.lastError ||
-          this.state.ethValue === null ||
-          this.state.ethValue === ""
+          this.state.lastError 
         )
       });
     } else {
@@ -153,8 +134,6 @@ class FormComponent extends Component {
         firstTouched: true,
         submitEnabled: !(
           this.state.zipError ||
-          this.state.ethValue === null ||
-          this.state.ethValue === "" ||
           this.state.firstError ||
           this.state.lastError ||
           this.state.emailError
@@ -177,8 +156,6 @@ class FormComponent extends Component {
         lastTouched: true,
         submitEnabled: !(
           this.state.zipError ||
-          this.state.ethValue === null ||
-          this.state.ethValue === "" ||
           this.state.firstError ||
           this.state.emailError
         )
@@ -205,25 +182,10 @@ class FormComponent extends Component {
         submitEnabled: !(
           this.state.zipError ||
           this.state.firstError ||
-          this.state.lastError ||
-          this.state.ethValue === null ||
-          this.state.ethValue === ""
+          this.state.lastError
         )
       });
     }
-  }
-  handleEthChange(evt) {
-    this.setState({
-      ethValue: evt.currentTarget.value,
-      ethTouched: true,
-      submitEnabled: !(
-        this.state.zipError ||
-        this.state.emailError ||
-        this.state.firstError ||
-        this.state.lastError ||
-        evt.currentTarget.value === ""
-      )
-    });
   }
 
   handleChangeText(evt) {
@@ -313,28 +275,6 @@ class FormComponent extends Component {
             this.state.zipError && (
               <div className="error">
                 Error in zipcode... It is optional<br />
-              </div>
-            )}
-          <Form.Field
-            control="select"
-            label="Ethnicity*"
-            autoComplete="ethnicity"
-            placeholder="Select your ethnicity"
-            value={this.state.ethValue}
-            onChange={this.handleEthChange}
-          >
-            {ethOptions.map(eth => {
-              return (
-                <option key={eth.value} value={eth.value}>
-                  {eth.text}
-                </option>
-              );
-            })}
-          </Form.Field>
-          {this.state.ethTouched &&
-            this.state.ethValue === "" && (
-              <div className="error">
-                Please select one of the above<br />
               </div>
             )}
           <Form.Field
