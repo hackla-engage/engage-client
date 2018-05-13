@@ -1,4 +1,4 @@
-import { REQUEST_TAGS } from '../constants/actionTypes.js';
+import { REQUEST_TAGS } from '../ducks/preference.js';
 import { getJSON } from '../engage_client.js';
 /**
  * Make GET /tags request to Engage API
