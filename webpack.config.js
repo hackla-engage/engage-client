@@ -1,6 +1,13 @@
 const path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// default runs data from ducks
+let NODE_ENV = 'development'
+// testing with django server running on http://localhost:8000
+if (process.env.DEBUG) {
+  NODE_ENV = 'devsrv'
+}
+
 module.exports = {
   entry: ["babel-polyfill", "./src/app.js"],
   output: {
@@ -52,6 +59,11 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+    })
+  ],
   // Dev tools are provided by webpack
   // Source maps help map errors to original react code
   devtool: 'cheap-module-eval-source-map',
