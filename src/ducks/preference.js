@@ -1,8 +1,8 @@
 // Action
-const REQUEST_TAGS = 'REQUEST_TAGS';
+export const REQUEST_TAGS = 'REQUEST_TAGS';
 
-// Reducer
-export default function reducer(state = [], action) {
+// Reducers
+export function reducer(state = [], action) {
   switch (action.type) {
     case REQUEST_TAGS:
       return [
