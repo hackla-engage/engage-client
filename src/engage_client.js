@@ -4,13 +4,7 @@
  */
 import { getResource } from "./async";
 
-let HOST = "";
-if (process.env.NODE_ENV === "production") {
-  HOST = "https://council-tag.herokuapp.com/api";
-} else {
-  HOST = "http://localhost:8000/api";
-}
-export default HOST
+export const HOST =  "https://council-tag.herokuapp.com/api";
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
