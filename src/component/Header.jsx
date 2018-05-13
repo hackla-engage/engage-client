@@ -17,10 +17,9 @@ const breakPointSize = 767;
 const Header = () => (
   <Menu
     borderless
+    attached
     style={{
       paddingLeft: "1rem",
-      paddingRight: "1rem",
-      margin: 0,
       backgroundColor: "#7FB800"
     }}
   >
