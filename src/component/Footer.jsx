@@ -11,12 +11,17 @@ import {
 
 const breakPointSize = 767
 const Footer = () => (
-  <Segment style={{
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
-    margin: 0,
-    backgroundColor: "#7FB800"
-  }}>
+  <Segment
+    borderless
+    attached
+    style={{
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
+      margin: 0,
+      border: "solid #7FB800",
+      backgroundColor: "#7FB800"
+    }}
+  >
     <Container textAlign='center'>
       <h2 className="social-links__title">Have a question? <br/>Want to help?</h2>
       <p>Join us at <a href="https://www.meetup.com/hackforla/">Hack for LA</a>, Mondays at 6:00pm in Santa Monica</p>
