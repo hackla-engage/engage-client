@@ -22,6 +22,7 @@ class FormContainer extends Component {
       captchaHidden: "block",
       showModal: false
     };
+    console.log(process.env.NODE_ENV)
     this.loadedForm = this.loadedForm.bind(this);
     this.returnToAgendaItem = this.returnToAgendaItem.bind(this);
     this.returnToFeed = this.returnToFeed.bind(this);

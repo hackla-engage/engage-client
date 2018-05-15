@@ -10,6 +10,7 @@
     "serve": "live-server public",
     "build": "webpack --mode production -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode development --open",
+    "devsrv": "DEBUG=true npm run dev",
     "postinstall": "npm run build"
   },
   "dependencies": {
