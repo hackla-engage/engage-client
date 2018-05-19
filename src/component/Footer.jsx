@@ -12,7 +12,6 @@ import {
 const breakPointSize = 767
 const Footer = () => (
   <Segment
-    borderless
     attached
     style={{
       paddingLeft: '1rem',

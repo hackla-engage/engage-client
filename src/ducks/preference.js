@@ -2,7 +2,7 @@
 export const REQUEST_TAGS = "REQUEST_TAGS";
 
 // Reducers
-export function reducer(state = [], action) {
+export default function reducer(state = [], action) {
   switch (action.type) {
     case REQUEST_TAGS:
       return [
