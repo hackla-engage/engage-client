@@ -21,87 +21,66 @@ class AgendaItemContainer extends Component {
       showForm,
     } = this.props;
 
-    const meetingDate = () => {
-      let meetTime = moment(meeting_time * 1000);
-      return (
-        <div style={{ marginBottom: '3%' }}>
-          <div
-            style={{
-              width: '70%',
-              float: 'left',
-              padding: '1%',
-            }}
-          >
-            <h3
-              style={{
-                textDecoration: 'underline',
-              }}
-            >
-              {title}
-            </h3>
-          </div>
-          <div
-            style={{
-              width: '30%',
-              float: 'left',
-              padding: '1%',
-              textAlign: 'right',
-            }}
-          >
-            <p>Meeting Date</p>
-            <p style={{ margin: '0' }}>{meetTime.format('M/D/YYYY')}</p>
-            <p>{meetTime.format('h:mm a')}</p>
-          </div>
-        </div>
-      );
-    };
+    const meetTime = moment(meeting_time * 1000);
 
-    const content = (body) => {
-      return (
-        body.length > 0 ? (
-          <div>
-            <p>{body[0]}</p>
-            <p>{body[1]}</p>
-            </div>
-          ) :
-          (
-            <div>
-              <p>There is no summary for this agenda</p>
-            </div>
-          )
-        )
-    }
     const container = (
       <Container text style={{ margin: '2%' }}>
         <Card style={{ width: 'auto' }}>
-          <Card.Content>{meetingDate()}</Card.Content>
-          <Card.Content>
-            {content(body)}
+          <Card.Content style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}>
+            <Card.Description style={{
+              alignSelf: 'flex-end',
+            }}>
+              <div>Meeting Date</div>
+              <div>{meetTime.format('M/D/YYYY')}</div>
+              <div>{meetTime.format('h:mm a')}</div>
+            </Card.Description>
           </Card.Content>
-          <Divider />
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '0 5% 3% 5%',
-            }}
-          >
+          <Card.Content>
+            <Card.Header>
+              {title}
+            </Card.Header>
+          </Card.Content>
+          <Card.Content>
             <Button fluid color="blue">
               <Icon name="list layout" />View Item
             </Button>
-          </div>
+          </Card.Content>
         </Card>
       </Container>
     );
 
+    const summary = body.length > 0 ? (
+      <div style={{
+        marginBottom: '10px',
+      }}>
+        <p>{body[0]}</p>
+        <p>{body[1]}</p>
+        </div>
+      ) :
+      (
+        <div style={{
+          marginBottom: '10px',
+        }}>
+          <p>There is no summary for this agenda.</p>
+        </div>
+      );
+            
     const recommendation = recommendations[0] ? (
-      <div>
+      <div style={{
+        marginBottom: '10px',
+      }}>
         <h5>Recommendation:</h5>
         <p>{recommendations[0].recommendation}</p>
         <h5>What is your stance on the recommended action?</h5>
       </div>
     ) : (
-      <div>
-        <p>No recommended Action</p>
+      <div style={{
+        marginBottom: '10px',
+      }}>
+        <p>No recommended action has been proposed.</p>
       </div>
     );
 
@@ -116,17 +95,27 @@ class AgendaItemContainer extends Component {
         trigger={container}
         style={{ color: 'black' }}
       >
-        <div
-          style={{
-            padding: '2%',
+        <Modal.Content style={{
+            display: 'flex',
+            flexDirection: 'column',
+            
           }}
         >
-          {meetingDate()}
-        </div>
+          <div style={{
+            alignSelf: 'flex-end',
+            marginTop: '2rem'
+          }}>
+            <div>Meeting Date</div>
+            <div>{meetTime.format('M/D/YYYY')}</div>
+            <div>{meetTime.format('h:mm a')}</div>
+          </div>
+        </Modal.Content>
         <Divider />
+        <Modal.Header>
+          {title}
+        </Modal.Header>
         <Modal.Content>
-          <p>{body[0]}</p>
-          <p>{body[1]}</p>
+          {summary}
           {recommendation}
         </Modal.Content>
         <Modal.Actions>
@@ -152,15 +141,8 @@ class AgendaItemContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // agendaItems: state.agendas.agendaItems,
-    // agendaIDs: state.agendas.agendaIDs,
-  };
-}
-
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(AgendaItemContainer);
+export default connect(undefined, matchDispatchToProps)(AgendaItemContainer);
