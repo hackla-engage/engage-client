@@ -105,6 +105,7 @@ class AgendaFeed extends Component {
     render () {
         const {
             agendaItems,
+            agendaIDs,
             agendaLoading,
             agendaLoadError,
         } = this.props;
@@ -116,7 +117,8 @@ class AgendaFeed extends Component {
         } else {
             return (
                 <div style={{color: 'black'}}>
-                    {Object.values(agendaItems).map((agenda, i) => {
+                    {agendaIDs.map((agendaID, i) => {
+                        let agenda = agendaItems[agendaID];
                         return (
                             <AgendaItemContainer
                                 key={agenda.id}

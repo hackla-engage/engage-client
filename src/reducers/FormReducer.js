@@ -1,5 +1,4 @@
 export default function(state = null, action) {
-  console.log(action)
   switch (action.type) {
     case "AGENDA_ITEM_RECEIVED":
       return action.payload;
