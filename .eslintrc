@@ -1,0 +1,18 @@
+{
+  parser: "babel-eslint",
+  env: {
+    browser: true,
+    commonjs: true
+  },
+  rules: {
+    indent: ['error', 4],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single']
+  },
+  globals: {
+    __dirname: true,
+    process: true,
+  },
+  extends: ["airbnb-base"]
+}
+  
