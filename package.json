@@ -11,7 +11,9 @@
     "build": "webpack --mode production -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode development --open",
     "devsrv": "DEBUG=true npm run dev",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "prettier": "prettier-eslint --write '!public/**/*.js' '*.js' '*.jsx'",
+    "prettier-dryrun": "prettier-eslint '!public/**/*.js' '*.js' '*.jsx'"
   },
   "dependencies": {
     "b": "^2.0.1",
@@ -63,6 +65,8 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
+    "prettier-eslint": "^8.8.1",
+    "prettier-eslint-cli": "^4.7.1",
     "webpack-dev-server": "^3.1.1"
   }
 }
