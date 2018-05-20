@@ -62,12 +62,12 @@ class Landing extends Component {
                 marginBottom: '1em',
               }}
             />
-            <Button primary size="huge" style={{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
-              <Link style={{ color: '#FFF' }} to="/feed">
-                Click to Engage
-              </Link>
-              <Icon name="right arrow" />
-            </Button>
+            <Link style={{ color: '#FFF' }} to="/feed">
+              <Button primary size="huge" style={{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
+                  Click to Engage
+                <Icon name="right arrow" />
+              </Button>
+            </Link>
           </Container>
           <div
             style={{
