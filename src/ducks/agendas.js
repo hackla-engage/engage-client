@@ -27,10 +27,31 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
     switch (action.type) {
         case REQUEST_AGENDAS:
+            const agendaList = action.payload.agendaList;
+            if(!agendaList || agendaList.length === 0) return;
+
+            const agendaItems = agendaList.reduce((acc, agenda)=>{
+                if(acc[agenda.id]){
+                    console.log('duplicate agenda id', agenda.id);
+                }
+                acc[agenda.id] = agenda;
+                return acc;
+            }, {...state.agendaItems})
+
+            const agendaIDs = Object.keys(agendaItems);
+            const agendaIDsSortedByTime = agendaIDs.sort((a, b)=>{
+                let timeA = agendaItems[a].meeting_time
+                let timeB = agendaItems[b].meeting_time
+
+                if(timeA > timeB) return -1;
+                else if(timeA < timeB) return 1;
+                else return 0;
+            })
+
             return {
                 ...state,
-                agendaItems: action.payload.agendas,
-                agendaIDs: action.payload.agendaIDs,
+                agendaItems,
+                agendaIDs: agendaIDsSortedByTime,
                 agendaLoading: false,
             };
         case REQUEST_LOADING:
@@ -60,23 +81,10 @@ export function requestAgendas() {
                     return [...acc, ...result.items];
                 }, [])
 
-                let agendaIDs = agendaList.reduce((acc, agenda)=>{
-                    return [...acc, ...agenda.id];
-                }, [])
-
-                let agendas = agendaList.reduce((acc, agenda)=>{
-                    if(acc[agenda.id]){
-                        console.log('duplicate agenda id', agenda.id);
-                    }
-                    acc[agenda.id] = agenda;
-                    return acc;
-                }, {})
-
                 dispatch({
                     type: REQUEST_AGENDAS,
                     payload: {
-                        agendas,
-                        agendaIDs,
+                        agendaList,
                     }
                 })
             })
