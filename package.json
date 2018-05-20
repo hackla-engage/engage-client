@@ -12,8 +12,8 @@
     "dev": "webpack-dev-server --mode development --open",
     "devsrv": "DEBUG=true npm run dev",
     "postinstall": "npm run build",
-    "prettier": "prettier-eslint --write '!public/**/*.js' '*.js' '*.jsx'",
-    "prettier-dryrun": "prettier-eslint '!public/**/*.js' '*.js' '*.jsx'"
+    "prettier": "prettier-eslint --write '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'",
+    "prettier-dryrun": "prettier-eslint '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'"
   },
   "dependencies": {
     "b": "^2.0.1",

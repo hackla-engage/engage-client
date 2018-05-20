@@ -10,26 +10,25 @@ import {
   Image,
   Responsive,
   Segment,
-} from 'semantic-ui-react'
+} from 'semantic-ui-react';
 
-const breakPointSize = 767
+const breakPointSize = 767;
 
-const TopicsSelector = (props) =>{
+const TopicsSelector = props => {
   return (
     <div>
       <Segment
-        textAlign='center'
+        textAlign="center"
         style={{ position: 'relative', minHeight: 536, padding: '1em 0em' }}
         vertical
       >
         <Container text>
-            {props.topics.map((topic, i) => <Headline key={i} text={topic.label} />)}
+          {props.topics.map((topic, i) => <Headline key={i} text={topic.label} />)}
         </Container>
       </Segment>
-
     </div>
   );
-}
+};
 
 /**
  * Display the label/title of the topic/tag.
@@ -38,14 +37,19 @@ const TopicsSelector = (props) =>{
  *
  * @param props.text is required
  */
-const Headline = (props) => (
-    <Header
-        as='h1'
-        content={props.text}
-        inverted
-        style={{ fontSize: '4em', color: '#7FB800', fontWeight: 'normal', marginBottom: 0, marginTop: '1.5em' }}
-    />
+const Headline = props => (
+  <Header
+    as="h1"
+    content={props.text}
+    inverted
+    style={{
+      fontSize: '4em',
+      color: '#7FB800',
+      fontWeight: 'normal',
+      marginBottom: 0,
+      marginTop: '1.5em',
+    }}
+  />
 );
-
 
 export default TopicsSelector;

@@ -11,21 +11,15 @@ import { requestTags } from '../actions/RequestTags.js';
  */
 
 class TopicsSelectorContainer extends React.Component {
-    componentDidMount() {
-        // Kick off action to make async call to our server for tags/topics.
-        // This will then get stored in our redux state.
-        requestTags();
-    }
-    render () {
-        const topics = [
-            {label: "First"},
-            {label: "Second"},
-            {label: "Third"},
-        ];
-        return (
-            <TopicsSelector topics={topics} />
-        );
-    }
+  componentDidMount() {
+    // Kick off action to make async call to our server for tags/topics.
+    // This will then get stored in our redux state.
+    requestTags();
+  }
+  render() {
+    const topics = [{ label: 'First' }, { label: 'Second' }, { label: 'Third' }];
+    return <TopicsSelector topics={topics} />;
+  }
 }
 
 export default TopicsSelectorContainer;

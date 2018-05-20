@@ -3,16 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import qs from 'query-string';
-import {
-  Button,
-  Card,
-  Container,
-  Divider,
-  Header,
-  Icon,
-  Modal,
-  Segment
-} from 'semantic-ui-react';
+import { Button, Card, Container, Divider, Header, Icon, Modal, Segment } from 'semantic-ui-react';
 import { requestAgendas } from '../ducks/agendas';
 
 class AgendaItemContainer extends Component {
@@ -27,22 +18,23 @@ class AgendaItemContainer extends Component {
       recommendations,
       removeId,
       title,
-      showForm
+      showForm,
     } = this.props;
 
     const meetingDate = () => {
       let meetTime = moment(meeting_time * 1000);
-      return <div style={{ marginBottom: "3%" }}>
+      return (
+        <div style={{ marginBottom: '3%' }}>
           <div
             style={{
-              width: "70%",
-              float: "left",
-              padding: "1%"
+              width: '70%',
+              float: 'left',
+              padding: '1%',
             }}
           >
             <h3
               style={{
-                textDecoration: "underline"
+                textDecoration: 'underline',
               }}
             >
               {title}
@@ -50,27 +42,23 @@ class AgendaItemContainer extends Component {
           </div>
           <div
             style={{
-              width: "30%",
-              float: "left",
-              padding: "1%",
-              textAlign: "right"
+              width: '30%',
+              float: 'left',
+              padding: '1%',
+              textAlign: 'right',
             }}
           >
-            <p style={{ margin: "0" }}>Hearing Date: {meetTime.format("M/D/YYYY")}</p>
-            <p>Hearing Time: {meetTime.format("h:mm a")}</p>
+            <p style={{ margin: '0' }}>Hearing Date: {meetTime.format('M/D/YYYY')}</p>
+            <p>Hearing Time: {meetTime.format('h:mm a')}</p>
           </div>
-        </div>;
+        </div>
+      );
     };
 
     const container = (
-      <Container
-        text
-        style={{ margin: "2%" }}
-      >
-        <Card style={{ width: "auto" }}>
-          <Card.Content>
-            {meetingDate()}
-          </Card.Content>
+      <Container text style={{ margin: '2%' }}>
+        <Card style={{ width: 'auto' }}>
+          <Card.Content>{meetingDate()}</Card.Content>
           <Card.Content>
             {body[0]}
             {body[1]}
@@ -78,17 +66,14 @@ class AgendaItemContainer extends Component {
           <Divider />
           <div
             style={{
-              textAlign: "center",
-              padding: "0 5% 3% 5%"
+              textAlign: 'center',
+              padding: '0 5% 3% 5%',
             }}
           >
-            <Button
-              fluid
-              color="blue"
-            >
-              <Icon name="list layout"/>View Item
+            <Button fluid color="blue">
+              <Icon name="list layout" />View Item
             </Button>
-            </div>
+          </div>
         </Card>
       </Container>
     );
@@ -109,14 +94,16 @@ class AgendaItemContainer extends Component {
       <Modal
         closeIcon
         defaultOpen={defaultOpen}
-        onOpen={() => { addId(id); }}
+        onOpen={() => {
+          addId(id);
+        }}
         onClose={removeId}
         trigger={container}
-        style={{ color: "black" }}
+        style={{ color: 'black' }}
       >
         <div
           style={{
-            padding: "2%"
+            padding: '2%',
           }}
         >
           {meetingDate()}
@@ -130,13 +117,17 @@ class AgendaItemContainer extends Component {
         <Modal.Actions>
           <Button
             primary
-            onClick={evt => { showForm("pro"); }}
+            onClick={evt => {
+              showForm('pro');
+            }}
           >
             Pro <Icon name="right chevron" />
           </Button>
           <Button
             primary
-            onClick={evt => { showForm("con"); }}
+            onClick={evt => {
+              showForm('con');
+            }}
           >
             Con <Icon name="right chevron" />
           </Button>
@@ -157,6 +148,4 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(
-  AgendaItemContainer
-);
+export default connect(mapStateToProps, matchDispatchToProps)(AgendaItemContainer);

@@ -1,16 +1,10 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {
-  Menu,
-  Dropdown,
-  Responsive,
-  Container,
-  Segment
-} from "semantic-ui-react";
-import styles from "./Header.scss";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, Dropdown, Responsive, Container, Segment } from 'semantic-ui-react';
+import styles from './Header.scss';
 
 styles.link = {
-  color: "#FFF"
+  color: '#FFF',
 };
 
 const breakPointSize = 767;
@@ -19,8 +13,8 @@ const Header = () => (
     borderless
     attached
     style={{
-      paddingLeft: "1rem",
-      backgroundColor: "#7FB800"
+      paddingLeft: '1rem',
+      backgroundColor: '#7FB800',
     }}
   >
     <Menu.Item name="browse">
@@ -48,13 +42,8 @@ const Header = () => (
     </Responsive>
 
     <Responsive as={Menu.Menu} position="right" maxWidth={breakPointSize}>
-      <Dropdown
-        style={{ backgroundColor: "#7FB800", color: "#fff" }}
-        item
-        simple
-        text="Menu"
-      >
-        <Dropdown.Menu style={{ color: "#FFF", backgroundColor: "#7FB800" }}>
+      <Dropdown style={{ backgroundColor: '#7FB800', color: '#fff' }} item simple text="Menu">
+        <Dropdown.Menu style={{ color: '#FFF', backgroundColor: '#7FB800' }}>
           <Dropdown.Item>
             <a href="about.html">About</a>
           </Dropdown.Item>

@@ -1,17 +1,10 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import FormComponent from "../component/FormComponent.jsx";
-import ReactDOM from "react-dom";
-import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Button,
-  Container,
-  Header,
-  Icon,
-  Modal,
-  Segment
-} from "semantic-ui-react";
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import FormComponent from '../component/FormComponent.jsx';
+import ReactDOM from 'react-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { Button, Container, Header, Icon, Modal, Segment } from 'semantic-ui-react';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -19,10 +12,10 @@ class FormContainer extends Component {
     this.state = {
       recaptchaSuccess: false,
       showForm: false,
-      captchaHidden: "block",
-      showModal: false
+      captchaHidden: 'block',
+      showModal: false,
     };
-    console.log(process.env.NODE_ENV)
+    console.log(process.env.NODE_ENV);
     this.loadedForm = this.loadedForm.bind(this);
     this.returnToAgendaItem = this.returnToAgendaItem.bind(this);
     this.returnToFeed = this.returnToFeed.bind(this);
@@ -32,18 +25,18 @@ class FormContainer extends Component {
   onVerify(evt) {
     this.setState({
       showForm: true,
-      captchaHidden: "none",
-      captchaVerify: evt
+      captchaHidden: 'none',
+      captchaVerify: evt,
     });
   }
   returnToAgendaItem() {
     this.props.history.goBack();
   }
   returnToFeed() {
-    this.props.history.push("/feed");
+    this.props.history.push('/feed');
   }
   thankYou() {
-    console.log("Thank you");
+    console.log('Thank you');
     this.setState({ showForm: false, showModal: true });
   }
   loadedForm(ref) {
@@ -59,9 +52,7 @@ class FormContainer extends Component {
   render() {
     return (
       <div>
-        <div
-          style={{ position: "relative", display: this.state.captchaHidden }}
-        >
+        <div style={{ position: 'relative', display: this.state.captchaHidden }}>
           <ReCAPTCHA
             ref="recaptcha"
             sitekey="6LcnmVUUAAAAAKaVa9eHX41Nxpzg42_yEsGh0IOH"
@@ -69,10 +60,7 @@ class FormContainer extends Component {
           />
         </div>
         {this.state.showForm && (
-          <div
-            style={{ position: "relative", zIndex: 50 }}
-            ref={this.loadedForm}
-          >
+          <div style={{ position: 'relative', zIndex: 50 }} ref={this.loadedForm}>
             <FormComponent
               Title={this.props.Title}
               Recommendations={this.props.Recommendations}
@@ -84,32 +72,28 @@ class FormContainer extends Component {
             />
           </div>
         )}
-          <div>
-            <Modal style={{color: "black"}} defaultOpen={this.state.showModal}>
-              <Modal.Header>{"Thank You For Your Opinion"}</Modal.Header>
-              <Modal.Content>
-                <Modal.Description>
-                  <p>
-                    Although we keep your opinion we don't directly send
-                    comments to the City Council. We send grouped summaries of
-                    opinions we receive.
-                  </p>
-                  <p>
-                    Now that your opinion was recorded, where would you like to
-                    go?
-                  </p>
-                </Modal.Description>
-              </Modal.Content>
-              <Modal.Actions>
-                <Button primary onClick={this.returnToFeed}>
-                  <Icon name="angle double left" />Back to feed
-                </Button>
-                <Button primary onClick={this.returnToAgendaItem}>
-                  <Icon name="angle left" />Back to agenda item
-                </Button>
-              </Modal.Actions>
-            </Modal>
-          </div>
+        <div>
+          <Modal style={{ color: 'black' }} defaultOpen={this.state.showModal}>
+            <Modal.Header>{'Thank You For Your Opinion'}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <p>
+                  Although we keep your opinion we don't directly send comments to the City Council.
+                  We send grouped summaries of opinions we receive.
+                </p>
+                <p>Now that your opinion was recorded, where would you like to go?</p>
+              </Modal.Description>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button primary onClick={this.returnToFeed}>
+                <Icon name="angle double left" />Back to feed
+              </Button>
+              <Button primary onClick={this.returnToAgendaItem}>
+                <Icon name="angle left" />Back to agenda item
+              </Button>
+            </Modal.Actions>
+          </Modal>
+        </div>
       </div>
     );
   }
@@ -123,7 +107,7 @@ function mapStateToProps(state) {
       Recommendations: Form.Recommendations,
       Summary: Form.Summary,
       Id: Form.Id,
-      Pro: Form.Pro
+      Pro: Form.Pro,
     };
   } else {
     return {};

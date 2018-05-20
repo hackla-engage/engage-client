@@ -16,77 +16,77 @@ const REQUEST_LOADING = 'REQUEST_LOADING';
 
 // Reducer
 const defaultState = {
-    agendaIDs: [],
-    agendaItems: {},
-    agendaLoading: false,
-    agendaLoadError: {
-        error: false,
-        content: '',
-    },
-}
+  agendaIDs: [],
+  agendaItems: {},
+  agendaLoading: false,
+  agendaLoadError: {
+    error: false,
+    content: '',
+  },
+};
 export default function reducer(state = defaultState, action) {
-    switch (action.type) {
-        case REQUEST_AGENDAS:
-            const agendaList = action.payload.agendaList;
-            if(!agendaList || agendaList.length === 0) return;
+  switch (action.type) {
+  case REQUEST_AGENDAS:
+    const agendaList = action.payload.agendaList;
+    if (!agendaList || agendaList.length === 0) return;
 
-            const agendaItems = agendaList.reduce((acc, agenda)=>{
-                if(acc[agenda.id]){
-                    console.log('duplicate agenda id', agenda.id);
-                }
-                acc[agenda.id] = agenda;
-                return acc;
-            }, {...state.agendaItems})
+    const agendaItems = agendaList.reduce(
+      (acc, agenda) => {
+        if (acc[agenda.id]) {
+          console.log('duplicate agenda id', agenda.id);
+        }
+        acc[agenda.id] = agenda;
+        return acc;
+      },
+      { ...state.agendaItems },
+    );
 
-            const agendaIDs = Object.keys(agendaItems);
-            const agendaIDsSortedByTime = agendaIDs.sort((a, b)=>{
-                let timeA = agendaItems[a].meeting_time
-                let timeB = agendaItems[b].meeting_time
+    const agendaIDs = Object.keys(agendaItems);
+    const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
+      const timeA = agendaItems[a].meeting_time;
+      const timeB = agendaItems[b].meeting_time;
 
-                if(timeA > timeB) return -1;
-                else if(timeA < timeB) return 1;
-                else return 0;
-            })
+      if (timeA > timeB) return -1;
+      else if (timeA < timeB) return 1;
+      return 0;
+    });
 
-            return {
-                ...state,
-                agendaItems,
-                agendaIDs: agendaIDsSortedByTime,
-                agendaLoading: false,
-            };
-        case REQUEST_LOADING:
-            return {
-                ...state,
-                agendaLoading: true,
-            }
-        default:
-            return state;
-    }
+    return {
+      ...state,
+      agendaItems,
+      agendaIDs: agendaIDsSortedByTime,
+      agendaLoading: false,
+    };
+  case REQUEST_LOADING:
+    return {
+      ...state,
+      agendaLoading: true,
+    };
+  default:
+    return state;
+  }
 }
 
 // Action Creators
 export function requestAgendas() {
-    return (dispatch) => {
-        dispatch({
-            type: REQUEST_LOADING
-        });
-        getJSON('agendas')
-            .then((json) => {
-                console.log('requestAgendas: ', json);
-                if(!json || !json.results || json.results.length === 0){ 
-                    return;
-                }
+  return (dispatch) => {
+    dispatch({
+      type: REQUEST_LOADING,
+    });
+    getJSON('agendas').then((json) => {
+      console.log('requestAgendas: ', json);
+      if (!json || !json.results || json.results.length === 0) {
+        return;
+      }
 
-                let agendaList = json.results.reduce((acc, result)=>{
-                    return [...acc, ...result.items];
-                }, [])
+      const agendaList = json.results.reduce((acc, result) => [...acc, ...result.items], []);
 
-                dispatch({
-                    type: REQUEST_AGENDAS,
-                    payload: {
-                        agendaList,
-                    }
-                })
-            })
-    }
+      dispatch({
+        type: REQUEST_AGENDAS,
+        payload: {
+          agendaList,
+        },
+      });
+    });
+  };
 }
