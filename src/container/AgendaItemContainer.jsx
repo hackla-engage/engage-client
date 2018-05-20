@@ -48,20 +48,35 @@ class AgendaItemContainer extends Component {
               textAlign: 'right',
             }}
           >
-            <p style={{ margin: '0' }}>Hearing Date: {meetTime.format('M/D/YYYY')}</p>
-            <p>Hearing Time: {meetTime.format('h:mm a')}</p>
+            <p>Meeting Date</p>
+            <p style={{ margin: '0' }}>{meetTime.format('M/D/YYYY')}</p>
+            <p>{meetTime.format('h:mm a')}</p>
           </div>
         </div>
       );
     };
 
+    const content = (body) => {
+      return (
+        body.length > 0 ? (
+          <div>
+            <p>{body[0]}</p>
+            <p>{body[1]}</p>
+            </div>
+          ) :
+          (
+            <div>
+              <p>There is no summary for this agenda</p>
+            </div>
+          )
+        )
+    }
     const container = (
       <Container text style={{ margin: '2%' }}>
         <Card style={{ width: 'auto' }}>
           <Card.Content>{meetingDate()}</Card.Content>
           <Card.Content>
-            {body[0]}
-            {body[1]}
+            {content(body)}
           </Card.Content>
           <Divider />
           <div
