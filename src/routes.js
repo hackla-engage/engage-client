@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import About from './component/About.jsx';
 import Landing from './component/Landing.jsx';
 import Header from './component/Header.jsx';
 import Footer from './component/Footer.jsx';
@@ -16,6 +17,7 @@ const Routes = () => {
       <Route component={Header} />
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/about" component={About} />
         <Route path="/preference" component={PreferenceList} />
         <Route path="/feed" component={AgendaFeedContainer} />
         <Route path="/signin" component={SignIn} />
@@ -23,7 +25,7 @@ const Routes = () => {
         <Route path="/form" component={FormContainer} />
         <Route path="/topics" component={TopicsSelectorContainer} />
       </Switch>
-      <Route component={Footer} />
+      <Route exact path="/" component={Footer} />
     </div>
   );
 };
