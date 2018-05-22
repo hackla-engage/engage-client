@@ -13,8 +13,8 @@ const Header = () => (
     borderless
     attached
     style={{
-      paddingLeft: '1rem',
-      backgroundColor: '#7FB800',
+      paddingLeft: "1rem",
+      backgroundColor: "#192a56"
     }}
   >
     <Menu.Item style={styles.link} name="browse" as={Link} to="/">
@@ -36,10 +36,17 @@ const Header = () => (
     </Responsive>
 
     <Responsive as={Menu.Menu} position="right" maxWidth={breakPointSize}>
-      <Dropdown style={{ backgroundColor: '#7FB800', color: '#fff' }} item simple text="Menu">
-        <Dropdown.Menu style={{ color: '#FFF', backgroundColor: '#7FB800' }}>
+      <Dropdown
+        style={{ backgroundColor: "#192a56", color: "#fff" }}
+        item
+        simple
+        text="Menu"
+      >
+        <Dropdown.Menu style={{ color: "#FFF", backgroundColor: "#192a56" }}>
           <Dropdown.Item>
-            <a href="about.html">About</a>
+            <Link style={styles.link} to="/about">
+              About
+            </Link>
           </Dropdown.Item>
           <Dropdown.Item>
             <Link style={styles.link} to="/faq">

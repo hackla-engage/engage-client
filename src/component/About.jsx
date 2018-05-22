@@ -1,6 +1,6 @@
 import React from 'react';
 
-const About = props => {
+const About = () => {
   return (
     <div className="ui vertical stripe segment" style={{ color: 'black' }}>
       <div className="ui middle aligned stackable grid container">
