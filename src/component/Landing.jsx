@@ -45,7 +45,7 @@ class Landing extends Component {
               inverted
               style={{
                 fontSize: '4em',
-                color: '#7FB800',
+                color: '#192a56',
                 fontWeight: 'normal',
                 marginBottom: 0,
                 marginTop: '1.5em',
@@ -63,7 +63,7 @@ class Landing extends Component {
               }}
             />
             <Link style={{ color: '#FFF' }} to="/feed">
-              <Button primary size="huge" style={{ backgroundColor: '#7FB800', marginTop: '1rem' }}>
+              <Button primary size="huge" style={{ backgroundColor: '#192a56', marginTop: '1rem' }}>
                   Click to Engage
                 <Icon name="right arrow" />
               </Button>

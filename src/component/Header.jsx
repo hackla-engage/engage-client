@@ -23,7 +23,7 @@ const Header = () => (
 
     <Responsive as={Container} minWidth={breakPointSize}>
       <Menu.Menu position="right">
-        <Menu.Item style={styles.link} name="about" href="/about.html">
+        <Menu.Item style={styles.link} name="about" as={Link} to="/about">
           About
         </Menu.Item>
         <Menu.Item style={styles.link} name="faq" as={Link} to="/faq">
