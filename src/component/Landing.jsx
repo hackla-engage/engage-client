@@ -43,9 +43,9 @@ class Landing extends Component {
               content={copyText.page_header.header_text}
               inverted
               style={{
-                fontSize: "4em",
-                color: "#7FB800",
-                fontWeight: "normal",
+                fontSize: '4em',
+                color: '#192a56',
+                fontWeight: 'normal',
                 marginBottom: 0,
                 marginTop: "1.5em"
               }}
@@ -61,13 +61,10 @@ class Landing extends Component {
                 marginBottom: "1em"
               }}
             />
-            <Link style={{ color: "#FFF" }} to="/feed">
-              <Button
-                primary
-                size="huge"
-                style={{ backgroundColor: "#7FB800", marginTop: "1rem" }}
-              >
-                Click to Engage
+
+            <Link style={{ color: '#FFF' }} to="/feed">
+              <Button primary size="huge" style={{ backgroundColor: '#192a56', marginTop: '1rem' }}>
+                  Click to Engage
                 <Icon name="right arrow" />
               </Button>
             </Link>
