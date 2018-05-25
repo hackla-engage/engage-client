@@ -1,4 +1,3 @@
-
 /**
  * Helper functions for HTTP requests
  * Generally these should be used to build other functions
@@ -6,9 +5,9 @@
  */
 
 export function getResource(headers, host, endpointUrl) {
-  return fetch(`${host}/${endpointUrl}/`, {
+  return fetch(`${host}/${endpointUrl}`, {
     headers,
-    mode: 'cors',
+    mode: "cors"
   })
     .then(handleErrors)
     .then(response => response.json());
@@ -18,7 +17,7 @@ export function getResource(headers, host, endpointUrl) {
 export function getResourceDEVMODEONLY(headers, host, endpointUrl) {
   const opts = {
     headers,
-    mode: 'cors',
+    mode: "cors"
   };
   return fetch(`${host}/${endpointUrl}`, opts)
     .then(handleErrors)

@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import moment from 'moment';
-import qs from 'query-string';
-import { Button, Card, Container, Divider, Header, Icon, Modal, Segment } from 'semantic-ui-react';
-import { requestAgendas } from '../ducks/agendas';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import moment from "moment";
+import qs from "query-string";
+import {
+  Button,
+  Card,
+  Container,
+  Divider,
+  Header,
+  Icon,
+  Modal,
+  Segment
+} from "semantic-ui-react";
+import { requestAgendas } from "../ducks/agendas";
 
 class AgendaItemContainer extends Component {
   render() {
@@ -18,30 +27,32 @@ class AgendaItemContainer extends Component {
       recommendations,
       removeId,
       title,
-      showForm,
+      showForm
     } = this.props;
 
     const meetTime = moment(meeting_time * 1000);
 
     const container = (
-      <Container text style={{ margin: '2%' }}>
-        <Card style={{ width: 'auto' }}>
-          <Card.Content style={{
-            display: 'flex',
-            flexDirection: 'column',
-          }}>
-            <Card.Description style={{
-              alignSelf: 'flex-end',
-            }}>
+      <Container text style={{ margin: "2%" }}>
+        <Card style={{ width: "auto" }}>
+          <Card.Content
+            style={{
+              display: "flex",
+              flexDirection: "column"
+            }}
+          >
+            <Card.Description
+              style={{
+                alignSelf: "flex-end"
+              }}
+            >
               <div>Meeting Date</div>
-              <div>{meetTime.format('M/D/YYYY')}</div>
-              <div>{meetTime.format('h:mm a')}</div>
+              <div>{meetTime.format("M/D/YYYY")}</div>
+              <div>{meetTime.format("h:mm a")}</div>
             </Card.Description>
           </Card.Content>
           <Card.Content>
-            <Card.Header>
-              {title}
-            </Card.Header>
+            <Card.Header>{title}</Card.Header>
           </Card.Content>
           <Card.Content>
             <Button fluid color="blue">
@@ -52,34 +63,42 @@ class AgendaItemContainer extends Component {
       </Container>
     );
 
-    const summary = body.length > 0 ? (
-      <div style={{
-        marginBottom: '10px',
-      }}>
-        <p>{body[0]}</p>
-        <p>{body[1]}</p>
+    const summary =
+      body.length > 0 ? (
+        <div
+          style={{
+            marginBottom: "10px"
+          }}
+        >
+          <p>{body[0]}</p>
+          <p>{body[1]}</p>
         </div>
-      ) :
-      (
-        <div style={{
-          marginBottom: '10px',
-        }}>
+      ) : (
+        <div
+          style={{
+            marginBottom: "10px"
+          }}
+        >
           <p>There is no summary for this agenda.</p>
         </div>
       );
-            
+
     const recommendation = recommendations[0] ? (
-      <div style={{
-        marginBottom: '10px',
-      }}>
+      <div
+        style={{
+          marginBottom: "10px"
+        }}
+      >
         <h5>Recommendation:</h5>
         <p>{recommendations[0].recommendation}</p>
         <h5>What is your stance on the recommended action?</h5>
       </div>
     ) : (
-      <div style={{
-        marginBottom: '10px',
-      }}>
+      <div
+        style={{
+          marginBottom: "10px"
+        }}
+      >
         <p>No recommended action has been proposed.</p>
       </div>
     );
@@ -93,27 +112,27 @@ class AgendaItemContainer extends Component {
         }}
         onClose={removeId}
         trigger={container}
-        style={{ color: 'black' }}
+        style={{ color: "black" }}
       >
-        <Modal.Content style={{
-            display: 'flex',
-            flexDirection: 'column',
-            
+        <Modal.Content
+          style={{
+            display: "flex",
+            flexDirection: "column"
           }}
         >
-          <div style={{
-            alignSelf: 'flex-end',
-            marginTop: '2rem'
-          }}>
+          <div
+            style={{
+              alignSelf: "flex-end",
+              marginTop: "2rem"
+            }}
+          >
             <div>Meeting Date</div>
-            <div>{meetTime.format('M/D/YYYY')}</div>
-            <div>{meetTime.format('h:mm a')}</div>
+            <div>{meetTime.format("M/D/YYYY")}</div>
+            <div>{meetTime.format("h:mm a")}</div>
           </div>
         </Modal.Content>
         <Divider />
-        <Modal.Header>
-          {title}
-        </Modal.Header>
+        <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
           {summary}
           {recommendation}
@@ -122,7 +141,7 @@ class AgendaItemContainer extends Component {
           <Button
             primary
             onClick={evt => {
-              showForm('pro');
+              showForm("pro");
             }}
           >
             Pro <Icon name="right chevron" />
@@ -130,7 +149,7 @@ class AgendaItemContainer extends Component {
           <Button
             primary
             onClick={evt => {
-              showForm('con');
+              showForm("con");
             }}
           >
             Con <Icon name="right chevron" />

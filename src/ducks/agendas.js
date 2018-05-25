@@ -1,7 +1,8 @@
 // This ducks is a combined file for {actionTypes, actions, reducer} tuples for convenience only
 // https://github.com/erikras/ducks-modular-redux
 
-import { getJSON } from '../engage_client.js';
+import { getJSON } from "../engage_client.js";
+import store from "../store/configureStore.dev";
 /**
  * Make GET /tags request to Engage API
  *
@@ -11,8 +12,8 @@ import { getJSON } from '../engage_client.js';
  */
 
 // Actions
-const REQUEST_AGENDAS = 'REQUEST_AGENDAS';
-const REQUEST_LOADING = 'REQUEST_LOADING';
+const REQUEST_AGENDAS = "REQUEST_AGENDAS";
+const REQUEST_LOADING = "REQUEST_LOADING";
 
 // Reducer
 const defaultState = {
@@ -21,72 +22,90 @@ const defaultState = {
   agendaLoading: false,
   agendaLoadError: {
     error: false,
-    content: '',
+    content: ""
   },
+  next: ""
 };
+
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
-  case REQUEST_AGENDAS:
-    const agendaList = action.payload.agendaList;
-    if (!agendaList || agendaList.length === 0) return;
+    case REQUEST_AGENDAS:
+      const agendaList = action.payload.agendaList;
+      if (!agendaList || agendaList.length === 0) return;
 
-    const agendaItems = agendaList.reduce(
-      (acc, agenda) => {
-        if (acc[agenda.id]) {
-          console.log('duplicate agenda id', agenda.id);
-        }
-        acc[agenda.id] = agenda;
-        return acc;
-      },
-      { ...state.agendaItems },
-    );
+      const next = action.next;
 
-    const agendaIDs = Object.keys(agendaItems);
-    const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
-      const timeA = agendaItems[a].meeting_time;
-      const timeB = agendaItems[b].meeting_time;
+      const agendaItems = agendaList.reduce(
+        (acc, agenda) => {
+          if (acc[agenda.id]) {
+            console.log("duplicate agenda id", agenda.id);
+          }
+          acc[agenda.id] = agenda;
+          return acc;
+        },
+        { ...state.agendaItems }
+      );
 
-      if (timeA > timeB) return -1;
-      else if (timeA < timeB) return 1;
-      return 0;
-    });
+      const agendaIDs = Object.keys(agendaItems);
+      const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
+        const timeA = agendaItems[a].meeting_time;
+        const timeB = agendaItems[b].meeting_time;
 
-    return {
-      ...state,
-      agendaItems,
-      agendaIDs: agendaIDsSortedByTime,
-      agendaLoading: false,
-    };
-  case REQUEST_LOADING:
-    return {
-      ...state,
-      agendaLoading: true,
-    };
-  default:
-    return state;
+        if (timeA > timeB) return -1;
+        else if (timeA < timeB) return 1;
+        return 0;
+      });
+
+      return {
+        ...state,
+        agendaItems,
+        agendaIDs: agendaIDsSortedByTime,
+        agendaLoading: false,
+        next
+      };
+    case REQUEST_LOADING:
+      return {
+        ...state,
+        agendaLoading: true
+      };
+    default:
+      return state;
   }
 }
 
 // Action Creators
-export function requestAgendas() {
-  return (dispatch) => {
+export function requestAgendas(requestURL) {
+  return dispatch => {
     dispatch({
-      type: REQUEST_LOADING,
+      type: REQUEST_LOADING
     });
-    getJSON('agendas').then((json) => {
-      console.log('requestAgendas: ', json);
-      if (!json || !json.results || json.results.length === 0) {
-        return;
-      }
+    getJSON(requestURL)
+      .then(json => {
+        console.log("requestAgendas: ", json);
+        console.log("requestAgend: requestURL: " + requestURL);
+        if (!json || !json.results || json.results.length === 0) {
+          return;
+        }
 
-      const agendaList = json.results.reduce((acc, result) => [...acc, ...result.items], []);
+        const agendaList = json.results.reduce(
+          (acc, result) => [...acc, ...result.items],
+          []
+        );
 
-      dispatch({
-        type: REQUEST_AGENDAS,
-        payload: {
-          agendaList,
-        },
-      });
-    });
+        const nextArray = json.next.split("/");
+        const nextAgendaURL =
+          nextArray[nextArray.length - 2] +
+          "/" +
+          nextArray[nextArray.length - 1];
+
+        dispatch({
+          type: REQUEST_AGENDAS,
+          payload: {
+            agendaList
+          },
+          next: nextAgendaURL
+        });
+      })
+      .catch(err => console.log(err));
   };
 }
