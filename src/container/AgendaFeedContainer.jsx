@@ -5,7 +5,7 @@ import { requestAgendas } from "../ducks/agendas";
 import agenda_item_received from "../actions/Form";
 import AgendaItemContainer from "./AgendaItemContainer.jsx";
 import qs from "query-string";
-import { Button } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 
 class AgendaFeed extends Component {
   constructor(props) {
@@ -135,18 +135,17 @@ class AgendaFeed extends Component {
               />
             );
           })}
-          <div>
+          <Grid style={{ margin: "6px" }} centered>
             {agendaLoading ? (
-              <Button fluid loading primary />
+              <Button loading primary />
             ) : (
               <Button
-                fluid
                 onClick={this.getMoreAgendas}
                 content="Load More"
                 primary
               />
             )}
-          </div>
+          </Grid>
         </div>
       );
     }
