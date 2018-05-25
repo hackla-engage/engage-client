@@ -102,9 +102,6 @@ class AgendaFeed extends Component {
   }
 
   getMoreAgendas() {
-    console.log("getMoreAgendas");
-    console.log("nextAgendaURL " + this.props.nextAgendaURL);
-
     const { requestAgendas } = this.props;
     requestAgendas(this.props.nextAgendaURL);
   }

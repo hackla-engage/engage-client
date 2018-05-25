@@ -82,7 +82,6 @@ export function requestAgendas(requestURL) {
     getJSON(requestURL)
       .then(json => {
         console.log("requestAgendas: ", json);
-        console.log("requestAgend: requestURL: " + requestURL);
         if (!json || !json.results || json.results.length === 0) {
           return;
         }
