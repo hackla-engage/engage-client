@@ -25,7 +25,7 @@ const Routes = () => {
         <Route path="/form" component={FormContainer} />
         <Route path="/topics" component={TopicsSelectorContainer} />
       </Switch>
-      <Route exact path="/" component={Footer} />
+      <Route component={Footer} />
     </div>
   );
 };

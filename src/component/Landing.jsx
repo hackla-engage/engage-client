@@ -8,6 +8,7 @@ import {
   Header,
   Icon,
   Image,
+  Grid,
   Responsive,
   Segment
 } from "semantic-ui-react";
@@ -47,7 +48,6 @@ class Landing extends Component {
                 fontWeight: 'normal',
                 fontFamily: 'Pacifico, cursive',
                 marginBottom: 0,
-                marginTop: "1.5em"
                 marginTop: '1.5em',
                 textAlign: 'left'
               }}
