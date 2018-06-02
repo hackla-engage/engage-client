@@ -1,14 +1,14 @@
 /**
  * Interact with the Engage API
  */
-import { getResource } from "./async";
+import { getResource } from './async';
 
-export const HOST = "https://council-tag.herokuapp.com/api";
+export const HOST = 'https://backend.engage.town/api';
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
-  "Content-Type": "json",
-  Accept: "json"
+  'Content-Type': 'json',
+  Accept: 'json',
 });
 
 /**
