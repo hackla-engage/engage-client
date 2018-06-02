@@ -55,7 +55,7 @@ module.exports = {
   plugins: [
     new UglifyJSPlugin({
       uglifyOptions: {
-        sourcemap: true
+        parallel: true,
       },
     }),
     new webpack.DefinePlugin({
