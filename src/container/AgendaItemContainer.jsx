@@ -8,10 +8,8 @@ import {
   Card,
   Container,
   Divider,
-  Header,
   Icon,
   Modal,
-  Segment
 } from "semantic-ui-react";
 import { requestAgendas } from "../ducks/agendas";
 
