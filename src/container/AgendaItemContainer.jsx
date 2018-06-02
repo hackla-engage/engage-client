@@ -53,7 +53,7 @@ class AgendaItemContainer extends Component {
             <Card.Header>{title}</Card.Header>
           </Card.Content>
           <Card.Content>
-            <Button fluid color="blue">
+            <Button fluid style={{ backgroundColor: "#192a56", color: "white" }}>
               <Icon name="list layout" />View Item
             </Button>
           </Card.Content>
@@ -140,6 +140,7 @@ class AgendaItemContainer extends Component {
         <Modal.Actions>
           <Button
             primary
+            style={{ backgroundColor: "#8CB474", color: "white" }}
             onClick={evt => {
               showForm("pro");
             }}
@@ -148,6 +149,7 @@ class AgendaItemContainer extends Component {
           </Button>
           <Button
             primary
+            style={{ backgroundColor: "#e74c3c", color: "white" }}
             onClick={evt => {
               showForm("con");
             }}

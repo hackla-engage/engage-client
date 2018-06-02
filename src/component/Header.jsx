@@ -10,36 +10,78 @@ styles.link = {
 const breakPointSize = 767;
 const Header = () => (
   <Menu
-    borderless
     attached
     style={{
-      paddingLeft: '1rem',
-      backgroundColor: '#7FB800',
+      paddingLeft: "1rem",
+      backgroundColor: "#192a56",
+      border: 'none'
     }}
   >
-    <Menu.Item style={styles.link} name="browse" as={Link} to="/">
+    <Menu.Item
+      style={styles.link}
+      name="browse"
+      as={Link}
+      to="/"
+    >
       Engage
     </Menu.Item>
 
-    <Responsive as={Container} minWidth={breakPointSize}>
+    <Responsive
+      as={Container}
+      minWidth={breakPointSize}
+    >
       <Menu.Menu position="right">
-        <Menu.Item style={styles.link} name="about" href="/about.html">
+        <Menu.Item
+          style={styles.link}
+          name="about"
+          as={Link}
+          to="/about"
+        >
           About
         </Menu.Item>
-        <Menu.Item style={styles.link} name="faq" as={Link} to="/faq">
+        <Menu.Item
+          style={styles.link}
+          name="faq"
+          as={Link}
+          to="/faq"
+        >
           FAQ
         </Menu.Item>
-        <Menu.Item style={styles.link} name="signin" as={Link} to="/signin">
+        <Menu.Item
+          style={styles.link}
+          name="signin"
+          as={Link}
+          to="/signin"
+        >
           Sign In
         </Menu.Item>
       </Menu.Menu>
     </Responsive>
 
-    <Responsive as={Menu.Menu} position="right" maxWidth={breakPointSize}>
-      <Dropdown style={{ backgroundColor: '#7FB800', color: '#fff' }} item simple text="Menu">
-        <Dropdown.Menu style={{ color: '#FFF', backgroundColor: '#7FB800' }}>
+    <Responsive
+      as={Menu.Menu}
+      position="right"
+      maxWidth={breakPointSize}
+    >
+      <Dropdown
+        style={{
+          backgroundColor: "#192a56",
+          color: "#fff"
+        }}
+        item
+        simple
+        text="Menu"
+      >
+        <Dropdown.Menu
+          style={{
+            color: "#FFF",
+            backgroundColor: "#192a56"
+          }}
+        >
           <Dropdown.Item>
-            <a href="about.html">About</a>
+            <Link style={styles.link} to="/about">
+              About
+            </Link>
           </Dropdown.Item>
           <Dropdown.Item>
             <Link style={styles.link} to="/faq">
