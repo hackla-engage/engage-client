@@ -15,6 +15,7 @@
     "prettier": "prettier-eslint --write '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'",
     "prettier-dryrun": "prettier-eslint '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'"
   },
+  "sideEffects": false,
   "dependencies": {
     "b": "^2.0.1",
     "babel-cli": "^6.26.0",
@@ -28,13 +29,12 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.5.0",
-    "core-js": "^2.5.3",
     "css-loader": "^0.28.7",
+    "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
     "formik": "^0.11.11",
     "live-server": "^1.2.0",
     "lodash": "^4.17.4",
-    "moment": "^2.22.1",
     "node-sass": "^4.5.3",
     "query-string": "^5.1.1",
     "react": "^16.0.0",
@@ -67,6 +67,7 @@
     "eslint-plugin-react": "^7.8.2",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^3.1.1"
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import moment from "moment";
+import format from 'date-fns/format';
 import qs from "query-string";
 import {
   Button,
@@ -30,7 +30,7 @@ class AgendaItemContainer extends Component {
       showForm
     } = this.props;
 
-    const meetTime = moment(meeting_time * 1000);
+    const meetTime = new Date(meeting_time * 1000);
 
     const container = (
       <Container text style={{ margin: "2%" }}>
@@ -47,8 +47,8 @@ class AgendaItemContainer extends Component {
               }}
             >
               <div>Meeting Date</div>
-              <div>{meetTime.format("M/D/YYYY")}</div>
-              <div>{meetTime.format("h:mm a")}</div>
+              <div>{format(meetTime, "M/D/YYYY")}</div>
+              <div>{format(meetTime, "h:mm a")}</div>
             </Card.Description>
           </Card.Content>
           <Card.Content>
@@ -127,8 +127,10 @@ class AgendaItemContainer extends Component {
             }}
           >
             <div>Meeting Date</div>
-            <div>{meetTime.format("M/D/YYYY")}</div>
-            <div>{meetTime.format("h:mm a")}</div>
+            {/* <div>{meetTime.format("M/D/YYYY")}</div> */}
+            {/* <div>{meetTime.format("h:mm a")}</div> */}
+              <div>{format(meetTime, "M/D/YYYY")}</div>
+              <div>{format(meetTime, "h:mm a")}</div>
           </div>
         </Modal.Content>
         <Divider />

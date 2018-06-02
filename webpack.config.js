@@ -1,5 +1,5 @@
 const path = require('path');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 
 // default runs data from ducks
@@ -63,7 +63,8 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    })
+    }),
+    // new BundleAnalyzerPlugin(),
   ],
   // Dev tools are provided by webpack
   // Source maps help map errors to original react code
