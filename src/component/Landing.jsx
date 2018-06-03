@@ -31,7 +31,10 @@ class Landing extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{
+        overflow: 'scroll', /* has to be scroll, not auto */
+        webkitOverflowScrolling: 'touch'
+      }}>
         <Segment
           textAlign="center"
           style={{ position: 'relative', minHeight: 650, padding: '1em 0em' }}
