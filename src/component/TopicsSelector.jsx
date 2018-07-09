@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import styles from './Landing.scss';
 import {
-  Button,
   Container,
-  Divider,
-  Grid,
   Header,
-  Icon,
-  Image,
-  Responsive,
   Segment,
 } from 'semantic-ui-react';
 

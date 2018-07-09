@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Landing.scss";
 import {
   Button,
   Container,
-  Divider,
   Header,
-  Icon,
   Image,
   Grid,
   Responsive,
