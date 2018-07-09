@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import styles from './Footer.scss';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Button, Container, Image, Grid, Segment } from 'semantic-ui-react';
 
 const breakPointSize = 767;

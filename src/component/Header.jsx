@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Container, Segment } from 'semantic-ui-react';
+import { Menu, Dropdown, Responsive, Container} from 'semantic-ui-react';
 import styles from './Header.scss';
 
 styles.link = {

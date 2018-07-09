@@ -1,20 +1,13 @@
-import React, { Component } from 'react';
-import styles from './Landing.scss';
+import React from 'react';
 import {
-  Button,
   Container,
   Divider,
-  Grid,
   Header,
-  Icon,
-  Image,
-  Responsive,
   Segment,
 } from 'semantic-ui-react';
 
 import copyText from '../../public/static/landing_page_copy.json';
 
-const breakPointSize = 767;
 const linkStyle = {
   color: '#074d91',
 };

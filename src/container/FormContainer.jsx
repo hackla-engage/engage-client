@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FormComponent from '../component/FormComponent.jsx';
 import ReactDOM from 'react-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Button, Container, Header, Icon, Modal, Segment } from 'semantic-ui-react';
+import { Button, Icon, Modal } from 'semantic-ui-react';
 
 class FormContainer extends Component {
   constructor(props) {
