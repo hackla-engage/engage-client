@@ -11,6 +11,8 @@ import Faq from './component/Faq.jsx';
 import FormContainer from './container/FormContainer.jsx';
 import TopicsSelectorContainer from './container/TopicsSelectorContainer.jsx';
 
+import PositionFormFinalStep from './component/PositionFormFinalStep.jsx';
+
 const Routes = () => {
   return (
     <div>
@@ -24,6 +26,8 @@ const Routes = () => {
         <Route path="/faq" component={Faq} />
         <Route path="/form" component={FormContainer} />
         <Route path="/topics" component={TopicsSelectorContainer} />
+
+        <Route path="/form-final-step" component={PositionFormFinalStep} />
       </Switch>
       <Route component={Footer} />
     </div>
