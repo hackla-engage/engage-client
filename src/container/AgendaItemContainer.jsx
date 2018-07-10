@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import format from 'date-fns/format';
+import format from "date-fns/format";
 import qs from "query-string";
 import {
   Button,
@@ -9,8 +9,10 @@ import {
   Container,
   Divider,
   Icon,
-  Modal,
+  Modal
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+
 import { requestAgendas } from "../ducks/agendas";
 
 class AgendaItemContainer extends Component {
@@ -31,34 +33,62 @@ class AgendaItemContainer extends Component {
     const meetTime = new Date(meeting_time * 1000);
 
     const container = (
-      <Container text style={{ margin: "2%" }}>
-        <Card style={{ width: "auto" }}>
-          <Card.Content
+      <Modal
+        closeIcon
+        defaultOpen={defaultOpen}
+        onOpen={() => {
+          addId(id);
+        }}
+        onClose={removeId}
+        trigger={container}
+        style={{ color: "black" }}
+      >
+        <Modal.Content
+          style={{
+            display: "flex",
+            flexDirection: "column"
+          }}
+        >
+          <div
             style={{
-              display: "flex",
-              flexDirection: "column"
+              alignSelf: "flex-end",
+              marginTop: "2rem"
             }}
           >
-            <Card.Description
-              style={{
-                alignSelf: "flex-end"
-              }}
-            >
-              <div>Meeting Date</div>
-              <div>{format(meetTime, "M/D/YYYY")}</div>
-              <div>{format(meetTime, "h:mm a")}</div>
-            </Card.Description>
-          </Card.Content>
-          <Card.Content>
-            <Card.Header>{title}</Card.Header>
-          </Card.Content>
-          <Card.Content>
-            <Button fluid style={{ backgroundColor: "#192a56", color: "white" }}>
-              <Icon name="list layout" />View Item
-            </Button>
-          </Card.Content>
-        </Card>
-      </Container>
+            <div>Meeting Date</div>
+            {/* <div>{meetTime.format("M/D/YYYY")}</div> */}
+            {/* <div>{meetTime.format("h:mm a")}</div> */}
+            <div>{format(meetTime, "M/D/YYYY")}</div>
+            <div>{format(meetTime, "h:mm a")}</div>
+          </div>
+        </Modal.Content>
+        <Divider />
+        <Modal.Header>{title}</Modal.Header>
+        <Modal.Content>
+          {summary}
+          {recommendation}
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            primary
+            style={{ backgroundColor: "#8CB474", color: "white" }}
+            onClick={evt => {
+              showForm("pro");
+            }}
+          >
+            Pro <Icon name="right chevron" />
+          </Button>
+          <Button
+            primary
+            style={{ backgroundColor: "#e74c3c", color: "white" }}
+            onClick={evt => {
+              showForm("con");
+            }}
+          >
+            Con <Icon name="right chevron" />
+          </Button>
+        </Modal.Actions>
+      </Modal>
     );
 
     const summary =
@@ -102,62 +132,39 @@ class AgendaItemContainer extends Component {
     );
 
     return (
-      <Modal
-        closeIcon
-        defaultOpen={defaultOpen}
-        onOpen={() => {
-          addId(id);
-        }}
-        onClose={removeId}
-        trigger={container}
-        style={{ color: "black" }}
-      >
-        <Modal.Content
-          style={{
-            display: "flex",
-            flexDirection: "column"
-          }}
-        >
-          <div
+      <Container text style={{ margin: "2%" }}>
+        <Card style={{ width: "auto" }}>
+          <Card.Content
             style={{
-              alignSelf: "flex-end",
-              marginTop: "2rem"
+              display: "flex",
+              flexDirection: "column"
             }}
           >
-            <div>Meeting Date</div>
-            {/* <div>{meetTime.format("M/D/YYYY")}</div> */}
-            {/* <div>{meetTime.format("h:mm a")}</div> */}
+            <Card.Description
+              style={{
+                alignSelf: "flex-end"
+              }}
+            >
+              <div>Meeting Date</div>
               <div>{format(meetTime, "M/D/YYYY")}</div>
               <div>{format(meetTime, "h:mm a")}</div>
-          </div>
-        </Modal.Content>
-        <Divider />
-        <Modal.Header>{title}</Modal.Header>
-        <Modal.Content>
-          {summary}
-          {recommendation}
-        </Modal.Content>
-        <Modal.Actions>
-          <Button
-            primary
-            style={{ backgroundColor: "#8CB474", color: "white" }}
-            onClick={evt => {
-              showForm("pro");
-            }}
-          >
-            Pro <Icon name="right chevron" />
-          </Button>
-          <Button
-            primary
-            style={{ backgroundColor: "#e74c3c", color: "white" }}
-            onClick={evt => {
-              showForm("con");
-            }}
-          >
-            Con <Icon name="right chevron" />
-          </Button>
-        </Modal.Actions>
-      </Modal>
+            </Card.Description>
+          </Card.Content>
+          <Card.Content>
+            <Card.Header>{title}</Card.Header>
+          </Card.Content>
+          <Card.Content>
+            <Button
+              fluid
+              style={{ backgroundColor: "#192a56", color: "white" }}
+            >
+              <Link to={`/feed/${id}`}>
+                <Icon name="list layout" />View Item
+              </Link>
+            </Button>
+          </Card.Content>
+        </Card>
+      </Container>
     );
   }
 }
@@ -166,4 +173,7 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas }, dispatch);
 }
 
-export default connect(undefined, matchDispatchToProps)(AgendaItemContainer);
+export default connect(
+  undefined,
+  matchDispatchToProps
+)(AgendaItemContainer);

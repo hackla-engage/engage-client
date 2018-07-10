@@ -167,4 +167,7 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas, agenda_item_received }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(AgendaFeed);
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(AgendaFeed);
