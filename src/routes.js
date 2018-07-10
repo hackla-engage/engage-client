@@ -21,7 +21,7 @@ const Routes = () => {
         <Route path="/signin" component={SignIn} />
         <Route path="/faq" component={Faq} />
         <Route path="/form" component={FormContainer} />
-        <Route path="/emailConfirmation" component={EmailConfirmation}/>
+        <Route path="/emailConfirmation" component={EmailConfirmation} />
       </Switch>
       <Route component={Footer} />
     </div>
