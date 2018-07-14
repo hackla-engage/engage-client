@@ -151,7 +151,11 @@ class AgendaItemContainer extends Component {
             </Card.Description>
           </Card.Content>
           <Card.Content>
-            <Card.Header>{title}</Card.Header>
+            <Link to={`/feed/${id}`}>
+              <Card.Header style={{ color: "black", fontSize: 24 }}>
+                {title}
+              </Card.Header>
+            </Link>
           </Card.Content>
           <Card.Content>
             <Link to={`/feed/${id}`}>

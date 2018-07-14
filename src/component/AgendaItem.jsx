@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import format from "date-fns/format";
+import { Link } from "react-router-dom";
 
 //I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 //Now I just need to design a page and put informations on them
@@ -52,6 +52,7 @@ class AgendaItem extends Component {
 
     const agendaTime = this.timeConverter(agendaItem.meeting_time);
     const agendaBody = agendaItem.body;
+    const agendaRecommendation = agendaItem.recommendations[0].recommendation;
     console.log(agendaItem);
     return (
       <Container style={{ margin: 24, color: "black" }}>
@@ -75,10 +76,16 @@ class AgendaItem extends Component {
             <Card.Header>{agendaItem.title}</Card.Header>
           </Card.Content>
           <Card.Content>
+            <Card.Header>BODY:</Card.Header>
             {agendaBody.map((string, index) => {
               return <p key={index}>{string}</p>;
             })}
           </Card.Content>
+          <Card.Content>
+            <Card.Header>RECOMMENDED ACTION:</Card.Header>
+            {agendaRecommendation}
+          </Card.Content>
+
           <Card.Content>
             <Card.Header>
               WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
@@ -94,6 +101,11 @@ class AgendaItem extends Component {
                 Need More Info
               </Button>
             </div>
+          </Card.Content>
+          <Card.Content style={{ textAlign: "center" }}>
+            <Link to={`/feed`} style={{ color: "brown" }}>
+              Return to Agenda Feed
+            </Link>
           </Card.Content>
         </Card>
       </Container>
