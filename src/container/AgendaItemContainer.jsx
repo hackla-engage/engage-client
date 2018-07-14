@@ -154,14 +154,14 @@ class AgendaItemContainer extends Component {
             <Card.Header>{title}</Card.Header>
           </Card.Content>
           <Card.Content>
-            <Button
-              fluid
-              style={{ backgroundColor: "#192a56", color: "white" }}
-            >
-              <Link to={`/feed/${id}`}>
+            <Link to={`/feed/${id}`}>
+              <Button
+                fluid
+                style={{ backgroundColor: "#192a56", color: "white" }}
+              >
                 <Icon name="list layout" />View Item
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </Card.Content>
         </Card>
       </Container>
