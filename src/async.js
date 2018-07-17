@@ -5,21 +5,10 @@
  */
 
 export function getResource(headers, host, endpointUrl) {
-  return fetch(`${host}/${endpointUrl}`, {
+  return fetch(`${host}/${endpointUrl}/`, {
     headers,
-    mode: "cors"
+    mode: 'cors',
   })
-    .then(handleErrors)
-    .then(response => response.json());
-}
-
-// Ugly hack to deal with CORS.
-export function getResourceDEVMODEONLY(headers, host, endpointUrl) {
-  const opts = {
-    headers,
-    mode: "cors"
-  };
-  return fetch(`${host}/${endpointUrl}`, opts)
     .then(handleErrors)
     .then(response => response.json());
 }
