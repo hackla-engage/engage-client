@@ -179,7 +179,6 @@ class FormComponent extends Component {
     return (
       <Segment className="form-background">
         <div className={this.props.Pro ? 'pro' : 'con'}>{this.props.Pro ? 'Pro' : 'Con'}</div>
-        <Form onSubmit={this.handleSubmit} size="large">
           <div className="vote-title-holder" />
           <div className="vote-recommendations-holder">
             <div className="vote-title-title">{this.props.Title}</div>
@@ -192,78 +191,81 @@ class FormComponent extends Component {
               <div dangerouslySetInnerHTML={{ __html: this.props.Recommendations }} />
             </div>
           </div>
-          Tell us a little about yourself:
-          <br />
-          <div className="form-label">Name*</div>
-          <Form.Group inline>
-            <Form.Field
-              control="input"
-              type="text"
-              autoComplete="first-name"
-              placeholder="first name"
-              value={this.state.firstValue}
-              onChange={this.handleFirstNameChange}
-            />
-            <Form.Field
-              control="input"
-              type="text"
-              autoComplete="last-name"
-              placeholder="last name"
-              value={this.state.lastValue}
-              onChange={this.handleLastNameChange}
-            />
-          </Form.Group>
-          {((this.state.firstNameTouched && this.state.firstNameError) ||
-            (this.state.lastNameTouched && this.state.lasttNameError)) && (
-            <div className="error">Name is required</div>
-          )}
-          {this.state.nameTouched &&
-            this.state.nameError && <div className="error">Name is required</div>}
-          <Form.Field
-            label="Email*"
-            control="input"
-            name="email"
-            type="text"
-            autoComplete="email"
-            placeholder="email"
-            value={this.state.emailValue}
-            onChange={this.handleEmailChange}
-          />
-          {this.state.emailTouched &&
-            this.state.emailError && <div className="error">Error in email</div>}
-          <Form.Field
-            label="Zipcode (optional)"
-            type="text"
-            control="input"
-            placeholder="zipcode"
-            autoComplete="postal-code"
-            pattern="[0-9]{5}"
-            maxLength="5"
-            minLength="5"
-            value={this.state.zipValue}
-            onChange={this.handleZipChange}
-          />
-          {this.state.zipTouched &&
-            this.state.zipError && (
-              <div className="error">
-                Error in zipcode... It is optional<br />
-              </div>
-            )}
-          <Form.Field
-            autoheight="true"
-            label="Let the council know what you think about this item. The actual text you write will NOT go to the council, but an analysis will (optional):"
-            control="textarea"
-            rows="3"
-            onChange={this.handleChangeText}
-          />
-          <div className="chars">{200 - this.state.textValue.length} characters left</div>
-          <br />
-          {!this.state.submitEnabled && (
-            <div className="error">Form has errors, submit is disabled</div>
-          )}
-          <Button type="submit" content="Submit" primary disabled={!this.state.submitEnabled} />
-          <Button content="Cancel" secondary onClick={this.handleCancel} />
-        </Form>
+          {this.props.showCommentForm ? (
+            <Form onSubmit={this.handleSubmit} size="large">
+              <div className="vote-title-holder">Tell us a little about yourself:</div>
+              <br />
+              <div className="form-label">Name*</div>
+              <Form.Group inline>
+                <Form.Field
+                  control="input"
+                  type="text"
+                  autoComplete="first-name"
+                  placeholder="first name"
+                  value={this.state.firstValue}
+                  onChange={this.handleFirstNameChange}
+                />
+                <Form.Field
+                  control="input"
+                  type="text"
+                  autoComplete="last-name"
+                  placeholder="last name"
+                  value={this.state.lastValue}
+                  onChange={this.handleLastNameChange}
+                />
+              </Form.Group>
+              {((this.state.firstNameTouched && this.state.firstNameError) ||
+                (this.state.lastNameTouched && this.state.lasttNameError)) && (
+                <div className="error">Name is required</div>
+              )}
+              {this.state.nameTouched &&
+                this.state.nameError && <div className="error">Name is required</div>}
+              <Form.Field
+                label="Email*"
+                control="input"
+                name="email"
+                type="text"
+                autoComplete="email"
+                placeholder="email"
+                value={this.state.emailValue}
+                onChange={this.handleEmailChange}
+              />
+              {this.state.emailTouched &&
+                this.state.emailError && <div className="error">Error in email</div>}
+              <Form.Field
+                label="Zipcode (optional)"
+                type="text"
+                control="input"
+                placeholder="zipcode"
+                autoComplete="postal-code"
+                pattern="[0-9]{5}"
+                maxLength="5"
+                minLength="5"
+                value={this.state.zipValue}
+                onChange={this.handleZipChange}
+              />
+              {this.state.zipTouched &&
+                this.state.zipError && (
+                  <div className="error">
+                    Error in zipcode... It is optional<br />
+                  </div>
+                )}
+              <Form.Field
+                autoheight="true"
+                label="Let the council know what you think about this item. The actual text you write will NOT go to the council, but an analysis will (optional):"
+                control="textarea"
+                rows="3"
+                onChange={this.handleChangeText}
+              />
+              <div className="chars">{200 - this.state.textValue.length} characters left</div>
+              <br />
+              {!this.state.submitEnabled && (
+                <div className="error">Form has errors, submit is disabled</div>
+              )}
+              <Button type="submit" content="Submit" primary disabled={!this.state.submitEnabled} />
+              <Button content="Cancel" secondary onClick={this.handleCancel} />
+            </Form>
+          ) : <div className="vote-title-holder vote-title-title">>> Note: Commenting is closed for this issue.</div>}
       </Segment>
     );
   }

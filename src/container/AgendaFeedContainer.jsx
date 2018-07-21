@@ -69,7 +69,7 @@ class AgendaFeed extends Component {
     // this.requestedID is only useful at loading lifecycle event not afterward
     const parsed = qs.parse(this.props.location.search);
     if (parsed && parsed.id) {
-      const { id, body, recommendations, title } = this.props.agendaItems[
+      const { id, body, meeting_time, recommendations, title } = this.props.agendaItems[
         parsed.id
       ];
       let recommendationsString = "";
@@ -92,7 +92,8 @@ class AgendaFeed extends Component {
         Recommendations: recommendationsString,
         Summary: summaryString,
         Id: id,
-        Pro: proCon === "pro"
+        Pro: proCon === "pro",
+        Time: meeting_time,
       });
       setTimeout(this.goToForm, 200);
     }
