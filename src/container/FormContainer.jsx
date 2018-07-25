@@ -30,7 +30,14 @@ class FormContainer extends Component {
       const meetTime = new Date(this.props.Time * 1000);
       const meetTimeObj = setMinutes(setHours(meetTime, 11),59);
       if (new Date() < meetTimeObj) {
-        this.setState({showCommentForm: true});
+        this.setState({
+          showCommentForm: true
+        });
+      } else {
+        this.setState({
+          showForm: true,
+          captchaHidden: 'none'
+        });
       }
     }
   }
