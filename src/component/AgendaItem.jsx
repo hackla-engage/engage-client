@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import agenda_item_received from "../actions/Form";
+import { requestAgendas } from "../ducks/agendas";
 import { bindActionCreators } from "redux";
+import convertToNormalTime from "../util/convertUNIX";
 
 //I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 //Now I just need to design a page and put informations on them
-import { Button, Card, Container } from "semantic-ui-react";
+import { Button, Card, Container, Loader } from "semantic-ui-react";
 
 class AgendaItem extends Component {
   constructor() {
@@ -19,44 +20,13 @@ class AgendaItem extends Component {
     this.goToForm = this.goToForm.bind(this);
   }
 
-  componentDidMount = () => {};
+  componentWillMount = () => {
+    let { requestAgendas } = this.props;
 
-  timeConverter(UNIX_timestamp) {
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = "0" + a.getHours();
-    var min = "0" + a.getMinutes();
-    var sec = "0" + a.getSeconds();
-    var time =
-      month +
-      " " +
-      date +
-      ", " +
-      year +
-      " - " +
-      hour.substr(-2) +
-      ":" +
-      min.substr(-2) +
-      ":" +
-      sec.substr(-2);
-    return time;
-  }
+    if (Object.keys(this.props.agendaItems).length < 2) {
+      requestAgendas("agendas");
+    }
+  };
 
   recommendationReducer = (acc, curr) => {
     return acc + "<br />" + curr;
@@ -116,92 +86,103 @@ class AgendaItem extends Component {
 
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
+    let agendaTime, body, recommendation;
 
-    const agendaTime = this.timeConverter(agendaItem.meeting_time);
-    const agendaBody = agendaItem.body;
-    const agendaRecommendation = agendaItem.recommendations[0].recommendation;
+    if (agendaItem) {
+      agendaTime = convertToNormalTime(agendaItem.meeting_time);
+      const agendaBody = agendaItem.body;
+      const agendaRecommendation = agendaItem.recommendations[0].recommendation;
 
-    const body = agendaBody.map((string, index) => {
-      return <p key={index}>{string}</p>;
-    });
+      body = agendaBody.map((string, index) => {
+        return <p key={index}>{string}</p>;
+      });
 
-    const recommendation = agendaRecommendation ? (
-      <div>
-        {agendaRecommendation.map((string, index) => {
-          return <p key={index}>{string}</p>;
-        })}
-      </div>
-    ) : (
-      <div>
-        <p>No recommended action has been proposed.</p>
-      </div>
-    );
+      recommendation = agendaRecommendation ? (
+        <div>
+          {agendaRecommendation.map((string, index) => {
+            return <p key={index}>{string}</p>;
+          })}
+        </div>
+      ) : (
+        <div>
+          <p>No recommended action has been proposed.</p>
+        </div>
+      );
+    }
 
     return (
-      <Container style={{ margin: 24, color: "black" }}>
-        <Card style={{ width: "auto" }}>
-          <Card.Content
-            style={{
-              display: "flex",
-              flexDirection: "column"
-            }}
-          >
-            <Card.Description
-              style={{
-                alignSelf: "center"
-              }}
-            >
-              <div>{agendaTime}</div>
-              <div>{agendaItem.department}</div>
-            </Card.Description>
-          </Card.Content>
-          <Card.Content>
-            <Card.Header>{agendaItem.title}</Card.Header>
-          </Card.Content>
-          <Card.Content>
-            <Card.Header>BODY:</Card.Header>
-            {body}
-          </Card.Content>
-          <Card.Content>
-            <Card.Header>RECOMMENDED ACTION:</Card.Header>
-            {recommendation}
-          </Card.Content>
+      <div>
+        {agendaItem ? (
+          <Container style={{ margin: 24, color: "black" }}>
+            <Card style={{ width: "auto" }}>
+              <Card.Content
+                style={{
+                  display: "flex",
+                  flexDirection: "column"
+                }}
+              >
+                <Card.Description
+                  style={{
+                    alignSelf: "center"
+                  }}
+                >
+                  <div>{agendaTime}</div>
+                  <div>{agendaItem.department}</div>
+                </Card.Description>
+              </Card.Content>
+              <Card.Content>
+                <Card.Header>{agendaItem.title}</Card.Header>
+              </Card.Content>
+              <Card.Content>
+                <Card.Header>BODY:</Card.Header>
+                {body}
+              </Card.Content>
+              <Card.Content>
+                <Card.Header>RECOMMENDED ACTION:</Card.Header>
+                {recommendation}
+              </Card.Content>
 
-          <Card.Content>
-            <Card.Header>
-              WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
-            </Card.Header>
-            <div className="ui three buttons" style={{ padding: 24 }}>
-              <Button
-                basic
-                color="green"
-                onClick={evt => {
-                  this.showForm("pro");
-                }}
-              >
-                Approve
-              </Button>
-              <Button
-                basic
-                color="red"
-                onClick={evt => {
-                  this.showForm("con");
-                }}
-              >
-                Decline
-              </Button>
-              <Button basic color="black">
-                Need More Info
-              </Button>
-            </div>
-          </Card.Content>
-          <Card.Content style={{ textAlign: "center" }}>
-            <Link to={`/feed`} style={{ color: "brown" }}>
-              Return to Agenda Feed
-            </Link>
-          </Card.Content>
-        </Card>
-      </Container>
+              <Card.Content>
+                <Card.Header>
+                  WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
+                </Card.Header>
+                <div className="ui three buttons" style={{ padding: 24 }}>
+                  <Button
+                    basic
+                    color="green"
+                    onClick={evt => {
+                      this.showForm("pro");
+                    }}
+                  >
+                    Approve
+                  </Button>
+                  <Button
+                    basic
+                    color="red"
+                    onClick={evt => {
+                      this.showForm("con");
+                    }}
+                  >
+                    Decline
+                  </Button>
+                  <Button basic color="black">
+                    Need More Info
+                  </Button>
+                </div>
+              </Card.Content>
+              <Card.Content style={{ textAlign: "center" }}>
+                <Link to={`/feed`} style={{ color: "brown" }}>
+                  Return to Agenda Feed
+                </Link>
+              </Card.Content>
+            </Card>
+          </Container>
+        ) : (
+          <Loader active inline="centered" style={{ color: "black" }}>
+            Loading agenda...
+          </Loader>
+        )}
+      </div>
     );
   }
 }
@@ -209,12 +190,13 @@ class AgendaItem extends Component {
 function mapStateToProps(state) {
   const agendas = state.agendas;
   return {
-    agendaItems: agendas.agendaItems
+    agendaItems: agendas.agendaItems,
+    agendaLoading: agendas.agendaLoading
   };
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ agenda_item_received }, dispatch);
+  return bindActionCreators({ agenda_item_received, requestAgendas }, dispatch);
 }
 
 export default connect(
