@@ -9,6 +9,7 @@ import AgendaItem from "./component/AgendaItem.jsx";
 import SignIn from "./component/SignIn.jsx";
 import Faq from "./component/Faq.jsx";
 import FormContainer from "./container/FormContainer.jsx";
+import EmailConfirmation from './component/EmailConfirmation.jsx';
 
 const Routes = () => {
   return (
@@ -22,6 +23,7 @@ const Routes = () => {
         <Route path="/signin" component={SignIn} />
         <Route path="/faq" component={Faq} />
         <Route path="/form" component={FormContainer} />
+        <Route path="/emailConfirmation" component={EmailConfirmation} />
       </Switch>
       <Route component={Footer} />
     </div>
