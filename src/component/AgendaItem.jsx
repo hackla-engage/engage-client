@@ -5,6 +5,17 @@ import agenda_item_received from "../actions/Form";
 import { requestAgendas } from "../ducks/agendas";
 import { bindActionCreators } from "redux";
 import convertToNormalTime from "../util/convertUNIX";
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton
+} from "react-share";
+import styles from "./ShareButtons.scss";
 
 //I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 //Now I just need to design a page and put informations on them
@@ -168,6 +179,40 @@ class AgendaItem extends Component {
                   <Button basic color="black">
                     Need More Info
                   </Button>
+                </div>
+                <div className="shareContainer">
+                  <div className="shareContainer__button">
+                    <FacebookShareButton
+                      url={window.location.href}>
+                    <FacebookIcon
+                      size={32}
+                      round={true}/>
+                    </FacebookShareButton>
+                  </div>
+                  <div className="shareContainer__button">
+                    <TwitterShareButton
+                      url={window.location.href}>
+                    <TwitterIcon
+                      size={32}
+                      round={true}/>
+                    </TwitterShareButton>
+                  </div>
+                  <div className="shareContainer__button">
+                    <LinkedinShareButton
+                      url={window.location.href}>
+                    <LinkedinIcon
+                      size={32}
+                      round={true}/>
+                    </LinkedinShareButton>
+                  </div>
+                  <div className="shareContainer__button">
+                    <EmailShareButton
+                      url={window.location.href}>
+                    <EmailIcon
+                      size={32}
+                      round={true}/>
+                    </EmailShareButton>
+                  </div>
                 </div>
               </Card.Content>
               <Card.Content style={{ textAlign: "center" }}>
