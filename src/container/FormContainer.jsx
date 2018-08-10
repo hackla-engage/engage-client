@@ -55,7 +55,7 @@ class FormContainer extends Component {
         <div style={{ position: 'relative', display: this.state.captchaHidden }}>
           <ReCAPTCHA
             ref="recaptcha"
-            sitekey="6LcnmVUUAAAAAKaVa9eHX41Nxpzg42_yEsGh0IOH"
+            sitekey="6LcBR2kUAAAAAFFlNvl7_iMrN3sA0CoAN30yeIM2"
             onChange={this.onVerify}
           />
         </div>
