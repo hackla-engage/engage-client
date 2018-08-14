@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import {
   Button,
-  Checkbox,
   Form,
-  FormField,
-  Icon,
-  Input,
-  Responsive,
   Segment,
-  Select,
-  TextArea,
 } from 'semantic-ui-react';
 import request from 'superagent';
 import './FormComponent.scss';
