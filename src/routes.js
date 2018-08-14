@@ -24,7 +24,6 @@ const Routes = () => {
         <Route path="/signin" component={SignIn} />
         <Route path="/faq" component={Faq} />
         <Route path="/form" component={FormContainer} />
-//         <Route path="/topics" component={TopicsSelectorContainer} />
         <Route path="/form-final-step" component={PositionFormFinalStep} />
         <Route path="/emailConfirmation" component={EmailConfirmation} />
       </Switch>
