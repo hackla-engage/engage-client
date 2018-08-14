@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import {
-  Button,
-  Form,
-  Segment,
-} from 'semantic-ui-react';
-import request from 'superagent';
-import './FormComponent.scss';
-import HOST from '../engage_client';
+import React, { Component } from "react";
+import { Button, Form, Segment, Grid, Checkbox, Header } from "semantic-ui-react";
+import request from "superagent";
+import "./FormComponent.scss";
+import {HOSTNAME} from "../engage_client";
 class FormComponent extends Component {
   constructor(props) {
     super(props);
@@ -19,22 +15,28 @@ class FormComponent extends Component {
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.state = {
       yesNoValue: false,
-      textValue: '',
+      textValue: "",
       textError: false,
-      firstValue: '',
+      firstValue: "",
       firstError: true,
       firstTouched: false,
-      lastValue: '',
+      lastValue: "",
       lastError: true,
       lastTouched: false,
       zipError: false,
-      zipValue: '90401',
+      zipValue: "90401",
       zipTouched: false,
       emailError: true,
-      emailValue: '',
+      emailValue: "",
       emailTouched: false,
+      homeOwner: false,
+      businessOwner: false,
+      resident: false,
+      works: false,
+      school: false,
+      childSchool: false,
       submitEnabled: true,
-      isSubmitting: false,
+      isSubmitting: false
     };
   }
   handleSubmit(evt) {
@@ -49,13 +51,13 @@ class FormComponent extends Component {
       this.setState({ isSubmitting: false, submitEnabled: false });
       return false;
     }
-    console.log('PROPSTATE:', this.props, this.state, HOST);
+    console.log("PROPSTATE:", this.props, this.state, HOSTNAME);
     request
       .agent()
-      .post(HOST + '/add/message/')
-      .set('Content-Type', 'application/json')
+      .post(HOSTNAME + "/add/message/")
+      .set("Content-Type", "application/json")
       .send({
-        committee: 'Santa Monica City Council',
+        committee: "Santa Monica City Council",
         ag_item: this.props.Id,
         token: this.props.verify,
         content: this.state.textValue,
@@ -64,19 +66,25 @@ class FormComponent extends Component {
         zip: parseInt(this.state.zipValue),
         pro: this.props.Pro,
         email: this.state.emailValue,
+        home_owner: this.state.homeOwner,
+        business_owner: this.state.businessOwner,
+        resident: this.state.resident,
+        works: this.state.works,
+        school: this.state.school,
+        child_school: this.state.childSchool
       })
       .then(res => {
-        console.log('success', res);
+        console.log("success", res);
         this.props.thankYou();
       })
       .catch(err => {
-        console.log('ERR SENDING RECTS', err);
+        console.log("ERR SENDING MESSAGE", err);
       });
   }
   handleCancel(evt) {
     // redirect back, how?
     evt.preventDefault();
-    console.log('prevent default');
+    console.log("prevent default");
     this.props.thankYou();
   }
   handleZipChange(evt) {
@@ -89,32 +97,57 @@ class FormComponent extends Component {
         zipValue: evt.currentTarget.value,
         zipError: true,
         zipTouched: true,
-        submitEnabled: false,
+        submitEnabled: false
       });
     } else if (parseInt(evt.currentTarget.value) < 99999) {
       this.setState({
         zipValue: evt.currentTarget.value,
         zipError: false,
         zipTouched: true,
-        submitEnabled: !(this.state.emailError || this.state.firstError || this.state.lastError),
+        submitEnabled: !(
+          this.state.emailError ||
+          this.state.firstError ||
+          this.state.lastError
+        )
       });
     } else {
       this.setState({
-        zipValue: '99999',
+        zipValue: "99999",
         zipError: true,
         zipTouched: true,
-        submitEnabled: false,
+        submitEnabled: false
       });
     }
   }
-
+  handleDemographicChange(key, value) {
+    switch (key) {
+      case "homeOwner":
+        this.setState({ homeOwner: value });
+        break;
+      case "businessOwner":
+        this.setState({ businessOwner: value });
+        break;
+      case "resident":
+        this.setState({ resident: value });
+        break;
+      case "works":
+        this.setState({ works: value });
+        break;
+      case "school":
+        this.setState({ school: value });
+        break;
+      default:
+        this.setState({ childSchool: value });
+        break;
+    }
+  }
   handleFirstNameChange(evt) {
-    if (evt.currentTarget.value === '') {
+    if (evt.currentTarget.value === "") {
       this.setState({
         firstValue: evt.currentTarget.value,
         submitEnabled: false,
         nameError: true,
-        nameTouched: true,
+        nameTouched: true
       });
     } else {
       this.setState({
@@ -126,45 +159,53 @@ class FormComponent extends Component {
           this.state.firstError ||
           this.state.lastError ||
           this.state.emailError
-        ),
+        )
       });
     }
   }
   handleLastNameChange(evt) {
-    if (evt.currentTarget.value === '') {
+    if (evt.currentTarget.value === "") {
       this.setState({
         lastValue: evt.currentTarget.value,
         submitEnabled: false,
         lastError: true,
-        lastTouched: true,
+        lastTouched: true
       });
     } else {
       this.setState({
         lastValue: evt.currentTarget.value,
         lastError: false,
         lastTouched: true,
-        submitEnabled: !(this.state.zipError || this.state.firstError || this.state.emailError),
+        submitEnabled: !(
+          this.state.zipError ||
+          this.state.firstError ||
+          this.state.emailError
+        )
       });
     }
   }
 
   handleEmailChange(evt) {
     if (
-      evt.currentTarget.value !== '' &&
+      evt.currentTarget.value !== "" &&
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(evt.currentTarget.value)
     ) {
       this.setState({
         emailValue: evt.currentTarget.value,
         emailError: true,
         emailTouched: true,
-        submitEnabled: false,
+        submitEnabled: false
       });
     } else {
       this.setState({
         emailValue: evt.currentTarget.value,
         emailError: false,
         emailTouched: true,
-        submitEnabled: !(this.state.zipError || this.state.firstError || this.state.lastError),
+        submitEnabled: !(
+          this.state.zipError ||
+          this.state.firstError ||
+          this.state.lastError
+        )
       });
     }
   }
@@ -178,7 +219,9 @@ class FormComponent extends Component {
   render() {
     return (
       <Segment className="form-background">
-        <div className={this.props.Pro ? 'pro' : 'con'}>{this.props.Pro ? 'Pro' : 'Con'}</div>
+        <div className={this.props.Pro ? "pro" : "con"}>
+          {this.props.Pro ? "Pro" : "Con"}
+        </div>
         <Form onSubmit={this.handleSubmit} size="large">
           <div className="vote-title-holder" />
           <div className="vote-recommendations-holder">
@@ -187,9 +230,13 @@ class FormComponent extends Component {
             <div className="vote-recommendations-recommendations">
               <div dangerouslySetInnerHTML={{ __html: this.props.Summary }} />
             </div>
-            <div className="vote-recommendations-keyword">Recommended Actions:</div>
+            <div className="vote-recommendations-keyword">
+              Recommended Actions:
+            </div>
             <div className="vote-recommendations-recommendations">
-              <div dangerouslySetInnerHTML={{ __html: this.props.Recommendations }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: this.props.Recommendations }}
+              />
             </div>
           </div>
           Tell us a little about yourself:
@@ -218,7 +265,9 @@ class FormComponent extends Component {
             <div className="error">Name is required</div>
           )}
           {this.state.nameTouched &&
-            this.state.nameError && <div className="error">Name is required</div>}
+            this.state.nameError && (
+              <div className="error">Name is required</div>
+            )}
           <Form.Field
             label="Email*"
             control="input"
@@ -230,7 +279,9 @@ class FormComponent extends Component {
             onChange={this.handleEmailChange}
           />
           {this.state.emailTouched &&
-            this.state.emailError && <div className="error">Error in email</div>}
+            this.state.emailError && (
+              <div className="error">Error in email</div>
+            )}
           <Form.Field
             label="Zipcode (optional)"
             type="text"
@@ -256,12 +307,71 @@ class FormComponent extends Component {
             rows="3"
             onChange={this.handleChangeText}
           />
-          <div className="chars">{200 - this.state.textValue.length} characters left</div>
+          <div className="chars">
+            {200 - this.state.textValue.length} characters left
+          </div>
           <br />
+          <Header as="h4">Demographics:</Header>
+          <Grid columns={2} stackable>
+            <Grid.Row>
+              <Grid.Column width={6} padded="horizontally">
+                <Checkbox
+                  label="Resident of the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange("resident", value.checked);
+                  }}
+                />
+                <br />
+                <Checkbox
+                  label="Home owner in the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange("homeOwner", value.checked);
+                  }}
+                />
+                <br />
+                <Checkbox
+                  label="Business owner in the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange(
+                      "businessOwner",
+                      value.checked
+                    );
+                  }}
+                />
+              </Grid.Column>
+              <Grid.Column width={6} padded="horizontally">
+                <Checkbox
+                  label="Employed in the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange("works", value.checked);
+                  }}
+                />
+                <br />
+                <Checkbox
+                  label="Attends school in the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange("school", value.checked);
+                  }}
+                />
+                <br />
+                <Checkbox
+                  label="Has a child who attends school in the city"
+                  onChange={(evt, value) => {
+                    this.handleDemographicChange("childSchool", value.checked);
+                  }}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           {!this.state.submitEnabled && (
             <div className="error">Form has errors, submit is disabled</div>
           )}
-          <Button type="submit" content="Submit" primary disabled={!this.state.submitEnabled} />
+          <Button
+            type="submit"
+            content="Submit"
+            primary
+            disabled={!this.state.submitEnabled}
+          />
           <Button content="Cancel" secondary onClick={this.handleCancel} />
         </Form>
       </Segment>
