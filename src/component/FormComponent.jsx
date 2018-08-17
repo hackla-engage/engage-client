@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 
 import './FormComponent.scss';
-import CommentForm from './CommentForm';
+import CommentForm from './CommentForm.jsx';
 
 class FormComponent extends Component {
   render() {
