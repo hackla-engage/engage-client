@@ -12,17 +12,12 @@ class AgendaFeed extends Component {
     super(props);
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
-    this.showForm = this.showForm.bind(this);
-    this.recommendationReducer = this.recommendationReducer.bind(this);
-    this.summaryReducer = this.summaryReducer.bind(this);
-    this.goToForm = this.goToForm.bind(this);
     this.getMoreAgendas = this.getMoreAgendas.bind(this);
   }
 
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
     // This will then get stored in our redux state.
-    console.log("ComponentDidMount");
     gtag("config", "UA-116538234-1", {
       page_title: "feed",
       page_path: "/feed"
@@ -132,7 +127,6 @@ class AgendaFeed extends Component {
                 defaultOpen={agenda.id === this.requestedID}
                 removeId={this.removeId}
                 searchParams={this.props.location.search}
-                showForm={this.showForm}
               />
             );
           })}
@@ -168,4 +162,7 @@ function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas, agenda_item_received }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(AgendaFeed);
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(AgendaFeed);
