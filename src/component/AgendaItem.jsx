@@ -5,6 +5,7 @@ import agenda_item_received from "../actions/Form";
 import { requestAgendas } from "../ducks/agendas";
 import { bindActionCreators } from "redux";
 import convertToNormalTime from "../util/convertUNIX";
+import { setHours, setMinutes } from 'date-fns';
 
 //I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 //Now I just need to design a page and put informations on them
@@ -86,9 +87,16 @@ class AgendaItem extends Component {
 
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
-    let agendaTime, body, recommendation;
+    let agendaTime, body, recommendation, showActions;
 
     if (agendaItem) {
+      // If past 11:59 AM PST on the day of the meeting, don't show action buttons/form
+      const meetTime = new Date(agendaItem.meeting_time * 1000);
+      const meetTimeObj = setMinutes(setHours(meetTime, 11),59);
+      if (new Date() < meetTimeObj) {
+        showActions = true;
+      }
+
       agendaTime = convertToNormalTime(agendaItem.meeting_time);
       const agendaBody = agendaItem.body;
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
@@ -142,34 +150,41 @@ class AgendaItem extends Component {
                 {recommendation}
               </Card.Content>
 
-              <Card.Content>
-                <Card.Header>
-                  WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
-                </Card.Header>
-                <div className="ui three buttons" style={{ padding: 24 }}>
-                  <Button
-                    basic
-                    color="green"
-                    onClick={evt => {
-                      this.showForm("pro");
-                    }}
-                  >
-                    Approve
-                  </Button>
-                  <Button
-                    basic
-                    color="red"
-                    onClick={evt => {
-                      this.showForm("con");
-                    }}
-                  >
-                    Decline
-                  </Button>
-                  <Button basic color="black">
-                    Need More Info
-                  </Button>
-                </div>
-              </Card.Content>
+              {showActions ?
+                <Card.Content>
+                  <Card.Header>
+                    WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
+                  </Card.Header>
+                  <div className="ui three buttons" style={{ padding: 24 }}>
+                    <Button
+                      basic
+                      color="green"
+                      onClick={evt => {
+                        this.showForm("pro");
+                      }}
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      basic
+                      color="red"
+                      onClick={evt => {
+                        this.showForm("con");
+                      }}
+                    >
+                      Decline
+                    </Button>
+                    <Button basic color="black">
+                      Need More Info
+                    </Button>
+                  </div>
+                </Card.Content> :
+                <Card.Content>
+                  <Card.Header>
+                    >> Note: Commenting is closed for this issue.
+                  </Card.Header>
+                </Card.Content>
+              }
               <Card.Content style={{ textAlign: "center" }}>
                 <Link to={`/feed`} style={{ color: "brown" }}>
                   Return to Agenda Feed
