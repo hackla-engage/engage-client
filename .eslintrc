@@ -1,17 +1,27 @@
 {
-  env: {
-    browser: true,
-    commonjs: true
+  "env": {
+    "browser": true,
+    "commonjs": true
   },
-  rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single']
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ]
   },
-  globals: {
-    __dirname: true,
-    process: true,
+  "globals": {
+    "__dirname": true,
+    "process": true,
   },
-  extends: ["airbnb-base"]
+  "extends": [
+    "airbnb-base"
+  ]
 }
-  
