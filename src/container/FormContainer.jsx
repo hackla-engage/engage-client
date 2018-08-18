@@ -5,6 +5,7 @@ import FormComponent from '../component/FormComponent.jsx';
 import ReactDOM from 'react-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button, Icon, Modal } from 'semantic-ui-react';
+import { setHours, setMinutes } from 'date-fns';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class FormContainer extends Component {
       showForm: false,
       captchaHidden: 'block',
       showModal: false,
+      showCommentForm: false,
     };
     console.log(process.env.NODE_ENV);
     this.loadedForm = this.loadedForm.bind(this);
@@ -21,6 +23,23 @@ class FormContainer extends Component {
     this.returnToFeed = this.returnToFeed.bind(this);
     this.thankYou = this.thankYou.bind(this);
     this.onVerify = this.onVerify.bind(this);
+  }
+  componentDidMount() {
+    if (this.props.Time) {
+      // If past 11:59 AM PST on the day of the meeting, don't show comment form
+      const meetTime = new Date(this.props.Time * 1000);
+      const meetTimeObj = setMinutes(setHours(meetTime, 11),59);
+      if (new Date() < meetTimeObj) {
+        this.setState({
+          showCommentForm: true
+        });
+      } else {
+        this.setState({
+          showForm: true,
+          captchaHidden: 'none'
+        });
+      }
+    }
   }
   onVerify(evt) {
     this.setState({
@@ -69,6 +88,7 @@ class FormContainer extends Component {
               Pro={this.props.Pro}
               thankYou={this.thankYou}
               verify={this.state.captchaVerify}
+              showCommentForm={this.state.showCommentForm}
             />
           </div>
         )}
@@ -108,6 +128,7 @@ function mapStateToProps(state) {
       Summary: Form.Summary,
       Id: Form.Id,
       Pro: Form.Pro,
+      Time: Form.Time,
     };
   } else {
     return {};

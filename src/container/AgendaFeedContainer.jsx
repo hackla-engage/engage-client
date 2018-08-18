@@ -42,6 +42,60 @@ class AgendaFeed extends Component {
     delete parsed.id;
     this.props.history.push("/feed?" + qs.stringify(parsed));
   }
+  recommendationReducer = (acc, curr) => {
+    return acc + "<br />" + curr;
+  };
+
+  summaryReducer = (acc, curr) => {
+    if (!this.gotBackground) {
+      if (acc.toLowerCase().includes("summary")) {
+        return curr;
+      } else if (curr.toLowerCase().includes("background")) {
+        this.gotBackground = true;
+        return acc;
+      } else {
+        return acc + "<br />" + curr;
+      }
+    } else {
+      return acc;
+    }
+  };
+  showForm(proCon) {
+    // this.requestedID is only useful at loading lifecycle event not afterward
+    const parsed = qs.parse(this.props.location.search);
+    if (parsed && parsed.id) {
+      const { id, body, meeting_time, recommendations, title } = this.props.agendaItems[
+        parsed.id
+      ];
+      let recommendationsString = "";
+      // map to get recommendation from object and reduce array to string concatenated with <br />s
+      if (recommendations.length > 0) {
+        recommendationsString = recommendations
+          .map(rec => {
+            return rec.recommendation;
+          })
+          .reduce(this.recommendationReducer);
+      }
+      let summaryString = "";
+      // slice and reduce array to string concatenated with <br />s
+      if (body.length > 0) {
+        summaryString = body.slice(0, 4).reduce(this.summaryReducer);
+      }
+      // Configure form content
+      this.props.agenda_item_received({
+        Title: title,
+        Recommendations: recommendationsString,
+        Summary: summaryString,
+        Id: id,
+        Pro: proCon === "pro",
+        Time: meeting_time,
+      });
+      setTimeout(this.goToForm, 200);
+    }
+  }
+  goToForm() {
+    this.props.history.push("/form"); // already set up!
+  }
 
   getMoreAgendas() {
     const { requestAgendas } = this.props;
