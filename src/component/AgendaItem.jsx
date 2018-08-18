@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import agenda_item_received from "../actions/Form";
 import { requestAgendas } from "../ducks/agendas";
 import { bindActionCreators } from "redux";
-import convertToNormalTime from "../util/convertUNIX";
-
+import format from "date-fns/format";
 //I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 //Now I just need to design a page and put informations on them
 import { Button, Card, Container, Loader } from "semantic-ui-react";
@@ -86,10 +85,11 @@ class AgendaItem extends Component {
 
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
-    let agendaTime, body, recommendation;
+    let agendaDate, body, recommendation;
 
     if (agendaItem) {
-      agendaTime = convertToNormalTime(agendaItem.meeting_time);
+      agendaDate = new Date(agendaItem.meeting_time * 1000);
+      const offset = agendaDate.getTimezoneOffset();      
       const agendaBody = agendaItem.body;
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
 
@@ -126,7 +126,9 @@ class AgendaItem extends Component {
                     alignSelf: "center"
                   }}
                 >
-                  <div>{agendaTime}</div>
+                  {/* Date formatting consistency, but still is in user's local time zone :-( */}
+                    <div>{format(agendaDate, "MM/DD/YYYY")}</div>
+                    <div>{format(agendaDate, "hh:mm a", {locale: "PST"})}</div>
                   <div>{agendaItem.department}</div>
                 </Card.Description>
               </Card.Content>
