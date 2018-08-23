@@ -58,7 +58,6 @@ class CommentForm extends Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
   componentDidMount() {
-    console.log('SCROLL TO TOP');
     this.props.scrollToAppTop();
   }
   handleSubmit(evt) {
@@ -74,6 +73,10 @@ class CommentForm extends Component {
     const works = this.state.values.works.value;
     const childSchool = this.state.values.childSchool.value;
     const school = this.state.values.school.value;
+    if ([firstName, lastName, email].includes('')) {
+      this.setState({ submitEnabled: false });
+      return;
+    }
     const values = {
       firstName,
       lastName,
@@ -185,6 +188,9 @@ class CommentForm extends Component {
       break;
     default:
       break;
+    }
+    if ([values.firstName.value, values.lastName.value, values.email.value].includes('')) {
+      submitEnabled = false;
     }
     this.setState({ values, submitEnabled });
   }

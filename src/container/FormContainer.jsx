@@ -43,11 +43,11 @@ class FormContainer extends Component {
 
   scrollToAppTop() {
     window.scrollTo(0, 0);
+    document.getElementById('app').scrollTo(0, 0);
     const menu = document.getElementById('menu');
-    console.log(menu);
     menu.scrollTop = 0;
     menu.scrollIntoView(true);
-    document.getElementById('app').scrollTo(0, 0);
+    this.forceUpdate();
   }
 
   render() {

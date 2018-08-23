@@ -48,18 +48,18 @@
 
 }
 .ui.segment.con {
-  background-image: linear-gradient(to right, red, white) ;
+  background-color: red;
   color: white;
   font-weight: bold;
 }
 .ui.segment.pro {
-  background-image: linear-gradient(to right, green, white) ;
+  background-color: green;
   color: white;
   font-weight: bold;
   background-repeat: no-repeat;
 }
 .ui.segment.need {
-  background-image: linear-gradient(to right, black, white) ;
+  background-color: black;
   color: white;
   font-weight: bold;
 }

@@ -14,10 +14,10 @@ class FormComponent extends Component {
     let divContent;
     if (this.props.Pro === 1) {
       className = 'pro';
-      divContent = 'Pro';
+      divContent = 'Agree';
     } else if (this.props.Pro === 0) {
       className = 'con';
-      divContent = 'Con';
+      divContent = 'Disagree';
     } else {
       className = 'need';
       divContent = 'Need more information';
