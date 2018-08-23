@@ -5,6 +5,9 @@
   font-weight: bold;
   margin-top: -10px;
 }
+.error + .error {
+  margin-top: 2px;
+}
 .vote-title-holder {
   color: black;
 }

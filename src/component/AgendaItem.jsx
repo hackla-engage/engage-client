@@ -1,114 +1,99 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import agenda_item_received from "../actions/Form";
-import { requestAgendas } from "../ducks/agendas";
-import { bindActionCreators } from "redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { agendaItemReceived } from '../actions/Form';
+import { requestAgendas } from '../ducks/agendas';
+import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
-import format from "date-fns/format";
-//I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
-//Now I just need to design a page and put informations on them
-import { Button, Card, Container, Loader } from "semantic-ui-react";
+import format from 'date-fns/format';
+// I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
+// Now I just need to design a page and put informations on them
+import { Button, Card, Container, Loader } from 'semantic-ui-react';
+
+const recommendationReducer = (acc, curr) => `${acc}<br />${curr}`;
+const summaryReducer = (acc, curr) => {
+  if (!this.gotBackground) {
+    if (acc.toLowerCase().includes('summary')) {
+      return curr;
+    } else if (curr.toLowerCase().includes('background')) {
+      this.gotBackground = true;
+      return acc;
+    }
+    return `${acc}<br />${curr}`;
+  }
+  return acc;
+};
 
 class AgendaItem extends Component {
   constructor() {
     super();
-
-    this.recommendationReducer = this.recommendationReducer.bind(this);
-    this.summaryReducer = this.summaryReducer.bind(this);
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
   }
 
-  componentWillMount = () => {
-    let { requestAgendas } = this.props;
-
+  componentWillMount() {
     if (Object.keys(this.props.agendaItems).length < 2) {
-      requestAgendas("agendas");
+      this.props.requestAgendas('agendas');
     }
-  };
+  }
 
-  recommendationReducer = (acc, curr) => {
-    return acc + "<br />" + curr;
-  };
+  goToForm() {
+    this.props.history.push('/form');
+  }
 
-  summaryReducer = (acc, curr) => {
-    if (!this.gotBackground) {
-      if (acc.toLowerCase().includes("summary")) {
-        return curr;
-      } else if (curr.toLowerCase().includes("background")) {
-        this.gotBackground = true;
-        return acc;
-      } else {
-        return acc + "<br />" + curr;
-      }
-    } else {
-      return acc;
-    }
-  };
 
   showForm(proCon) {
-    const id = this.props.match.params.id;
+    const { id } = this.props.match.params;
     const agenda = this.props.agendaItems[id];
-    const body = agenda.body;
+    const { body, title, agenda_item_id } = agenda;
     const recommendations = agenda.recommendations[0].recommendation;
-    const title = agenda.title;
-
-    let recommendationsString = "";
+    let recommendationsString = '';
     // map to get recommendation from object and reduce array to string concatenated with <br />s
     if (recommendations.length > 0) {
       recommendationsString = recommendations
-        .map(rec => {
-          return rec;
-        })
-        .reduce(this.recommendationReducer);
+        .map(rec => rec)
+        .reduce(recommendationReducer);
     }
 
-    let summaryString = "";
+    let summaryString = '';
     // slice and reduce array to string concatenated with <br />s
     if (body.length > 0) {
-      summaryString = body.slice(0, 4).reduce(this.summaryReducer);
+      summaryString = body.slice(0, 4).reduce(summaryReducer);
     }
     // Configure form content
-    this.props.agenda_item_received({
+    this.props.agendaItemReceived({
+      Committee: this.props.committee,
       Title: title,
       Recommendations: recommendationsString,
       Summary: summaryString,
       Id: id,
-      Pro: proCon === "pro"
+      AgendaItemId: agenda_item_id,
+      Pro: proCon,
     });
     setTimeout(this.goToForm, 200);
   }
 
-  goToForm() {
-    this.props.history.push("/form");
-  }
-
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
-    let agendaDate, body, recommendation;
+    let agendaDate;
+    let body;
+    let recommendation;
     let showActions = false;
-        
+
     if (agendaItem) {
       agendaDate = new Date(agendaItem.meeting_time * 1000);
-      const meetTimeObj = setMinutes(setHours(agendaDate, 11),59);
+      const meetTimeObj = setMinutes(setHours(agendaDate, 11), 59);
       if (new Date() < meetTimeObj) {
         showActions = true;
       }
-
-      const offset = agendaDate.getTimezoneOffset();      
       const agendaBody = agendaItem.body;
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
 
-      body = agendaBody.map((string, index) => {
-        return <p key={index}>{string}</p>;
-      });
+      body = agendaBody.map((string, index) => <p key={index}>{string}</p>);
 
       recommendation = agendaRecommendation ? (
         <div>
-          {agendaRecommendation.map((string, index) => {
-            return <p key={index}>{string}</p>;
-          })}
+          {agendaRecommendation.map((string, index) => <p key={index}>{string}</p>)}
         </div>
       ) : (
         <div>
@@ -120,22 +105,22 @@ class AgendaItem extends Component {
     return (
       <div>
         {agendaItem ? (
-          <Container style={{ margin: 24, color: "black" }}>
-            <Card style={{ width: "auto" }}>
+          <Container style={{ margin: 24, color: 'black' }}>
+            <Card style={{ width: 'auto' }}>
               <Card.Content
                 style={{
-                  display: "flex",
-                  flexDirection: "column"
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
                 <Card.Description
                   style={{
-                    alignSelf: "center"
+                    alignSelf: 'center',
                   }}
                 >
                   {/* Date formatting consistency, but still is in user's local time zone :-( */}
-                    <div>{format(agendaDate, "MM/DD/YYYY")}</div>
-                    <div>{format(agendaDate, "hh:mm a", {locale: "PST"})}</div>
+                  <div>{format(agendaDate, 'MM/DD/YYYY')}</div>
+                  <div>{format(agendaDate, 'hh:mm a', { locale: 'PST' })}</div>
                   <div>{agendaItem.department}</div>
                 </Card.Description>
               </Card.Content>
@@ -160,8 +145,8 @@ class AgendaItem extends Component {
                     <Button
                       basic
                       color="green"
-                      onClick={evt => {
-                        this.showForm("pro");
+                      onClick={(evt) => {
+                        this.showForm(1);
                       }}
                     >
                       Approve
@@ -169,13 +154,20 @@ class AgendaItem extends Component {
                     <Button
                       basic
                       color="red"
-                      onClick={evt => {
-                        this.showForm("con");
+                      onClick={(evt) => {
+                        this.showForm(0);
                       }}
                     >
                       Decline
                     </Button>
-                    <Button basic color="black">
+                    <Button
+                      basic
+                      color=
+                        "black"
+                      onClick={(evt) => {
+                        this.showForm(2);
+                      }}
+                    >
                       Need More Info
                     </Button>
                   </div>
@@ -186,15 +178,15 @@ class AgendaItem extends Component {
                   </Card.Header>
                 </Card.Content>
               }
-              <Card.Content style={{ textAlign: "center" }}>
-                <Link to={`/feed`} style={{ color: "brown" }}>
+              <Card.Content style={{ textAlign: 'center' }}>
+                <Link to={'/feed'} style={{ color: 'brown' }}>
                   Return to Agenda Feed
                 </Link>
               </Card.Content>
             </Card>
           </Container>
         ) : (
-          <Loader active inline="centered" style={{ color: "black" }}>
+          <Loader active inline="centered" style={{ color: 'black' }}>
             Loading agenda...
           </Loader>
         )}
@@ -203,19 +195,22 @@ class AgendaItem extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const agendas = state.agendas;
+const mapStateToProps = (state) => {
+  const { agendas } = state;
   return {
     agendaItems: agendas.agendaItems,
-    agendaLoading: agendas.agendaLoading
+    agendaLoading: agendas.agendaLoading,
+    committee: agendas.committee,
   };
-}
-
-function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ agenda_item_received, requestAgendas }, dispatch);
-}
-
-export default connect(
+};
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    agendaItemReceived, requestAgendas,
+  },
+  dispatch,
+);
+const AgendaItemComponent = connect(
   mapStateToProps,
-  matchDispatchToProps
+  mapDispatchToProps,
 )(AgendaItem);
+export default AgendaItemComponent;
