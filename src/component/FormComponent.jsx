@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
+import { ReactDOM } from 'react-dom';
 
 import './FormComponent.scss';
 import CommentForm from './CommentForm.jsx';
 
 class FormComponent extends Component {
+  componentDidMount() {
+    this.props.scrollToAppTop();
+  }
   render() {
     let className;
     let divContent;
@@ -20,9 +24,7 @@ class FormComponent extends Component {
     }
     return (
       <Segment className="form-background">
-        <div className={className}> { divContent } </div>
-        <div className="vote-title-holder" />
-        <div className="vote-recommendations-holder">
+        <Segment className="vote-recommendations-holder">
           <div className="vote-title-title">{this.props.Title}</div>
           <div className="vote-recommendations-keyword">Summary:</div>
           <div
@@ -36,26 +38,31 @@ class FormComponent extends Component {
             className="vote-recommendations-recommendations"
             dangerouslySetInnerHTML={{ __html: this.props.Recommendations }}
           />
-        </div>
-        <CommentForm
-          id = {this.props.Id}
-          pro = {this.props.Pro}
-          committee = {this.props.Committee}
-          content = {this.props.content}
-          email = {this.props.email}
-          firstName = {this.props.firstName}
-          lastName = {this.props.lastName}
-          zipcode = {this.props.zipcode}
-          businessOwner = {this.props.businessOwner}
-          childSchool = {this.props.childSchool}
-          homeOwner = {this.props.homeOwner}
-          resident = {this.props.resident}
-          school = {this.props.school}
-          works = {this.props.works}
-          submitted = {this.props.submitted}
-          saveForm={this.props.saveForm}
-          resetForm={this.props.resetForm}
-        />
+        </Segment>
+        <Segment>
+          <Segment className={className} color="teal" style={{ float: 'right', position: 'relative' }}> { divContent } </Segment>
+          <CommentForm
+            id = {this.props.Id}
+            pro = {this.props.Pro}
+            committee = {this.props.Committee}
+            content = {this.props.content}
+            email = {this.props.email}
+            firstName = {this.props.firstName}
+            lastName = {this.props.lastName}
+            zipcode = {this.props.zipcode}
+            businessOwner = {this.props.businessOwner}
+            childSchool = {this.props.childSchool}
+            homeOwner = {this.props.homeOwner}
+            resident = {this.props.resident}
+            school = {this.props.school}
+            works = {this.props.works}
+            submitted = {this.props.submitted}
+            saveForm = {this.props.saveForm}
+            resetForm = {this.props.resetForm}
+            returnToItem = {this.props.returnToItem}
+            scrollToAppTop = {this.props.scrollToAppTop}
+          />
+        </Segment>
       </Segment>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Container} from 'semantic-ui-react';
+import { Menu, Dropdown, Responsive, Container } from 'semantic-ui-react';
 import styles from './Header.scss';
 
 styles.link = {
@@ -12,10 +12,11 @@ const Header = () => (
   <Menu
     attached
     style={{
-      paddingLeft: "1rem",
-      backgroundColor: "#192a56",
-      border: 'none'
+      paddingLeft: '1rem',
+      backgroundColor: '#192a56',
+      border: 'none',
     }}
+    id="menu"
   >
     <Menu.Item
       style={styles.link}
@@ -65,8 +66,8 @@ const Header = () => (
     >
       <Dropdown
         style={{
-          backgroundColor: "#192a56",
-          color: "#fff"
+          backgroundColor: '#192a56',
+          color: '#fff',
         }}
         item
         simple
@@ -74,8 +75,8 @@ const Header = () => (
       >
         <Dropdown.Menu
           style={{
-            color: "#FFF",
-            backgroundColor: "#192a56"
+            color: '#FFF',
+            backgroundColor: '#192a56',
           }}
         >
           <Dropdown.Item>

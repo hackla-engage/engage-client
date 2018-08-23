@@ -16,9 +16,9 @@ class FormContainer extends Component {
       showForm: true,
       captchaHidden: 'block',
     };
-    this.loadedForm = this.loadedForm.bind(this);
     this.onVerify = this.onVerify.bind(this);
     this.returnToItem = this.returnToItem.bind(this);
+    this.scrollToAppTop = this.scrollToAppTop.bind(this);
   }
   componentDidMount() {
     if (this.props.Time) {
@@ -41,14 +41,13 @@ class FormContainer extends Component {
     this.props.history.push(`/feed/${this.props.Id}`);
   }
 
-  loadedForm(ref) {
-    // Super ugly! and non-performant, but window scrollTo would not work
-    // If you find a better way, please do it! It may be at the router level
-    // At every route change, the menu should be scrolled into view!
-    const node = ReactDOM.findDOMNode(ref);
-    if (node) {
-      node.scrollIntoView();
-    }
+  scrollToAppTop() {
+    window.scrollTo(0, 0);
+    const menu = document.getElementById('menu');
+    console.log(menu);
+    menu.scrollTop = 0;
+    menu.scrollIntoView(true);
+    document.getElementById('app').scrollTo(0, 0);
   }
 
   render() {
@@ -67,7 +66,6 @@ class FormContainer extends Component {
               zIndex: 50,
               display: this.props.token == null ? 'none' : 'block',
             }}
-            ref={this.loadedForm}
           >
             <FormComponent
               Committee = {this.props.Committee}
@@ -90,6 +88,8 @@ class FormContainer extends Component {
               submitted = {this.props.submitted}
               saveForm = {this.props.saveForm}
               resetForm = {this.props.resetForm}
+              returnToItem = {this.returnToItem}
+              scrollToAppTop = {this.scrollToAppTop}
             />
           </div>
         </div>
@@ -120,6 +120,7 @@ class FormContainer extends Component {
           resetForm = {this.props.resetForm}
           editForm = {this.props.editForm}
           submitForm = {this.props.submitForm}
+          scrollToAppTop = {this.scrollToAppTop}
         />
       );
     }

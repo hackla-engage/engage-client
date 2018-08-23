@@ -7,7 +7,9 @@ class ConfirmFormContentComponent extends React.Component {
     super(props);
     this.state = {};
   }
-
+  componentDidMount() {
+    this.props.scrollToAppTop();
+  }
   render() {
     return (
       <Container>

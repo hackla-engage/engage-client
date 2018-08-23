@@ -47,15 +47,19 @@
   color: black;
 
 }
-.pro {
-  padding: 8px;
-  background: linear-gradient(to right, blue, white) 
+.ui.segment.con {
+  background-image: linear-gradient(to right, red, white) ;
+  color: white;
+  font-weight: bold;
 }
-.con {
-  padding: 8px;
-  background: linear-gradient(to right, red, white) 
+.ui.segment.pro {
+  background-image: linear-gradient(to right, green, white) ;
+  color: white;
+  font-weight: bold;
+  background-repeat: no-repeat;
 }
-.nocomment {
-  color: black;
+.ui.segment.need {
+  background-image: linear-gradient(to right, black, white) ;
+  color: white;
   font-weight: bold;
 }

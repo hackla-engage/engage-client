@@ -7,7 +7,7 @@ class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      submitEnabled: false,
+      submitEnabled: this.props.firstName !== '',
       values: {
         firstName: {
           value: this.props.firstName,
@@ -56,6 +56,10 @@ class CommentForm extends Component {
     this.handleDemographicChange = this.handleDemographicChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+  componentDidMount() {
+    console.log('SCROLL TO TOP');
+    this.props.scrollToAppTop();
   }
   handleSubmit(evt) {
     evt.preventDefault();
@@ -131,6 +135,7 @@ class CommentForm extends Component {
     };
     this.setState({ values });
     this.props.resetForm();
+    this.props.returnToItem();
   }
   handleTextChange(category, value) {
     let submitEnabled = true;
