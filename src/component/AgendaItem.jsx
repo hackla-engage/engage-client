@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { agendaItemReceived } from '../actions/Form';
-import { requestAgendas } from '../ducks/agendas';
 import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
 import format from 'date-fns/format';
+import { agendaItemReceived } from '../actions/Form';
+import { requestAgendas } from '../ducks/agendas';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 import { Button, Card, Container, Loader } from 'semantic-ui-react';
@@ -17,6 +17,7 @@ class AgendaItem extends Component {
     super();
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
+    this.summaryReducer = this.summaryReducer.bind(this);
   }
   summaryReducer(acc, curr) {
     if (!this.gotBackground) {
