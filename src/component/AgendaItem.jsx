@@ -11,24 +11,24 @@ import format from 'date-fns/format';
 import { Button, Card, Container, Loader } from 'semantic-ui-react';
 
 const recommendationReducer = (acc, curr) => `${acc}<br />${curr}`;
-const summaryReducer = (acc, curr) => {
-  if (!this.gotBackground) {
-    if (acc.toLowerCase().includes('summary')) {
-      return curr;
-    } else if (curr.toLowerCase().includes('background')) {
-      this.gotBackground = true;
-      return acc;
-    }
-    return `${acc}<br />${curr}`;
-  }
-  return acc;
-};
 
 class AgendaItem extends Component {
   constructor() {
     super();
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
+  }
+  summaryReducer(acc, curr) {
+    if (!this.gotBackground) {
+      if (acc.toLowerCase().includes('summary')) {
+        return curr;
+      } else if (curr.toLowerCase().includes('background')) {
+        this.gotBackground = true;
+        return acc;
+      }
+      return `${acc}<br />${curr}`;
+    }
+    return acc;
   }
 
   componentWillMount() {
@@ -58,7 +58,7 @@ class AgendaItem extends Component {
     let summaryString = '';
     // slice and reduce array to string concatenated with <br />s
     if (body.length > 0) {
-      summaryString = body.slice(0, 4).reduce(summaryReducer);
+      summaryString = body.slice(0, 4).reduce(this.summaryReducer);
     }
     // Configure form content
     this.props.agendaItemReceived({
@@ -187,7 +187,7 @@ class AgendaItem extends Component {
           </Container>
         ) : (
           <Loader active inline="centered" style={{ color: 'black' }}>
-            Loading agenda...
+              Loading agenda...
           </Loader>
         )}
       </div>

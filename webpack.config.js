@@ -3,32 +3,32 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const webpack = require('webpack');
 
 // default runs data from ducks
-let NODE_ENV = 'development'
+let NODE_ENV = 'development';
 // testing with django server running on http://localhost:8000
 if (process.env.DEBUG) {
-  NODE_ENV = 'devsrv'
+  NODE_ENV = 'devsrv';
 }
 
 module.exports = {
-  entry: ["babel-polyfill", "./src/app.js"],
+  entry: ['babel-polyfill', './src/app.js'],
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         loader: 'babel-loader',
         test: /\.js$|\.jsx$/,
-        resolve: { extensions: [".js", ".jsx"] },
-        exclude: /node_modules/
+        resolve: { extensions: ['.js', '.jsx'] },
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
           'css-loader',
-        ]
+        ],
       },
       {
         test: /\.scss$/,
@@ -36,7 +36,7 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
-        ]
+        ],
       },
       // {
       //   test: /\.(png|jpg|gif)$/,
@@ -54,15 +54,15 @@ module.exports = {
         use: [
           {
             loader: 'svg-url-loader',
-            options: {}
-          }
-        ]
-      }
-    ]
+            options: {},
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     }),
     // new BundleAnalyzerPlugin(),
   ],
@@ -73,6 +73,6 @@ module.exports = {
   // Configuration for webpack-dev-server
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    compress: true
-  }
+    compress: true,
+  },
 };
