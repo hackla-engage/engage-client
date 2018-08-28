@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { setHours, setMinutes } from 'date-fns';
 import { verifiedCaptcha, resetForm, saveForm, editForm, submitForm } from '../actions/Form';
-import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent';
-import PositionFormFinalStep from '../component/PositionFormFinalStep';
+import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent.jsx';
+import PositionFormFinalStep from '../component/PositionFormFinalStep.jsx';
 
 class FormContainer extends Component {
   constructor(props) {
