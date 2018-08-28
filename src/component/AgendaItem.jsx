@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
+import { Button, Card, Container, Loader } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
-import { Button, Card, Container, Loader } from 'semantic-ui-react';
 
 const recommendationReducer = (acc, curr) => `${acc}<br />${curr}`;
 
