@@ -75,9 +75,7 @@ export const submitForm = () => (dispatch, getState) => {
     .set('Content-Type', 'application/json')
     .send(values)
     .then((res) => {
-      if (res.body.success) {
-        dispatch(formSubmitted(true));
-      }
+      dispatch(formSubmitted(true));
     })
     .catch((err) => {
       console.log('ERR SENDING FORM', err);
