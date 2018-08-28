@@ -1,0 +1,24 @@
+import request from 'superagent';
+import { HOSTNAME } from '../engage_client';
+
+export const VERIFIED = 'VERIFIED';
+
+export const verified = verification => (
+  { type: VERIFIED, payload: verification }
+);
+
+export const verify = (email, id, code, type) => (dispatch) => {
+  request
+    .agent()
+    .post(`${HOSTNAME}/verify/`)
+    .send({
+      email, id, code, type,
+    })
+    .then((res) => {
+      dispatch(verified(res.body));
+    })
+    .catch((err) => {
+      console.log(`Error: ${err}`);
+    });
+};
+

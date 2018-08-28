@@ -11,7 +11,7 @@ class PositionFormFinalStep extends Component {
 
   handleClose(evt) {
     evt.preventDefault();
-    this.props.returnToItem();
+    this.props.returnToItem(this.props.Id);
     // TODO Once form flow is optimized, clear form when user clicks close
   }
 
