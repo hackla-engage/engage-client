@@ -138,7 +138,7 @@ class CommentForm extends Component {
     };
     this.setState({ values });
     this.props.resetForm();
-    this.props.returnToItem();
+    this.props.returnToItem(this.props.id);
   }
   handleTextChange(category, value) {
     let submitEnabled = true;

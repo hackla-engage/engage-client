@@ -39,8 +39,9 @@ class FormContainer extends Component {
     this.props.verifiedCaptcha(evt);
   }
 
-  returnToItem() {
-    this.props.history.push(`/feed/${this.props.Id}`);
+  returnToItem(id) {
+    this.props.resetForm();
+    this.props.history.push(`/feed/${id}`);
   }
 
   scrollToAppTop() {
@@ -53,7 +54,7 @@ class FormContainer extends Component {
   }
 
   render() {
-    if (this.state.showForm && this.props.editing) {
+    if (this.state.showForm && this.props.editing && !this.props.submitted) {
       return (
         <div style={{ position: 'relative' }}>
           <ReCAPTCHA
@@ -127,7 +128,7 @@ class FormContainer extends Component {
       );
     }
     return (
-      <PositionFormFinalStep returnToItem={this.returnToItem} />
+      <PositionFormFinalStep returnToItem={this.returnToItem} Id={this.props.Id} />
     );
   }
 }
