@@ -47,14 +47,6 @@ const Header = () => (
         >
           FAQ
         </Menu.Item>
-        <Menu.Item
-          style={styles.link}
-          name="signin"
-          as={Link}
-          to="/signin"
-        >
-          Sign In
-        </Menu.Item>
       </Menu.Menu>
     </Responsive>
 
