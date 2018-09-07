@@ -11,25 +11,25 @@ import { requestAgendas } from '../ducks/agendas';
 // Now I just need to design a page and put informations on them
 
 const recommendationReducer = (acc, curr) => `${acc}<br />${curr}`;
+const summaryReducer = (acc, curr) => [acc, <br/>, curr];
+
+const bodyIdx = (body, length) => {
+  let acc = 0;
+  let accIdx = 0;
+  for (; acc < length; acc += body[accIdx].length) {
+    if (body[accIdx].toLowerCase().includes('discussion')) {
+      break;
+    }
+    accIdx += 1;
+  }
+  return accIdx;
+};
 
 class AgendaItem extends Component {
   constructor() {
     super();
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
-    this.summaryReducer = this.summaryReducer.bind(this);
-  }
-  summaryReducer(acc, curr) {
-    if (!this.gotBackground) {
-      if (acc.toLowerCase().includes('summary')) {
-        return curr;
-      } else if (curr.toLowerCase().includes('background')) {
-        this.gotBackground = true;
-        return acc;
-      }
-      return `${acc}<br />${curr}`;
-    }
-    return acc;
   }
 
   componentWillMount() {
@@ -56,11 +56,10 @@ class AgendaItem extends Component {
         .reduce(recommendationReducer);
     }
 
-    let summaryString = '';
     // slice and reduce array to string concatenated with <br />s
-    if (body.length > 0) {
-      summaryString = body.slice(0, 4).reduce(this.summaryReducer);
-    }
+    const idx = bodyIdx(body, 1000);
+    const summaryString = body.slice(1, idx).reduce(summaryReducer);
+
     // Configure form content
     this.props.agendaItemReceived({
       Committee: this.props.committee,
@@ -77,20 +76,18 @@ class AgendaItem extends Component {
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
     let agendaDate;
-    let body;
     let recommendation;
     let showActions = false;
-
+    let bodyString;
     if (agendaItem) {
+      const idx = bodyIdx(agendaItem.body, 1000);
+      bodyString = agendaItem.body.slice(1, idx).reduce(summaryReducer);
       agendaDate = new Date(agendaItem.meeting_time * 1000);
       const meetTimeObj = setMinutes(setHours(agendaDate, 11), 59);
       if (new Date() < meetTimeObj) {
         showActions = true;
       }
-      const agendaBody = agendaItem.body;
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
-
-      body = agendaBody.map((string, index) => <p key={index}>{string}</p>);
 
       recommendation = agendaRecommendation ? (
         <div>
@@ -129,9 +126,8 @@ class AgendaItem extends Component {
                 <Card.Header>{agendaItem.title}</Card.Header>
               </Card.Content>
               <Card.Content>
-                <Card.Header>{body[0]}</Card.Header>
-                
-                {body[1]}
+                <Card.Header>Executive Summary</Card.Header>
+                {bodyString}
               </Card.Content>
               <Card.Content>
                 <Card.Header>RECOMMENDED ACTION</Card.Header>
