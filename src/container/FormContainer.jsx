@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormComponent from '../component/FormComponent.jsx';
-import ReactDOM from 'react-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { setHours, setMinutes } from 'date-fns';
 import { verifiedCaptcha, resetForm, saveForm, editForm, submitForm } from '../actions/Form';
