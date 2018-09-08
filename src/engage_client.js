@@ -3,7 +3,11 @@
  */
 import { getResource } from './async';
 
-export const HOST = 'https://backend.engage.town/api';
+let HOST = 'https://backend.engage.town/api';
+if (process.env.NODE_ENV === 'devsrv') {
+  HOST = 'http://localhost:8000/api';
+}
+export const HOSTNAME = HOST;
 
 // Headers for basic GET request which returns JSON
 const HEADERS = new Headers({
