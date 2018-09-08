@@ -1,0 +1,52 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
+    working_directory: ~/engage-client
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      - run: npm test
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+            fingerprints:
+              - "f0:c5:81:4b:96:55:2e:99:91:96:ad:d6:60:05:97:e6"
+      - run:
+            name: Deploy over SSH
+            command: |
+                ssh -f $SSH_USER@$SSH_HOST "./deploy-client.sh"
+workflows:
+ version: 2
+ build-and-deploy:
+   jobs:
+     - build
+     - deploy:
+         requires:
+           - build
+         filters:
+           branches:
+             only: master

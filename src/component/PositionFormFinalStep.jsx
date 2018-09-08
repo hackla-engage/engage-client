@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, Container } from "semantic-ui-react";
+import { Button, Image, Container } from 'semantic-ui-react';
 import './PositionForm.scss';
 
 class PositionFormFinalStep extends Component {
@@ -11,12 +11,12 @@ class PositionFormFinalStep extends Component {
 
   handleClose(evt) {
     evt.preventDefault();
-    console.log("Close box")
+    this.props.returnToItem(this.props.Id);
     // TODO Once form flow is optimized, clear form when user clicks close
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <Container className="box" textAlign="center">
         <h2 className="top-heading heading">Final Step: Confirm Email Address</h2>
         <h2 className="agenda-item-heading heading">AGENDA ITEM #{this.props.Id}</h2>
@@ -33,7 +33,7 @@ class PositionFormFinalStep extends Component {
           <Button size="huge" className="close-button" onClick={this.handleClose}>CLOSE</Button>
         </div>
       </Container>
-    )
+    );
   }
 }
 
