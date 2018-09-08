@@ -129,11 +129,12 @@ class AgendaItem extends Component {
                 <Card.Header>{agendaItem.title}</Card.Header>
               </Card.Content>
               <Card.Content>
-                <Card.Header>BODY:</Card.Header>
-                {body}
+                <Card.Header>{body[0]}</Card.Header>
+                
+                {body[1]}
               </Card.Content>
               <Card.Content>
-                <Card.Header>RECOMMENDED ACTION:</Card.Header>
+                <Card.Header>RECOMMENDED ACTION</Card.Header>
                 {recommendation}
               </Card.Content>
 
