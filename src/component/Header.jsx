@@ -42,11 +42,11 @@ const Header = () => (
         </Menu.Item>
         <Menu.Item
           style={styles.link}
-          name="faq"
+          name="howto"
           as={Link}
-          to="/faq"
+          to="/howto"
         >
-          FAQ
+          How To
         </Menu.Item>
       </Menu.Menu>
     </Responsive>
@@ -77,13 +77,8 @@ const Header = () => (
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link style={styles.link} to="/faq">
-              FAQ
-            </Link>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <Link style={styles.link} to="/faq">
-              Sign In
+            <Link style={styles.link} to="/howto">
+              How To
             </Link>
           </Dropdown.Item>
         </Dropdown.Menu>
