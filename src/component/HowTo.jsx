@@ -28,11 +28,17 @@ const HowTo = props => {
           </Header>
 
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_1}</p>
+          <img src="static/image/engage_howto_img1.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_2}</p>
+          <img src="static/image/engage_howto_img2.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_3}</p>
+          <img src="static/image/engage_howto_img3.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_4}</p>
+          <img src="static/image/engage_howto_img4.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_5}</p>
+          <img src="static/image/engage_howto_img5.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_6}</p>
+          <img src="static/image/engage_howto_img6.png" />
           <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_7}</p>
           <Divider
             as="h4"
