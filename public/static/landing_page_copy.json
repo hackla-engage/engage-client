@@ -12,8 +12,19 @@
         "body_text": "The team is still working hard to make an app! But we would love to hear from you about our prototype and any questions you have for us."
     },
     "city_council": {
-        "header_text": "How does the City Council Work?",
-        "body_text": "It may seem confusing, but we are here to help! We will be creating a page to describe the process of how decisions are made at the City Council."
+        "header_text": "How does the Santa Monica City Council Work?",
+        "body_text": "The Santa Monica City Council meets every other Tuesday (there are some exceptions) for public hearings and discussions. Agenda Items for each meeting are made public a minimum of 72 hours in advance of the scheduled meeting, and public feedback is accepted on these Items until noon the day of the Council Meeting."
 
+    },
+    "submit_feedback": {
+        "header_text": "Submitting Feedback to City Council",
+        "body_text_step_1": "On our main feed, you’ll see a list of all the most-recently posted Council Meeting Agenda Items from the City of Santa Monica. Each item includes a title describing the issue, and the date and time of the Council Meeting when that item will be discussed. To view an Agenda Item in more detail, click on \"View Item\" for that Agenda Item.",
+        "body_text_step_2": "You’ll see the Executive Summary of the proposed item, as well as the City’s recommended action. Here is where you can enter a position on the recommended action: \"Pro,\" \"Con,\" or, if you don’t understand the issue, or want more information, \"No Position.\"",
+        "body_text_step_3": "Once you enter a position, you’ll have a chance to enter an optional comment and/or demographic information that the city can use to help better respond to your concerns. <strong>One required piece of information at this step is an email address to which you have access.</strong> You’ll see why in a second. When you’re done, click \"Submit.\"",
+        "body_text_step_4": "This is your chance to review all your information before submitting to the City Clerk's office. You can edit what's entered, or – if you're ready – click this final \"Submit\" button.",
+        "body_text_step_5": "Now we send an email to the address you provided. Time to head on over to your email account.",
+        "body_text_step_6": "Follow the link in the email and your address will be logged in our system as \"confirmed.\" This way the City knows this feedback was submitted by an actual concerned citizen, and not a clever algorithm.",
+        "body_text_step_7": "Public feedback will be closed at noon the day of the scheduled council meeting. At this point, the feedback entered on Engage for all that meeting’s Agenda Items are gathered into a report, which then gets sent to the City clerk’s office. This report is also made immediately available to the public, so you’ll be able to see the same data that Engage is sending to the City.",
+        "body_text_step_8": "<strong>PLEASE NOTE, per City of Santa Monica policy:</strong><blockquote>All letters, emails and faxes regarding City Council agenda items will be available for public viewing online.  Written comments will not be redacted, and email addresses, physical addresses and telephone numbers will appear online as they are submitted.</blockquote>"
     }
 }
