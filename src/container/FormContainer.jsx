@@ -56,13 +56,15 @@ class FormContainer extends Component {
   render() {
     if (this.state.showForm && this.props.editing && !this.props.submitted) {
       return (
-        <div style={{ position: 'relative' }}>
-          <ReCAPTCHA
-            ref="recaptcha"
-            sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
-            onChange={this.onVerify}
-            style={{ position: 'relative', display: this.props.token == null ? 'block' : 'none' }}
-          />
+
+          <div style={{display:"flex", minHeight:"63vh", flexDirection:"column" }}>
+            <ReCAPTCHA
+              ref="recaptcha"
+              sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
+              onChange={this.onVerify}
+              style={{ position: 'relative', display: this.props.token == null ? 'flex' : 'none', minHeight:"63vh", flexDirection:"column" }}
+            />
+
           <div
             style={{
               position: 'relative',

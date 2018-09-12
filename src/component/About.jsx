@@ -6,15 +6,14 @@ const About = () => {
       <div className="ui middle aligned stackable grid container">
         <div className="row">
           <div className="ui text container">
-            <h3 className="ui header center">About this project</h3>
+            <h3 className="ui header center">About Engage</h3>
             <p>
               People often never get a chance to speak at a city council meeting. There are many
               causes for this: work schedules, childcare, accessibility, they've thought their voice
               would not be heard, or they just haven't followed an issue in detail.
             </p>
             <p>
-              Engage is a tool that lets you easily follow issues your city council is debating and
-              lets you easily participate in the discussion with the most impact.
+              Engage is a tool that lets you easily follow issues your city council is debating. More importantly, it provides a platform for expressing your views on these issues, in a way you know will be heard by your city.
             </p>
           </div>
         </div>
@@ -28,9 +27,7 @@ const About = () => {
               of Santa Monica.
             </p>
             <p>
-              Some of our short-term objectives include a mobile app that allows users to see city
-              council agenda items that are interesting to them, and an in-app option to send
-              feedback to their city council.
+              We are nearing launch on our pilot app for Santa Monica - please check back soon for announcements, or follow us on Twitter <a href="https://twitter.com/EngageStaMonica">@EngageStaMonica</a>.
             </p>
           </div>
         </div>
@@ -39,7 +36,8 @@ const About = () => {
           <div className="ui text container">
             <h3 className="ui header">About Hack for LA</h3>
             <p>
-              Hack for LA is the official Los Angeles chapter of Code for America, a national
+              Engage was developed under the auspices of <a href="http://www.hackforla.org/#projects">Hack for LA</a>.</p>
+              <p>Hack for LA is the official Los Angeles chapter of <a href="https://www.codeforamerica.org/">Code for America</a>, a national
               nonprofit that believes government can work for the people, by the people, in the 21st
               century. At our weekly Civic Hack Nights, we organize groups of volunteers to build
               technology addressing the LA region’s biggest civic issues. We welcome technologists,
@@ -52,20 +50,13 @@ const About = () => {
         <div className="row">
           <div className="ui text container">
             <h3 className="ui header">Have a question? Want to help?</h3>
-            <p>Join us at Hack For LA, Wednesdays at 6pm</p>
+            <p>We’d love to hear from you! Contact the Engage team at <a href="mailto:engage@engage.town">engage@engage.town</a>.
+            </p>
+            <p>Or come on down to Hack Night! Find out more about Hack for LA's current projects and how to contribute <a href="http://www.hackforla.org/#projects">here</a>.</p>
           </div>
         </div>
 
-        <div className="row">
-          <div className="ui text container">
-            <h3 className="ui header">Support this project!</h3>
-            <p>
-              We’re a volunteer-based project and would love your donation! On the donation page,
-              please choose Los Angeles Brigade and make it in honor of Engage with the email
-              address info@foodoasis.la
-            </p>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import AgendaFeedContainer from "./container/AgendaFeedContainer.jsx";
 import AgendaItem from "./component/AgendaItem.jsx";
 import SignIn from "./component/SignIn.jsx";
 import Faq from "./component/Faq.jsx";
+import HowTo from "./component/HowTo.jsx";
 import FormContainer from "./container/FormContainer.jsx";
 import EmailConfirmation from './component/EmailConfirmation.jsx';
 import PositionFormFinalStep from './component/PositionFormFinalStep.jsx';
@@ -18,6 +19,7 @@ const Routes = () => {
       <Route component={Header} />
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/howto" component={HowTo} />
         <Route exact path="/about" component={About} />
         <Route exact path="/feed" component={AgendaFeedContainer} />
         <Route path="/feed/:id" component={AgendaItem} />
