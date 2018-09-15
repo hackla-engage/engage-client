@@ -49,6 +49,7 @@ jobs:
       - add_ssh_keys:
             fingerprints:
               - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
+      - run: ssh-keyscan -t rsa -H engage.town >> ~/.ssh/known_hosts
       - run:
             name: Deploy over SSH
             command: |
