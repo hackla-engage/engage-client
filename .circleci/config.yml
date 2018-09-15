@@ -29,10 +29,12 @@ jobs:
       # run tests!
       - run: npm test
   deploy:
-    machine:
-      enabled: true
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
     working_directory: ~/engage-client
     steps:
+      - checkout
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
