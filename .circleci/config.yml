@@ -61,4 +61,4 @@ workflows:
            - build
          filters:
            branches:
-             only: master
+             only: eselkin/testing_scp
