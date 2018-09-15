@@ -54,6 +54,7 @@ jobs:
             name: Deploy over SSH
             command: |
                 scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
+                ssh -f $SSH_USER@$SSH_HOST "./deploy-client.sh"
 workflows:
  version: 2
  build-and-deploy:
@@ -64,4 +65,4 @@ workflows:
            - build
          filters:
            branches:
-             only: eselkin/testing_scp
+             only: master
