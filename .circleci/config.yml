@@ -40,15 +40,15 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - add_ssh_keys:
-            fingerprints:
-              - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
       - run: 
             name: Build for deploy
             command: |
               npm run build
               cd ..
               tar cj -f engage-client.tar.bz2 engage-client
+      - add_ssh_keys:
+            fingerprints:
+              - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
       - run:
             name: Deploy over SSH
             command: |
