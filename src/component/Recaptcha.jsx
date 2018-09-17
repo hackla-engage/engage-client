@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 class Recaptcha extends Component {
@@ -23,6 +23,7 @@ class Recaptcha extends Component {
             alignContent: 'center',
           }}
           >
+            <Header as="h3">For unregistered users we need to make sure you are a human.</Header>
             <ReCAPTCHA
               ref="recaptcha"
               sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
