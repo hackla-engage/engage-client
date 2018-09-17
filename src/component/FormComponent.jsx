@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
-import { ReactDOM } from 'react-dom';
 
 import './FormComponent.scss';
 import CommentForm from './CommentForm.jsx';
@@ -8,6 +7,7 @@ import CommentForm from './CommentForm.jsx';
 class FormComponent extends Component {
   componentDidMount() {
     this.props.scrollToAppTop();
+    console.log(this.props, 'FormComponentDidMount');
   }
   render() {
     let className;
@@ -40,27 +40,16 @@ class FormComponent extends Component {
           />
         </Segment>
         <Segment>
-          <Segment className={className} color="teal" style={{ float: 'right', position: 'relative' }}> { divContent } </Segment>
+          <Segment className={className} color="teal" style={{ float: 'right', position: 'relative' }}> {divContent} </Segment>
           <CommentForm
-            id = {this.props.Id}
-            pro = {this.props.Pro}
-            committee = {this.props.Committee}
-            content = {this.props.content}
-            email = {this.props.email}
-            firstName = {this.props.firstName}
-            lastName = {this.props.lastName}
-            zipcode = {this.props.zipcode}
-            businessOwner = {this.props.businessOwner}
-            childSchool = {this.props.childSchool}
-            homeOwner = {this.props.homeOwner}
-            resident = {this.props.resident}
-            school = {this.props.school}
-            works = {this.props.works}
-            submitted = {this.props.submitted}
-            saveForm = {this.props.saveForm}
-            resetForm = {this.props.resetForm}
-            returnToItem = {this.props.returnToItem}
-            scrollToAppTop = {this.props.scrollToAppTop}
+            id={this.props.Id}
+            pro={this.props.Pro}
+            committee={this.props.Committee}
+            complete={this.props.complete}
+            completeForm={this.props.completeForm}
+            resetForm={this.props.resetForm}
+            returnToItem={this.props.returnToItem}
+            scrollToAppTop={this.props.scrollToAppTop}
           />
         </Segment>
       </Segment>
