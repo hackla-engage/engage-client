@@ -5,6 +5,7 @@ import {
   FORM_SUBMITTED,
   CAPTCHA_VERIFIED,
   FORM_EDITING,
+  FORM_COMPLETE,
 } from '../actions/Form';
 
 const defaultFormState = {
@@ -31,6 +32,7 @@ const defaultFormState = {
   school: false,
   works: false,
   editing: true,
+  complete: {},
 };
 
 export default function (state = defaultFormState, action) {
@@ -62,11 +64,11 @@ export default function (state = defaultFormState, action) {
       editing: false,
     });
   case FORM_EDITING:
-    return Object.assign({}, state, { editing: true });
+    return Object.assign({}, state, { editing: action.payload });
   case FORM_SUBMITTED:
-    return Object.assign({}, state, {
-      submitted: true,
-    });
+    return Object.assign({}, defaultFormState, { submitted: true });
+  case FORM_COMPLETE:
+    return Object.assign({}, state, { complete: action.payload, editing: false });
   case FORM_RESET:
     return defaultFormState;
   case CAPTCHA_VERIFIED:

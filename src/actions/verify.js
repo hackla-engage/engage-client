@@ -1,5 +1,4 @@
-import request from 'superagent';
-import { HOSTNAME } from '../engage_client';
+import { HOSTNAME, agent } from '../engage_client';
 
 export const VERIFIED = 'VERIFIED';
 
@@ -8,8 +7,7 @@ export const verified = verification => (
 );
 
 export const verify = (email, id, code, type) => (dispatch) => {
-  request
-    .agent()
+  agent
     .post(`${HOSTNAME}/verify/`)
     .send({
       email, id, code, type,

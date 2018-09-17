@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormComponent from '../component/FormComponent.jsx';
-import ReactDOM from 'react-dom';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { setHours, setMinutes } from 'date-fns';
-import { verifiedCaptcha, resetForm, saveForm, editForm, submitForm } from '../actions/Form';
+import { verifiedCaptcha, resetForm, saveForm, editingForm, submitForm, completeForm } from '../actions/Form';
 import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent.jsx';
 import PositionFormFinalStep from '../component/PositionFormFinalStep.jsx';
+import Recaptcha from '../component/Recaptcha.jsx';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -20,7 +19,11 @@ class FormContainer extends Component {
     this.returnToItem = this.returnToItem.bind(this);
     this.scrollToAppTop = this.scrollToAppTop.bind(this);
   }
-
+  componentWillMount() {
+    if (this.props.submitted) {
+      this.props.resetForm();
+    }
+  }
   componentDidMount() {
     if (this.props.Time) {
       // If past 11:59 AM PST on the day of the meeting, don't show comment form
@@ -54,22 +57,14 @@ class FormContainer extends Component {
   }
 
   render() {
-    if (this.state.showForm && this.props.editing && !this.props.submitted) {
+    console.log(this.props);
+    if ((Object.keys(this.props.complete).length === 0 || this.props.editing) && !this.props.submitted) {
       return (
-
-          <div style={{display:"flex", minHeight:"63vh", flexDirection:"column" }}>
-            <ReCAPTCHA
-              ref="recaptcha"
-              sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
-              onChange={this.onVerify}
-              style={{ position: 'relative', display: this.props.token == null ? 'flex' : 'none', minHeight:"63vh", flexDirection:"column" }}
-            />
-
+        <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
           <div
             style={{
               position: 'relative',
               zIndex: 50,
-              display: this.props.token == null ? 'none' : 'block',
             }}
           >
             <FormComponent
@@ -79,19 +74,9 @@ class FormContainer extends Component {
               Recommendations={this.props.Recommendations}
               Summary={this.props.Summary}
               Title={this.props.Title}
-              content={this.props.content}
-              email={this.props.email}
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              zipcode={this.props.zipcode}
-              businessOwner={this.props.businessOwner}
-              childSchool={this.props.childSchool}
-              homeOwner={this.props.homeOwner}
-              resident={this.props.resident}
-              school={this.props.school}
-              works={this.props.works}
-              submitted={this.props.submitted}
-              saveForm={this.props.saveForm}
+              complete={this.props.complete}
+              editing={this.props.editing}
+              completeForm={this.props.completeForm}
               resetForm={this.props.resetForm}
               returnToItem={this.returnToItem}
               scrollToAppTop={this.scrollToAppTop}
@@ -99,38 +84,53 @@ class FormContainer extends Component {
           </div>
         </div>
       );
-    }
-    if (this.state.showForm && !this.props.editing && !this.props.submitted) {
+    } else if (!this.props.submitted) {
       return (
-        <ConfirmFormContentComponent
-          Pro={this.props.Pro}
-          Recommendations={this.props.Recommendations}
-          AgendaItemId={this.props.AgendaItemId}
-          Id={this.props.Id}
-          Summary={this.props.Summary}
-          Title={this.props.Title}
-          content={this.props.content}
-          email={this.props.email}
-          firstName={this.props.firstName}
-          lastName={this.props.lastName}
-          zipcode={this.props.zipcode}
-          businessOwner={this.props.businessOwner}
-          childSchool={this.props.childSchool}
-          homeOwner={this.props.homeOwner}
-          resident={this.props.resident}
-          school={this.props.school}
-          works={this.props.works}
-          submitted={this.props.submitted}
-          saveForm={this.props.saveForm}
-          resetForm={this.props.resetForm}
-          editForm={this.props.editForm}
-          submitForm={this.props.submitForm}
-          scrollToAppTop={this.scrollToAppTop}
-        />
+        <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
+          <Recaptcha display={this.props.firstName !== ''} onVerify={this.onVerify}/>
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 50,
+              display: this.props.firstName !== '' ? 'none' : 'block',
+            }}
+          >
+            <ConfirmFormContentComponent
+              Pro={this.props.Pro}
+              Recommendations={this.props.Recommendations}
+              AgendaItemId={this.props.AgendaItemId}
+              Id={this.props.Id}
+              Summary={this.props.Summary}
+              Title={this.props.Title}
+              content={this.props.content}
+              complete={this.props.complete}
+              saveForm={this.props.saveForm}
+              resetForm={this.props.resetForm}
+              editForm={this.props.editForm}
+              scrollToAppTop={this.scrollToAppTop}
+            />
+          </div>
+        </div>
       );
     }
     return (
-      <PositionFormFinalStep returnToItem={this.returnToItem} Id={this.props.Id} />
+      <PositionFormFinalStep
+        returnToItem={this.returnToItem}
+        Id={this.props.Id}
+        complete={this.props.complete}
+        submitForm={this.props.submitForm}
+        content={this.props.content}
+        email={this.props.email}
+        firstName={this.props.firstName}
+        lastName={this.props.lastName}
+        zipcode={this.props.zipcode}
+        businessOwner={this.props.businessOwner}
+        childSchool={this.props.childSchool}
+        homeOwner={this.props.homeOwner}
+        resident={this.props.resident}
+        school={this.props.school}
+        works={this.props.works}
+      />
     );
   }
 }
@@ -151,14 +151,15 @@ function mapStateToProps(state) {
       firstName: Form.firstName,
       lastName: Form.lastName,
       zipcode: Form.zipcode,
-      submitted: Form.submitted,
-      editing: Form.editing,
       businessOwner: Form.businessOwner,
       childSchool: Form.childSchool,
       homeOwner: Form.homeOwner,
       resident: Form.resident,
       school: Form.school,
       works: Form.works,
+      submitted: Form.submitted,
+      editing: Form.editing,
+      complete: Form.complete,
       token: Form.token, // captcha token
     };
   }
@@ -170,8 +171,9 @@ function matchDispatchToProps(dispatch) {
     resetForm,
     saveForm,
     verifiedCaptcha,
-    editForm,
+    editingForm,
     submitForm,
+    completeForm,
   }, dispatch);
 }
 
