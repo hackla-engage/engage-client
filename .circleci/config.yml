@@ -29,15 +29,31 @@ jobs:
       # run tests!
       - run: npm test
   deploy:
-    machine:
-      enabled: true
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
+    working_directory: ~/engage-client
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: 
+            name: Build for deploy
+            command: |
+              npm run build
+              cd ..
+              tar cj -f engage-client.tar.bz2 engage-client
       - add_ssh_keys:
             fingerprints:
-              - "f0:c5:81:4b:96:55:2e:99:91:96:ad:d6:60:05:97:e6"
+              - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
+      - run: ssh-keyscan -t rsa -H engage.town >> ~/.ssh/known_hosts
       - run:
             name: Deploy over SSH
             command: |
+                scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
                 ssh -f $SSH_USER@$SSH_HOST "./deploy-client.sh"
 workflows:
  version: 2

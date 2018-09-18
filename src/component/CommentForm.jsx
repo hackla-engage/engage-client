@@ -7,50 +7,52 @@ class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      submitEnabled: this.props.firstName !== '',
+      submitEnabled: this.props.complete.firstName,
       values: {
         firstName: {
-          value: this.props.firstName,
+          value: '',
           error: '',
           touched: false,
         },
         lastName: {
-          value: this.props.lastName,
+          value: '',
           error: '',
           touched: false,
         },
         email: {
-          value: this.props.email,
+          value: '',
           error: '',
           touched: false,
         },
         zipcode: {
-          value: this.props.zipcode || 90401,
+          value: 90401,
           error: '',
           touched: false,
         },
         content: {
-          value: this.props.content,
+          value: '',
+          touched: false,
         },
         resident: {
-          value: this.props.resident,
+          value: false,
         },
         homeOwner: {
-          value: this.props.homeOwner,
+          value: false,
         },
         businessOwner: {
-          value: this.props.businessOwner,
+          value: false,
         },
         works: {
-          value: this.props.works,
+          value: false,
         },
         school: {
-          value: this.props.school,
+          value: false,
         },
         childSchool: {
-          value: this.props.childSchool,
+          value: false,
         },
       },
+      setByProps: false,
     };
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleDemographicChange = this.handleDemographicChange.bind(this);
@@ -59,6 +61,22 @@ class CommentForm extends Component {
   }
   componentDidMount() {
     this.props.scrollToAppTop();
+  }
+  componentWillReceiveProps(nextProps) {
+    const { values, setByProps } = this.state;
+    if (nextProps.complete != null && Object.keys(nextProps.complete).length !== 0 && !setByProps) {
+      values.firstName.value = nextProps.complete.firstName;
+      values.lastName.value = nextProps.complete.lastName;
+      values.email.value = nextProps.complete.email;
+      values.zipcode.value = nextProps.complete.zipcode;
+      values.content.value = nextProps.complete.content;
+      values.resident.value = nextProps.complete.resident;
+      values.homeOwner.value = nextProps.complete.homeOwner;
+      values.businessOwner.value = nextProps.complete.businessOwner;
+      values.works.value = nextProps.complete.works;
+      values.school.value = nextProps.complete.school;
+      this.setState({ values, setByProps: true });
+    }
   }
   handleSubmit(evt) {
     evt.preventDefault();
@@ -90,7 +108,7 @@ class CommentForm extends Component {
       works,
       school,
     };
-    this.props.saveForm(values);
+    this.props.completeForm(values);
   }
   handleCancel() {
     const values = {

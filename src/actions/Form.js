@@ -1,5 +1,4 @@
-import { HOSTNAME } from '../engage_client';
-import request from 'superagent';
+import { HOSTNAME, agent } from '../engage_client';
 
 // agendaItem should be
 // {Title: 'x', Recommendations: 'y', Summary: 'z', Id: 'a', Pro: 0/1/2}
@@ -9,6 +8,8 @@ export const FORM_SAVE = 'FORM_SAVE';
 export const CAPTCHA_VERIFIED = 'CAPTCHA_VERIFIED';
 export const FORM_SUBMITTED = 'FORM_SUBMITTED';
 export const FORM_EDITING = 'FORM_EDITING';
+export const FORM_COMPLETE = 'FORM_COMPLETE';
+
 export const agendaItemReceived = agendaItem => ({
   type: AGENDA_ITEM_RECEIVED,
   payload: agendaItem,
@@ -19,18 +20,21 @@ export const resetForm = () => ({
   payload: null,
 });
 
+export const completeForm = values => ({
+  type: FORM_COMPLETE,
+  payload: values,
+});
+
 export const saveForm = values => ({
   type: FORM_SAVE,
   payload: values,
 });
-export const editForm = () => ({
+
+export const editingForm = value => ({
   type: FORM_EDITING,
-  payload: true,
+  payload: value,
 });
-export const verifiedCaptcha = token => ({
-  type: CAPTCHA_VERIFIED,
-  payload: token,
-});
+
 export const formSubmitted = success => ({
   type: FORM_SUBMITTED,
   payload: success,
@@ -50,12 +54,12 @@ export const formSubmitted = success => ({
       email: email text value,
  * }
  */
-export const submitForm = () => (dispatch, getState) => {
+export const submitForm = token => (dispatch, getState) => {
   const { Form } = getState();
   const values = {
     committee: Form.Committee,
     ag_item: Form.Id,
-    token: Form.token,
+    token,
     content: Form.content,
     email: Form.email,
     first_name: Form.firstName,
@@ -69,9 +73,9 @@ export const submitForm = () => (dispatch, getState) => {
     school: Form.school,
     pro: Form.Pro,
   };
-  request
-    .agent()
+  agent
     .post(`${HOSTNAME}/add/message/`)
+    .withCredentials()
     .set('Content-Type', 'application/json')
     .send(values)
     .then((res) => {
@@ -80,4 +84,8 @@ export const submitForm = () => (dispatch, getState) => {
     .catch((err) => {
       console.log('ERR SENDING FORM', err);
     });
+};
+
+export const verifiedCaptcha = token => (dispatch) => {
+  dispatch(submitForm(token));
 };

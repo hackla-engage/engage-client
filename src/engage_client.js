@@ -1,7 +1,10 @@
 /**
  * Interact with the Engage API
  */
+import superagent from 'superagent';
 import { getResource } from './async';
+
+export const agent = superagent.agent();
 
 let HOST = 'https://backend.engage.town/api';
 if (process.env.NODE_ENV === 'devsrv') {

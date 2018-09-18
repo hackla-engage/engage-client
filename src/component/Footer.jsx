@@ -10,7 +10,8 @@ const Footer = () => (
       paddingRight: "1rem",
       margin: 0,
       border: "solid #192a56",
-      backgroundColor: "#192a56"
+      backgroundColor: "#192a56",
+      color: "#ffffff"
     }}
   >
     <Container textAlign="center">
