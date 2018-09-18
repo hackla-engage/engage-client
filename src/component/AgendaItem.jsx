@@ -148,7 +148,7 @@ class AgendaItem extends Component {
                         this.showForm(1);
                       }}
                     >
-                      Approve
+                      Agree
                     </Button>
                     <Button
                       basic
@@ -157,7 +157,7 @@ class AgendaItem extends Component {
                         this.showForm(0);
                       }}
                     >
-                      Decline
+                      Disagree
                     </Button>
                     <Button
                       basic
