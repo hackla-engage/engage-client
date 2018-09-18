@@ -356,7 +356,7 @@ class CommentForm extends Component {
         )}
         <Button
           type="submit"
-          content="Submit"
+          content="Review Submission"
           primary
           disabled={!this.state.submitEnabled}
         />
