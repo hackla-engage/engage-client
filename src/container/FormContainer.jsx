@@ -57,7 +57,6 @@ class FormContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     if ((Object.keys(this.props.complete).length === 0 || this.props.editing) && !this.props.submitted) {
       return (
         <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
@@ -87,7 +86,7 @@ class FormContainer extends Component {
     } else if (!this.props.submitted) {
       return (
         <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
-          <Recaptcha display={this.props.firstName !== ''} onVerify={this.onVerify}/>
+          <Recaptcha display={this.props.firstName !== ''} onVerify={this.onVerify} />
           <div
             style={{
               position: 'relative',
@@ -106,7 +105,7 @@ class FormContainer extends Component {
               complete={this.props.complete}
               saveForm={this.props.saveForm}
               resetForm={this.props.resetForm}
-              editForm={this.props.editForm}
+              editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
             />
           </div>

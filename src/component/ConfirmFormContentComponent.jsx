@@ -21,7 +21,7 @@ class ConfirmFormContentComponent extends React.Component {
           </Header>
           <Segment className="agenda-item-recommendation">
             <Header as="h4">Recommended action:</Header>
-            {this.props.Recommendations}
+            <div> {this.props.Recommendations} </div>
           </Segment>
           <Segment>
             <Button onClick={() => this.props.editingForm(true)} style={{ position: 'relative', float: 'right' }}>Edit</Button>
@@ -31,12 +31,12 @@ class ConfirmFormContentComponent extends React.Component {
             <Header as="h4" className="agenda-item-section">Your position:</Header> {this.props.Pro === 1 ? 'Agree' : this.props.Pro === 0 ? 'Disagree' : 'Need more information'}
             <Header as="h4" className="agenda-item-section">Additional comments:</Header> {this.props.complete.content}
             <Header as="h4" className="agenda-item-section">Additional demographics:</Header>
-            {this.props.complete.resident && (<div>{'Resident of the city'}<br/></div>)}
-            {this.props.complete.homeOwner && (<div>{'Home owner in the city'}<br/></div>)}
+            {this.props.complete.resident && (<div>{'Resident of the city'}<br /></div>)}
+            {this.props.complete.homeOwner && (<div>{'Home owner in the city'}<br /></div>)}
             {this.props.complete.businessOwner && (<div>{'Business owner in the city'}</div>)}
-            {this.props.complete.childSchool && (<div>{'Has children in school in the city'}<br/></div>)}
-            {this.props.complete.school && (<div>{'Attends school in the city'}<br/></div>)}
-            {this.props.complete.works && (<div>{'Employed in the city'}<br/></div>)}
+            {this.props.complete.childSchool && (<div>{'Has children in school in the city'}<br /></div>)}
+            {this.props.complete.school && (<div>{'Attends school in the city'}<br /></div>)}
+            {this.props.complete.works && (<div>{'Employed in the city'}<br /></div>)}
           </Segment>
           <Segment color="orange">
             <Header as="h3">
