@@ -8,6 +8,7 @@ export function getResource(headers, host, endpointUrl) {
   return fetch(`${host}/${endpointUrl}/`, {
     headers,
     mode: 'cors',
+    credentials: 'include',
   })
     .then(handleErrors)
     .then(response => response.json());
