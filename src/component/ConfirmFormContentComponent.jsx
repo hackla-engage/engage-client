@@ -1,4 +1,5 @@
 import React from 'react';
+import Recaptcha from './Recaptcha.jsx';
 import { Segment, Container, Header, Button } from 'semantic-ui-react';
 import './ConfirmFormContent.scss';
 
@@ -43,6 +44,7 @@ class ConfirmFormContentComponent extends React.Component {
               {'By submitting this form, you consent to entering the above data, including your email address, as a matter of Public Record and you certify that you are not knowingly submitting false information.'}
             </Header>
           </Segment>
+          <Recaptcha display={this.props.firstName !== ''} />
           <Segment textAlign="center">
             <Button color="green" onClick={() => { this.props.saveForm(this.props.complete); }}>
               <Header as="h1" style={{ color: 'white' }}>SUBMIT</Header>
