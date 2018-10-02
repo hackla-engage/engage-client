@@ -103,6 +103,7 @@ class FormContainer extends Component {
               Title={this.props.Title}
               content={this.props.content}
               complete={this.props.complete}
+              submitForm={this.props.submitForm}
               saveForm={this.props.saveForm}
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
