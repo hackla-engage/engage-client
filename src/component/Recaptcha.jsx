@@ -17,7 +17,6 @@ class Recaptcha extends Component {
         <div style={{
           position: 'relative',
           // display: this.props.firstName !== '' ? 'flex' : 'none',
-          minHeight: '63vh',
           flexDirection: 'column',
           alignItems: 'center',
           alignContent: 'center',
