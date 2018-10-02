@@ -107,6 +107,8 @@ class FormContainer extends Component {
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
+              token={this.props.token}
+              onVerify={this.onVerify}
             />
           </div>
         </div>
