@@ -39,6 +39,7 @@ class FormContainer extends Component {
   }
 
   onVerify(evt) { // only executes on success
+    this.props.saveForm(this.props.complete);
     this.props.verifiedCaptcha(evt);
   }
 
