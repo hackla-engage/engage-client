@@ -103,13 +103,14 @@ class FormContainer extends Component {
               Title={this.props.Title}
               content={this.props.content}
               complete={this.props.complete}
+              firstName={this.props.firstName}
+              onVerify={this.onVerify}
               submitForm={this.props.submitForm}
               saveForm={this.props.saveForm}
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
               token={this.props.token}
-              onVerify={this.onVerify}
             />
           </div>
         </div>
