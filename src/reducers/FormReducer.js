@@ -67,7 +67,7 @@ export default function (state = defaultFormState, action) {
     case FORM_EDITING:
       return Object.assign({}, state, { editing: action.payload });
     case TOKEN_SUBMIT:
-      return Object.assign({}, state, { token: payload });
+      return Object.assign({}, state, { token: action.payload });
     case FORM_SUBMITTED:
       return Object.assign({}, defaultFormState, { submitted: true });
     case FORM_COMPLETE:
