@@ -11,29 +11,29 @@ class Recaptcha extends Component {
     };
   }
   render() {
-    if (this.props.display) {
-      return (
-        <Segment>
-          <div style={{
-            position: 'relative',
-            display: this.props.firstName !== '' ? 'flex' : 'none',
-            minHeight: '63vh',
-            flexDirection: 'column',
-            alignItems: 'center',
-            alignContent: 'center',
-          }}
-          >
-            <Header as="h3">For unregistered users we need to make sure you are a human.</Header>
-            <ReCAPTCHA
-              ref="recaptcha"
-              sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
-              onChange={this.props.onVerify}
-            />
-          </div>
-        </Segment>
-      );
-    }
-    return <div></div>;
+    // if (this.props.display) {
+    return (
+      <Segment>
+        <div style={{
+          position: 'relative',
+          // display: this.props.firstName !== '' ? 'flex' : 'none',
+          minHeight: '63vh',
+          flexDirection: 'column',
+          alignItems: 'center',
+          alignContent: 'center',
+        }}
+        >
+          <Header as="h3">For unregistered users we need to make sure you are a human.</Header>
+          <ReCAPTCHA
+            ref="recaptcha"
+            sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"
+            onChange={this.props.onVerify}
+          />
+        </div>
+      </Segment>
+    );
+    // }
+    // return <div></div>;
   }
 }
 export default Recaptcha;

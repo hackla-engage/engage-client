@@ -87,7 +87,6 @@ class FormContainer extends Component {
     } else if (!this.props.submitted) {
       return (
         <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
-          <Recaptcha display={this.props.firstName !== ''} onVerify={this.onVerify} />
           <div
             style={{
               position: 'relative',
