@@ -44,9 +44,9 @@ class ConfirmFormContentComponent extends React.Component {
               {'By submitting this form, you consent to entering the above data, including your email address, as a matter of Public Record and you certify that you are not knowingly submitting false information.'}
             </Header>
           </Segment>
-          <Recaptcha display={this.props.firstName !== ''} />
+          <Recaptcha display={this.props.firstName !== ''} onVerify={this.props.onVerify} />
           <Segment textAlign="center">
-            <Button color="green" onClick={() => { this.props.saveForm(this.props.complete); }}>
+            <Button color="green" disabled={this.props.token === null} onClick={() => { this.props.saveForm(this.props.complete); }}>
               <Header as="h1" style={{ color: 'white' }}>SUBMIT</Header>
             </Button>
           </Segment>
