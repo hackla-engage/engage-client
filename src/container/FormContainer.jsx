@@ -17,6 +17,7 @@ class FormContainer extends Component {
     this.onVerify = this.onVerify.bind(this);
     this.returnToItem = this.returnToItem.bind(this);
     this.scrollToAppTop = this.scrollToAppTop.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentWillMount() {
     if (this.props.submitted) {
@@ -41,8 +42,9 @@ class FormContainer extends Component {
     this.props.verifiedCaptcha(evt);
   }
 
-  handleSubmit(evt) {
-    this.props.saveForm(this.props.complete);
+  handleSubmit(values) {
+    this.props.saveForm(values);
+    debugger;
     this.props.submitForm(this.props.token);
   }
 
@@ -107,7 +109,7 @@ class FormContainer extends Component {
               content={this.props.content}
               complete={this.props.complete}
               onVerify={this.onVerify}
-              submitForm={this.props.submitForm}
+              handleSubmit={this.handleSubmit}
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
