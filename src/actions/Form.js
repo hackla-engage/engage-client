@@ -7,6 +7,7 @@ export const FORM_RESET = 'FORM_RESET';
 export const FORM_SAVE = 'FORM_SAVE';
 export const CAPTCHA_VERIFIED = 'CAPTCHA_VERIFIED';
 export const FORM_SUBMITTED = 'FORM_SUBMITTED';
+export const TOKEN_SUBMIT = 'TOKEN_SUBMIT';
 export const FORM_EDITING = 'FORM_EDITING';
 export const FORM_COMPLETE = 'FORM_COMPLETE';
 
@@ -34,6 +35,11 @@ export const editingForm = value => ({
   type: FORM_EDITING,
   payload: value,
 });
+
+export const submitToken = value => ({
+  type: TOKEN_SUBMIT,
+  payload: value,
+})
 
 export const formSubmitted = success => ({
   type: FORM_SUBMITTED,
@@ -87,5 +93,5 @@ export const submitForm = token => (dispatch, getState) => {
 };
 
 export const verifiedCaptcha = token => (dispatch) => {
-  dispatch(submitForm(token));
+  dispatch(submitToken(token));
 };
