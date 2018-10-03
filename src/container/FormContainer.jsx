@@ -6,7 +6,6 @@ import { setHours, setMinutes } from 'date-fns';
 import { verifiedCaptcha, resetForm, saveForm, editingForm, submitForm, completeForm } from '../actions/Form';
 import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent.jsx';
 import PositionFormFinalStep from '../component/PositionFormFinalStep.jsx';
-import Recaptcha from '../component/Recaptcha.jsx';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -102,14 +101,12 @@ class FormContainer extends Component {
               Title={this.props.Title}
               content={this.props.content}
               complete={this.props.complete}
-              firstName={this.props.firstName}
               onVerify={this.onVerify}
               submitForm={this.props.submitForm}
-              saveForm={this.props.saveForm}
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
-              token={this.props.token}
+              token={this.props.token} // captcha token
             />
           </div>
         </div>
