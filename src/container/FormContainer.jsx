@@ -6,7 +6,6 @@ import { setHours, setMinutes } from 'date-fns';
 import { verifiedCaptcha, resetForm, saveForm, editingForm, submitForm, completeForm } from '../actions/Form';
 import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent.jsx';
 import PositionFormFinalStep from '../component/PositionFormFinalStep.jsx';
-import Recaptcha from '../component/Recaptcha.jsx';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ class FormContainer extends Component {
     this.onVerify = this.onVerify.bind(this);
     this.returnToItem = this.returnToItem.bind(this);
     this.scrollToAppTop = this.scrollToAppTop.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentWillMount() {
     if (this.props.submitted) {
@@ -40,6 +40,11 @@ class FormContainer extends Component {
 
   onVerify(evt) { // only executes on success
     this.props.verifiedCaptcha(evt);
+  }
+
+  handleSubmit(values) {
+    this.props.saveForm(values);
+    this.props.submitForm(this.props.token);
   }
 
   returnToItem(id) {
@@ -86,7 +91,6 @@ class FormContainer extends Component {
     } else if (!this.props.submitted) {
       return (
         <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
-          <Recaptcha display={this.props.firstName !== ''} onVerify={this.onVerify} />
           <div
             style={{
               position: 'relative',
@@ -103,10 +107,12 @@ class FormContainer extends Component {
               Title={this.props.Title}
               content={this.props.content}
               complete={this.props.complete}
-              saveForm={this.props.saveForm}
+              onVerify={this.onVerify}
+              handleSubmit={this.handleSubmit}
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
+              token={this.props.token} // captcha token
             />
           </div>
         </div>
