@@ -44,7 +44,6 @@ class FormContainer extends Component {
 
   handleSubmit(values) {
     this.props.saveForm(values);
-    debugger;
     this.props.submitForm(this.props.token);
   }
 
