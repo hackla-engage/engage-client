@@ -63,7 +63,7 @@ class AgendaItemContainer extends Component {
                 fluid
                 style={{ backgroundColor: "#192a56", color: "white" }}
               >
-                <Icon name="list layout" />View Item
+                <Icon name="list layout" />View Item Details
               </Button>
             </Link>
           </Card.Content>

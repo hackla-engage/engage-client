@@ -10,27 +10,13 @@ import { requestAgendas } from '../ducks/agendas';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 
-const recommendationReducer = (acc, curr) => `${acc}<br />${curr}`;
-
 class AgendaItem extends Component {
   constructor() {
     super();
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
-    this.summaryReducer = this.summaryReducer.bind(this);
   }
-  summaryReducer(acc, curr) {
-    if (!this.gotBackground) {
-      if (acc.toLowerCase().includes('summary')) {
-        return curr;
-      } else if (curr.toLowerCase().includes('background')) {
-        this.gotBackground = true;
-        return acc;
-      }
-      return `${acc}<br />${curr}`;
-    }
-    return acc;
-  }
+
 
   componentWillMount() {
     if (Object.keys(this.props.agendaItems).length < 2) {
@@ -48,25 +34,27 @@ class AgendaItem extends Component {
     const agenda = this.props.agendaItems[id];
     const { body, title, agenda_item_id } = agenda;
     const recommendations = agenda.recommendations[0].recommendation;
-    let recommendationsString = '';
     // map to get recommendation from object and reduce array to string concatenated with <br />s
-    if (recommendations.length > 0) {
-      recommendationsString = recommendations
-        .map(rec => rec)
-        .reduce(recommendationReducer);
-    }
-
-    let summaryString = '';
+    let background = false;
+    let length = 0;
+    const summaryArray = body.filter((v, i) => {
+      if (v.toLowerCase().includes('background')) { background = true; return false; }
+      if (background) { return false; }
+      if (v.toLowerCase().includes('executive summary') || i >= 6) {
+        return false;
+      }
+      if (length > 500) { return false; }
+      length += v.length;
+      return true;
+    }).map((val, idx) => (<p key={`summary-${idx}`}>{val}</p>));
+    const recommendationsArray = recommendations.map((v, i) => <p key={`recommendation-${i}`}>{i}. {v}</p>);
     // slice and reduce array to string concatenated with <br />s
-    if (body.length > 0) {
-      summaryString = body.slice(0, 4).reduce(this.summaryReducer);
-    }
     // Configure form content
     this.props.agendaItemReceived({
       Committee: this.props.committee,
       Title: title,
-      Recommendations: recommendationsString,
-      Summary: summaryString,
+      Recommendations: recommendationsArray,
+      Summary: summaryArray,
       Id: id,
       AgendaItemId: agenda_item_id,
       Pro: proCon,
@@ -77,8 +65,8 @@ class AgendaItem extends Component {
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
     let agendaDate;
-    let body;
     let recommendation;
+    let summaryArray;
     let showActions = false;
 
     if (agendaItem) {
@@ -87,11 +75,21 @@ class AgendaItem extends Component {
       if (new Date() < meetTimeObj) {
         showActions = true;
       }
-      const agendaBody = agendaItem.body;
+      const { body } = agendaItem;
+      let length = 0;
+      let background = false;
+      summaryArray = body.filter((v, i) => {
+        if (v.toLowerCase().includes('background')) { background = true; return false; }
+        if (background) { return false; }
+        if (v.toLowerCase().includes('executive summary') || v.toLowerCase().trim() === 'summary' || i >= 6) {
+          return false;
+        }
+        if (length > 500) { return false; }
+        length += v.length;
+        return true;
+      }).map((val, idx) => (<p key={`summary-${idx}`}>{val}</p>));
+      console.log(agendaItem);
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
-
-      body = agendaBody.map((string, index) => <p key={index}>{string}</p>);
-
       recommendation = agendaRecommendation ? (
         <div>
           {agendaRecommendation.map((string, index) => <p key={index}>{string}</p>)}
@@ -129,9 +127,8 @@ class AgendaItem extends Component {
                 <Card.Header>{agendaItem.title}</Card.Header>
               </Card.Content>
               <Card.Content>
-                <Card.Header>{body[0]}</Card.Header>
-                
-                {body[1]}
+                <Card.Header>EXECUTIVE SUMMARY</Card.Header>
+                {summaryArray}
               </Card.Content>
               <Card.Content>
                 <Card.Header>RECOMMENDED ACTION</Card.Header>
@@ -151,7 +148,7 @@ class AgendaItem extends Component {
                         this.showForm(1);
                       }}
                     >
-                      Approve
+                      Agree
                     </Button>
                     <Button
                       basic
@@ -160,7 +157,7 @@ class AgendaItem extends Component {
                         this.showForm(0);
                       }}
                     >
-                      Decline
+                      Disagree
                     </Button>
                     <Button
                       basic

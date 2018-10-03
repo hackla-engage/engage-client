@@ -64,6 +64,7 @@ class CommentForm extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { values, setByProps } = this.state;
+    console.log(nextProps, 'nextProps componentWillReceiveProps CommentForm');
     if (nextProps.complete != null && Object.keys(nextProps.complete).length !== 0 && !setByProps) {
       values.firstName.value = nextProps.complete.firstName;
       values.lastName.value = nextProps.complete.lastName;
@@ -76,6 +77,7 @@ class CommentForm extends Component {
       values.works.value = nextProps.complete.works;
       values.school.value = nextProps.complete.school;
       this.setState({ values, setByProps: true });
+      console.log(values);
     }
   }
   handleSubmit(evt) {
@@ -219,6 +221,10 @@ class CommentForm extends Component {
     this.setState({ values });
   }
   render() {
+    console.log(this.state);
+    const {
+      firstName, lastName, email, zipcode, content, resident, homeOwner, businessOwner, works, school, childSchool,
+    } = this.state.values;
     return (
       <Form onSubmit={this.handleSubmit} size="large">
         <div className="vote-title-holder">
@@ -232,7 +238,7 @@ class CommentForm extends Component {
             type="text"
             autoComplete="first-name"
             placeholder="first name"
-            defaultValue={this.props.firstName}
+            value={firstName.value}
             onChange={(evt) => { this.handleTextChange('firstName', evt.target.value); }}
           />
           <Form.Field
@@ -240,7 +246,7 @@ class CommentForm extends Component {
             type="text"
             autoComplete="last-name"
             placeholder="last name"
-            defaultValue={this.props.lastName}
+            value={lastName.value}
             onChange={(evt) => { this.handleTextChange('lastName', evt.target.value); }}
           />
         </Form.Group>
@@ -258,7 +264,7 @@ class CommentForm extends Component {
           type="text"
           autoComplete="email"
           placeholder="email"
-          defaultValue={this.props.email}
+          value={email.value}
           onChange={(evt) => { this.handleTextChange('email', evt.target.value); }}
         />
         {this.state.values.email.touched &&
@@ -272,7 +278,7 @@ class CommentForm extends Component {
           pattern="[0-9]{5}"
           maxLength="5"
           minLength="5"
-          defaultValue={this.props.zipcode}
+          value={zipcode.value}
           onChange={(evt) => { this.handleTextChange('zipcode', evt.target.value); }}
         />
         {this.state.values.zipcode.touched &&
@@ -288,7 +294,7 @@ class CommentForm extends Component {
           control="textarea"
           rows="3"
           maxLength={200}
-          defaultValue={this.props.content}
+          value={content.value}
           onChange={(evt) => { this.handleTextChange('content', evt.target.value); }}
         />
         <div className="chars">
@@ -302,7 +308,7 @@ class CommentForm extends Component {
             <Grid.Column width={6} padded="horizontally">
               <Checkbox
                 label="Resident of the city"
-                defaultChecked={this.props.resident}
+                checked={resident.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('resident', value.checked);
                 }}
@@ -310,7 +316,7 @@ class CommentForm extends Component {
               <br />
               <Checkbox
                 label="Home owner in the city"
-                defaultChecked={this.props.homeOwner}
+                checked={homeOwner.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('homeOwner', value.checked);
                 }}
@@ -318,7 +324,7 @@ class CommentForm extends Component {
               <br />
               <Checkbox
                 label="Business owner in the city"
-                defaultChecked={this.props.businessOwner}
+                checked={businessOwner.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('businessOwner', value.checked);
                 }}
@@ -327,7 +333,7 @@ class CommentForm extends Component {
             <Grid.Column width={6} padded="horizontally">
               <Checkbox
                 label="Employed in the city"
-                defaultChecked={this.props.works}
+                checked={works.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('works', value.checked);
                 }}
@@ -335,7 +341,7 @@ class CommentForm extends Component {
               <br />
               <Checkbox
                 label="Attends school in the city"
-                defaultChecked={this.props.school}
+                checked={school.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('school', value.checked);
                 }}
@@ -343,7 +349,7 @@ class CommentForm extends Component {
               <br />
               <Checkbox
                 label="Has a child who attends school in the city"
-                defaultChecked={this.props.childSchool}
+                checked={childSchool.value}
                 onChange={(evt, value) => {
                   this.handleDemographicChange('childSchool', value.checked);
                 }}
@@ -356,7 +362,7 @@ class CommentForm extends Component {
         )}
         <Button
           type="submit"
-          content="Submit"
+          content="Review Submission"
           primary
           disabled={!this.state.submitEnabled}
         />

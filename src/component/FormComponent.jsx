@@ -27,17 +27,15 @@ class FormComponent extends Component {
         <Segment className="vote-recommendations-holder">
           <div className="vote-title-title">{this.props.Title}</div>
           <div className="vote-recommendations-keyword">Summary:</div>
-          <div
-            className="vote-recommendations-recommendations"
-            dangerouslySetInnerHTML={{ __html: this.props.Summary }}
-          />
+          <div className="vote-recommendations-recommendations">
+            {this.props.Summary}
+          </div>
           <div className="vote-recommendations-keyword">
             Recommended Action(s):
           </div>
-          <div
-            className="vote-recommendations-recommendations"
-            dangerouslySetInnerHTML={{ __html: this.props.Recommendations }}
-          />
+          <div className="vote-recommendations-recommendations">
+            {this.props.Recommendations}
+          </div>
         </Segment>
         <Segment>
           <Segment className={className} color="teal" style={{ float: 'right', position: 'relative' }}> {divContent} </Segment>
@@ -47,6 +45,7 @@ class FormComponent extends Component {
             committee={this.props.Committee}
             complete={this.props.complete}
             completeForm={this.props.completeForm}
+            editing={this.props.editing}
             resetForm={this.props.resetForm}
             returnToItem={this.props.returnToItem}
             scrollToAppTop={this.props.scrollToAppTop}
