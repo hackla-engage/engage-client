@@ -41,6 +41,11 @@ class FormContainer extends Component {
     this.props.verifiedCaptcha(evt);
   }
 
+  handleSubmit(evt) {
+    this.props.saveForm(this.props.complete);
+    this.props.submitForm(this.props.token);
+  }
+
   returnToItem(id) {
     this.props.resetForm();
     this.props.history.push(`/feed/${id}`);
