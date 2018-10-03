@@ -93,6 +93,5 @@ export const submitForm = token => (dispatch, getState) => {
 };
 
 export const verifiedCaptcha = token => (dispatch) => {
-  // dispatch(submitForm(token));
   dispatch(submitToken(token));
 };

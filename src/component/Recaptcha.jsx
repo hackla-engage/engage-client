@@ -11,12 +11,10 @@ class Recaptcha extends Component {
     };
   }
   render() {
-    // if (this.props.display) {
     return (
       <Segment>
         <div style={{
           position: 'relative',
-          // display: this.props.firstName !== '' ? 'flex' : 'none',
           flexDirection: 'column',
           alignItems: 'center',
           alignContent: 'center',
@@ -31,8 +29,6 @@ class Recaptcha extends Component {
         </div>
       </Segment>
     );
-    // }
-    // return <div></div>;
   }
 }
 export default Recaptcha;
