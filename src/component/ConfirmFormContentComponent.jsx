@@ -46,7 +46,7 @@ class ConfirmFormContentComponent extends React.Component {
           </Segment>
           <Recaptcha onVerify={this.props.onVerify} />
           <Segment textAlign="center">
-            <Button color="green" disabled={this.props.token === null} onClick={() => this.props.submitForm(this.props.token)}>
+            <Button color="green" disabled={this.props.token === null} onClick={() => this.props.handleSubmit(this.props.complete)}>
               <Header as="h1" style={{ color: 'white' }}>SUBMIT</Header>
             </Button>
           </Segment>
