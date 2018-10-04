@@ -21,16 +21,19 @@ class PositionFormFinalStep extends Component {
         <h2 className="top-heading heading">Final Step: Confirm Email Address</h2>
         <h2 className="agenda-item-heading heading">AGENDA ITEM #{this.props.Id}</h2>
         <div className="email-box">
-          <Image src="/static/image/email-icon.png" className="email-icon"/>
+          <Image src="/static/image/email-icon.png" className="email-icon" />
           <h2 className="check-heading heading">Check Your Email for A Confirmation Link</h2>
           <div className="what-text">
             <div className="what-heading heading"> What does this mean?</div>
-            We sent a confirmation link to your email to verify ownership.<br/>
+            We sent a confirmation link to your email to verify ownership.
+            <br />
             Click on this link to verify your email and complete your submission.
           </div>
         </div>
         <div>
-          <Button size="huge" className="close-button" onClick={this.handleClose}>CLOSE</Button>
+          <Button size="huge" className="close-button" onClick={this.handleClose}>
+            CLOSE
+          </Button>
         </div>
       </Container>
     );

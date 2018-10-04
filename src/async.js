@@ -14,7 +14,6 @@ export function getResource(headers, host, endpointUrl) {
     .then(response => response.json());
 }
 
-
 export function handleErrors(response) {
   // TODO: This is not correct. Fix it at some point. OK to leave out
   // while developing.

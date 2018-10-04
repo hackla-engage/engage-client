@@ -3,7 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormComponent from '../component/FormComponent.jsx';
 import { setHours, setMinutes } from 'date-fns';
-import { verifiedCaptcha, resetForm, saveForm, editingForm, submitForm, completeForm } from '../actions/Form';
+import {
+  verifiedCaptcha,
+  resetForm,
+  saveForm,
+  editingForm,
+  submitForm,
+  completeForm,
+} from '../actions/Form';
 import ConfirmFormContentComponent from '../component/ConfirmFormContentComponent.jsx';
 import PositionFormFinalStep from '../component/PositionFormFinalStep.jsx';
 
@@ -38,7 +45,8 @@ class FormContainer extends Component {
     }
   }
 
-  onVerify(evt) { // only executes on success
+  onVerify(evt) {
+    // only executes on success
     this.props.verifiedCaptcha(evt);
   }
 
@@ -62,7 +70,10 @@ class FormContainer extends Component {
   }
 
   render() {
-    if ((Object.keys(this.props.complete).length === 0 || this.props.editing) && !this.props.submitted) {
+    if (
+      (Object.keys(this.props.complete).length === 0 || this.props.editing) &&
+      !this.props.submitted
+    ) {
       return (
         <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
           <div
@@ -172,14 +183,17 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({
-    resetForm,
-    saveForm,
-    verifiedCaptcha,
-    editingForm,
-    submitForm,
-    completeForm,
-  }, dispatch);
+  return bindActionCreators(
+    {
+      resetForm,
+      saveForm,
+      verifiedCaptcha,
+      editingForm,
+      submitForm,
+      completeForm,
+    },
+    dispatch,
+  );
 }
 
 export default connect(

@@ -18,44 +18,22 @@ const Header = () => (
     }}
     id="menu"
   >
-    <Menu.Item
-      style={styles.link}
-      name="browse"
-      as={Link}
-      to="/"
-    >
+    <Menu.Item style={styles.link} name="browse" as={Link} to="/">
       Engage
     </Menu.Item>
 
-    <Responsive
-      as={Container}
-      minWidth={breakPointSize}
-    >
+    <Responsive as={Container} minWidth={breakPointSize}>
       <Menu.Menu position="right">
-        <Menu.Item
-          style={styles.link}
-          name="about"
-          as={Link}
-          to="/about"
-        >
+        <Menu.Item style={styles.link} name="about" as={Link} to="/about">
           About
         </Menu.Item>
-        <Menu.Item
-          style={styles.link}
-          name="howto"
-          as={Link}
-          to="/howto"
-        >
+        <Menu.Item style={styles.link} name="howto" as={Link} to="/howto">
           How To
         </Menu.Item>
       </Menu.Menu>
     </Responsive>
 
-    <Responsive
-      as={Menu.Menu}
-      position="right"
-      maxWidth={breakPointSize}
-    >
+    <Responsive as={Menu.Menu} position="right" maxWidth={breakPointSize}>
       <Dropdown
         style={{
           backgroundColor: '#192a56',

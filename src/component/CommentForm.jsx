@@ -85,7 +85,9 @@ class CommentForm extends Component {
     const firstName = this.state.values.firstName.value;
     const lastName = this.state.values.lastName.value;
     const email = this.state.values.email.value;
-    const zipcode = /^[0-9]{5}/.test(this.state.values.zipcode.value) ? this.state.values.zipcode.value : 90401;
+    const zipcode = /^[0-9]{5}/.test(this.state.values.zipcode.value)
+      ? this.state.values.zipcode.value
+      : 90401;
     const content = this.state.values.content.value;
     const businessOwner = this.state.values.businessOwner.value;
     const homeOwner = this.state.values.homeOwner.value;
@@ -223,13 +225,21 @@ class CommentForm extends Component {
   render() {
     console.log(this.state);
     const {
-      firstName, lastName, email, zipcode, content, resident, homeOwner, businessOwner, works, school, childSchool,
+      firstName,
+      lastName,
+      email,
+      zipcode,
+      content,
+      resident,
+      homeOwner,
+      businessOwner,
+      works,
+      school,
+      childSchool,
     } = this.state.values;
     return (
       <Form onSubmit={this.handleSubmit} size="large">
-        <div className="vote-title-holder">
-          Tell us a little about yourself:
-        </div>
+        <div className="vote-title-holder">Tell us a little about yourself:</div>
         <br />
         <div className="form-label">Name*</div>
         <Form.Group inline>
@@ -239,7 +249,9 @@ class CommentForm extends Component {
             autoComplete="first-name"
             placeholder="first name"
             value={firstName.value}
-            onChange={(evt) => { this.handleTextChange('firstName', evt.target.value); }}
+            onChange={(evt) => {
+              this.handleTextChange('firstName', evt.target.value);
+            }}
           />
           <Form.Field
             control="input"
@@ -247,16 +259,15 @@ class CommentForm extends Component {
             autoComplete="last-name"
             placeholder="last name"
             value={lastName.value}
-            onChange={(evt) => { this.handleTextChange('lastName', evt.target.value); }}
+            onChange={(evt) => {
+              this.handleTextChange('lastName', evt.target.value);
+            }}
           />
         </Form.Group>
-        {this.state.values.firstName.touched && this.state.values.firstName.error && (
-          <div className="error">First name is required</div>
-        )}
-        {
-          this.state.values.lastName.touched && this.state.values.lastName.error && (
-            <div className="error">Last name is required</div>
-          )}
+        {this.state.values.firstName.touched &&
+          this.state.values.firstName.error && <div className="error">First name is required</div>}
+        {this.state.values.lastName.touched &&
+          this.state.values.lastName.error && <div className="error">Last name is required</div>}
         <Form.Field
           label="Email*"
           control="input"
@@ -265,7 +276,9 @@ class CommentForm extends Component {
           autoComplete="email"
           placeholder="email"
           value={email.value}
-          onChange={(evt) => { this.handleTextChange('email', evt.target.value); }}
+          onChange={(evt) => {
+            this.handleTextChange('email', evt.target.value);
+          }}
         />
         {this.state.values.email.touched &&
           this.state.values.email.error && <div className="error">Error in email</div>}
@@ -279,7 +292,9 @@ class CommentForm extends Component {
           maxLength="5"
           minLength="5"
           value={zipcode.value}
-          onChange={(evt) => { this.handleTextChange('zipcode', evt.target.value); }}
+          onChange={(evt) => {
+            this.handleTextChange('zipcode', evt.target.value);
+          }}
         />
         {this.state.values.zipcode.touched &&
           this.state.values.zipcode.error && (
@@ -295,11 +310,11 @@ class CommentForm extends Component {
           rows="3"
           maxLength={200}
           value={content.value}
-          onChange={(evt) => { this.handleTextChange('content', evt.target.value); }}
+          onChange={(evt) => {
+            this.handleTextChange('content', evt.target.value);
+          }}
         />
-        <div className="chars">
-          {200 - this.state.values.content.value.length} characters left
-        </div>
+        <div className="chars">{200 - this.state.values.content.value.length} characters left</div>
         <br />
         <br />
         <Header as="h4">Demographics:</Header>

@@ -39,7 +39,7 @@ export const editingForm = value => ({
 export const submitToken = value => ({
   type: TOKEN_SUBMIT,
   payload: value,
-})
+});
 
 export const formSubmitted = success => ({
   type: FORM_SUBMITTED,

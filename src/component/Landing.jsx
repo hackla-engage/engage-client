@@ -1,37 +1,31 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Header,
-  Image,
-  Grid,
-  Responsive,
-  Segment
-} from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Container, Header, Image, Grid, Responsive, Segment } from 'semantic-ui-react';
 
 const copyText = require('../../public/static/landing_page_copy.json');
-//const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
-const appLink = "#/feed";
+// const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
+const appLink = '#/feed';
 const breakPointSize = 767;
 
 const linkStyle = {
-  color: "#074d91"
+  color: '#074d91',
 };
 
 class Landing extends Component {
   componentDidMount() {
-    gtag("config", "UA-116538234-1", {
-      page_title: "home",
-      page_path: "/"
+    gtag('config', 'UA-116538234-1', {
+      page_title: 'home',
+      page_path: '/',
     });
   }
   render() {
     return (
-      <div style={{
-        overflow: 'scroll', /* has to be scroll, not auto */
-        webkitOverflowScrolling: 'touch'
-      }}>
+      <div
+        style={{
+          overflow: 'scroll' /* has to be scroll, not auto */,
+          webkitOverflowScrolling: 'touch',
+        }}
+      >
         <Segment
           textAlign="center"
           style={{ position: 'relative', minHeight: 650, padding: '1em 0em' }}
@@ -49,7 +43,7 @@ class Landing extends Component {
                 fontFamily: 'Pacifico, cursive',
                 marginBottom: 0,
                 marginTop: '1.5em',
-                textAlign: 'left'
+                textAlign: 'left',
               }}
             />
             <Header
@@ -57,19 +51,18 @@ class Landing extends Component {
               content={copyText.page_header.body_text}
               inverted
               style={{
-
                 fontSize: '1.7em',
                 fontWeight: 'bold',
                 color: 'black',
                 marginBottom: '1em',
-                textAlign: 'left'
+                textAlign: 'left',
               }}
             />
             <Link
               to="/feed"
               style={{
-                color: '#FFF'
-              }} 
+                color: '#FFF',
+              }}
             >
               <Button
                 primary
@@ -77,7 +70,7 @@ class Landing extends Component {
                 style={{
                   backgroundColor: '#192a56',
                   marginTop: '1rem',
-                  float: 'left'
+                  float: 'left',
                 }}
               >
                 Start Engaging
@@ -89,7 +82,7 @@ class Landing extends Component {
               <Image
                 src="https://source.unsplash.com/xYjWeyS235w"
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: 0,
                   left: 0,
                   zIndex: -1,
@@ -97,7 +90,7 @@ class Landing extends Component {
                   height: '100%',
                   minHeight: '650px',
                   objectFit: 'cover',
-                  opacity: '0.7'
+                  opacity: '0.7',
                 }}
               />
             </Responsive>
@@ -105,7 +98,7 @@ class Landing extends Component {
               <Image
                 src="https://source.unsplash.com/xYjWeyS235w"
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: 0,
                   left: 0,
                   zIndex: -1,
@@ -113,7 +106,7 @@ class Landing extends Component {
                   height: 'auto',
                   minHeight: '650px',
                   objectFit: 'cover',
-                  opacity: '0.7'
+                  opacity: '0.7',
                 }}
               />
             </Responsive>
@@ -123,7 +116,7 @@ class Landing extends Component {
           vertical
           style={{
             padding: '6em 0em',
-            backgroundColor: '#dfe4ea'
+            backgroundColor: '#dfe4ea',
           }}
         >
           <Container text>
@@ -135,13 +128,13 @@ class Landing extends Component {
                     style={{
                       height: '100px',
                       width: '100px',
-                      textAlign: 'center'
+                      textAlign: 'center',
                     }}
                   />
                   <div
                     style={{
-                      color: "black",
-                      marginTop: '1em'
+                      color: 'black',
+                      marginTop: '1em',
                     }}
                   >
                     Get Informed on City Developments
@@ -153,13 +146,13 @@ class Landing extends Component {
                     style={{
                       borderRadius: '50%',
                       height: '100px',
-                      width: '100px'
+                      width: '100px',
                     }}
                   />
                   <div
                     style={{
-                      color: "black",
-                      marginTop: '1em'
+                      color: 'black',
+                      marginTop: '1em',
                     }}
                   >
                     View, Read, and Comment on Recent Agenda Items
@@ -170,14 +163,14 @@ class Landing extends Component {
                     src="/static/image/people-icon.png"
                     style={{
                       height: '100px',
-                      width: '100px'
+                      width: '100px',
                     }}
                   />
                   <div
                     style={{
-                      color: "black",
+                      color: 'black',
                       marginTop: '1em',
-                      marginBottom: '3em'
+                      marginBottom: '3em',
                     }}
                   >
                     Feel Empowered to Engage In-Person at City Meetings
@@ -187,18 +180,16 @@ class Landing extends Component {
             </Grid>
             <hr
               style={{
-                border: "solid 1px #a4b0be",
-                marginBottom: "3em"
+                border: 'solid 1px #a4b0be',
+                marginBottom: '3em',
               }}
             />
-            <div style={{ textAlign: "center" }}>
-              <Header as="h2">
-                {copyText.what_is_engage.header_text}
-              </Header>
+            <div style={{ textAlign: 'center' }}>
+              <Header as="h2">{copyText.what_is_engage.header_text}</Header>
               <p
                 style={{
                   color: 'black',
-                  fontSize: '1.1em'
+                  fontSize: '1.1em',
                 }}
               >
                 {copyText.what_is_engage.body_text}
