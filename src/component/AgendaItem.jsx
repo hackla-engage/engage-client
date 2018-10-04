@@ -76,7 +76,6 @@ class AgendaItem extends Component {
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
     const detailPageLink = agendaItem ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${agendaItem.id}&MediaPosition=&ID=${agendaItem.agenda_item_id}&CssClass=` : null;
-    debugger;
     let agendaDate;
     let recommendation;
     let summaryArray;
