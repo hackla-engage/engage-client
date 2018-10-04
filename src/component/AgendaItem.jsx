@@ -201,7 +201,7 @@ class AgendaItem extends Component {
                   </Card.Content>
                 )}
               <Card.Content style={{ textAlign: 'center' }}>
-                <a href={detailPageLink} style={{ color: 'brown' }}>
+                <a href={detailPageLink} target='_blank' style={{ color: 'brown' }}>
                   View More Details on the Council Page
                 </a><br />
                 <Link to={'/feed'} style={{ color: 'brown' }}>
