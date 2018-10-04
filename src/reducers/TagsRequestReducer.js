@@ -1,4 +1,3 @@
-
 import { REQUEST_TAGS } from '../ducks/preference.js';
 
 // This is the initial state for our particular slice of the entire state.

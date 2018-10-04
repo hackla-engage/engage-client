@@ -31,12 +31,12 @@ class EmailConfirmation extends Component {
         <div className="box">
           <h2 className="emailbox"> Thank You </h2>
           <h4 className="emailbox"> Your email is confirmed and your post has been submitted </h4>
-          <br></br>
-          <a id="engagefeedlink" href="#"><h1> Go to the Engage Feed </h1></a>
-
+          <br />
+          <a id="engagefeedlink" href="#">
+            <h1> Go to the Engage Feed </h1>
+          </a>
         </div>
       </div>
-
     );
   }
 }
@@ -52,9 +52,12 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({
-    verify,
-  }, dispatch);
+  return bindActionCreators(
+    {
+      verify,
+    },
+    dispatch,
+  );
 }
 
 export default connect(

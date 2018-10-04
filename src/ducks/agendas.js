@@ -87,16 +87,12 @@ export function requestAgendas(requestURL) {
           return;
         }
 
-        const agendaList = json.results.reduce(
-          (acc, result) => [...acc, ...result.items],
-          [],
-        );
+        const agendaList = json.results.reduce((acc, result) => [...acc, ...result.items], []);
         console.log(json.results);
         const nextArray = json.next.split('/');
-        const nextAgendaURL =
-          `${nextArray[nextArray.length - 2]
-          }/${
-            nextArray[nextArray.length - 1]}`;
+        const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${
+          nextArray[nextArray.length - 1]
+        }`;
 
         dispatch({
           type: REQUEST_AGENDAS,
