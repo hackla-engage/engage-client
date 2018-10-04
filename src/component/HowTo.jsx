@@ -45,10 +45,10 @@ const HowTo = props => (
         </Header>
         <p style={{ fontSize: '1em' }}>{copyText.city_council.body_text}</p>
         <p style={{ fontSize: '1em' }}>
-            More information about the City Council Meetings, and the Council itself, can be found
-            at the City’s official Council Website, here:{' '}
+          More information about the City Council Meetings, and the Council itself, can be found at
+          the City’s official Council Website, here:{' '}
           <a href="https://www.smgov.net/departments/council/">
-              https://www.smgov.net/departments/council/
+            https://www.smgov.net/departments/council/
           </a>
         </p>
       </Container>
