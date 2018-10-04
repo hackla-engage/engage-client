@@ -9,7 +9,7 @@ import {
   FORM_COMPLETE,
 } from '../actions/Form';
 
-const defaultFormState = {
+export const defaultFormState = {
   // AgendaItem generated
   Committee: '',
   Id: 0,
