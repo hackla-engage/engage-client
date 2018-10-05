@@ -75,6 +75,7 @@ class AgendaItem extends Component {
 
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
+    const detailPageLink = agendaItem ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${agendaItem.id}&MediaPosition=&ID=${agendaItem.agenda_item_id}&CssClass=` : null;
     let agendaDate;
     let recommendation;
     let summaryArray;
@@ -121,10 +122,10 @@ class AgendaItem extends Component {
           ))}
         </div>
       ) : (
-        <div>
-          <p>No recommended action has been proposed.</p>
-        </div>
-      );
+          <div>
+            <p>No recommended action has been proposed.</p>
+          </div>
+        );
     }
 
     return (
@@ -195,11 +196,14 @@ class AgendaItem extends Component {
                   </div>
                 </Card.Content>
               ) : (
-                <Card.Content>
-                  <Card.Header>>> Note: Commenting is closed for this issue.</Card.Header>
-                </Card.Content>
-              )}
+                  <Card.Content>
+                    <Card.Header>>> Note: Commenting is closed for this issue.</Card.Header>
+                  </Card.Content>
+                )}
               <Card.Content style={{ textAlign: 'center' }}>
+                <a href={detailPageLink} target='_blank' style={{ color: 'brown' }}>
+                  View More Details on the Council Page
+                </a><br />
                 <Link to={'/feed'} style={{ color: 'brown' }}>
                   Return to Agenda Feed
                 </Link>
@@ -207,10 +211,10 @@ class AgendaItem extends Component {
             </Card>
           </Container>
         ) : (
-          <Loader active inline="centered" style={{ color: 'black' }}>
-            Loading agenda...
+            <Loader active inline="centered" style={{ color: 'black' }}>
+              Loading agenda...
           </Loader>
-        )}
+          )}
       </div>
     );
   }
