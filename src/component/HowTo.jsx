@@ -25,7 +25,7 @@ const HowTo = props => (
         <img src="static/image/engage_howto_img1.png" />
         <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_2}</p>
         <img src="static/image/engage_howto_img2.png" />
-        <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_3}</p>
+        <p style={{ fontSize: '1em' }} dangerouslySetInnerHTML={ {__html: copyText.submit_feedback.body_text_step_3} }></p>
         <img src="static/image/engage_howto_img3.png" />
         <p style={{ fontSize: '1em' }}>{copyText.submit_feedback.body_text_step_4}</p>
         <img src="static/image/engage_howto_img4.png" />
