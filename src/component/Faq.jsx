@@ -36,7 +36,7 @@ const Faq = props => (
           {copyText.use_engage.body_text}
           <br />
           <a style={linkStyle} href="mailto:engagelosangeles@gmail.com">
-              engagelosangeles@gmail.com
+            engagelosangeles@gmail.com
           </a>
         </p>
         <Divider

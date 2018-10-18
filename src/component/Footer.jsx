@@ -6,12 +6,12 @@ const Footer = () => (
   <Segment
     attached
     style={{
-      paddingLeft: "1rem",
-      paddingRight: "1rem",
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
       margin: 0,
-      border: "solid #192a56",
-      backgroundColor: "#192a56",
-      color: "#ffffff"
+      border: 'solid #192a56',
+      backgroundColor: '#192a56',
+      color: '#ffffff',
     }}
   >
     <Container textAlign="center">
@@ -20,23 +20,18 @@ const Footer = () => (
         Want to help?
       </h2>
       <p>
-        Join us at{" "}
-        <a
-          href="https://www.meetup.com/hackforla/"
-          style={{ color: "#6399CF" }}
-        >
+        Join us at{' '}
+        <a href="https://www.meetup.com/hackforla/" style={{ color: '#6399CF' }}>
           Hack for LA
         </a>
         , Mondays at 6:00pm in Santa Monica
       </p>
 
       <a
-        style={{ display: "block", marginBottom: "1rem" }}
+        style={{ display: 'block', marginBottom: '1rem' }}
         href="mailto:engagelosangeles@gmail.com"
       >
-        <Button style={{ backgroundColor: "#587E44", color: "white" }}>
-          Send us a message
-        </Button>
+        <Button style={{ backgroundColor: '#587E44', color: 'white' }}>Send us a message</Button>
       </a>
       <Grid verticalAlign="middle" centered>
         <Grid.Column mobile={4} tablet={2} computer={2}>
@@ -49,8 +44,8 @@ const Footer = () => (
               src="/static/image/meetup.png"
               alt="meetup"
               style={{
-                height: "auto",
-                objectFit: "cover"
+                height: 'auto',
+                objectFit: 'cover',
               }}
             />
           </a>
@@ -65,24 +60,20 @@ const Footer = () => (
               src="/static/image/slack-light.svg"
               alt="slack"
               style={{
-                height: "auto",
-                objectFit: "cover"
+                height: 'auto',
+                objectFit: 'cover',
               }}
             />
           </a>
         </Grid.Column>
         <Grid.Column mobile={4} tablet={2} computer={2}>
-          <a
-            className="social-links__link"
-            href="https://github.com/hackforla"
-            target="_blank"
-          >
+          <a className="social-links__link" href="https://github.com/hackforla" target="_blank">
             <Image
               src="/static/image/github-light.png"
               alt="github"
               style={{
-                height: "auto",
-                objectFit: "cover"
+                height: 'auto',
+                objectFit: 'cover',
               }}
             />
           </a>
