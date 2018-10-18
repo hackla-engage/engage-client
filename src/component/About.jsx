@@ -30,7 +30,7 @@ const About = () => (
           <p>
               We are nearing launch on our pilot app for Santa Monica - please check back soon for
               announcements, or follow us on Twitter{' '}
-            <a href="https://twitter.com/EngageStaMonica">@EngageStaMonica</a>.
+            <a href="https://twitter.com/EngageStaMonica" style={{ color: '#3878B7' }}>@EngageStaMonica</a>.
           </p>
         </div>
       </div>
@@ -40,11 +40,11 @@ const About = () => (
           <h3 className="ui header">About Hack for LA</h3>
           <p>
               Engage was developed under the auspices of{' '}
-            <a href="http://www.hackforla.org/#projects">Hack for LA</a>.
+            <a href="http://www.hackforla.org/#projects" style={{ color: '#3878B7' }}>Hack for LA</a>.
           </p>
           <p>
               Hack for LA is the official Los Angeles chapter of{' '}
-            <a href="https://www.codeforamerica.org/">Code for America</a>, a national nonprofit
+            <a href="https://www.codeforamerica.org/" style={{ color: '#3878B7' }}>Code for America</a>, a national nonprofit
               that believes government can work for the people, by the people, in the 21st century.
               At our weekly Civic Hack Nights, we organize groups of volunteers to build technology
               addressing the LA region’s biggest civic issues. We welcome technologists, government
@@ -59,11 +59,11 @@ const About = () => (
           <h3 className="ui header">Have a question? Want to help?</h3>
           <p>
               We’d love to hear from you! Contact the Engage team at{' '}
-            <a href="mailto:engage@engage.town">engage@engage.town</a>.
+            <a href="mailto:engage@engage.town" style={{ color: '#3878B7' }}>engage@engage.town</a>.
           </p>
           <p>
               Or come on down to Hack Night! Find out more about Hack for LA's current projects and
-              how to contribute <a href="http://www.hackforla.org/#projects">here</a>.
+              how to contribute <a href="http://www.hackforla.org/#projects" style={{ color: '#3878B7' }}>here</a>.
           </p>
         </div>
       </div>

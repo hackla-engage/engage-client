@@ -81,6 +81,7 @@ class Landing extends Component {
             <Responsive minWidth={breakPointSize}>
               <Image
                 src="https://source.unsplash.com/xYjWeyS235w"
+                alt="Background"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -97,6 +98,7 @@ class Landing extends Component {
             <Responsive maxWidth={breakPointSize}>
               <Image
                 src="https://source.unsplash.com/xYjWeyS235w"
+                alt="Background"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -125,6 +127,7 @@ class Landing extends Component {
                 <Grid.Column>
                   <Image
                     src="/static/image/news-feed-icon.png"
+                    alt="Intro"
                     style={{
                       height: '100px',
                       width: '100px',
@@ -143,6 +146,7 @@ class Landing extends Component {
                 <Grid.Column>
                   <Image
                     src="/static/image/comment-icon.png"
+                    alt="Intro"
                     style={{
                       borderRadius: '50%',
                       height: '100px',
@@ -161,6 +165,7 @@ class Landing extends Component {
                 <Grid.Column>
                   <Image
                     src="/static/image/people-icon.png"
+                    alt="Intro"
                     style={{
                       height: '100px',
                       width: '100px',

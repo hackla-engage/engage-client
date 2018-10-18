@@ -17,7 +17,7 @@ class Sign_in extends Component {
           style={{ width: this.width, minWidth: '400px', margin: '50px 0 50px 0' }}
         >
           <h2 className="ui teal image header">
-            <img src="/static/image/meetup.png" className="image" />
+            <img src="/static/image/meetup.png" className="image" alt="Meetup logo"/>
             <div className="content">Log-in to your account</div>
           </h2>
           <form className="ui large form">
