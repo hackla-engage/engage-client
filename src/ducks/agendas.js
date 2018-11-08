@@ -25,6 +25,7 @@ const defaultState = {
     error: false,
     content: '',
   },
+  agendaResults: [],
   next: '',
 };
 
