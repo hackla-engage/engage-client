@@ -31,7 +31,7 @@ const defaultState = {
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
   case REQUEST_AGENDAS:
-    const { agendaList, committee } = action.payload;
+    const { agendaList, committee, agendaResults } = action.payload;
     if (!agendaList || agendaList.length === 0) return;
 
     const next = action.next;
@@ -63,6 +63,7 @@ export default function reducer(state = defaultState, action) {
       committee,
       agendaIDs: agendaIDsSortedByTime,
       agendaLoading: false,
+      agendaResults,
       next,
     };
   case REQUEST_LOADING:
@@ -89,6 +90,7 @@ export function requestAgendas(requestURL) {
 
         const agendaList = json.results.reduce((acc, result) => [...acc, ...result.items], []);
         console.log(json.results);
+        const agendaResults = json.results;
         const nextArray = json.next.split('/');
         const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${
           nextArray[nextArray.length - 1]
@@ -98,6 +100,7 @@ export function requestAgendas(requestURL) {
           type: REQUEST_AGENDAS,
           payload: {
             agendaList,
+            agendaResults,
             committee: json.results[0].committee.name,
           },
           next: nextAgendaURL,
