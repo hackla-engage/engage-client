@@ -6,6 +6,7 @@ import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
 import { Button, Grid } from 'semantic-ui-react';
+let moment = require('moment');
 
 class AgendaFeed extends Component {
   constructor(props) {
@@ -101,13 +102,33 @@ class AgendaFeed extends Component {
   }
 
   render() {
-    const { agendaItems, agendaIDs, agendaLoading, agendaLoadError } = this.props;
-
+    const { agendaItems, agendaIDs, agendaLoading, agendaLoadError, agendaResults } = this.props;
     if (agendaLoadError.error) {
       return <div style={{ color: 'black' }}>Error: retrieving agenda items</div>;
     } else {
       return (
         <div style={{ color: 'black' }}>
+          {agendaResults.map((time, index) => {
+            let meetingDate = moment(time.meeting_time * 1000).format('MMMM Do YYYY, h:mm a');
+            return (
+            <div key={index}>
+                <h2>{meetingDate}</h2>
+                  {agendaIDs.map((agendaID, i) => {
+                    let agenda = agendaItems[agendaID];
+                    return (
+                      <AgendaItemContainer
+                        key={agenda.id}
+                        addId={this.addId}
+                        {...agenda}
+                        defaultOpen={agenda.id === this.requestedID}
+                        removeId={this.removeId}
+                        searchParams={this.props.location.search}
+                      />
+                    );
+                  })}
+            </div>
+            )
+          })}
           {agendaIDs.map((agendaID, i) => {
             let agenda = agendaItems[agendaID];
             return (
@@ -141,6 +162,7 @@ function mapStateToProps(state) {
     agendaIDs: agendas.agendaIDs,
     agendaLoading: agendas.agendaLoading,
     agendaLoadError: agendas.agendaLoadError,
+    agendaResults: agendas.agendaResults,
     nextAgendaURL: agendas.next,
   };
 }
