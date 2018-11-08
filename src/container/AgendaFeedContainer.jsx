@@ -5,7 +5,7 @@ import { requestAgendas } from '../ducks/agendas';
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
-import { Button, Grid } from 'semantic-ui-react';
+import { Button, Grid, Divider } from 'semantic-ui-react';
 let moment = require('moment');
 
 class AgendaFeed extends Component {
@@ -107,12 +107,15 @@ class AgendaFeed extends Component {
       return <div style={{ color: 'black' }}>Error: retrieving agenda items</div>;
     } else {
       return (
-        <div style={{ color: 'black' }}>
+        <div style={{ color: 'black'}}>
           {agendaResults.map((time, index) => {
             let meetingDate = moment(time.meeting_time * 1000).format('MMMM Do YYYY, h:mm a');
             return (
-            <div key={index}>
-                <h2>{meetingDate}</h2>
+            <div key={ index }>
+                <div className="ui text container" style={{ 'margin': '85px 0 25px' }}>
+                <h2>{ meetingDate }</h2>
+                <Divider/>
+                </div>
                   {agendaIDs.map((agendaID, i) => {
                     let agenda = agendaItems[agendaID];
                     return (
