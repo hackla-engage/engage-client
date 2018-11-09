@@ -118,6 +118,8 @@ class AgendaFeed extends Component {
                 </div>
                   {agendaIDs.map((agendaID, i) => {
                     let agenda = agendaItems[agendaID];
+                  let itemMeetingDate = moment(agenda.meeting_time * 1000).format('MMMM Do YYYY, h:mm a');
+                    if (itemMeetingDate === meetingDate) {
                     return (
                       <AgendaItemContainer
                         key={agenda.id}
@@ -128,22 +130,10 @@ class AgendaFeed extends Component {
                         searchParams={this.props.location.search}
                       />
                     );
+                    }
                   })}
             </div>
             )
-          })}
-          {agendaIDs.map((agendaID, i) => {
-            let agenda = agendaItems[agendaID];
-            return (
-              <AgendaItemContainer
-                key={agenda.id}
-                addId={this.addId}
-                {...agenda}
-                defaultOpen={agenda.id === this.requestedID}
-                removeId={this.removeId}
-                searchParams={this.props.location.search}
-              />
-            );
           })}
           <Grid style={{ margin: '6px' }} centered>
             {agendaLoading ? (
