@@ -5,8 +5,7 @@ import { requestAgendas } from '../ducks/agendas';
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
-import { Button, Grid, Divider } from 'semantic-ui-react';
-let moment = require('moment');
+import { Button, Grid } from 'semantic-ui-react';
 
 class AgendaFeed extends Component {
   constructor(props) {
@@ -102,38 +101,25 @@ class AgendaFeed extends Component {
   }
 
   render() {
-    const { agendaItems, agendaIDs, agendaLoading, agendaLoadError, agendaResults } = this.props;
+    const { agendaItems, agendaIDs, agendaLoading, agendaLoadError } = this.props;
+
     if (agendaLoadError.error) {
       return <div style={{ color: 'black' }}>Error: retrieving agenda items</div>;
     } else {
       return (
-        <div style={{ color: 'black'}}>
-          {agendaResults.map((time, index) => {
-            let meetingDate = moment(time.meeting_time * 1000).format('MMMM Do YYYY, h:mm a');
+        <div style={{ color: 'black' }}>
+          {agendaIDs.map((agendaID, i) => {
+            let agenda = agendaItems[agendaID];
             return (
-            <div key={ index }>
-                <div className="ui text container" style={{ 'margin': '85px 0 25px' }}>
-                <h2>{ meetingDate }</h2>
-                <Divider/>
-                </div>
-                  {agendaIDs.map((agendaID, i) => {
-                    let agenda = agendaItems[agendaID];
-                  let itemMeetingDate = moment(agenda.meeting_time * 1000).format('MMMM Do YYYY, h:mm a');
-                    if (itemMeetingDate === meetingDate) {
-                    return (
-                      <AgendaItemContainer
-                        key={agenda.id}
-                        addId={this.addId}
-                        {...agenda}
-                        defaultOpen={agenda.id === this.requestedID}
-                        removeId={this.removeId}
-                        searchParams={this.props.location.search}
-                      />
-                    );
-                    }
-                  })}
-            </div>
-            )
+              <AgendaItemContainer
+                key={agenda.id}
+                addId={this.addId}
+                {...agenda}
+                defaultOpen={agenda.id === this.requestedID}
+                removeId={this.removeId}
+                searchParams={this.props.location.search}
+              />
+            );
           })}
           <Grid style={{ margin: '6px' }} centered>
             {agendaLoading ? (
@@ -155,7 +141,6 @@ function mapStateToProps(state) {
     agendaIDs: agendas.agendaIDs,
     agendaLoading: agendas.agendaLoading,
     agendaLoadError: agendas.agendaLoadError,
-    agendaResults: agendas.agendaResults,
     nextAgendaURL: agendas.next,
   };
 }
