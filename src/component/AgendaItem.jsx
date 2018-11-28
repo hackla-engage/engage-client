@@ -15,6 +15,7 @@ class AgendaItem extends Component {
     super();
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
+    this.copyText = this.copyText.bind(this);
   }
 
   componentWillMount() {
@@ -73,7 +74,18 @@ class AgendaItem extends Component {
     setTimeout(this.goToForm, 200);
   }
 
+  copyText(e) {
+    e.preventDefault();
+    const placeHolder = document.createElement('textarea');
+    placeHolder.innerText = e.currentTarget.href;
+    document.body.appendChild(placeHolder);
+    placeHolder.select();
+    document.execCommand('copy');
+    placeHolder.remove();
+  }
+
   render() {
+    console.log("RENDER", window.location.href)
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
     const detailPageLink = agendaItem ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${agendaItem.id}&MediaPosition=&ID=${agendaItem.agenda_item_id}&CssClass=` : null;
     let agendaDate;
@@ -197,9 +209,15 @@ class AgendaItem extends Component {
                 </Card.Content>
               ) : (
                   <Card.Content>
-                    <Card.Header>>> Note: Commenting is closed for this issue.</Card.Header>
+                    <Card.Header> Note: Commenting is closed for this issue.</Card.Header>
                   </Card.Content>
                 )}
+              <Card.Content>
+                <Card.Header>
+                  Share This Issue:
+                  <a onClick={(e) => this.copyText(e)} href={window.location.href} target='_blank'> {window.location.href}</a>
+                </Card.Header>
+              </Card.Content>
               <Card.Content style={{ textAlign: 'center' }}>
                 <a href={detailPageLink} target='_blank' style={{ color: 'brown' }}>
                   View More Details on the Council Page
