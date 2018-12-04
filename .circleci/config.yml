@@ -5,6 +5,8 @@
 version: 2
 jobs:
   build:
+    branches:
+      only: master
     docker:
       # specify the version you desire here
       - image: circleci/node:10.9.0
@@ -29,6 +31,8 @@ jobs:
       # run tests!
       - run: npm test
   buildstaging:
+    branches:
+      only: staging
     docker:
       # specify the version you desire here
       - image: circleci/node:10.9.0
