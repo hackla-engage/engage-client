@@ -28,6 +28,30 @@ jobs:
         
       # run tests!
       - run: npm test
+  buildstaging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
+    working_directory: ~/engage-client-staging
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      - run: npm test
   deploy:
     docker:
       # specify the version you desire here
@@ -95,10 +119,10 @@ workflows:
               only: master
   build-and-test:
     jobs:
-      - build
+      - buildstaging
       - deploystaging:
           requires:
-            - build
+            - buildstaging
           filters:
             branches:
               only: staging
