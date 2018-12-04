@@ -110,7 +110,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
+            scp ~/engage-client-staging.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client-staging.tar.bz2
             ssh -f $SSH_USER@$SSH_HOST "./deploy-client-staging-ci.sh"
 workflows:
   version: 2
