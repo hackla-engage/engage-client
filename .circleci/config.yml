@@ -54,15 +54,51 @@ jobs:
             name: Deploy over SSH
             command: |
                 scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
-                ssh -f $SSH_USER@$SSH_HOST "./deploy-client.sh"
+                ssh -f $SSH_USER@$SSH_HOST "./deploy-client-ci.sh"
+  deploystaging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.9.0
+    working_directory: ~/engage-client-staging
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: 
+            name: Build for staging deployment
+            command: |
+              npm run build
+              cd ..
+              tar cj -f engage-client-staging.tar.bz2 engage-client-staging
+      - add_ssh_keys:
+            fingerprints:
+              - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
+      - run: ssh-keyscan -t rsa -H engage.town >> ~/.ssh/known_hosts
+      - run:
+            name: Deploy over SSH
+            command: |
+                scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
+                ssh -f $SSH_USER@$SSH_HOST "./deploy-client-staging-ci.sh"
 workflows:
- version: 2
- build-and-deploy:
-   jobs:
-     - build
-     - deploy:
-         requires:
-           - build
-         filters:
-           branches:
-             only: master
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+  build-and-test:
+    jobs:
+      - build
+      - deploystaging:
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
