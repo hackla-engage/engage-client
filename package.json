@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "node index.js",
+    "servestaging": "PORT=5900 node index.js",
     "build": "webpack --mode production -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode development --open",
     "devsrv": "DEBUG=true npm run dev",
