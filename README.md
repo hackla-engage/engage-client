@@ -1,5 +1,5 @@
-# CouncilTag
-A tool to tag council meeting content
+# Code of Contribution
+All PRs should be made to branch *STAGING*.
 
 ## Client
 To run dev mode of website run the following:
