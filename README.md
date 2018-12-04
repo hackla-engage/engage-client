@@ -1,5 +1,5 @@
 # Code of Contribution
-All PRs should be made to branch *STAGING*.
+All PRs should be made to the `staging` branch.
 
 ## Client
 To run dev mode of website run the following:
