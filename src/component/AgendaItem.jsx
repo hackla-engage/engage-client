@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
-import { Button, Card, Container, Loader } from 'semantic-ui-react';
+import { Button, Card, Container, Loader, Header } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
@@ -127,7 +127,7 @@ class AgendaItem extends Component {
           </div>
         );
     }
-
+    const url = encodeURIComponent(location.href)
     return (
       <div>
         {agendaItem ? (
@@ -207,6 +207,12 @@ class AgendaItem extends Component {
                 <Link to={'/feed'} style={{ color: 'brown' }}>
                   Return to Agenda Feed
                 </Link>
+              </Card.Content>
+              <Card.Content textAlign="center">
+                <Header as="h3">Share this Item</Header>
+                <a className="fb-xfbml-parse-ignore" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${ url };src=sdkpreparse`}><Button circular color="facebook" icon="facebook"></Button></a>
+                <a target="_blank"  className="twitter-share-button" href={ `https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=teddycrepineau&url=${ url }`}><Button circular color="twitter" icon="twitter"></Button></a>
+                <a href={ `mailto:?subject=Check out this new agenda item from our city council&body=${ url }`}><Button circular color="grey" icon="mail"></Button></a>
               </Card.Content>
             </Card>
           </Container>
