@@ -2,7 +2,7 @@
 Engage is a tool that lets you easily follow issues your city council is debating. More importantly, it provides a platform for expressing your views on these issues, in a way you know will be heard by your city.
 
 ## Important Links
-* live website: https://www.sm.engage.town
+* live website: https://sm.engage.town
 * staging website: https://smstaging.engage.town
 
 ## Stack
