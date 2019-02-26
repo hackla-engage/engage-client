@@ -65,7 +65,13 @@ class AgendaFeed extends Component {
     // this.requestedID is only useful at loading lifecycle event not afterward
     const parsed = qs.parse(this.props.location.search);
     if (parsed && parsed.id) {
-      const { id, body, meeting_time, recommendations, title } = this.props.agendaItems[parsed.id];
+      const {
+        id,
+        body,
+        meeting_time,
+        recommendations,
+        title,
+      } = this.props.agendaItems[parsed.id];
       let recommendationsString = '';
       // map to get recommendation from object and reduce array to string concatenated with <br />s
       if (recommendations.length > 0) {
@@ -102,25 +108,41 @@ class AgendaFeed extends Component {
   }
 
   render() {
-    const { agendaItems, agendaIDs, agendaLoading, agendaLoadError, agendaResults } = this.props;
+    const {
+      agendaItems,
+      agendaIDs,
+      agendaLoading,
+      agendaLoadError,
+      agendaResults,
+    } = this.props;
 
     if (agendaLoadError.error) {
-      return <div style={{ color: 'black' }}>Error: retrieving agenda items</div>;
+      return (
+        <div style={{ color: 'black' }}>Error: retrieving agenda items</div>
+      );
     } else {
       return (
-        <div style={{ color: 'black'}}>
-        {agendaResults.map((time, index) => {
-          let meetingDate = format(time.meeting_time * 1000, 'MMMM Do YYYY, h:mm a');
+        <div style={{ color: 'black' }}>
+          {agendaResults.map((time, index) => {
+            let meetingDate = format(
+              time.meeting_time * 1000,
+              'MMMM Do YYYY, h:mm a'
+            );
             return (
-              <div key={ index }>
-                <div className="ui text container" style={{ 'margin': '85px 0 25px' }}>
-                <h2>{ meetingDate }</h2>
-                <Divider/>
+              <div key={index}>
+                <div
+                  className="ui text container"
+                  style={{ margin: '85px 0 25px' }}>
+                  <h2>{meetingDate}</h2>
+                  <Divider />
                 </div>
-                  {agendaIDs.map((agendaID, i) => {
-                    let agenda = agendaItems[agendaID];
-                  let itemMeetingDate = format(agenda.meeting_time * 1000,'MMMM Do YYYY, h:mm a');
-                    if (itemMeetingDate === meetingDate) {
+                {agendaIDs.map((agendaID, i) => {
+                  let agenda = agendaItems[agendaID];
+                  let itemMeetingDate = format(
+                    agenda.meeting_time * 1000,
+                    'MMMM Do YYYY, h:mm a'
+                  );
+                  if (itemMeetingDate === meetingDate) {
                     return (
                       <AgendaItemContainer
                         key={agenda.id}
@@ -131,16 +153,20 @@ class AgendaFeed extends Component {
                         searchParams={this.props.location.search}
                       />
                     );
-                    }
-                  })}
-            </div>
-            )
+                  }
+                })}
+              </div>
+            );
           })}
           <Grid style={{ margin: '6px' }} centered>
             {agendaLoading ? (
               <Button loading primary />
             ) : (
-              <Button onClick={this.getMoreAgendas} content="Load More" primary />
+              <Button
+                onClick={this.getMoreAgendas}
+                content="Load More"
+                primary
+              />
             )}
           </Grid>
         </div>
@@ -167,5 +193,5 @@ function matchDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  matchDispatchToProps,
+  matchDispatchToProps
 )(AgendaFeed);

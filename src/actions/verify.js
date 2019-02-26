@@ -2,9 +2,12 @@ import { HOSTNAME, agent } from '../engage_client';
 
 export const VERIFIED = 'VERIFIED';
 
-export const verified = verification => ({ type: VERIFIED, payload: verification });
+export const verified = verification => ({
+  type: VERIFIED,
+  payload: verification,
+});
 
-export const verify = (email, id, code, type) => (dispatch) => {
+export const verify = (email, id, code, type) => dispatch => {
   agent
     .post(`${HOSTNAME}/verify/`)
     .send({
@@ -13,10 +16,10 @@ export const verify = (email, id, code, type) => (dispatch) => {
       code,
       type,
     })
-    .then((res) => {
+    .then(res => {
       dispatch(verified(res.body));
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(`Error: ${err}`);
     });
 };
