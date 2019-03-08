@@ -14,8 +14,11 @@ class Sign_in extends Component {
       <div className="ui middle aligned center aligned grid">
         <div
           className="column"
-          style={{ width: this.width, minWidth: '400px', margin: '50px 0 50px 0' }}
-        >
+          style={{
+            width: this.width,
+            minWidth: '400px',
+            margin: '50px 0 50px 0',
+          }}>
           <h2 className="ui teal image header">
             <img src="/static/image/meetup.png" className="image" />
             <div className="content">Log-in to your account</div>
@@ -25,13 +28,21 @@ class Sign_in extends Component {
               <div className="field">
                 <div className="ui left icon input">
                   <i className="user icon" />
-                  <input type="text" name="email" placeholder="E-mail address" />
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="E-mail address"
+                  />
                 </div>
               </div>
               <div className="field">
                 <div className="ui left icon input">
                   <i className="lock icon" />
-                  <input type="password" name="password" placeholder="Password" />
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                  />
                 </div>
               </div>
               <div className="ui fluid large teal submit button">Login</div>

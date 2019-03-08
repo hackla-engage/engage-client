@@ -27,8 +27,7 @@ class ConfirmFormContentComponent extends React.Component {
           <Segment>
             <Button
               onClick={() => this.props.editingForm(true)}
-              style={{ position: 'relative', float: 'right' }}
-            >
+              style={{ position: 'relative', float: 'right' }}>
               Edit
             </Button>
             <Header as="h4" className="agenda-item-section">
@@ -46,8 +45,8 @@ class ConfirmFormContentComponent extends React.Component {
             {this.props.Pro === 1
               ? 'Agree'
               : this.props.Pro === 0
-                ? 'Disagree'
-                : 'Need more information'}
+              ? 'Disagree'
+              : 'Need more information'}
             <Header as="h4" className="agenda-item-section">
               Additional comments:
             </Header>{' '}
@@ -67,7 +66,9 @@ class ConfirmFormContentComponent extends React.Component {
                 <br />
               </div>
             )}
-            {this.props.complete.businessOwner && <div>{'Business owner in the city'}</div>}
+            {this.props.complete.businessOwner && (
+              <div>{'Business owner in the city'}</div>
+            )}
             {this.props.complete.childSchool && (
               <div>
                 {'Has children in school in the city'}
@@ -99,8 +100,7 @@ class ConfirmFormContentComponent extends React.Component {
             <Button
               color="green"
               disabled={this.props.token === null}
-              onClick={() => this.props.handleSubmit(this.props.complete)}
-            >
+              onClick={() => this.props.handleSubmit(this.props.complete)}>
               <Header as="h1" style={{ color: 'white' }}>
                 SUBMIT
               </Header>

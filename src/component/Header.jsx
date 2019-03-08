@@ -16,8 +16,7 @@ const Header = () => (
       backgroundColor: '#192a56',
       border: 'none',
     }}
-    id="menu"
-  >
+    id="menu">
     <Menu.Item style={styles.link} name="browse" as={Link} to="/">
       Engage
     </Menu.Item>
@@ -41,14 +40,12 @@ const Header = () => (
         }}
         item
         simple
-        text="Menu"
-      >
+        text="Menu">
         <Dropdown.Menu
           style={{
             color: '#FFF',
             backgroundColor: '#192a56',
-          }}
-        >
+          }}>
           <Dropdown.Item>
             <Link style={styles.link} to="/about">
               About

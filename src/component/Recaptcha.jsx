@@ -19,9 +19,10 @@ class Recaptcha extends Component {
             flexDirection: 'column',
             alignItems: 'center',
             alignContent: 'center',
-          }}
-        >
-          <Header as="h3">For unregistered users we need to make sure you are a human.</Header>
+          }}>
+          <Header as="h3">
+            For unregistered users we need to make sure you are a human.
+          </Header>
           <ReCAPTCHA
             ref="recaptcha"
             sitekey="6Lex02wUAAAAAI6g5DnS3iIMMqhQSXReUINtVi94"

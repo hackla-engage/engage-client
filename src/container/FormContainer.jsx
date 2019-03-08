@@ -75,13 +75,17 @@ class FormContainer extends Component {
       !this.props.submitted
     ) {
       return (
-        <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
+        <div
+          style={{
+            display: 'flex',
+            minHeight: '63vh',
+            flexDirection: 'column',
+          }}>
           <div
             style={{
               position: 'relative',
               zIndex: 50,
-            }}
-          >
+            }}>
             <FormComponent
               Committee={this.props.Committee}
               Id={this.props.Id}
@@ -101,14 +105,18 @@ class FormContainer extends Component {
       );
     } else if (!this.props.submitted) {
       return (
-        <div style={{ display: 'flex', minHeight: '63vh', flexDirection: 'column' }}>
+        <div
+          style={{
+            display: 'flex',
+            minHeight: '63vh',
+            flexDirection: 'column',
+          }}>
           <div
             style={{
               position: 'relative',
               zIndex: 50,
               display: this.props.firstName !== '' ? 'none' : 'block',
-            }}
-          >
+            }}>
             <ConfirmFormContentComponent
               Pro={this.props.Pro}
               Recommendations={this.props.Recommendations}
@@ -192,11 +200,11 @@ function matchDispatchToProps(dispatch) {
       submitForm,
       completeForm,
     },
-    dispatch,
+    dispatch
   );
 }
 
 export default connect(
   mapStateToProps,
-  matchDispatchToProps,
+  matchDispatchToProps
 )(FormContainer);

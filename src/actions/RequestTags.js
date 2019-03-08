@@ -8,7 +8,7 @@ import { getJSON } from '../engage_client.js';
  * create our action, which the function then returns.
  */
 export function requestTags() {
-  return getJSON('tags').then((json) => {
+  return getJSON('tags').then(json => {
     console.log('requestTags json: ', json);
     return {
       type: REQUEST_TAGS,

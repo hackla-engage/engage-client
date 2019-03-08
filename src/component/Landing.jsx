@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Header, Image, Grid, Responsive, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Header,
+  Image,
+  Grid,
+  Responsive,
+  Segment,
+} from 'semantic-ui-react';
 
 const copyText = require('../../public/static/landing_page_copy.json');
 // const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
@@ -24,13 +32,11 @@ class Landing extends Component {
         style={{
           overflow: 'scroll' /* has to be scroll, not auto */,
           webkitOverflowScrolling: 'touch',
-        }}
-      >
+        }}>
         <Segment
           textAlign="center"
           style={{ position: 'relative', minHeight: 650, padding: '1em 0em' }}
-          vertical
-        >
+          vertical>
           <Container text>
             <Header
               as="h1"
@@ -62,8 +68,7 @@ class Landing extends Component {
               to="/feed"
               style={{
                 color: '#FFF',
-              }}
-            >
+              }}>
               <Button
                 primary
                 size="huge"
@@ -71,8 +76,7 @@ class Landing extends Component {
                   backgroundColor: '#192a56',
                   marginTop: '1rem',
                   float: 'left',
-                }}
-              >
+                }}>
                 Start Engaging
               </Button>
             </Link>
@@ -117,8 +121,7 @@ class Landing extends Component {
           style={{
             padding: '6em 0em',
             backgroundColor: '#dfe4ea',
-          }}
-        >
+          }}>
           <Container text>
             <Grid columns="equal" align="center">
               <Grid.Row>
@@ -135,8 +138,7 @@ class Landing extends Component {
                     style={{
                       color: 'black',
                       marginTop: '1em',
-                    }}
-                  >
+                    }}>
                     Get Informed on City Developments
                   </div>
                 </Grid.Column>
@@ -153,8 +155,7 @@ class Landing extends Component {
                     style={{
                       color: 'black',
                       marginTop: '1em',
-                    }}
-                  >
+                    }}>
                     View, Read, and Comment on Recent Agenda Items
                   </div>
                 </Grid.Column>
@@ -171,8 +172,7 @@ class Landing extends Component {
                       color: 'black',
                       marginTop: '1em',
                       marginBottom: '3em',
-                    }}
-                  >
+                    }}>
                     Feel Empowered to Engage In-Person at City Meetings
                   </div>
                 </Grid.Column>
@@ -190,8 +190,7 @@ class Landing extends Component {
                 style={{
                   color: 'black',
                   fontSize: '1.1em',
-                }}
-              >
+                }}>
                 {copyText.what_is_engage.body_text}
               </p>
             </div>
