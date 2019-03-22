@@ -80,7 +80,7 @@ class Landing extends Component {
           <div style={{ width: '100%' }}>
             <Responsive minWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -96,7 +96,7 @@ class Landing extends Component {
             </Responsive>
             <Responsive maxWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
