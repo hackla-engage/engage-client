@@ -13,12 +13,13 @@ class Recaptcha extends Component {
   render() {
     return (
       <Segment>
-        <div style={{
-          position: 'relative',
-          flexDirection: 'column',
-          alignItems: 'center',
-          alignContent: 'center',
-        }}
+        <div
+          style={{
+            position: 'relative',
+            flexDirection: 'column',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
         >
           <Header as="h3">We need to make sure you are a human.</Header>
           <ReCAPTCHA

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
-import { Button, Card, Container, Loader } from 'semantic-ui-react';
+import { Button, Card, Container, Loader, Header } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
@@ -17,7 +17,6 @@ class AgendaItem extends Component {
     this.goToForm = this.goToForm.bind(this);
   }
 
-
   componentWillMount() {
     if (Object.keys(this.props.agendaItems).length < 2) {
       this.props.requestAgendas('agendas');
@@ -28,7 +27,6 @@ class AgendaItem extends Component {
     this.props.history.push('/form');
   }
 
-
   showForm(proCon) {
     const { id } = this.props.match.params;
     const agenda = this.props.agendaItems[id];
@@ -37,17 +35,30 @@ class AgendaItem extends Component {
     // map to get recommendation from object and reduce array to string concatenated with <br />s
     let background = false;
     let length = 0;
-    const summaryArray = body.filter((v, i) => {
-      if (v.toLowerCase().includes('background')) { background = true; return false; }
-      if (background) { return false; }
-      if (v.toLowerCase().includes('executive summary') || i >= 6) {
-        return false;
-      }
-      if (length > 500) { return false; }
-      length += v.length;
-      return true;
-    }).map((val, idx) => (<p key={`summary-${idx}`}>{val}</p>));
-    const recommendationsArray = recommendations.map((v, i) => <p key={`recommendation-${i}`}>{i}. {v}</p>);
+    const summaryArray = body
+      .filter((v, i) => {
+        if (v.toLowerCase().includes('background')) {
+          background = true;
+          return false;
+        }
+        if (background) {
+          return false;
+        }
+        if (v.toLowerCase().includes('executive summary') || i >= 6) {
+          return false;
+        }
+        if (length > 500) {
+          return false;
+        }
+        length += v.length;
+        return true;
+      })
+      .map((val, idx) => <p key={`summary-${idx}`}>{val}</p>);
+    const recommendationsArray = recommendations.map((v, i) => (
+      <p key={`recommendation-${i}`}>
+        {i}. {v}
+      </p>
+    ));
     // slice and reduce array to string concatenated with <br />s
     // Configure form content
     this.props.agendaItemReceived({
@@ -64,6 +75,7 @@ class AgendaItem extends Component {
 
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
+    const detailPageLink = agendaItem ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${agendaItem.id}&MediaPosition=&ID=${agendaItem.agenda_item_id}&CssClass=` : null;
     let agendaDate;
     let recommendation;
     let summaryArray;
@@ -78,29 +90,44 @@ class AgendaItem extends Component {
       const { body } = agendaItem;
       let length = 0;
       let background = false;
-      summaryArray = body.filter((v, i) => {
-        if (v.toLowerCase().includes('background')) { background = true; return false; }
-        if (background) { return false; }
-        if (v.toLowerCase().includes('executive summary') || v.toLowerCase().trim() === 'summary' || i >= 6) {
-          return false;
-        }
-        if (length > 500) { return false; }
-        length += v.length;
-        return true;
-      }).map((val, idx) => (<p key={`summary-${idx}`}>{val}</p>));
+      summaryArray = body
+        .filter((v, i) => {
+          if (v.toLowerCase().includes('background')) {
+            background = true;
+            return false;
+          }
+          if (background) {
+            return false;
+          }
+          if (
+            v.toLowerCase().includes('executive summary') ||
+            v.toLowerCase().trim() === 'summary' ||
+            i >= 6
+          ) {
+            return false;
+          }
+          if (length > 500) {
+            return false;
+          }
+          length += v.length;
+          return true;
+        })
+        .map((val, idx) => <p key={`summary-${idx}`}>{val}</p>);
       console.log(agendaItem);
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
       recommendation = agendaRecommendation ? (
         <div>
-          {agendaRecommendation.map((string, index) => <p key={index}>{string}</p>)}
+          {agendaRecommendation.map((string, index) => (
+            <p key={index}>{string}</p>
+          ))}
         </div>
       ) : (
-        <div>
-          <p>No recommended action has been proposed.</p>
-        </div>
-      );
+          <div>
+            <p>No recommended action has been proposed.</p>
+          </div>
+        );
     }
-
+    const url = encodeURIComponent(location.href)
     return (
       <div>
         {agendaItem ? (
@@ -135,11 +162,9 @@ class AgendaItem extends Component {
                 {recommendation}
               </Card.Content>
 
-              {showActions ?
+              {showActions ? (
                 <Card.Content>
-                  <Card.Header>
-                    WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?
-                  </Card.Header>
+                  <Card.Header>WHAT IS YOUR POSITION ON THE RECOMMENDED ACTION?</Card.Header>
                   <div className="ui three buttons" style={{ padding: 24 }}>
                     <Button
                       basic
@@ -161,8 +186,7 @@ class AgendaItem extends Component {
                     </Button>
                     <Button
                       basic
-                      color=
-                        "black"
+                      color="black"
                       onClick={(evt) => {
                         this.showForm(2);
                       }}
@@ -170,25 +194,33 @@ class AgendaItem extends Component {
                       Need More Info
                     </Button>
                   </div>
-                </Card.Content> :
-                <Card.Content>
-                  <Card.Header>
-                    >> Note: Commenting is closed for this issue.
-                  </Card.Header>
                 </Card.Content>
-              }
+              ) : (
+                  <Card.Content>
+                    <Card.Header>>> Note: Commenting is closed for this issue.</Card.Header>
+                  </Card.Content>
+                )}
               <Card.Content style={{ textAlign: 'center' }}>
+                <a href={detailPageLink} target='_blank' style={{ color: 'brown' }}>
+                  View More Details on the Council Page
+                </a><br />
                 <Link to={'/feed'} style={{ color: 'brown' }}>
                   Return to Agenda Feed
                 </Link>
               </Card.Content>
+              <Card.Content textAlign="center">
+                <Header as="h3">Share this Item</Header>
+                <a className="fb-xfbml-parse-ignore" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${ url };src=sdkpreparse`}><Button circular color="facebook" icon="facebook"></Button></a>
+                <a target="_blank"  className="twitter-share-button" href={ `https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=EngageStaMonica&url=${ url }`}><Button circular color="twitter" icon="twitter"></Button></a>
+                <a href={ `mailto:?subject=Check out this new agenda item from our city council&body=${ url }`}><Button circular color="grey" icon="mail"></Button></a>
+              </Card.Content>
             </Card>
           </Container>
         ) : (
-          <Loader active inline="centered" style={{ color: 'black' }}>
+            <Loader active inline="centered" style={{ color: 'black' }}>
               Loading agenda...
           </Loader>
-        )}
+          )}
       </div>
     );
   }
@@ -202,12 +234,14 @@ const mapStateToProps = (state) => {
     committee: agendas.committee,
   };
 };
-const mapDispatchToProps = dispatch => bindActionCreators(
-  {
-    agendaItemReceived, requestAgendas,
-  },
-  dispatch,
-);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      agendaItemReceived,
+      requestAgendas,
+    },
+    dispatch,
+  );
 const AgendaItemComponent = connect(
   mapStateToProps,
   mapDispatchToProps,

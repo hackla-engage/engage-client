@@ -12,12 +12,6 @@ if (process.env.NODE_ENV === 'devsrv') {
 }
 export const HOSTNAME = HOST;
 
-// Headers for basic GET request which returns JSON
-const HEADERS = new Headers({
-  'Content-Type': 'json',
-  Accept: 'json',
-});
-
 /**
  * getJSON
  * Use this for basic GET requests to get JSON
