@@ -15,5 +15,5 @@ render(
       <Routes />
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById('app')
 );

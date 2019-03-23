@@ -31,65 +31,68 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action) {
   switch (action.type) {
-  case REQUEST_AGENDAS:
-    const { agendaList, committee, agendaResults } = action.payload;
-    if (!agendaList || agendaList.length === 0) return;
+    case REQUEST_AGENDAS:
+      const { agendaList, committee, agendaResults } = action.payload;
+      if (!agendaList || agendaList.length === 0) return;
 
-    const next = action.next;
+      const next = action.next;
 
-    const agendaItems = agendaList.reduce(
-      (acc, agenda) => {
-        if (acc[agenda.id]) {
-          console.log('duplicate agenda id', agenda.id);
-        }
-        acc[agenda.id] = agenda;
-        return acc;
-      },
-      { ...state.agendaItems },
-    );
+      const agendaItems = agendaList.reduce(
+        (acc, agenda) => {
+          if (acc[agenda.id]) {
+            console.log('duplicate agenda id', agenda.id);
+          }
+          acc[agenda.id] = agenda;
+          return acc;
+        },
+        { ...state.agendaItems }
+      );
 
-    const agendaIDs = Object.keys(agendaItems);
-    const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
-      const timeA = agendaItems[a].meeting_time;
-      const timeB = agendaItems[b].meeting_time;
+      const agendaIDs = Object.keys(agendaItems);
+      const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
+        const timeA = agendaItems[a].meeting_time;
+        const timeB = agendaItems[b].meeting_time;
 
-      if (timeA > timeB) return -1;
-      else if (timeA < timeB) return 1;
-      return 0;
-    });
+        if (timeA > timeB) return -1;
+        else if (timeA < timeB) return 1;
+        return 0;
+      });
 
-    return {
-      ...state,
-      agendaItems,
-      committee,
-      agendaIDs: agendaIDsSortedByTime,
-      agendaLoading: false,
-      agendaResults,
-      next,
-    };
-  case REQUEST_LOADING:
-    return {
-      ...state,
-      agendaLoading: true,
-    };
-  default:
-    return state;
+      return {
+        ...state,
+        agendaItems,
+        committee,
+        agendaIDs: agendaIDsSortedByTime,
+        agendaLoading: false,
+        agendaResults,
+        next,
+      };
+    case REQUEST_LOADING:
+      return {
+        ...state,
+        agendaLoading: true,
+      };
+    default:
+      return state;
   }
 }
 
 // Action Creators
 export function requestAgendas(requestURL) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: REQUEST_LOADING,
     });
     getJSON(requestURL)
-      .then((json) => {
+      .then(json => {
         if (!json || !json.results || json.results.length === 0) {
           return;
         }
 
-        const agendaList = json.results.reduce((acc, result) => [...acc, ...result.items], []);
+        const agendaList = json.results.reduce(
+          (acc, result) => [...acc, ...result.items],
+          []
+        );
         console.log(json.results);
         const agendaResults = json.results;
         const nextArray = json.next.split('/');

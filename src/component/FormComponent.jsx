@@ -27,16 +27,21 @@ class FormComponent extends Component {
         <Segment className="vote-recommendations-holder">
           <div className="vote-title-title">{this.props.Title}</div>
           <div className="vote-recommendations-keyword">Summary:</div>
-          <div className="vote-recommendations-recommendations">{this.props.Summary}</div>
-          <div className="vote-recommendations-keyword">Recommended Action(s):</div>
-          <div className="vote-recommendations-recommendations">{this.props.Recommendations}</div>
+          <div className="vote-recommendations-recommendations">
+            {this.props.Summary}
+          </div>
+          <div className="vote-recommendations-keyword">
+            Recommended Action(s):
+          </div>
+          <div className="vote-recommendations-recommendations">
+            {this.props.Recommendations}
+          </div>
         </Segment>
         <Segment>
           <Segment
             className={className}
             color="teal"
-            style={{ float: 'right', position: 'relative' }}
-          >
+            style={{ float: 'right', position: 'relative' }}>
             {' '}
             {divContent}{' '}
           </Segment>
