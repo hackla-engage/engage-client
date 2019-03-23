@@ -30,13 +30,14 @@ class Landing extends Component {
     return (
       <div
         style={{
-          overflow: 'scroll' /* has to be scroll, not auto */,
+          overflow: 'visible' /* has to be scroll, not auto */,
           webkitOverflowScrolling: 'touch',
         }}>
         <Segment
           textAlign="center"
-          style={{ position: 'relative', minHeight: 650, padding: '1em 0em' }}
-          vertical>
+          style={{ position: 'relative', minHeight: 515, padding: '1em 0em' }}
+          vertical
+        >
           <Container text>
             <Header
               as="h1"
@@ -81,10 +82,10 @@ class Landing extends Component {
               </Button>
             </Link>
           </Container>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%' }} >
             <Responsive minWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -92,15 +93,15 @@ class Landing extends Component {
                   zIndex: -1,
                   width: '100%',
                   height: '100%',
-                  minHeight: '650px',
+                  minHeight: 515,
                   objectFit: 'cover',
-                  opacity: '0.7',
+                  opacity: '0.5',
                 }}
               />
             </Responsive>
             <Responsive maxWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -108,9 +109,9 @@ class Landing extends Component {
                   zIndex: -1,
                   width: '100%',
                   height: 'auto',
-                  minHeight: '650px',
+                  minHeight: 515,
                   objectFit: 'cover',
-                  opacity: '0.7',
+                  opacity: '0.5',
                 }}
               />
             </Responsive>

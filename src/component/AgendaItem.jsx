@@ -217,22 +217,9 @@ class AgendaItem extends Component {
               </Card.Content>
               <Card.Content textAlign="center">
                 <Header as="h3">Share this Item</Header>
-                <a
-                  className="fb-xfbml-parse-ignore"
-                  target="_blank"
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${url};src=sdkpreparse`}>
-                  <Button circular color="facebook" icon="facebook" />
-                </a>
-                <a
-                  target="_blank"
-                  className="twitter-share-button"
-                  href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=teddycrepineau&url=${url}`}>
-                  <Button circular color="twitter" icon="twitter" />
-                </a>
-                <a
-                  href={`mailto:?subject=Check out this new agenda item from our city council&body=${url}`}>
-                  <Button circular color="grey" icon="mail" />
-                </a>
+                <a className="fb-xfbml-parse-ignore" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${ url };src=sdkpreparse`}><Button circular color="facebook" icon="facebook"></Button></a>
+                <a target="_blank"  className="twitter-share-button" href={ `https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=EngageStaMonica&url=${ url }`}><Button circular color="twitter" icon="twitter"></Button></a>
+                <a href={ `mailto:?subject=Check out this new agenda item from our city council&body=${ url }`}><Button circular color="grey" icon="mail"></Button></a>
               </Card.Content>
             </Card>
           </Container>

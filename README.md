@@ -9,7 +9,7 @@ Engage is a tool that lets you easily follow issues your city council is debatin
 The frontend part of the Engage is powered by [React](https://reactjs.org/), [Redux](https://redux.js.org/), and [Semantic UI React](https://react.semantic-ui.com/). 
 
 ## Contributing
-**Important:** All PRs should be made to the `staging` branch.
+**Important:** Please fork and develop on the the `staging` branch. `Master` is used for live production. All PR much be committed to `staging`
 
 Please read the [Airbnb React Style Guide](https://github.com/airbnb/javascript/tree/master/react#table-of-contents) prior to contributing. The app is also structured following the Container/Component seperation philosophy. For more information, please read this [blog post](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
