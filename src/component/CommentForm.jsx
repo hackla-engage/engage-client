@@ -305,7 +305,7 @@ class CommentForm extends Component {
         )}
         <Form.Field
           autoheight="true"
-          label="Let the council know what you think about this item. The actual text you write will NOT go to the council, but an analysis will (optional):"
+          label="Let the council know what you think about this item (optional):"
           control="textarea"
           rows="3"
           maxLength={200}
