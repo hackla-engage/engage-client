@@ -14,6 +14,7 @@ import {
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
+import './AgendaItem.scss'
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 
@@ -208,13 +209,14 @@ class AgendaItem extends Component {
               ) : (
                 //no longer able to vote
                 <Card.Content>
-                  <Card.Header style={{}}>
+                  <Card.Header style={{}} >
                   
                     {
                       
                       pdfIsGenerated ? (
                         //if pdf is generated
                       <div
+                      className="commentingClosed"
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -239,13 +241,18 @@ class AgendaItem extends Component {
                           </div>{' '}
                         </div>
                         <a
+                        style={{ 
+                          position:'relative',
+                          width: '70px',
+                          height: '70px',
+                        }}
                         >
                         <Image
                           src="/static/image/pdf-icon.png"
                           style={{
                             position: 'relative',
-                            width: 'auto',
-                            height: '80px',
+                            width: '100%',
+                            height: '100%',
                           }}
                         /></a></div>
                       </div>
