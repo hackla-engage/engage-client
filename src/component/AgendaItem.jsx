@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { setHours, setMinutes } from 'date-fns';
-import { Button, Card, Container, Loader, Header } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Container,
+  Loader,
+  Header,
+  Image,
+} from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
@@ -26,6 +33,7 @@ class AgendaItem extends Component {
   goToForm() {
     this.props.history.push('/form');
   }
+
 
   showForm(proCon) {
     const { id } = this.props.match.params;
@@ -84,6 +92,7 @@ class AgendaItem extends Component {
     let recommendation;
     let summaryArray;
     let showActions = false;
+    let pdfIsGenerated = true;
 
     if (agendaItem) {
       agendaDate = new Date(agendaItem.meeting_time * 1000);
@@ -163,7 +172,7 @@ class AgendaItem extends Component {
                 <Card.Header>RECOMMENDED ACTION</Card.Header>
                 {recommendation}
               </Card.Content>
-
+                    {/* what to vote on */}
               {showActions ? (
                 <Card.Content>
                   <Card.Header>
@@ -197,9 +206,56 @@ class AgendaItem extends Component {
                   </div>
                 </Card.Content>
               ) : (
+                //no longer able to vote
                 <Card.Content>
-                  <Card.Header>
-                    >> Note: Commenting is closed for this issue.
+                  <Card.Header style={{}}>
+                  
+                    {
+                      
+                      pdfIsGenerated ? (
+                        //if pdf is generated
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                        }}>
+                        <div>>> </div>
+                        <div
+                          style={{
+                            display: 'relative',
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}
+                        >
+                          <div>
+                          <div>Note: Commenting is closed for this issue. </div>
+                          <div
+                            style={{
+                              display: 'flex',
+                            }}>
+                            View resuls of public feedback for this issue by
+                            downloading this Report PDF:
+                          </div>{' '}
+                        </div>
+                        <a
+                        >
+                        <Image
+                          src="/static/image/pdf-icon.png"
+                          style={{
+                            position: 'relative',
+                            width: 'auto',
+                            height: '80px',
+                          }}
+                        /></a></div>
+                      </div>
+                    ) : (
+                      //if pdf hasn't been generated
+                      <div>
+                        >> Results of public feedback are being assembled into a
+                        report which will be available here shortly.
+                      </div>
+                    )}
                   </Card.Header>
                 </Card.Content>
               )}
@@ -217,9 +273,22 @@ class AgendaItem extends Component {
               </Card.Content>
               <Card.Content textAlign="center">
                 <Header as="h3">Share this Item</Header>
-                <a className="fb-xfbml-parse-ignore" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${ url };src=sdkpreparse`}><Button circular color="facebook" icon="facebook"></Button></a>
-                <a target="_blank"  className="twitter-share-button" href={ `https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=EngageStaMonica&url=${ url }`}><Button circular color="twitter" icon="twitter"></Button></a>
-                <a href={ `mailto:?subject=Check out this new agenda item from our city council&body=${ url }`}><Button circular color="grey" icon="mail"></Button></a>
+                <a
+                  className="fb-xfbml-parse-ignore"
+                  target="_blank"
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${url};src=sdkpreparse`}>
+                  <Button circular color="facebook" icon="facebook" />
+                </a>
+                <a
+                  target="_blank"
+                  className="twitter-share-button"
+                  href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20new%20agenda%20item%20from%20our%20local%20government!&via=EngageStaMonica&url=${url}`}>
+                  <Button circular color="twitter" icon="twitter" />
+                </a>
+                <a
+                  href={`mailto:?subject=Check out this new agenda item from our city council&body=${url}`}>
+                  <Button circular color="grey" icon="mail" />
+                </a>
               </Card.Content>
             </Card>
           </Container>
