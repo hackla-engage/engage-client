@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -10,11 +11,12 @@ import {
   Loader,
   Header,
   Image,
+  Icon,
 } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
-import './AgendaItem.scss'
+import './AgendaItem.scss';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 
@@ -34,7 +36,6 @@ class AgendaItem extends Component {
   goToForm() {
     this.props.history.push('/form');
   }
-
 
   showForm(proCon) {
     const { id } = this.props.match.params;
@@ -82,6 +83,11 @@ class AgendaItem extends Component {
     setTimeout(this.goToForm, 200);
   }
 
+  componentDidMount() {
+    //screen position doesn't automatically reset, manual fix
+    document.querySelector('#app').scrollTop = 0;
+  }
+
   render() {
     const agendaItem = this.props.agendaItems[this.props.match.params.id];
     const detailPageLink = agendaItem
@@ -93,7 +99,7 @@ class AgendaItem extends Component {
     let recommendation;
     let summaryArray;
     let showActions = false;
-    let pdfIsGenerated = true;
+    let pdfIsGenerated = false;
 
     if (agendaItem) {
       agendaDate = new Date(agendaItem.meeting_time * 1000);
@@ -146,6 +152,16 @@ class AgendaItem extends Component {
       <div>
         {agendaItem ? (
           <Container style={{ margin: 24, color: 'black' }}>
+            <Link to="/feed">
+              <Button animated basic color="black" size="large">
+                <Button.Content
+                hidden
+                >
+                  <Icon name="long arrow alternate left" size='' />
+                </Button.Content>
+                <Button.Content visible> Back </Button.Content>
+              </Button>
+            </Link>
             <Card style={{ width: 'auto' }}>
               <Card.Content
                 style={{
@@ -173,7 +189,7 @@ class AgendaItem extends Component {
                 <Card.Header>RECOMMENDED ACTION</Card.Header>
                 {recommendation}
               </Card.Content>
-                    {/* what to vote on */}
+              {/* what to vote on */}
               {showActions ? (
                 <Card.Content>
                   <Card.Header>
@@ -209,14 +225,11 @@ class AgendaItem extends Component {
               ) : (
                 //no longer able to vote
                 <Card.Content>
-                  <Card.Header style={{}} >
-                  
-                    {
-                      
-                      pdfIsGenerated ? (
-                        //if pdf is generated
+                  <Card.Header style={{}}>
+                    {pdfIsGenerated ? (
+                      //if pdf is generated
                       <div
-                      className="commentingClosed"
+                        className="commentingClosed"
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
@@ -227,40 +240,66 @@ class AgendaItem extends Component {
                             display: 'relative',
                             width: '100%',
                             display: 'flex',
-                            justifyContent: 'space-between'
-                          }}
-                        >
+                            justifyContent: 'space-between',
+                          }}>
                           <div>
-                          <div>Note: Commenting is closed for this issue. </div>
-                          <div
+                            <div>
+                              Note: Commenting is closed for this issue.{' '}
+                            </div>
+                            <div
+                              style={{
+                                display: 'flex',
+                              }}>
+                              View resuls of public feedback for this issue by
+                              downloading this Report PDF:
+                            </div>{' '}
+                          </div>
+                          <a
                             style={{
-                              display: 'flex',
+                              position: 'relative',
+                              width: '70px',
+                              height: '70px',
                             }}>
-                            View resuls of public feedback for this issue by
-                            downloading this Report PDF:
-                          </div>{' '}
+                            <Image
+                              src="/static/image/pdf-icon.png"
+                              style={{
+                                position: 'relative',
+                                width: '100%',
+                                height: '100%',
+                              }}
+                            />
+                          </a>
                         </div>
-                        <a
-                        style={{ 
-                          position:'relative',
-                          width: '70px',
-                          height: '70px',
-                        }}
-                        >
-                        <Image
-                          src="/static/image/pdf-icon.png"
-                          style={{
-                            position: 'relative',
-                            width: '100%',
-                            height: '100%',
-                          }}
-                        /></a></div>
                       </div>
                     ) : (
                       //if pdf hasn't been generated
-                      <div>
-                        >> Results of public feedback are being assembled into a
-                        report which will be available here shortly.
+                      <div
+                        className="commentingClosed"
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                        }}>
+                        <div>>> </div>
+                        <div
+                          style={{
+                            display: 'relative',
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                          }}>
+                          <div>
+                            <div>
+                              Note: Commenting is closed for this issue.{' '}
+                            </div>
+                            <div
+                              style={{
+                                display: 'flex',
+                              }}>
+                             Results of public feedback are being assembled into a report which will be available here Shortly.
+                            </div>{' '}
+                          </div>
+                         
+                        </div>
                       </div>
                     )}
                   </Card.Header>
