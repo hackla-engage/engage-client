@@ -15,16 +15,21 @@ const Header = () => (
       paddingLeft: '1rem',
       backgroundColor: '#192a56',
       border: 'none',
+      padding: '0.5em'
     }}
     id="menu"
   >
-    <Menu.Item style={styles.link} name="browse" as={Link} to="/">
-      Engage
-    </Menu.Item>
+    <Container text>
+    <Menu.Menu id="brand-logo">
+      <Menu.Item style={{ fontFamily: 'Pacifico, cursive', color: '#fff',
+                          fontSize: '1.1em' }} name="browse" as={Link} to="/">
+        Engage
+      </Menu.Item>
+    </Menu.Menu>
 
     <Responsive as={Container} minWidth={breakPointSize}>
       <Menu.Menu position="right">
-        <Menu.Item style={styles.link} name="about" as={Link} to="/about">
+        <Menu.Item style={styles.link} name="about" as={Link} to="/about" position="right">
           About
         </Menu.Item>
         <Menu.Item style={styles.link} name="howto" as={Link} to="/howto">
@@ -62,7 +67,9 @@ const Header = () => (
         </Dropdown.Menu>
       </Dropdown>
     </Responsive>
+    </Container>
   </Menu>
+
 );
 
 export default Header;

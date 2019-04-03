@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Header, Image, Grid, Responsive, Segment } from 'semantic-ui-react';
+import './Landing.scss'
+
+import MailChimpForm from './MailChimpForm'
 
 const copyText = require('../../public/static/landing_page_copy.json');
 // const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
@@ -21,66 +24,93 @@ class Landing extends Component {
   render() {
     return (
       <div
-        style={{
-          overflow: 'scroll' /* has to be scroll, not auto */,
-          webkitOverflowScrolling: 'touch',
-        }}
-      >
+      style={{
+        overflow: 'visible' /* has to be scroll, not auto */,
+        webkitOverflowScrolling: 'touch',
+      }}>
         <Segment
           textAlign="center"
-          style={{ position: 'relative', minHeight: 650, padding: '1em 0em' }}
+          style={{ position: 'relative', minHeight: 380, padding: '1em 0em' ,
+                    border : 'None'}}
           vertical
         >
-          <Container text>
-            <Header
-              as="h1"
-              content={copyText.page_header.header_text}
-              inverted
-              style={{
-                fontSize: '4em',
-                color: '#192a56',
-                fontWeight: 'normal',
-                fontFamily: 'Pacifico, cursive',
-                marginBottom: 0,
-                marginTop: '1.5em',
-                textAlign: 'left',
-              }}
-            />
-            <Header
-              as="h2"
-              content={copyText.page_header.body_text}
-              inverted
-              style={{
-                fontSize: '1.7em',
-                fontWeight: 'bold',
-                color: 'black',
-                marginBottom: '1em',
-                textAlign: 'left',
-              }}
-            />
-            <Link
-              to="/feed"
-              style={{
-                color: '#FFF',
-              }}
-            >
-              <Button
-                primary
-                size="huge"
+          <Container fluid style={{marginTop: '5em'}}>
+              {/* <Header
+                as="h1"
+                content={copyText.page_header.header_text}
+                inverted
                 style={{
-                  backgroundColor: '#192a56',
-                  marginTop: '1rem',
-                  float: 'left',
+                  fontSize: '4em',
+                  color: '#192a56',
+                  fontWeight: 'normal',
+                  fontFamily: 'Pacifico, cursive',
+                  marginBottom: 0,
+                  marginTop: '1.5em',
+                  textAlign: 'center',
+                }}
+              /> */}
+              <Header
+                as="h2"
+                content={copyText.page_header.body_text}
+                inverted
+                style={{
+                  fontSize: '2.8em',
+                  fontWeight: '500',
+                  color: 'black',
+                  marginBottom: '0.5em',
+                  textAlign: 'center',
+                }}
+              />
+              <p style={{ fontSize: '1.5em',
+                           color: 'black',
+                           textAlign: 'center',
+                           fontWeight: '300',
+                           lineHeight: '1.5em'}}>Start using Engage today and be part of the discussion! Vote and comment on proposals from your local government</p>
+              <Link
+                to="/feed"
+                style={{
+                  color: '#FFF',
                 }}
               >
-                Start Engaging
-              </Button>
-            </Link>
+                <Button
+                  primary
+                  size="large"
+                  style={{
+                    backgroundColor: '#192a56',
+                    marginTop: '1rem',
+                    // float: 'left',
+                  }}
+                >
+                  Start Engaging
+                </Button>
+              </Link>
           </Container>
-          <div style={{ width: '100%' }}>
+        </Segment>
+        <Segment style={{
+            backgroundColor: '#f6f9fc',
+            border: 'None',
+            boxShadow: 'None',
+            paddingTop: '4em',
+            paddingBottom: '4em'
+          }}>
+          <Container>
+              <Header
+                as="h2"
+                content="Stay up to date! Get the latest proposals in your inbox."
+                inverted
+                style={{
+                  fontSize: '1.8em',
+                  fontWeight: '500',
+                  color: '#000',
+                  textAlign: 'center',
+                }}
+              />
+              <MailChimpForm id="home-page"/>
+          </Container>
+          {/* <div style={{ width: '100%' }}>
             <Responsive minWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -90,13 +120,13 @@ class Landing extends Component {
                   height: '100%',
                   minHeight: '650px',
                   objectFit: 'cover',
-                  opacity: '0.7',
+                  opacity: '0.5',
                 }}
               />
             </Responsive>
             <Responsive maxWidth={breakPointSize}>
               <Image
-                src="https://source.unsplash.com/xYjWeyS235w"
+                src="https://source.unsplash.com/VLDDaRX04GM"
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -106,17 +136,16 @@ class Landing extends Component {
                   height: 'auto',
                   minHeight: '650px',
                   objectFit: 'cover',
-                  opacity: '0.7',
+                  opacity: '0.5',
                 }}
               />
             </Responsive>
-          </div>
+           </div> */}
         </Segment>
         <Segment
           vertical
           style={{
             padding: '6em 0em',
-            backgroundColor: '#dfe4ea',
           }}
         >
           <Container text>

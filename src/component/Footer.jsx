@@ -28,7 +28,7 @@ const Footer = () => (
         style={{ display: 'block', marginBottom: '1rem' }}
         href="mailto:engagelosangeles@gmail.com"
       >
-        <Button style={{ backgroundColor: '#8CB474', color: 'white' }}>Send us a message</Button>
+        <Button style={{ backgroundColor: '#82BA2D', color: 'white' }}>Send us a message</Button>
       </a>
       <Grid verticalAlign="middle" centered>
         <Grid.Column mobile={4} tablet={2} computer={2}>
