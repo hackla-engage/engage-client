@@ -9,13 +9,15 @@ const Footer = () => (
       paddingLeft: '1rem',
       paddingRight: '1rem',
       margin: 0,
-      border: 'solid #192a56',
+      border: '0px solid #192a56',
       backgroundColor: '#192a56',
       color: '#ffffff',
+      width: '100%'
     }}>
     <Container textAlign="center">
       <h2 className="social-links__title">
-        Have a question? <br />
+        Have a question? 
+        <br />
         Want to help?
       </h2>
       <p>

@@ -1,0 +1,10 @@
+.commentingClosed{
+ font-size: 1.20rem
+}
+
+@media only screen and (max-width: 768px) {
+    .commentingClosed{
+        font-size: 1rem;
+font-weight: bold
+       };
+} 
