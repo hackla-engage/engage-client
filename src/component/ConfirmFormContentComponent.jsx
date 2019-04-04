@@ -32,6 +32,8 @@ class ConfirmFormContentComponent extends React.Component {
             </Button>
             <Header as="h4" className="agenda-item-section">
               Your name and zipcode:
+
+              
             </Header>
             {this.props.complete.firstName} {this.props.complete.lastName},{' '}
             {this.props.complete.zipcode}

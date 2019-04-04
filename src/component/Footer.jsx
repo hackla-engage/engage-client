@@ -12,11 +12,11 @@ const Footer = () => (
       border: '0px solid #192a56',
       backgroundColor: '#192a56',
       color: '#ffffff',
-      width: '100%'
+      width: '100%',
     }}>
     <Container textAlign="center">
       <h2 className="social-links__title">
-        Have a question? 
+        Have a question?
         <br />
         Want to help?
       </h2>
@@ -28,7 +28,13 @@ const Footer = () => (
       <a
         style={{ display: 'block', marginBottom: '1rem' }}
         href="mailto:engagelosangeles@gmail.com">
-        <Button style={{ backgroundColor: '#8CB474', color: 'white' }}>
+        <Button
+          style={{
+            backgroundColor: '#192a56',
+            color: 'white',
+            borderColor: '#192a56',
+            border: '1px solid #8CB474 '
+          }}>
           Send us a message
         </Button>
       </a>

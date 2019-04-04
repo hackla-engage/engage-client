@@ -12,6 +12,7 @@ import {
   Header,
   Image,
   Icon,
+  Divider,
 } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
@@ -154,10 +155,8 @@ class AgendaItem extends Component {
           <Container style={{ margin: 24, color: 'black' }}>
             <Link to="/feed">
               <Button animated basic color="black" size="large">
-                <Button.Content
-                hidden
-                >
-                  <Icon name="long arrow alternate left" size='' />
+                <Button.Content hidden>
+                  <Icon name="long arrow alternate left" size="" />
                 </Button.Content>
                 <Button.Content visible> Back </Button.Content>
               </Button>
@@ -295,27 +294,47 @@ class AgendaItem extends Component {
                               style={{
                                 display: 'flex',
                               }}>
-                             Results of public feedback are being assembled into a report which will be available here Shortly.
+                              Results of public feedback are being assembled
+                              into a report which will be available here
+                              Shortly.
                             </div>{' '}
                           </div>
-                         
                         </div>
                       </div>
                     )}
                   </Card.Header>
                 </Card.Content>
               )}
-              <Card.Content style={{ textAlign: 'center' }}>
-                <a
-                  href={detailPageLink}
-                  target="_blank"
-                  style={{ color: 'brown' }}>
-                  View More Details on the Council Page
-                </a>
-                <br />
-                <Link to={'/feed'} style={{ color: 'brown' }}>
-                  Return to Agenda Feed
-                </Link>
+              <Card.Content
+                id="agendaItemReturnToFeed"
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                }}>
+                <div
+                  style={{
+                    textAlign: 'right',
+                    width: '50%',
+                    paddingRight: '2rem',
+                    borderRight: '1px solid',
+
+                  }}>
+                  <a
+                    href={detailPageLink}
+                    target="_blank"
+                    style={{ color: '' }}>
+                    View More Details on the Council Page
+                  </a>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    textAlign: 'left',
+                    width: '50%',
+                    paddingLeft: '2rem',
+                  }}>
+                  <Link to={'/feed'}>Return to Agenda Feed</Link>
+                </div>
               </Card.Content>
               <Card.Content textAlign="center">
                 <Header as="h3">Share this Item</Header>
