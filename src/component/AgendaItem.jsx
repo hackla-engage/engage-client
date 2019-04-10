@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -306,34 +305,25 @@ class AgendaItem extends Component {
                 </Card.Content>
               )}
               <Card.Content
-                id="agendaItemReturnToFeed"
+                id="agendaItemLinks"
                 style={{
                   position: 'relative',
                   display: 'flex',
                 }}>
-                <div
-                  style={{
-                    textAlign: 'right',
-                    width: '50%',
-                    paddingRight: '2rem',
-                    borderRight: '1px solid',
-
-                  }}>
+                <div 
+                className="agendaItemLink1"
+                  >
                   <a
                     href={detailPageLink}
                     target="_blank"
                     style={{ color: '' }}>
-                    View More Details on the Council Page
+                    View More Details
                   </a>
                 </div>
                 <div
-                  style={{
-                    display: 'flex',
-                    textAlign: 'left',
-                    width: '50%',
-                    paddingLeft: '2rem',
-                  }}>
-                  <Link to={'/feed'}>Return to Agenda Feed</Link>
+                className="agendaItemLink2"
+                  >
+                  <Link to={'/feed'}>Return to Feed</Link>
                 </div>
               </Card.Content>
               <Card.Content textAlign="center">
