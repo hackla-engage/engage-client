@@ -35,20 +35,6 @@ class Landing extends Component {
           vertical
         >
           <Container fluid style={{marginTop: '5em'}}>
-              {/* <Header
-                as="h1"
-                content={copyText.page_header.header_text}
-                inverted
-                style={{
-                  fontSize: '4em',
-                  color: '#192a56',
-                  fontWeight: 'normal',
-                  fontFamily: 'Pacifico, cursive',
-                  marginBottom: 0,
-                  marginTop: '1.5em',
-                  textAlign: 'center',
-                }}
-              /> */}
               <Header
                 as="h2"
                 content={copyText.page_header.body_text}
@@ -87,7 +73,7 @@ class Landing extends Component {
           </Container>
         </Segment>
         <Segment style={{
-            backgroundColor: '#f6f9fc',
+            backgroundColor: '#e8ecf1',
             border: 'None',
             boxShadow: 'None',
             paddingTop: '4em',
@@ -107,40 +93,6 @@ class Landing extends Component {
               />
               <MailChimpForm id="home-page"/>
           </Container>
-          {/* <div style={{ width: '100%' }}>
-            <Responsive minWidth={breakPointSize}>
-              <Image
-                src="https://source.unsplash.com/VLDDaRX04GM"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: -1,
-                  width: '100%',
-                  height: '100%',
-                  minHeight: '650px',
-                  objectFit: 'cover',
-                  opacity: '0.5',
-                }}
-              />
-            </Responsive>
-            <Responsive maxWidth={breakPointSize}>
-              <Image
-                src="https://source.unsplash.com/VLDDaRX04GM"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: -1,
-                  width: '100%',
-                  height: 'auto',
-                  minHeight: '650px',
-                  objectFit: 'cover',
-                  opacity: '0.5',
-                }}
-              />
-            </Responsive>
-           </div> */}
         </Segment>
         <Segment
           vertical
