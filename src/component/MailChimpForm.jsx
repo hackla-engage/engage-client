@@ -16,7 +16,7 @@ class MailChimpForm extends Component {
     formSuccess: false,
     serverRequestError: false,
     serverRequestMessage: '',
-    formLoading: false
+    formLoading: false,
   };
   handleChange = (e, { name, value }) =>
     this.setState({
@@ -26,7 +26,7 @@ class MailChimpForm extends Component {
   handleSubmit = e => {
     let error = false;
     let success = false;
-    this.setState({formLoading:true})
+    this.setState({ formLoading: true });
 
     if (this.state.first_name === '') {
       this.setState({ first_nameError: true });
@@ -54,7 +54,7 @@ class MailChimpForm extends Component {
         formError: true,
         serverRequestError: false,
         formSuccess: false,
-        formLoading: false
+        formLoading: false,
       });
     }
 
@@ -74,14 +74,14 @@ class MailChimpForm extends Component {
             formError: false,
             serverRequestError: false,
             formSuccess: true,
-            formLoading: false
+            formLoading: false,
           });
         } else {
           this.setState({
             formSuccess: false,
             formError: false,
             serverRequestError: true,
-            formLoading:false,
+            formLoading: false,
             serverRequestMessage: r.payload.response,
           });
         }
