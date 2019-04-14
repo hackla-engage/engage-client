@@ -1,19 +1,19 @@
-import * as MailChimpSubscribe from '../actions/MailChimpPost'
+import * as MailChimpSubscribe from '../actions/MailChimpPost';
 
 const initialState = {
-    response: ""
-}
+  response: '',
+};
 
-export default (state=initialState, action) => {
-    switch(action.type) {
-        case MailChimpSubscribe.SUCCESS:
-            return ({
-                response: action.payload
-            })
-        
-            default:
-                return state
-    }
-}
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case MailChimpSubscribe.SUCCESS:
+      return {
+        response: action.payload,
+      };
 
-export const MailChimpSubscribeAPICall = (state) => state.response
+    default:
+      return state;
+  }
+};
+
+export const MailChimpSubscribeAPICall = state => state.response;

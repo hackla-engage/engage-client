@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Header, Image, Grid, Responsive, Segment } from 'semantic-ui-react';
-import './Landing.scss'
+import {
+  Button,
+  Container,
+  Header,
+  Image,
+  Grid,
+  Responsive,
+  Segment,
+} from 'semantic-ui-react';
+import './Landing.scss';
 
-import MailChimpForm from './MailChimpForm.jsx'
+import MailChimpForm from './MailChimpForm.jsx';
 
 const copyText = require('../../public/static/landing_page_copy.json');
 const appLink = '#/feed';
@@ -23,81 +31,88 @@ class Landing extends Component {
   render() {
     return (
       <div
-      style={{
-        overflow: 'visible' /* has to be scroll, not auto */,
-        webkitOverflowScrolling: 'touch',
-      }}>
+        style={{
+          overflow: 'visible' /* has to be scroll, not auto */,
+          webkitOverflowScrolling: 'touch',
+        }}>
         <Segment
           textAlign="center"
-          style={{ position: 'relative', minHeight: 380, padding: '1em 0em' ,
-                    border : 'None'}}
-          vertical
-        >
-          <Container fluid style={{marginTop: '5em'}}>
-              <Header
-                as="h2"
-                content={copyText.page_header.body_text}
-                inverted
+          style={{
+            position: 'relative',
+            minHeight: 380,
+            padding: '1em 0em',
+            border: 'None',
+          }}
+          vertical>
+          <Container fluid style={{ marginTop: '5em' }}>
+            <Header
+              as="h2"
+              content={copyText.page_header.body_text}
+              inverted
+              style={{
+                fontSize: '2.8em',
+                fontWeight: '500',
+                color: 'black',
+                marginBottom: '0.5em',
+                textAlign: 'center',
+              }}
+            />
+            <p
+              style={{
+                fontSize: '1.5em',
+                color: 'black',
+                textAlign: 'center',
+                fontWeight: '300',
+                lineHeight: '1.5em',
+              }}>
+              Start using Engage today and be part of the discussion! Vote and
+              comment on proposals from your local government
+            </p>
+            <Link
+              to="/feed"
+              style={{
+                color: '#FFF',
+              }}>
+              <Button
+                primary
+                size="large"
                 style={{
-                  fontSize: '2.8em',
-                  fontWeight: '500',
-                  color: 'black',
-                  marginBottom: '0.5em',
-                  textAlign: 'center',
-                }}
-              />
-              <p style={{ fontSize: '1.5em',
-                           color: 'black',
-                           textAlign: 'center',
-                           fontWeight: '300',
-                           lineHeight: '1.5em'}}>Start using Engage today and be part of the discussion! Vote and comment on proposals from your local government</p>
-              <Link
-                to="/feed"
-                style={{
-                  color: '#FFF',
-                }}
-              >
-                <Button
-                  primary
-                  size="large"
-                  style={{
-                    backgroundColor: '#192a56',
-                    marginTop: '1rem',
-                  }}
-                >
-                  Start Engaging
-                </Button>
-              </Link>
+                  backgroundColor: '#192a56',
+                  marginTop: '1rem',
+                }}>
+                Start Engaging
+              </Button>
+            </Link>
           </Container>
         </Segment>
-        <Segment style={{
+        <Segment
+          style={{
             backgroundColor: '#e8ecf1',
             border: 'None',
             boxShadow: 'None',
             paddingTop: '4em',
-            paddingBottom: '4em'
+            paddingBottom: '4em',
           }}>
           <Container>
-              <Header
-                as="h2"
-                content="Stay up to date! Get the latest proposals in your inbox."
-                inverted
-                style={{
-                  fontSize: '1.8em',
-                  fontWeight: '500',
-                  color: '#000',
-                  textAlign: 'center',
-                }}
-              />
-              <MailChimpForm id="home-page"/>
+            <Header
+              as="h2"
+              content="Stay up to date! Get the latest proposals in your inbox."
+              inverted
+              style={{
+                fontSize: '1.8em',
+                fontWeight: '500',
+                color: '#000',
+                textAlign: 'center',
+              }}
+            />
+            <MailChimpForm id="home-page" />
           </Container>
         </Segment>
         <Segment
           vertical
           style={{
             padding: '6em 0em',
-          }}
-        >
+          }}>
           <Container text>
             <Grid stackable columns="equal" align="center">
               <Grid.Row>
@@ -126,7 +141,6 @@ class Landing extends Component {
                       borderRadius: '50%',
                       height: '120px',
                       width: '120px',
-                      
                     }}
                   />
                   <div
@@ -134,7 +148,6 @@ class Landing extends Component {
                       color: 'black',
                       marginTop: '1em',
                       maxWidth: '220px',
-
                     }}>
                     View, Read, and Comment on Recent Agenda Items
                   </div>
@@ -153,7 +166,6 @@ class Landing extends Component {
                       marginTop: '1em',
                       marginBottom: '3em',
                       maxWidth: '220px',
-
                     }}>
                     Feel Empowered to Engage In-Person at City Meetings
                   </div>

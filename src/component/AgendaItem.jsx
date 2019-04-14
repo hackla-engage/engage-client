@@ -154,10 +154,8 @@ class AgendaItem extends Component {
           <Container style={{ margin: 24, color: 'black' }}>
             <Link to="/feed">
               <Button animated basic color="black" size="large">
-                <Button.Content
-                hidden
-                >
-                  <Icon name="long arrow alternate left" size='' />
+                <Button.Content hidden>
+                  <Icon name="long arrow alternate left" size="" />
                 </Button.Content>
                 <Button.Content visible> Back </Button.Content>
               </Button>
@@ -295,10 +293,11 @@ class AgendaItem extends Component {
                               style={{
                                 display: 'flex',
                               }}>
-                             Results of public feedback are being assembled into a report which will be available here Shortly.
+                              Results of public feedback are being assembled
+                              into a report which will be available here
+                              Shortly.
                             </div>{' '}
                           </div>
-                         
                         </div>
                       </div>
                     )}
