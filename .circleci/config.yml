@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client
     steps:
       - checkout
@@ -31,7 +31,7 @@ jobs:
   buildstaging:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client-staging
     steps:
       - checkout
@@ -55,7 +55,7 @@ jobs:
   deploy:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client
     steps:
       - checkout
@@ -83,7 +83,7 @@ jobs:
   deploystaging:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client-staging
     steps:
       - checkout

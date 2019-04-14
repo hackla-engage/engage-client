@@ -3,7 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import format from 'date-fns/format';
 import qs from 'query-string';
-import { Button, Card, Container, Divider, Icon, Modal } from 'semantic-ui-react';
+import {
+  Button,
+  Card,
+  Container,
+  Divider,
+  Icon,
+  Modal,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import { requestAgendas } from '../ducks/agendas';
@@ -31,13 +38,11 @@ class AgendaItemContainer extends Component {
             style={{
               display: 'flex',
               flexDirection: 'column',
-            }}
-          >
+            }}>
             <Card.Description
               style={{
                 alignSelf: 'flex-end',
-              }}
-            >
+              }}>
               <div>Meeting Date</div>
               <div>{format(meetTime, 'M/D/YYYY')}</div>
               <div>{format(meetTime, 'h:mm a')}</div>
@@ -45,12 +50,16 @@ class AgendaItemContainer extends Component {
           </Card.Content>
           <Card.Content>
             <Link to={`/feed/${id}`}>
-              <Card.Header style={{ color: 'black', fontSize: 24 }}>{title}</Card.Header>
+              <Card.Header style={{ color: 'black', fontSize: 24 }}>
+                {title}
+              </Card.Header>
             </Link>
           </Card.Content>
           <Card.Content>
             <Link to={`/feed/${id}`}>
-              <Button fluid style={{ backgroundColor: '#192a56', color: 'white' }}>
+              <Button
+                fluid
+                style={{ backgroundColor: '#192a56', color: 'white' }}>
                 <Icon name="list layout" />
                 View Item Details
               </Button>
@@ -68,5 +77,5 @@ function matchDispatchToProps(dispatch) {
 
 export default connect(
   undefined,
-  matchDispatchToProps,
+  matchDispatchToProps
 )(AgendaItemContainer);

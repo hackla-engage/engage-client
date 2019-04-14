@@ -65,7 +65,11 @@ class CommentForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { values, setByProps } = this.state;
     console.log(nextProps, 'nextProps componentWillReceiveProps CommentForm');
-    if (nextProps.complete != null && Object.keys(nextProps.complete).length !== 0 && !setByProps) {
+    if (
+      nextProps.complete != null &&
+      Object.keys(nextProps.complete).length !== 0 &&
+      !setByProps
+    ) {
       values.firstName.value = nextProps.complete.firstName;
       values.lastName.value = nextProps.complete.lastName;
       values.email.value = nextProps.complete.email;
@@ -166,52 +170,63 @@ class CommentForm extends Component {
     let submitEnabled = true;
     const { values } = this.state;
     switch (category) {
-    case 'firstName':
-      values.firstName.touched = true;
-      values.firstName.value = value;
-      if (value === '') {
-        values.firstName.error = 'First name is required';
-        submitEnabled = false;
-      } else {
-        values.firstName.error = '';
-      }
-      break;
-    case 'lastName':
-      values.lastName.touched = true;
-      values.lastName.value = value;
-      if (value === '') {
-        values.lastName.error = 'Last name is required';
-        submitEnabled = false;
-      } else {
-        values.lastName.error = '';
-      }
-      break;
-    case 'email':
-      values.email.touched = true;
-      values.email.value = value;
-      if (value === '' || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-        values.email.error = 'Email is required and must be in format name@domain.com';
-        submitEnabled = false;
-      } else {
-        values.email.error = '';
-      }
-      break;
-    case 'zipcode':
-      values.zipcode.touched = true;
-      values.zipcode.value = value;
-      if (!/^[0-9]{5}/.test(value)) {
-        values.zipcode.error = 'Zipcode is a 5 digit number, but not required';
-      } else {
-        values.zipcode.error = '';
-      }
-      break;
-    case 'content':
-      values.content.value = value;
-      break;
-    default:
-      break;
+      case 'firstName':
+        values.firstName.touched = true;
+        values.firstName.value = value;
+        if (value === '') {
+          values.firstName.error = 'First name is required';
+          submitEnabled = false;
+        } else {
+          values.firstName.error = '';
+        }
+        break;
+      case 'lastName':
+        values.lastName.touched = true;
+        values.lastName.value = value;
+        if (value === '') {
+          values.lastName.error = 'Last name is required';
+          submitEnabled = false;
+        } else {
+          values.lastName.error = '';
+        }
+        break;
+      case 'email':
+        values.email.touched = true;
+        values.email.value = value;
+        if (
+          value === '' ||
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+        ) {
+          values.email.error =
+            'Email is required and must be in format name@domain.com';
+          submitEnabled = false;
+        } else {
+          values.email.error = '';
+        }
+        break;
+      case 'zipcode':
+        values.zipcode.touched = true;
+        values.zipcode.value = value;
+        if (!/^[0-9]{5}/.test(value)) {
+          values.zipcode.error =
+            'Zipcode is a 5 digit number, but not required';
+        } else {
+          values.zipcode.error = '';
+        }
+        break;
+      case 'content':
+        values.content.value = value;
+        break;
+      default:
+        break;
     }
-    if ([values.firstName.value, values.lastName.value, values.email.value].includes('')) {
+    if (
+      [
+        values.firstName.value,
+        values.lastName.value,
+        values.email.value,
+      ].includes('')
+    ) {
       submitEnabled = false;
     }
     this.setState({ values, submitEnabled });
@@ -239,7 +254,9 @@ class CommentForm extends Component {
     } = this.state.values;
     return (
       <Form onSubmit={this.handleSubmit} size="large">
-        <div className="vote-title-holder">Tell us a little about yourself:</div>
+        <div className="vote-title-holder">
+          Tell us a little about yourself:
+        </div>
         <br />
         <div className="form-label">Name*</div>
         <Form.Group inline>
@@ -249,7 +266,7 @@ class CommentForm extends Component {
             autoComplete="first-name"
             placeholder="first name"
             value={firstName.value}
-            onChange={(evt) => {
+            onChange={evt => {
               this.handleTextChange('firstName', evt.target.value);
             }}
           />
@@ -259,15 +276,19 @@ class CommentForm extends Component {
             autoComplete="last-name"
             placeholder="last name"
             value={lastName.value}
-            onChange={(evt) => {
+            onChange={evt => {
               this.handleTextChange('lastName', evt.target.value);
             }}
           />
         </Form.Group>
         {this.state.values.firstName.touched &&
-          this.state.values.firstName.error && <div className="error">First name is required</div>}
+          this.state.values.firstName.error && (
+            <div className="error">First name is required</div>
+          )}
         {this.state.values.lastName.touched &&
-          this.state.values.lastName.error && <div className="error">Last name is required</div>}
+          this.state.values.lastName.error && (
+            <div className="error">Last name is required</div>
+          )}
         <Form.Field
           label="Email*"
           control="input"
@@ -276,12 +297,13 @@ class CommentForm extends Component {
           autoComplete="email"
           placeholder="email"
           value={email.value}
-          onChange={(evt) => {
+          onChange={evt => {
             this.handleTextChange('email', evt.target.value);
           }}
         />
-        {this.state.values.email.touched &&
-          this.state.values.email.error && <div className="error">Error in email</div>}
+        {this.state.values.email.touched && this.state.values.email.error && (
+          <div className="error">Error in email</div>
+        )}
         <Form.Field
           label="Zipcode (optional)"
           type="text"
@@ -292,29 +314,30 @@ class CommentForm extends Component {
           maxLength="5"
           minLength="5"
           value={zipcode.value}
-          onChange={(evt) => {
+          onChange={evt => {
             this.handleTextChange('zipcode', evt.target.value);
           }}
         />
-        {this.state.values.zipcode.touched &&
-          this.state.values.zipcode.error && (
+        {this.state.values.zipcode.touched && this.state.values.zipcode.error && (
           <div className="error">
-              Error in zipcode, but it is optional
+            Error in zipcode, but it is optional
             <br />
           </div>
         )}
         <Form.Field
           autoheight="true"
-          label="Let the council know what you think about this item. The actual text you write will NOT go to the council, but an analysis will (optional):"
+          label="Let the council know what you think about this item (optional):"
           control="textarea"
           rows="3"
           maxLength={200}
           value={content.value}
-          onChange={(evt) => {
+          onChange={evt => {
             this.handleTextChange('content', evt.target.value);
           }}
         />
-        <div className="chars">{200 - this.state.values.content.value.length} characters left</div>
+        <div className="chars">
+          {200 - this.state.values.content.value.length} characters left
+        </div>
         <br />
         <br />
         <Header as="h4">Demographics:</Header>

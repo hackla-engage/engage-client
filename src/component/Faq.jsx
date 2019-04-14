@@ -14,15 +14,16 @@ const Faq = props => (
         padding: '8em 0em',
         backgroundImage: 'linear-gradient(180deg, #80C3F3, #4A90E2)',
       }}
-      vertical
-    >
+      vertical>
       <Container text style={{}}>
         <Header as="h1">FAQ</Header>
         <Header as="h3" style={{ fontSize: '2em' }}>
           {copyText.what_is_engage.header_text}
         </Header>
 
-        <p style={{ fontSize: '1.33em' }}>{copyText.what_is_engage.body_text}</p>
+        <p style={{ fontSize: '1.33em' }}>
+          {copyText.what_is_engage.body_text}
+        </p>
         <Divider
           as="h4"
           className="header"
@@ -36,7 +37,7 @@ const Faq = props => (
           {copyText.use_engage.body_text}
           <br />
           <a style={linkStyle} href="mailto:engagelosangeles@gmail.com">
-              engagelosangeles@gmail.com
+            engagelosangeles@gmail.com
           </a>
         </p>
         <Divider

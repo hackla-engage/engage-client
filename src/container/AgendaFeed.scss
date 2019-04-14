@@ -1,0 +1,16 @@
+#mc_embed_signup {
+  background: #fff;
+  clear: left;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+.mailChimpFormFeed{
+  width: 460px;
+
+  margin: auto;
+}
+
+@media only screen and (max-width: 550px) {
+  .mailChimpFormFeed{
+  width: 100%;
+  }
+} 

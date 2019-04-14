@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { apiMiddleware } from 'redux-api-middleware'
+import { apiMiddleware } from 'redux-api-middleware';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
@@ -9,7 +9,7 @@ import * as agendaActions from '../ducks/agendas';
 
 const history = createHashHistory();
 
-const configureStore = (initialState) => {
+const configureStore = initialState => {
   // Redux Configuration
   const middleware = [];
   const enhancers = [];
@@ -38,9 +38,9 @@ const configureStore = (initialState) => {
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
-      actionCreators,
-    })
+        // Options: http://zalmoxisus.github.io/redux-devtools-extension/API/Arguments.html
+        actionCreators,
+      })
     : compose;
   /* eslint-enable no-underscore-dangle */
 
@@ -49,7 +49,7 @@ const configureStore = (initialState) => {
   const enhancer = composeEnhancers(...enhancers);
 
   // Create Store
-  const store = createStore(rootReducer, initialState,enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
 
   // if (module.hot) {
   //   module.hot.accept('../reducers', () =>

@@ -9,9 +9,10 @@ const Footer = () => (
       paddingLeft: '1rem',
       paddingRight: '1rem',
       margin: 0,
-      border: 'solid #192a56',
+      border: '0px solid #192a56',
       backgroundColor: '#192a56',
       color: '#ffffff',
+      width: '100%'
     }}
   >
     <Container textAlign="center" style={{ paddingTop: '3em', paddingBottom: '3em' }}>

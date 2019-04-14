@@ -15,6 +15,7 @@ const Header = () => (
       paddingLeft: '1rem',
       backgroundColor: '#192a56',
       border: 'none',
+      width: '100%',
       padding: '0.5em'
     }}
     id="menu"
@@ -46,14 +47,12 @@ const Header = () => (
         }}
         item
         simple
-        text="Menu"
-      >
+        text="Menu">
         <Dropdown.Menu
           style={{
             color: '#FFF',
             backgroundColor: '#192a56',
-          }}
-        >
+          }}>
           <Dropdown.Item>
             <Link style={styles.link} to="/about">
               About

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container, Header, Image, Grid, Responsive, Segment } from 'semantic-ui-react';
 import './Landing.scss'
 
-import MailChimpForm from './MailChimpForm'
+import MailChimpForm from './MailChimpForm.jsx'
 
 const copyText = require('../../public/static/landing_page_copy.json');
 const appLink = '#/feed';
@@ -99,14 +99,14 @@ class Landing extends Component {
           }}
         >
           <Container text>
-            <Grid columns="equal" align="center">
+            <Grid stackable columns="equal" align="center">
               <Grid.Row>
                 <Grid.Column>
                   <Image
                     src="/static/image/news-feed-icon.png"
                     style={{
-                      height: '100px',
-                      width: '100px',
+                      height: '120px',
+                      width: '120px',
                       textAlign: 'center',
                     }}
                   />
@@ -114,8 +114,8 @@ class Landing extends Component {
                     style={{
                       color: 'black',
                       marginTop: '1em',
-                    }}
-                  >
+                      maxWidth: '220px',
+                    }}>
                     Get Informed on City Developments
                   </div>
                 </Grid.Column>
@@ -124,16 +124,18 @@ class Landing extends Component {
                     src="/static/image/comment-icon.png"
                     style={{
                       borderRadius: '50%',
-                      height: '100px',
-                      width: '100px',
+                      height: '120px',
+                      width: '120px',
+                      
                     }}
                   />
                   <div
                     style={{
                       color: 'black',
                       marginTop: '1em',
-                    }}
-                  >
+                      maxWidth: '220px',
+
+                    }}>
                     View, Read, and Comment on Recent Agenda Items
                   </div>
                 </Grid.Column>
@@ -141,8 +143,8 @@ class Landing extends Component {
                   <Image
                     src="/static/image/people-icon.png"
                     style={{
-                      height: '100px',
-                      width: '100px',
+                      height: '120px',
+                      width: '120px',
                     }}
                   />
                   <div
@@ -150,8 +152,9 @@ class Landing extends Component {
                       color: 'black',
                       marginTop: '1em',
                       marginBottom: '3em',
-                    }}
-                  >
+                      maxWidth: '220px',
+
+                    }}>
                     Feel Empowered to Engage In-Person at City Meetings
                   </div>
                 </Grid.Column>
@@ -169,8 +172,7 @@ class Landing extends Component {
                 style={{
                   color: 'black',
                   fontSize: '1.1em',
-                }}
-              >
+                }}>
                 {copyText.what_is_engage.body_text}
               </p>
             </div>
