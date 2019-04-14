@@ -6,7 +6,6 @@ import './Landing.scss'
 import MailChimpForm from './MailChimpForm'
 
 const copyText = require('../../public/static/landing_page_copy.json');
-// const appLink = "https://www.figma.com/proto/DFWuuo5ZVOEgEmKedY6I8bRd/engage_prototype---Page-1?scaling=contain&node-id=158%3A393"
 const appLink = '#/feed';
 const breakPointSize = 767;
 
@@ -64,7 +63,6 @@ class Landing extends Component {
                   style={{
                     backgroundColor: '#192a56',
                     marginTop: '1rem',
-                    // float: 'left',
                   }}
                 >
                   Start Engaging
