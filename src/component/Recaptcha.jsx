@@ -19,7 +19,8 @@ class Recaptcha extends Component {
             flexDirection: 'column',
             alignItems: 'center',
             alignContent: 'center',
-          }}>
+          }}
+        >
           <Header as="h3">We need to make sure you are a human.</Header>
           <ReCAPTCHA
             ref="recaptcha"
