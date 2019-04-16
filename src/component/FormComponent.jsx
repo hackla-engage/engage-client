@@ -60,24 +60,21 @@ class FormComponent extends Component {
       </Segment>
     );
   }
-};
+}
 
 FormComponent.propTypes = {
-  Committee : PropTypes.string,
-  Id: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ]),
+  Committee: PropTypes.string,
+  Id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   Pro: PropTypes.number,
-  Recommendations:PropTypes.array,
-  Summary:PropTypes.string,
+  Recommendations: PropTypes.array,
+  Summary: PropTypes.string,
   Title: PropTypes.string,
   complete: PropTypes.object,
   editing: PropTypes.bool,
   completeForm: PropTypes.func,
   resetForm: PropTypes.func,
   returnToItem: PropTypes.func,
-  scrollToAppTop: PropTypes.func
-}
+  scrollToAppTop: PropTypes.func,
+};
 
 export default FormComponent;

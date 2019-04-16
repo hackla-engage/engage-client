@@ -29,14 +29,15 @@ const Footer = () => (
         style={{ display: 'block', marginBottom: '1rem' }}
         href="mailto:engagelosangeles@gmail.com">
         <Button
-        
-       inverted
-          style={{
-            // backgroundColor: '#192a56',
-            // color: 'white',
-            // borderColor: '#192a56',
-            // border: '1px solid #8CB474 '
-          }}>
+          inverted
+          style={
+            {
+              // backgroundColor: '#192a56',
+              // color: 'white',
+              // borderColor: '#192a56',
+              // border: '1px solid #8CB474 '
+            }
+          }>
           Send us a message
         </Button>
       </a>

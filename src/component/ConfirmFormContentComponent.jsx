@@ -12,7 +12,6 @@ class ConfirmFormContentComponent extends React.Component {
     this.props.scrollToAppTop();
   }
   render() {
-
     return (
       <Container>
         <Segment>
@@ -34,8 +33,6 @@ class ConfirmFormContentComponent extends React.Component {
             </Button>
             <Header as="h4" className="agenda-item-section">
               Your name and zipcode:
-
-              
             </Header>
             {this.props.complete.firstName} {this.props.complete.lastName},{' '}
             {this.props.complete.zipcode}
@@ -116,8 +113,6 @@ class ConfirmFormContentComponent extends React.Component {
   }
 }
 
-
-
 ConfirmFormContentComponent.propTypes = {
   AgendaItemId: PropTypes.number,
   editingForm: PropTypes.func,
@@ -126,6 +121,6 @@ ConfirmFormContentComponent.propTypes = {
   scrollToAppTop: PropTypes.func,
   pro: PropTypes.number,
   handleSubmit: PropTypes.func,
-} 
+};
 
 export default ConfirmFormContentComponent;

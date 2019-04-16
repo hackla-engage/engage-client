@@ -74,8 +74,8 @@ class AgendaItemContainer extends Component {
 AgendaItemContainer.propTypes = {
   id: PropTypes.number,
   meet_time: PropTypes.number,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+};
 
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas }, dispatch);

@@ -66,11 +66,11 @@ class PositionFormFinalStep extends Component {
       </Container>
     );
   }
-};
+}
 
 PositionFormFinalStep.propTypes = {
   id: PropTypes.number,
   returnToItem: PropTypes.func,
-}
+};
 
 export default PositionFormFinalStep;

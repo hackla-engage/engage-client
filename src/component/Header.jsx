@@ -16,7 +16,7 @@ const Header = () => (
       backgroundColor: '#192a56',
       border: 'none',
       width: '100%',
-       margin: 0
+      margin: 0,
     }}
     id="menu">
     <Menu.Item style={styles.link} name="browse" as={Link} to="/">

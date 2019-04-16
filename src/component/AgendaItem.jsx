@@ -17,7 +17,7 @@ import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
 import './AgendaItem.scss';
-import {getJSON} from '../engage_client'
+import { getJSON } from '../engage_client';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 
@@ -32,7 +32,6 @@ class AgendaItem extends Component {
     if (Object.keys(this.props.agendaItems).length < 2) {
       this.props.requestAgendas('agendas');
     }
-   
   }
 
   goToForm() {
@@ -89,12 +88,11 @@ class AgendaItem extends Component {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
 
-    console.log(this.props.location.pathname)
+    console.log(this.props.location.pathname);
     const url = this.props.location.pathname.split('/'),
-    newUrl = url[url.length-1]
-  console.log(newUrl)
-    getJSON(`agendas/${newUrl}`)
-    .then(json=>console.log(json))
+      newUrl = url[url.length - 1];
+    console.log(newUrl);
+    getJSON(`agendas/${newUrl}`).then(json => console.log(json));
   }
 
   render() {
@@ -161,9 +159,9 @@ class AgendaItem extends Component {
         {agendaItem ? (
           <Container style={{ margin: 24, color: 'black' }}>
             <Link to="/feed">
-              <Button animated basic color="black" >
+              <Button animated basic color="black">
                 <Button.Content hidden>
-            {/* icons fails proptype check but only way to get correct size */}
+                  {/* icons fails proptype check but only way to get correct size */}
                   <Icon name="long arrow left" size />
                 </Button.Content>
                 <Button.Content visible> Back </Button.Content>
@@ -319,19 +317,15 @@ class AgendaItem extends Component {
                   position: 'relative',
                   display: 'flex',
                 }}>
-                <div 
-                className="agendaItemLink1"
-                  >
+                <div className="agendaItemLink1">
                   <a
                     href={detailPageLink}
                     target="_blank"
                     style={{ color: '' }}>
-                    View More Details 
+                    View More Details
                   </a>
                 </div>
-                <div
-                className="agendaItemLink2"
-                  >
+                <div className="agendaItemLink2">
                   <Link to={'/feed'}>Return to Feed</Link>
                 </div>
               </Card.Content>

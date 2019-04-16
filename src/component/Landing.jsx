@@ -35,7 +35,12 @@ class Landing extends Component {
         }}>
         <Segment
           textAlign="center"
-          style={{ position: 'relative', minHeight: 515, padding: '1em 0em', top:0 }}
+          style={{
+            position: 'relative',
+            minHeight: 515,
+            padding: '1em 0em',
+            top: 0,
+          }}
           vertical>
           <Container text>
             <Header
@@ -150,7 +155,6 @@ class Landing extends Component {
                       borderRadius: '50%',
                       height: '120px',
                       width: '120px',
-                      
                     }}
                   />
                   <div
@@ -158,7 +162,6 @@ class Landing extends Component {
                       color: 'black',
                       marginTop: '1em',
                       maxWidth: '220px',
-
                     }}>
                     View, Read, and Comment on Recent Agenda Items
                   </div>
@@ -177,7 +180,6 @@ class Landing extends Component {
                       marginTop: '1em',
                       marginBottom: '3em',
                       maxWidth: '220px',
-
                     }}>
                     Feel Empowered to Engage In-Person at City Meetings
                   </div>

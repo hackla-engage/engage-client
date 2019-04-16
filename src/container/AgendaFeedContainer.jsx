@@ -5,19 +5,27 @@ import { requestAgendas } from '../ducks/agendas';
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
-import { Button, Grid, Divider, Container, Header, Radio, Icon } from 'semantic-ui-react';
+import {
+  Button,
+  Grid,
+  Divider,
+  Container,
+  Header,
+  Radio,
+  Icon,
+} from 'semantic-ui-react';
 import { format } from 'date-fns';
 import './AgendaFeed.scss';
 
 class AgendaFeed extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       radio: '',
-      agendaResults:[],
-      agendaIDs:[],
-      agendaItems: {}
-    }
+      agendaResults: [],
+      agendaIDs: [],
+      agendaItems: {},
+    };
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
     this.getMoreAgendas = this.getMoreAgendas.bind(this);
@@ -26,31 +34,26 @@ class AgendaFeed extends Component {
   static defaultProps = {
     agendaResults: [],
     agendaIDs: [],
-    agendaItems: {}
-  }
-  componentDidUpdate(prevProps, prevState){
-    let {
-      agendaItems,
-      agendaIDs,
-      agendaResults
-     
-    } = this.props;
+    agendaItems: {},
+  };
+  componentDidUpdate(prevProps, prevState) {
+    let { agendaItems, agendaIDs, agendaResults } = this.props;
 
-
-    const prevRes = prevProps.agendaResults
-    if(agendaResults[agendaResults.length-1]!== prevRes[prevRes.length-1]){
-      this.setState((state)=>({
+    const prevRes = prevProps.agendaResults;
+    if (
+      agendaResults[agendaResults.length - 1] !== prevRes[prevRes.length - 1]
+    ) {
+      this.setState(state => ({
         agendaResults: [...agendaResults],
         agendaIDs: [...agendaIDs],
-        agendaItems: {...state.agendaItems, ...agendaItems}
-      }))
+        agendaItems: { ...state.agendaItems, ...agendaItems },
+      }));
     }
-// else if(prevRes[prevRes.length -1].id !== agendaResults[agendaResults.length -1].id){
-//   this.setState((state)=>({
-//     agendaResults: [...state.agendaResults, ...agendaResults]
-//   }))
-// }
-
+    // else if(prevRes[prevRes.length -1].id !== agendaResults[agendaResults.length -1].id){
+    //   this.setState((state)=>({
+    //     agendaResults: [...state.agendaResults, ...agendaResults]
+    //   }))
+    // }
   }
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
@@ -63,15 +66,22 @@ class AgendaFeed extends Component {
     if (parsed && parsed.id) {
       this.requestedID = parseInt(parsed.id);
     }
-    const { requestAgendas, agendaItems, agendaIDs, agendaResults } = this.props;
-    if(agendaResults[0]){
-      this.setState((state)=>({
-        agendaIDs, agendaItems, agendaResults
-      }))
-    }else{
-    requestAgendas('agendas');
+    const {
+      requestAgendas,
+      agendaItems,
+      agendaIDs,
+      agendaResults,
+    } = this.props;
+    if (agendaResults[0]) {
+      this.setState(state => ({
+        agendaIDs,
+        agendaItems,
+        agendaResults,
+      }));
+    } else {
+      requestAgendas('agendas');
     }
-    document.querySelector('#app').scrollTop = 0
+    document.querySelector('#app').scrollTop = 0;
   }
 
   addId(id) {
@@ -147,35 +157,30 @@ class AgendaFeed extends Component {
   getMoreAgendas() {
     const { requestAgendas } = this.props;
     requestAgendas(this.props.nextAgendaURL);
-    console.log(this.props.nextAgendaURL, 'fancy')
+    console.log(this.props.nextAgendaURL, 'fancy');
   }
 
-  radioSelection(e){
+  radioSelection(e) {
     let display;
-    switch(e.target.value){
+    switch (e.target.value) {
       case 'html':
-        display = 'HTML'
+        display = 'HTML';
         break;
       case 'text':
-        display = 'Plain-text'
+        display = 'Plain-text';
         break;
       default:
-        display = ''
+        display = '';
     }
     this.setState({
-      radio: display
-    })
+      radio: display,
+    });
   }
- 
+
   render() {
-    const {
-      
-      agendaLoading,
-      agendaLoadError,
-     
-    } = this.props;
-    const {agendaItems, agendaIDs, agendaResults} = this.state 
-  
+    const { agendaLoading, agendaLoadError } = this.props;
+    const { agendaItems, agendaIDs, agendaResults } = this.state;
+
     //checks if async data has loaded
     const recentAgendaData =
       agendaItems &&
@@ -201,33 +206,30 @@ class AgendaFeed extends Component {
                   There are no active issues available for public feedback at
                   this time.
                 </Header>
-                
+
                 <p>
                   To be notified when issues become available for public
                   feedback, follow us on Twitter:
                 </p>
-                <a href="https://twitter.com/EngageStaMonica "
-                target="_blank"
-                >
-                <Icon name="twitter" size="large" />  @EngageStaMonica
+                <a href="https://twitter.com/EngageStaMonica " target="_blank">
+                  <Icon name="twitter" size="large" /> @EngageStaMonica
                 </a>
-                <p
-                  style={{paddingTop: '15px'}}
-                >
+                <p style={{ paddingTop: '15px' }}>
                   You can also get updates by subscribing to the Engage Santa
                   Monica email newsletter:
                 </p>
-                      {/*********** MAIL CHIMP NEWSLETTER ************/}
+                {/*********** MAIL CHIMP NEWSLETTER ************/}
                 {/* <Divider/> */}
-                <Header><Icon name="mail"/> Email Newsletter</Header>
-                <div id="mc_embed_signup"
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '100%'
-                }}
-                >
-                
+                <Header>
+                  <Icon name="mail" /> Email Newsletter
+                </Header>
+                <div
+                  id="mc_embed_signup"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
+                  }}>
                   <form
                     action="https://hackforla.us19.list-manage.com/subscribe/post?u=2885093b7df42c79d628f7267&amp;id=6ca892a88b"
                     method="post"
@@ -236,10 +238,12 @@ class AgendaFeed extends Component {
                     className="validate"
                     target="_blank"
                     style={{
-                      width: '100%'
+                      width: '100%',
                     }}
                     noValidate>
-                    <div id="mc_embed_signup_scroll" className="mailChimpFormFeed">
+                    <div
+                      id="mc_embed_signup_scroll"
+                      className="mailChimpFormFeed">
                       <div className="indicates-required">
                         <span className="asterisk">*</span> indicates required
                       </div>
@@ -276,14 +280,13 @@ class AgendaFeed extends Component {
                         <strong>Email Format: </strong> {this.state.radio}
                         <ul>
                           <li>
-                          <Radio 
-                            label="HTML"
-                            value="html"
-                            name="EMAILTYPE"
-                            checked={this.state.radio === 'HTML'}
-                              onChange={(e)=>this.radioSelection(e)}
+                            <Radio
+                              label="HTML"
+                              value="html"
+                              name="EMAILTYPE"
+                              checked={this.state.radio === 'HTML'}
+                              onChange={e => this.radioSelection(e)}
                               id="mce-EMAILTYPE-0"
-
                             />
                             {/* <input
                               type="radio"
@@ -294,17 +297,14 @@ class AgendaFeed extends Component {
                             <label htmlFor="mce-EMAILTYPE-0">html</label> */}
                           </li>
                           <li>
-                          <Radio 
-                            label="Plain-Text"
-                            value="text"
-                            name="EMAILTYPE"
-                            checked={this.state.radio === 'Plain-text'}
-
-                            onChange={(e)=>this.radioSelection(e)}
-                            id="mce-EMAILTYPE-1"
-
+                            <Radio
+                              label="Plain-Text"
+                              value="text"
+                              name="EMAILTYPE"
+                              checked={this.state.radio === 'Plain-text'}
+                              onChange={e => this.radioSelection(e)}
+                              id="mce-EMAILTYPE-1"
                             />
-                           
                           </li>
                         </ul>
                       </div>
@@ -327,21 +327,23 @@ class AgendaFeed extends Component {
                         <input
                           type="text"
                           name="b_2885093b7df42c79d628f7267_6ca892a88b"
-                          tabI ndex="-1"
+                          tabI
+                          ndex="-1"
                           value=""
                         />
                       </div>
                       <div className="clear">
-                        <Button 
-                         type="submit"
-                         value="Subscribe"
-                         name="subscribe"
-                         id="mc-embedded-subscribe"
-                         onClick={()=>location.reload()}
-                            style={{
-                              marginTop:'15px'
-                            }}
-                         >Subscribe</Button>
+                        <Button
+                          type="submit"
+                          value="Subscribe"
+                          name="subscribe"
+                          id="mc-embedded-subscribe"
+                          onClick={() => location.reload()}
+                          style={{
+                            marginTop: '15px',
+                          }}>
+                          Subscribe
+                        </Button>
                       </div>
                     </div>
                   </form>
@@ -355,20 +357,18 @@ class AgendaFeed extends Component {
                   Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';(jQuery));var
                   $mcj = jQuery.noConflict(true);
                 </script>
-                <Divider
-                style={{
-                }}
-                ></Divider>
+                <Divider style={{}} />
 
-                <Header 
-                style={{
-                  paddingTop: '70px',
-                  textDecoration: 'underline'
-                }}
-                size='small'>BROWSE PAST ISSUES BELOW</Header>
-
+                <Header
+                  style={{
+                    paddingTop: '70px',
+                    textDecoration: 'underline',
+                  }}
+                  size="small">
+                  BROWSE PAST ISSUES BELOW
+                </Header>
               </div>
-                          {/*********** MAIL CHIMP NEWSLETTER END ************/}
+              {/*********** MAIL CHIMP NEWSLETTER END ************/}
             </Container>
           ) : (
             <div />
@@ -419,7 +419,6 @@ class AgendaFeed extends Component {
                 content="Load More"
                 color="black"
                 basic
-                
               />
             )}
           </Grid>
