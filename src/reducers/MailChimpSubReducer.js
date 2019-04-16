@@ -1,4 +1,4 @@
-import * as MailChimpSubscribe from '../actions/MailChimpPost';
+import { MailChimpSubscribe } from '../actions/MailChimpPost';
 
 const initialState = {
   response: '',
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case MailChimpSubscribe.SUCCESS:
+    case MailChimpSubscribe.SUB_SUCCESS:
       return {
         response: action.payload,
       };
