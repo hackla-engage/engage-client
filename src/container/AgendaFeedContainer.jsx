@@ -13,15 +13,45 @@ class AgendaFeed extends Component {
   constructor(props) {
     super(props);
     this.state={
-      radio: ''
+      radio: '',
+      agendaResults:[],
+      agendaIDs:[],
+      agendaItems: {}
     }
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
     this.getMoreAgendas = this.getMoreAgendas.bind(this);
     this.radioSelection = this.radioSelection.bind(this);
-    this.emailInput = this.emailInput.bind(this);
   }
+  static defaultProps = {
+    agendaResults: [],
+    agendaIDs: [],
+    agendaItems: {}
+  }
+  componentDidUpdate(prevProps, prevState){
+    let {
+      agendaItems,
+      agendaIDs,
+      agendaResults
+     
+    } = this.props;
 
+
+    const prevRes = prevProps.agendaResults
+    if(agendaResults[agendaResults.length-1]!== prevRes[prevRes.length-1]){
+      this.setState((state)=>({
+        agendaResults: [...agendaResults],
+        agendaIDs: [...agendaIDs],
+        agendaItems: {...state.agendaItems, ...agendaItems}
+      }))
+    }
+// else if(prevRes[prevRes.length -1].id !== agendaResults[agendaResults.length -1].id){
+//   this.setState((state)=>({
+//     agendaResults: [...state.agendaResults, ...agendaResults]
+//   }))
+// }
+
+  }
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
     // This will then get stored in our redux state.
@@ -33,11 +63,15 @@ class AgendaFeed extends Component {
     if (parsed && parsed.id) {
       this.requestedID = parseInt(parsed.id);
     }
-
-    const { requestAgendas } = this.props;
+    const { requestAgendas, agendaItems, agendaIDs, agendaResults } = this.props;
+    if(agendaResults[0]){
+      this.setState((state)=>({
+        agendaIDs, agendaItems, agendaResults
+      }))
+    }else{
     requestAgendas('agendas');
+    }
     document.querySelector('#app').scrollTop = 0
-
   }
 
   addId(id) {
@@ -113,10 +147,10 @@ class AgendaFeed extends Component {
   getMoreAgendas() {
     const { requestAgendas } = this.props;
     requestAgendas(this.props.nextAgendaURL);
+    console.log(this.props.nextAgendaURL, 'fancy')
   }
 
   radioSelection(e){
-    console.log(e.target.value)
     let display;
     switch(e.target.value){
       case 'html':
@@ -128,25 +162,20 @@ class AgendaFeed extends Component {
       default:
         display = ''
     }
-    console.log(display)
     this.setState({
       radio: display
     })
   }
-  emailInput(e){
-    const stateObj = {
-      [e.target.name]: e.target.value
-    }
-    console.log(stateObj)
-  }
+ 
   render() {
     const {
-      agendaItems,
-      agendaIDs,
+      
       agendaLoading,
       agendaLoadError,
-      agendaResults,
+     
     } = this.props;
+    const {agendaItems, agendaIDs, agendaResults} = this.state 
+  
     //checks if async data has loaded
     const recentAgendaData =
       agendaItems &&
@@ -381,14 +410,16 @@ class AgendaFeed extends Component {
               </div>
             );
           })}
-          <Grid style={{ margin: '6px' }} centered>
+          <Grid style={{ margin: '20px' }} centered>
             {agendaLoading ? (
-              <Button loading primary />
+              <Button loading basic color="black" />
             ) : (
               <Button
                 onClick={this.getMoreAgendas}
                 content="Load More"
-                primary
+                color="black"
+                basic
+                
               />
             )}
           </Grid>

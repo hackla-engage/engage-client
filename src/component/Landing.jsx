@@ -31,11 +31,11 @@ class Landing extends Component {
       <div
         style={{
           overflow: 'visible' /* has to be scroll, not auto */,
-          webkitOverflowScrolling: 'touch',
+          WebkitOverflowScrolling: 'touch',
         }}>
         <Segment
           textAlign="center"
-          style={{ position: 'relative', minHeight: 515, padding: '1em 0em' }}
+          style={{ position: 'relative', minHeight: 515, padding: '1em 0em', top:0 }}
           vertical>
           <Container text>
             <Header

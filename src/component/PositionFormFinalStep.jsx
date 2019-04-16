@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Image, Container } from 'semantic-ui-react';
 import './PositionForm.scss';
+import PropTypes from 'prop-types';
 
 class PositionFormFinalStep extends Component {
   constructor(props) {
@@ -65,6 +66,11 @@ class PositionFormFinalStep extends Component {
       </Container>
     );
   }
+};
+
+PositionFormFinalStep.propTypes = {
+  id: PropTypes.number,
+  returnToItem: PropTypes.func,
 }
 
 export default PositionFormFinalStep;

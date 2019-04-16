@@ -29,7 +29,8 @@ const Footer = () => (
         style={{ display: 'block', marginBottom: '1rem' }}
         href="mailto:engagelosangeles@gmail.com">
         <Button
-        primary
+        
+       inverted
           style={{
             // backgroundColor: '#192a56',
             // color: 'white',

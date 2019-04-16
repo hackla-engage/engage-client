@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Grid, Checkbox, Header } from 'semantic-ui-react';
-
+import PropTypes from 'prop-types'
 import './FormComponent.scss';
 
 class CommentForm extends Component {
@@ -408,6 +408,15 @@ class CommentForm extends Component {
       </Form>
     );
   }
+}
+
+CommentForm.propTypes = {
+  Id: PropTypes.string,
+  Title: PropTypes.string,
+  completeForm: PropTypes.func,
+  resetForm: PropTypes.func,
+  returnToItem: PropTypes.func,
+  scrollToAppTop: PropTypes.func
 }
 
 export default CommentForm;
