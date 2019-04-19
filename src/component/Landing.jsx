@@ -87,7 +87,7 @@ class Landing extends Component {
 
             {/* How To Link promience  Issue #127  */}
             <Link
-              to="/feed"
+              to="/howto"
               style={{
                 color: '#FFF',
               }}>
