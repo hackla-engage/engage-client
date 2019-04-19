@@ -80,7 +80,33 @@ class Landing extends Component {
                 Start Engaging
               </Button>
             </Link>
+
+            <div className="row" style={{ padding: 50 }}>
+              f
+            </div>
+
+            {/* How To Link promience  Issue #127  */}
+            <Link
+              to="/feed"
+              style={{
+                color: '#FFF',
+              }}>
+              <Button
+                animated="fade"
+                className="inverted"
+                tabindex="0"
+                size="huge"
+                style={{ marginTop: '1rem', float: 'left' }}>
+                <Button.Content visible style={{ color: '#ff2a6c' }}>
+                  New to Engage?
+                </Button.Content>
+                <Button.Content hidden style={{ color: '#ff2a6c' }}>
+                  Learn More!
+                </Button.Content>
+              </Button>
+            </Link>
           </Container>
+
           <div style={{ width: '100%' }}>
             <Responsive minWidth={breakPointSize}>
               <Image
@@ -150,7 +176,6 @@ class Landing extends Component {
                       borderRadius: '50%',
                       height: '120px',
                       width: '120px',
-                      
                     }}
                   />
                   <div
@@ -158,7 +183,6 @@ class Landing extends Component {
                       color: 'black',
                       marginTop: '1em',
                       maxWidth: '220px',
-
                     }}>
                     View, Read, and Comment on Recent Agenda Items
                   </div>
@@ -177,7 +201,6 @@ class Landing extends Component {
                       marginTop: '1em',
                       marginBottom: '3em',
                       maxWidth: '220px',
-
                     }}>
                     Feel Empowered to Engage In-Person at City Meetings
                   </div>
