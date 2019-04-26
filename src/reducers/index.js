@@ -5,6 +5,7 @@ import Form from './FormReducer';
 import TagsRequestReducer from './TagsRequestReducer';
 import verify from './verify';
 import agendas from '../ducks/agendas';
+import mailChimp from './MailChimpSubReducer';
 
 const rootReducer = combineReducers({
   router,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   TagsRequestReducer,
   verify,
   agendas,
+  mailChimp,
 });
 
 export default rootReducer;

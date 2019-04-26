@@ -4,13 +4,8 @@
   font: 14px Helvetica, Arial, sans-serif;
 }
 .mailChimpFormFeed{
-  width: 460px;
+  max-width: 460px;
 
   margin: auto;
 }
 
-@media only screen and (max-width: 550px) {
-  .mailChimpFormFeed{
-  width: 100%;
-  }
-} 
