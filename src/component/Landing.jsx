@@ -105,7 +105,7 @@ class Landing extends Component {
                 textAlign: 'center',
               }}
             />
-            <MailChimpForm  />
+            <MailChimpForm />
           </Container>
         </Segment>
         <Segment

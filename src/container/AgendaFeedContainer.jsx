@@ -228,12 +228,11 @@ class AgendaFeed extends Component {
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    width: '100%'
+                    width: '100%',
                   }}>
-                  
-                <SignUp vertical maxWidth='470px' />
+                  <SignUp vertical maxWidth="470px" />
                 </div>
-               
+
                 <Divider style={{}} />
 
                 <Header
@@ -294,8 +293,7 @@ class AgendaFeed extends Component {
               <Button
                 onClick={this.getMoreAgendas}
                 content="Load More"
-
-                style={{backgroundColor:"#192a56", color: 'white'}}
+                style={{ backgroundColor: '#192a56', color: 'white' }}
               />
             )}
           </Grid>
