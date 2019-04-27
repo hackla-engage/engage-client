@@ -88,11 +88,6 @@ class AgendaItem extends Component {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
 
-    console.log(this.props.location.pathname);
-    const url = this.props.location.pathname.split('/'),
-      newUrl = url[url.length - 1];
-    console.log(newUrl);
-    getJSON(`agendas/${newUrl}`).then(json => console.log(json));
   }
 
   render() {
