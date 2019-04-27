@@ -93,7 +93,6 @@ export function requestAgendas(requestURL) {
           (acc, result) => [...acc, ...result.items],
           []
         );
-        console.log(json.results, 'agenda list', agendaList);
         const agendaResults = json.results;
         const nextArray = json.next.split('/');
         const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${

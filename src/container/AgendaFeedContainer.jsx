@@ -158,7 +158,6 @@ class AgendaFeed extends Component {
   getMoreAgendas() {
     const { requestAgendas } = this.props;
     requestAgendas(this.props.nextAgendaURL);
-    console.log(this.props.nextAgendaURL, 'fancy');
   }
 
   radioSelection(e) {
