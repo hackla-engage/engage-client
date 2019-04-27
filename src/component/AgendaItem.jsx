@@ -87,7 +87,6 @@ class AgendaItem extends Component {
   componentDidMount() {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
-
   }
 
   render() {
