@@ -292,7 +292,7 @@ class AgendaFeed extends Component {
             ) : (
               <Button
                 onClick={this.getMoreAgendas}
-                content="Load More"
+                content="Load More Agendas"
                 style={{ backgroundColor: '#192a56', color: 'white' }}
               />
             )}
