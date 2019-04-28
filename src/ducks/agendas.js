@@ -41,13 +41,13 @@ export default function reducer(state = defaultState, action) {
         (acc, agenda) => {
           if (acc[agenda.id]) {
             console.log('duplicate agenda id', agenda.id);
+          } else {
+            acc[agenda.id] = agenda;
+            return acc;
           }
-          acc[agenda.id] = agenda;
-          return acc;
         },
         { ...state.agendaItems }
       );
-
       const agendaIDs = Object.keys(agendaItems);
       const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
         const timeA = agendaItems[a].meeting_time;
@@ -64,7 +64,7 @@ export default function reducer(state = defaultState, action) {
         committee,
         agendaIDs: agendaIDsSortedByTime,
         agendaLoading: false,
-        agendaResults,
+        agendaResults: [...state.agendaResults, ...agendaResults],
         next,
       };
     case REQUEST_LOADING:
@@ -93,12 +93,12 @@ export function requestAgendas(requestURL) {
           (acc, result) => [...acc, ...result.items],
           []
         );
-        console.log(json.results);
         const agendaResults = json.results;
         const nextArray = json.next.split('/');
         const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${
           nextArray[nextArray.length - 1]
         }`;
+        console.log(nextAgendaURL);
 
         dispatch({
           type: REQUEST_AGENDAS,

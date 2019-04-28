@@ -33,7 +33,7 @@ class Landing extends Component {
       <div
         style={{
           overflow: 'visible' /* has to be scroll, not auto */,
-          webkitOverflowScrolling: 'touch',
+          WebkitOverflowScrolling: 'touch',
         }}>
         <Segment
           textAlign="center"
@@ -105,7 +105,7 @@ class Landing extends Component {
                 textAlign: 'center',
               }}
             />
-            <MailChimpForm id="home-page" />
+            <MailChimpForm />
           </Container>
         </Segment>
         <Segment

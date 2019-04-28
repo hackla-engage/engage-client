@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -12,11 +11,13 @@ import {
   Header,
   Image,
   Icon,
+  Divider,
 } from 'semantic-ui-react';
 import format from 'date-fns/format';
 import { agendaItemReceived } from '../actions/Form';
 import { requestAgendas } from '../ducks/agendas';
 import './AgendaItem.scss';
+import { getJSON } from '../engage_client';
 // I can just get the id from the param and use to to fetch from Application state's agenda agendaitems
 // Now I just need to design a page and put informations on them
 
@@ -133,7 +134,6 @@ class AgendaItem extends Component {
           return true;
         })
         .map((val, idx) => <p key={`summary-${idx}`}>{val}</p>);
-      console.log(agendaItem);
       const agendaRecommendation = agendaItem.recommendations[0].recommendation;
       recommendation = agendaRecommendation ? (
         <div>
@@ -153,11 +153,10 @@ class AgendaItem extends Component {
         {agendaItem ? (
           <Container style={{ margin: 24, color: 'black' }}>
             <Link to="/feed">
-              <Button animated basic color="black" size="large">
-                <Button.Content
-                hidden
-                >
-                  <Icon name="long arrow alternate left" size='' />
+              <Button animated basic color="black">
+                <Button.Content hidden>
+                  {/* icons fails proptype check but only way to get correct size */}
+                  <Icon name="long arrow left" size />
                 </Button.Content>
                 <Button.Content visible> Back </Button.Content>
               </Button>
@@ -295,27 +294,34 @@ class AgendaItem extends Component {
                               style={{
                                 display: 'flex',
                               }}>
-                             Results of public feedback are being assembled into a report which will be available here Shortly.
+                              Results of public feedback are being assembled
+                              into a report which will be available here
+                              Shortly.
                             </div>{' '}
                           </div>
-                         
                         </div>
                       </div>
                     )}
                   </Card.Header>
                 </Card.Content>
               )}
-              <Card.Content style={{ textAlign: 'center' }}>
-                <a
-                  href={detailPageLink}
-                  target="_blank"
-                  style={{ color: 'brown' }}>
-                  View More Details on the Council Page
-                </a>
-                <br />
-                <Link to={'/feed'} style={{ color: 'brown' }}>
-                  Return to Agenda Feed
-                </Link>
+              <Card.Content
+                id="agendaItemLinks"
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                }}>
+                <div className="agendaItemLink1">
+                  <a
+                    href={detailPageLink}
+                    target="_blank"
+                    style={{ color: '' }}>
+                    View More Details
+                  </a>
+                </div>
+                <div className="agendaItemLink2">
+                  <Link to={'/feed'}>Return to Feed</Link>
+                </div>
               </Card.Content>
               <Card.Content textAlign="center">
                 <Header as="h3">Share this Item</Header>

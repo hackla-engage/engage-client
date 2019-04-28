@@ -5,23 +5,57 @@ import { requestAgendas } from '../ducks/agendas';
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
-import { Button, Grid, Divider, Container, Header, Radio, Icon } from 'semantic-ui-react';
+import {
+  Button,
+  Grid,
+  Divider,
+  Container,
+  Header,
+  Radio,
+  Icon,
+} from 'semantic-ui-react';
 import { format } from 'date-fns';
+import SignUpForm from '../component/MailChimpForm.jsx';
 import './AgendaFeed.scss';
 
 class AgendaFeed extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      radio: ''
-    }
+    this.state = {
+      radio: '',
+      agendaResults: [],
+      agendaIDs: [],
+      agendaItems: {},
+    };
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
     this.getMoreAgendas = this.getMoreAgendas.bind(this);
     this.radioSelection = this.radioSelection.bind(this);
-    this.emailInput = this.emailInput.bind(this);
   }
+  static defaultProps = {
+    agendaResults: [],
+    agendaIDs: [],
+    agendaItems: {},
+  };
+  componentDidUpdate(prevProps, prevState) {
+    let { agendaItems, agendaIDs, agendaResults } = this.props;
 
+    const prevRes = prevProps.agendaResults;
+    if (
+      agendaResults[agendaResults.length - 1] !== prevRes[prevRes.length - 1]
+    ) {
+      this.setState(state => ({
+        agendaResults: [...agendaResults],
+        agendaIDs: [...agendaIDs],
+        agendaItems: { ...state.agendaItems, ...agendaItems },
+      }));
+    }
+    // else if(prevRes[prevRes.length -1].id !== agendaResults[agendaResults.length -1].id){
+    //   this.setState((state)=>({
+    //     agendaResults: [...state.agendaResults, ...agendaResults]
+    //   }))
+    // }
+  }
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
     // This will then get stored in our redux state.
@@ -33,11 +67,22 @@ class AgendaFeed extends Component {
     if (parsed && parsed.id) {
       this.requestedID = parseInt(parsed.id);
     }
-
-    const { requestAgendas } = this.props;
-    requestAgendas('agendas');
-    document.querySelector('#app').scrollTop = 0
-
+    const {
+      requestAgendas,
+      agendaItems,
+      agendaIDs,
+      agendaResults,
+    } = this.props;
+    if (agendaResults[0]) {
+      this.setState(state => ({
+        agendaIDs,
+        agendaItems,
+        agendaResults,
+      }));
+    } else {
+      requestAgendas('agendas');
+    }
+    document.querySelector('#app').scrollTop = 0;
   }
 
   addId(id) {
@@ -115,38 +160,27 @@ class AgendaFeed extends Component {
     requestAgendas(this.props.nextAgendaURL);
   }
 
-  radioSelection(e){
-    console.log(e.target.value)
+  radioSelection(e) {
     let display;
-    switch(e.target.value){
+    switch (e.target.value) {
       case 'html':
-        display = 'HTML'
+        display = 'HTML';
         break;
       case 'text':
-        display = 'Plain-text'
+        display = 'Plain-text';
         break;
       default:
-        display = ''
+        display = '';
     }
-    console.log(display)
     this.setState({
-      radio: display
-    })
+      radio: display,
+    });
   }
-  emailInput(e){
-    const stateObj = {
-      [e.target.name]: e.target.value
-    }
-    console.log(stateObj)
-  }
+
   render() {
-    const {
-      agendaItems,
-      agendaIDs,
-      agendaLoading,
-      agendaLoadError,
-      agendaResults,
-    } = this.props;
+    const { agendaLoading, agendaLoadError } = this.props;
+    const { agendaItems, agendaIDs, agendaResults } = this.state;
+
     //checks if async data has loaded
     const recentAgendaData =
       agendaItems &&
@@ -172,174 +206,44 @@ class AgendaFeed extends Component {
                   There are no active issues available for public feedback at
                   this time.
                 </Header>
-                
+
                 <p>
                   To be notified when issues become available for public
                   feedback, follow us on Twitter:
                 </p>
-                <a href="https://twitter.com/EngageStaMonica "
-                target="_blank"
-                >
-                <Icon name="twitter" size="large" />  @EngageStaMonica
+                <a href="https://twitter.com/EngageStaMonica " target="_blank">
+                  <Icon name="twitter" size="large" /> @EngageStaMonica
                 </a>
-                <p
-                  style={{paddingTop: '15px'}}
-                >
+                <p style={{ paddingTop: '15px' }}>
                   You can also get updates by subscribing to the Engage Santa
                   Monica email newsletter:
                 </p>
-                      {/*********** MAIL CHIMP NEWSLETTER ************/}
+                {/*********** MAIL CHIMP NEWSLETTER ************/}
                 {/* <Divider/> */}
-                <Header><Icon name="mail"/> Email Newsletter</Header>
-                <div id="mc_embed_signup"
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '100%'
-                }}
-                >
-                
-                  <form
-                    action="https://hackforla.us19.list-manage.com/subscribe/post?u=2885093b7df42c79d628f7267&amp;id=6ca892a88b"
-                    method="post"
-                    id="mc-embedded-subscribe-form"
-                    name="mc-embedded-subscribe-form"
-                    className="validate"
-                    target="_blank"
-                    style={{
-                      width: '100%'
-                    }}
-                    noValidate>
-                    <div id="mc_embed_signup_scroll" className="mailChimpFormFeed">
-                      <div className="indicates-required">
-                        <span className="asterisk">*</span> indicates required
-                      </div>
-                      <div className="mc-field-group">
-                        <label htmlFor="mce-EMAIL">
-                          Email Address <span className="asterisk">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="EMAIL"
-                          className="required email"
-                          id="mce-EMAIL"
-                        />
-                      </div>
-                      <div className="mc-field-group">
-                        <label htmlFor="mce-FNAME">First Name </label>
-                        <input
-                          type="text"
-                          name="FNAME"
-                          className=""
-                          id="mce-FNAME"
-                        />
-                      </div>
-                      <div className="mc-field-group">
-                        <label htmlFor="mce-LNAME">Last Name </label>
-                        <input
-                          type="text"
-                          name="LNAME"
-                          className=""
-                          id="mce-LNAME"
-                        />
-                      </div>
-                      <div className="mc-field-group input-group">
-                        <strong>Email Format: </strong> {this.state.radio}
-                        <ul>
-                          <li>
-                          <Radio 
-                            label="HTML"
-                            value="html"
-                            name="EMAILTYPE"
-                            checked={this.state.radio === 'HTML'}
-                              onChange={(e)=>this.radioSelection(e)}
-                              id="mce-EMAILTYPE-0"
-
-                            />
-                            {/* <input
-                              type="radio"
-                              value="html"
-                              name="EMAILTYPE"
-                              id="mce-EMAILTYPE-0"
-                            />
-                            <label htmlFor="mce-EMAILTYPE-0">html</label> */}
-                          </li>
-                          <li>
-                          <Radio 
-                            label="Plain-Text"
-                            value="text"
-                            name="EMAILTYPE"
-                            checked={this.state.radio === 'Plain-text'}
-
-                            onChange={(e)=>this.radioSelection(e)}
-                            id="mce-EMAILTYPE-1"
-
-                            />
-                           
-                          </li>
-                        </ul>
-                      </div>
-                      <div id="mce-responses" className="clear">
-                        <div
-                          className="response"
-                          id="mce-error-response"
-                          style={{ display: 'none' }}
-                        />
-                        <div
-                          className="response"
-                          id="mce-success-response"
-                          style={{ display: 'none' }}
-                        />
-                      </div>
-                      {/*   <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--> */}
-                      <div
-                        style={{ position: 'absolute', left: '-5000px' }}
-                        aria-hidden="true">
-                        <input
-                          type="text"
-                          name="b_2885093b7df42c79d628f7267_6ca892a88b"
-                          tabI ndex="-1"
-                          value=""
-                        />
-                      </div>
-                      <div className="clear">
-                        <Button 
-                         type="submit"
-                         value="Subscribe"
-                         name="subscribe"
-                         id="mc-embedded-subscribe"
-                         onClick={()=>location.reload()}
-                            style={{
-                              marginTop:'15px'
-                            }}
-                         >Subscribe</Button>
-                      </div>
-                    </div>
-                  </form>
+                <Header>
+                  <Icon name="mail" /> Email Newsletter
+                </Header>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
+                  }}>
+                  <SignUpForm vertical maxWidth="470px" />
                 </div>
-                <script
-                  type="text/javascript"
-                  src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-                />
-                <script type="text/javascript">
-                  (function($)window.fnames = new Array(); window.ftypes = new
-                  Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';(jQuery));var
-                  $mcj = jQuery.noConflict(true);
-                </script>
-                <Divider
-                style={{
-                }}
-                ></Divider>
 
-                <Header 
-                style={{
-                  paddingTop: '70px',
-                  textDecoration: 'underline'
-                }}
-                size='small'>BROWSE PAST ISSUES BELOW</Header>
+                <Divider style={{}} />
 
+                <Header
+                  style={{
+                    paddingTop: '70px',
+                    textDecoration: 'underline',
+                  }}
+                  size="small">
+                  BROWSE PAST ISSUES BELOW
+                </Header>
               </div>
-                          {/*********** MAIL CHIMP NEWSLETTER END ************/}
+              {/*********** MAIL CHIMP NEWSLETTER END ************/}
             </Container>
           ) : (
             <div />
@@ -381,14 +285,14 @@ class AgendaFeed extends Component {
               </div>
             );
           })}
-          <Grid style={{ margin: '6px' }} centered>
+          <Grid style={{ margin: '50px' }} centered>
             {agendaLoading ? (
-              <Button loading primary />
+              <Button loading basic color="black" />
             ) : (
               <Button
                 onClick={this.getMoreAgendas}
-                content="Load More"
-                primary
+                content="Load More Agendas"
+                style={{ backgroundColor: '#192a56', color: 'white' }}
               />
             )}
           </Grid>

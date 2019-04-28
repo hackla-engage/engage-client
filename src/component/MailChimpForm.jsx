@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Checkbox, Form, Header, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { MailChimpSub } from '../reducers/index';
+import { getResponse } from '../reducers/MailChimpSubReducer';
 import { MailChimpSubscribe } from '../actions/MailChimpPost';
+import PropTypes from 'prop-types';
+import './mailChimpForm.scss';
 
 class MailChimpForm extends Component {
   state = {
@@ -18,11 +20,15 @@ class MailChimpForm extends Component {
     serverRequestMessage: '',
     formLoading: false,
   };
+  static defaultProps = {
+    maxWidth: '500px',
+  };
   handleChange = (e, { name, value }) =>
     this.setState({
       [name]: value,
     });
 
+  componentDidMount() {}
   handleSubmit = e => {
     let error = false;
     let success = false;
@@ -74,7 +80,7 @@ class MailChimpForm extends Component {
             formError: false,
             serverRequestError: false,
             formSuccess: true,
-            formLoading: false,        
+            formLoading: false,
           });
         } else {
           this.setState({
@@ -89,55 +95,76 @@ class MailChimpForm extends Component {
     }
     e.preventDefault();
   };
+  animateMessage(bool) {
+    return bool ? 'open' : 'closed';
+  }
+  verticalConditional(child) {
+    if (this.props.vertical) {
+      return child;
+    } else {
+      return <Form.Group>{child}</Form.Group>;
+    }
+  }
 
   render() {
     const { first_name, last_name, email } = this.state;
-
+    const { vertical, maxWidth } = this.props;
+    if (vertical) {
+    }
     return (
-      <div id={this.props.id}>
+      <div
+        id={vertical ? 'verticalForm' : 'home-page'}
+        style={vertical ? { maxWidth } : {}}>
         <Form
           error={this.state.formError || this.state.serverRequestError}
           success={this.state.formSuccess}
-          size="large"
-          onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              width={3}
-              fluid
-              placeholder="First Name"
-              name="first_name"
-              value={first_name}
-              onChange={this.handleChange}
-              error={this.state.first_nameError}
-            />
-            <Form.Input
-              width={3}
-              fluid
-              placeholder="Last Name"
-              name="last_name"
-              value={last_name}
-              onChange={this.handleChange}
-              error={this.state.last_nameError}
-            />
-            <Form.Input
-              width={7}
-              fluid
-              placeholder="Email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-              error={this.state.emailError}
-            />
-            <Form.Button
-              width={3}
-              type="submit"
-              size="large"
-              content="Submit"
-              loading={this.state.formLoading}
-            />
-          </Form.Group>
+          size={vertical ? 'medium' : 'large'}
+          onSubmit={this.handleSubmit}
+          style={{
+            justifyContent: 'left',
+          }}>
+          {this.verticalConditional(
+            <React.Fragment>
+              <Form.Input
+                width={vertical ? null : 3}
+                fluid
+                placeholder="First Name"
+                name="first_name"
+                value={first_name}
+                onChange={this.handleChange}
+                error={this.state.first_nameError}
+              />
+              <Form.Input
+                width={vertical ? null : 3}
+                fluid
+                placeholder="Last Name"
+                name="last_name"
+                value={last_name}
+                onChange={this.handleChange}
+                error={this.state.last_nameError}
+              />
+              <Form.Input
+                width={vertical ? null : 7}
+                fluid
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+                error={this.state.emailError}
+              />
+              <Form.Button
+                width={vertical ? null : 3}
+                type="submit"
+                size={vertical ? 'medium' : 'large'}
+                content="Submit"
+                loading={this.state.formLoading}
+              />
+            </React.Fragment>
+          )}
+
           {this.state.formError ? (
             <Message
+              className={'' + this.state.formError ? 'mailChimp-message ' : ''}
               error
               header="All fields are required"
               content="Oops, it looks like you forgot to fill out some fields."
@@ -145,6 +172,9 @@ class MailChimpForm extends Component {
           ) : null}
           {this.state.serverRequestError ? (
             <Message
+              className={
+                '' + this.state.serverRequestError ? 'mailChimp-message ' : ''
+              }
               error
               header="Something went wrong"
               content={this.state.serverRequestMessage}
@@ -152,6 +182,9 @@ class MailChimpForm extends Component {
           ) : null}
           {this.state.formSuccess ? (
             <Message
+              className={
+                '' + this.state.formSuccess ? 'mailChimp-message ' : ''
+              }
               success
               header="Congratulations"
               content="You have successfuly subscribed to Engage updates!"
@@ -163,8 +196,13 @@ class MailChimpForm extends Component {
   }
 }
 
+MailChimpForm.propTypes = {
+  vertical: PropTypes.bool,
+  maxWidth: PropTypes.string,
+};
+
 const mapStateToProps = state => ({
-  fetchedResp: MailChimpSub(state),
+  fetchedResp: getResponse(state),
 });
 
 const mapDispatchToProps = {

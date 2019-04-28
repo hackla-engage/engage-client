@@ -2,6 +2,7 @@ import React from 'react';
 import Recaptcha from './Recaptcha.jsx';
 import { Segment, Container, Header, Button } from 'semantic-ui-react';
 import './ConfirmFormContent.scss';
+import PropTypes from 'prop-types';
 
 class ConfirmFormContentComponent extends React.Component {
   constructor(props) {
@@ -111,5 +112,15 @@ class ConfirmFormContentComponent extends React.Component {
     );
   }
 }
+
+ConfirmFormContentComponent.propTypes = {
+  AgendaItemId: PropTypes.number,
+  editingForm: PropTypes.func,
+  recommendation: PropTypes.array,
+  complete: PropTypes.object,
+  scrollToAppTop: PropTypes.func,
+  pro: PropTypes.number,
+  handleSubmit: PropTypes.func,
+};
 
 export default ConfirmFormContentComponent;

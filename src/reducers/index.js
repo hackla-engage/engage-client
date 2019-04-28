@@ -5,7 +5,7 @@ import Form from './FormReducer';
 import TagsRequestReducer from './TagsRequestReducer';
 import verify from './verify';
 import agendas from '../ducks/agendas';
-import MailChimpSubReducer, * as fromMailChimpSubReducer from './MailChimpSubReducer';
+import mailChimp from './MailChimpSubReducer';
 
 const rootReducer = combineReducers({
   router,
@@ -14,10 +14,7 @@ const rootReducer = combineReducers({
   TagsRequestReducer,
   verify,
   agendas,
-  MailChimpSubReducer,
+  mailChimp,
 });
 
 export default rootReducer;
-
-export const MailChimpSub = state =>
-  fromMailChimpSubReducer.MailChimpSubscribeAPICall(state.MailChimpSubReducer);
