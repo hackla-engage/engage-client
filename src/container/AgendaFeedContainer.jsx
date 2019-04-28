@@ -15,7 +15,7 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { format } from 'date-fns';
-import SignUp from '../component/MailChimpForm';
+import SignUpForm from '../component/MailChimpForm.jsx';
 import './AgendaFeed.scss';
 
 class AgendaFeed extends Component {
@@ -229,7 +229,7 @@ class AgendaFeed extends Component {
                     justifyContent: 'center',
                     width: '100%',
                   }}>
-                  <SignUp vertical maxWidth="470px" />
+                  <SignUpForm vertical maxWidth="470px" />
                 </div>
 
                 <Divider style={{}} />
