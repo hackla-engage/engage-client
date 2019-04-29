@@ -187,6 +187,8 @@ class AgendaFeed extends Component {
       agendaItems[agendaIDs[0]] &&
       agendaItems[agendaIDs[0]]['meeting_time'];
 
+console.log(agendaItems, 'josh')
+
     if (agendaLoadError.error) {
       return (
         <div style={{ color: 'black' }}>Error: retrieving agenda items</div>
@@ -229,7 +231,7 @@ class AgendaFeed extends Component {
                     justifyContent: 'center',
                     width: '100%',
                   }}>
-                  <SignUpForm vertical maxWidth="470px" />
+                  <SignUpForm vertical maxWidth="440px" />
                 </div>
 
                 <Divider style={{}} />

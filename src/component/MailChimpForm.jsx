@@ -95,9 +95,7 @@ class MailChimpForm extends Component {
     }
     e.preventDefault();
   };
-  animateMessage(bool) {
-    return bool ? 'open' : 'closed';
-  }
+ 
   verticalConditional(child) {
     if (this.props.vertical) {
       return child;

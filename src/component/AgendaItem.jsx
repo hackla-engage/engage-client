@@ -24,15 +24,14 @@ import { getJSON } from '../engage_client';
 class AgendaItem extends Component {
   constructor() {
     super();
+    this.state={
+
+    }
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
   }
 
-  componentWillMount() {
-    if (Object.keys(this.props.agendaItems).length < 2) {
-      this.props.requestAgendas('agendas');
-    }
-  }
+
 
   goToForm() {
     this.props.history.push('/form');
@@ -87,10 +86,15 @@ class AgendaItem extends Component {
   componentDidMount() {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
+    const id = this.props.history.location.pathname.split('/');
+    console.log()
+    getJSON(`agendas/item/${id[id.length-1]}`)
+    .then(agendaData=>{this.setState({agendaItem: {...agendaData}})})
+    .then(()=>console.log(this.state))
   }
 
   render() {
-    const agendaItem = this.props.agendaItems[this.props.match.params.id];
+    const agendaItem = this.state.agendaItem;
     const detailPageLink = agendaItem
       ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${
           agendaItem.id
@@ -345,9 +349,10 @@ class AgendaItem extends Component {
             </Card>
           </Container>
         ) : (
-          <Loader active inline="centered" style={{ color: 'black' }}>
+          <Container style={{height: '95vh' }}>
+          <Loader active inline="centered" style={{ color: 'black', top:'40%' }}>
             Loading agenda...
-          </Loader>
+          </Loader></Container>
         )}
       </div>
     );
