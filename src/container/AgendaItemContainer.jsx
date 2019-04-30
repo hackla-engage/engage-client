@@ -12,7 +12,7 @@ import {
   Modal,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 import { requestAgendas } from '../ducks/agendas';
 
 class AgendaItemContainer extends Component {
@@ -70,6 +70,12 @@ class AgendaItemContainer extends Component {
     );
   }
 }
+
+AgendaItemContainer.propTypes = {
+  id: PropTypes.number,
+  meet_time: PropTypes.number,
+  title: PropTypes.string,
+};
 
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({ requestAgendas }, dispatch);

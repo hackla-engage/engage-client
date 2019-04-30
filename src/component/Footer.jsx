@@ -53,10 +53,10 @@ const Footer = () => (
             href="https://hackforla-slack.herokuapp.com/"
             target="_blank"
             style={{ color: '#fff' }}>
-            <Icon name="slack hash" size="huge" />
+            <Icon name="slack" size="huge" />
           </a>
           <a
-            href="https://github.com/hackforla"
+            href="https://github.com/hackla-engage"
             target="_blank"
             style={{ color: '#fff' }}>
             <Icon name="github" size="huge" />
@@ -66,7 +66,7 @@ const Footer = () => (
       <a
         style={{ display: 'block', marginBottom: '4em', marginTop: '4em' }}
         href="mailto:engagelosangeles@gmail.com">
-        <Button style={{ backgroundColor: '#82BA2D', color: 'white' }}>
+        <Button style={{ backgroundColor: 'rgb(130, 186, 45)', color: 'white' }}>
           Send us a message
         </Button>
       </a>

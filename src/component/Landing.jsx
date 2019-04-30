@@ -33,7 +33,7 @@ class Landing extends Component {
       <div
         style={{
           overflow: 'visible' /* has to be scroll, not auto */,
-          webkitOverflowScrolling: 'touch',
+          WebkitOverflowScrolling: 'touch',
         }}>
         <Segment
           textAlign="center"
@@ -42,7 +42,7 @@ class Landing extends Component {
             minHeight: 600,
             padding: '1em 0em',
             border: 'None',
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.35),rgba(0, 0, 0, 0.35)),url(../static/image/engage_hero.jpeg)',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(../static/image/engage_hero.jpeg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -113,7 +113,7 @@ class Landing extends Component {
                 textAlign: 'center',
               }}
             />
-            <MailChimpForm id="home-page" />
+            <MailChimpForm />
           </Container>
         </Segment>
         <Segment

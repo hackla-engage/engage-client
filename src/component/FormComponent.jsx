@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
-
+import PropTypes from 'prop-types';
 import './FormComponent.scss';
 import CommentForm from './CommentForm.jsx';
 
@@ -61,5 +61,20 @@ class FormComponent extends Component {
     );
   }
 }
+
+FormComponent.propTypes = {
+  Committee: PropTypes.string,
+  Id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  Pro: PropTypes.number,
+  Recommendations: PropTypes.array,
+  Summary: PropTypes.string,
+  Title: PropTypes.string,
+  complete: PropTypes.object,
+  editing: PropTypes.bool,
+  completeForm: PropTypes.func,
+  resetForm: PropTypes.func,
+  returnToItem: PropTypes.func,
+  scrollToAppTop: PropTypes.func,
+};
 
 export default FormComponent;

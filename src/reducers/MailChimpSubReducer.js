@@ -8,6 +8,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case MailChimpSubscribe.SUB_SUCCESS:
       return {
+        ...state,
         response: action.payload,
       };
 
@@ -16,4 +17,4 @@ export default (state = initialState, action) => {
   }
 };
 
-export const MailChimpSubscribeAPICall = state => state.response;
+export const getResponse = state => state.mailChimp.response;
