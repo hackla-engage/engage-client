@@ -74,7 +74,7 @@ class MailChimpForm extends Component {
             formError: false,
             serverRequestError: false,
             formSuccess: true,
-            formLoading: false,        
+            formLoading: false,
           });
         } else {
           this.setState({
