@@ -24,23 +24,19 @@ import { getJSON } from '../engage_client';
 class AgendaItem extends Component {
   constructor() {
     super();
-    this.state={
-
-    }
+    this.state = {};
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
   }
-
-
 
   goToForm() {
     this.props.history.push('/form');
   }
 
   showForm(proCon) {
-    const { id } = this.props.match.params;
-    const agenda = this.props.agendaItems[id];
-    const { body, title, agenda_item_id } = agenda;
+    const agenda_item_id = this.state.id
+    const agenda = this.state.agendaItem;
+    const { body, title} = agenda;
     const recommendations = agenda.recommendations[0].recommendation;
     // map to get recommendation from object and reduce array to string concatenated with <br />s
     let background = false;
@@ -76,7 +72,7 @@ class AgendaItem extends Component {
       Title: title,
       Recommendations: recommendationsArray,
       Summary: summaryArray,
-      Id: id,
+      Id: agenda_item_id,
       AgendaItemId: agenda_item_id,
       Pro: proCon,
     });
@@ -87,10 +83,15 @@ class AgendaItem extends Component {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
     const id = this.props.history.location.pathname.split('/');
-    console.log()
-    getJSON(`agendas/item/${id[id.length-1]}`)
-    .then(agendaData=>{this.setState({agendaItem: {...agendaData}})})
-    .then(()=>console.log(this.state))
+    console.log();
+    getJSON(`agendas/item/${id[id.length - 1]}`)
+      .then(agendaData => {
+        this.setState({ 
+          agendaItem: { ...agendaData },
+          id: id[id.length - 1]
+        });
+      })
+      .then(() => console.log(this.state));
   }
 
   render() {
@@ -349,10 +350,14 @@ class AgendaItem extends Component {
             </Card>
           </Container>
         ) : (
-          <Container style={{height: '95vh' }}>
-          <Loader active inline="centered" style={{ color: 'black', top:'40%' }}>
-            Loading agenda...
-          </Loader></Container>
+          <Container style={{ height: '95vh' }}>
+            <Loader
+              active
+              inline="centered"
+              style={{ color: 'black', top: '40%' }}>
+              Loading agenda...
+            </Loader>
+          </Container>
         )}
       </div>
     );

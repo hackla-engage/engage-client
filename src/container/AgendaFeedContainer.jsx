@@ -13,6 +13,7 @@ import {
   Header,
   Radio,
   Icon,
+  Section,
 } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import SignUpForm from '../component/MailChimpForm.jsx';
@@ -50,11 +51,7 @@ class AgendaFeed extends Component {
         agendaItems: { ...state.agendaItems, ...agendaItems },
       }));
     }
-    // else if(prevRes[prevRes.length -1].id !== agendaResults[agendaResults.length -1].id){
-    //   this.setState((state)=>({
-    //     agendaResults: [...state.agendaResults, ...agendaResults]
-    //   }))
-    // }
+   
   }
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
@@ -187,7 +184,7 @@ class AgendaFeed extends Component {
       agendaItems[agendaIDs[0]] &&
       agendaItems[agendaIDs[0]]['meeting_time'];
 
-console.log(agendaItems, 'josh')
+    console.log(agendaItems, 'josh');
 
     if (agendaLoadError.error) {
       return (
@@ -198,55 +195,55 @@ console.log(agendaItems, 'josh')
         <div style={{ color: 'black' }}>
           {//compares most recent item to today
           recentAgendaData < Math.floor(Date.now() / 1000) ? (
-            <Container text>
-              <div
-                style={{
-                  textAlign: 'center',
-                  paddingTop: '2rem',
-                }}>
-                <Header size="medium">
-                  There are no active issues available for public feedback at
-                  this time.
-                </Header>
-
-                <p>
-                  To be notified when issues become available for public
-                  feedback, follow us on Twitter:
-                </p>
-                <a href="https://twitter.com/EngageStaMonica " target="_blank">
-                  <Icon name="twitter" size="large" /> @EngageStaMonica
-                </a>
-                <p style={{ paddingTop: '15px' }}>
-                  You can also get updates by subscribing to the Engage Santa
-                  Monica email newsletter:
-                </p>
-                {/*********** MAIL CHIMP NEWSLETTER ************/}
-                {/* <Divider/> */}
-                <Header>
-                  <Icon name="mail" /> Email Newsletter
-                </Header>
+            <div
+              style={{
+                textAlign: 'center',
+                paddingTop: '5rem',
+              }}>
+              <Header style={{fontSize: '2.5rem'}}  >
+                Whoops! No active agendas available.
+               
+              </Header>
+              <Icon style={{margin: '30px'}} name="low vision" size='huge'/>
+              <div className="feed-signUpContainer" style={{}}>
                 <div
                   style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    width: '100%',
+                    width: '50%',
                   }}>
+                  <Header size="large">Follow us!</Header>
+                  <a
+                  style={{fontSize: '1.5rem'}}
+                    href="https://twitter.com/EngageStaMonica "
+                    target="_blank">
+                    <Icon name="twitter" size="large" /> @EngageStaMonica
+                  </a>
+                </div>
+                <div className="VR" style={{}} />
+                <div
+                  style={{
+                    width: '50%',
+                  }}>
+                  <Header size="large">
+                    <Icon name="mail" /> Subscribe to our newsletter!
+                  </Header>
+
                   <SignUpForm vertical maxWidth="440px" />
                 </div>
-
-                <Divider style={{}} />
-
+              </div>
+<Divider style={{
+  margin: '80px'
+}}></Divider>
+                {' '}
                 <Header
                   style={{
-                    paddingTop: '70px',
+                    marginTop: '8rem',
                     textDecoration: 'underline',
                   }}
                   size="small">
                   BROWSE PAST ISSUES BELOW
                 </Header>
-              </div>
-              {/*********** MAIL CHIMP NEWSLETTER END ************/}
-            </Container>
+              
+            </div>
           ) : (
             <div />
           )}
