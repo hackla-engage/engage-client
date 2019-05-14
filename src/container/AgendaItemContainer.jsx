@@ -31,7 +31,7 @@ class AgendaItemContainer extends Component {
     } = this.props;
 
     const meetTime = new Date(meeting_time * 1000);
-    console.log(agenda_item_id)
+    console.log(agenda_item_id);
     return (
       <Container text style={{ margin: '2%' }}>
         <Card style={{ width: 'auto' }}>

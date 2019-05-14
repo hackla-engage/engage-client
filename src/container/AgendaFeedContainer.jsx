@@ -51,7 +51,6 @@ class AgendaFeed extends Component {
         agendaItems: { ...state.agendaItems, ...agendaItems },
       }));
     }
-   
   }
   componentDidMount() {
     // Kick off action to make async call to our server for tags/topics.
@@ -200,11 +199,10 @@ class AgendaFeed extends Component {
                 textAlign: 'center',
                 paddingTop: '5rem',
               }}>
-              <Header style={{fontSize: '2.5rem'}}  >
+              <Header style={{ fontSize: '2.5rem' }}>
                 Whoops! No active agendas available.
-               
               </Header>
-              <Icon style={{margin: '30px'}} name="low vision" size='huge'/>
+              <Icon style={{ margin: '30px' }} name="low vision" size="huge" />
               <div className="feed-signUpContainer" style={{}}>
                 <div
                   style={{
@@ -212,7 +210,7 @@ class AgendaFeed extends Component {
                   }}>
                   <Header size="large">Follow us!</Header>
                   <a
-                  style={{fontSize: '1.5rem'}}
+                    style={{ fontSize: '1.5rem' }}
                     href="https://twitter.com/EngageStaMonica "
                     target="_blank">
                     <Icon name="twitter" size="large" /> @EngageStaMonica
@@ -230,19 +228,19 @@ class AgendaFeed extends Component {
                   <SignUpForm vertical maxWidth="440px" />
                 </div>
               </div>
-<Divider style={{
-  margin: '80px'
-}}></Divider>
-                {' '}
-                <Header
-                  style={{
-                    marginTop: '8rem',
-                    textDecoration: 'underline',
-                  }}
-                  size="small">
-                  BROWSE PAST ISSUES BELOW
-                </Header>
-              
+              <Divider
+                style={{
+                  margin: '80px',
+                }}
+              />{' '}
+              <Header
+                style={{
+                  marginTop: '8rem',
+                  textDecoration: 'underline',
+                }}
+                size="small">
+                BROWSE PAST ISSUES BELOW
+              </Header>
             </div>
           ) : (
             <div />

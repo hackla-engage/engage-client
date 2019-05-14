@@ -34,9 +34,9 @@ class AgendaItem extends Component {
   }
 
   showForm(proCon) {
-    const agenda_item_id = this.state.id
+    const agenda_item_id = this.state.id;
     const agenda = this.state.agendaItem;
-    const { body, title} = agenda;
+    const { body, title } = agenda;
     const recommendations = agenda.recommendations[0].recommendation;
     // map to get recommendation from object and reduce array to string concatenated with <br />s
     let background = false;
@@ -86,9 +86,9 @@ class AgendaItem extends Component {
     console.log();
     getJSON(`agendas/item/${id[id.length - 1]}`)
       .then(agendaData => {
-        this.setState({ 
+        this.setState({
           agendaItem: { ...agendaData },
-          id: id[id.length - 1]
+          id: id[id.length - 1],
         });
       })
       .then(() => console.log(this.state));

@@ -95,7 +95,7 @@ class MailChimpForm extends Component {
     }
     e.preventDefault();
   };
- 
+
   verticalConditional(child) {
     if (this.props.vertical) {
       return child;
