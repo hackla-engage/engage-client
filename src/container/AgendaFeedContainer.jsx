@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { requestAgendas } from '../ducks/agendas';
+import {setPosition} from '../ducks/feedState'
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
@@ -27,20 +28,26 @@ class AgendaFeed extends Component {
       agendaResults: [],
       agendaIDs: [],
       agendaItems: {},
+      
+      pastIssues: 1,
     };
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
     this.getMoreAgendas = this.getMoreAgendas.bind(this);
-    this.radioSelection = this.radioSelection.bind(this);
+    this.setPostion = this.setPostion.bind(this);
+    this.throttler = Date.now();
   }
   static defaultProps = {
     agendaResults: [],
     agendaIDs: [],
     agendaItems: {},
   };
+  componentDidCatch(err, info){
+    console.error(err, info)
+  }
   componentDidUpdate(prevProps, prevState) {
+        //sets agenda props to state
     let { agendaItems, agendaIDs, agendaResults } = this.props;
-
     const prevRes = prevProps.agendaResults;
     if (
       agendaResults[agendaResults.length - 1] !== prevRes[prevRes.length - 1]
@@ -70,15 +77,40 @@ class AgendaFeed extends Component {
       agendaResults,
     } = this.props;
     if (agendaResults[0]) {
-      this.setState(state => ({
-        agendaIDs,
-        agendaItems,
-        agendaResults,
-      }));
+      //If data is requested already requested then set new state
+      (async () => {
+        await this.setState(state => ({
+          agendaIDs,
+          agendaItems,
+          agendaResults,
+        }));
+        await (() =>
+          (document.querySelector(
+            '#app'
+          ).scrollTop = this.props.appPosition))();
+      })();
     } else {
-      requestAgendas('agendas');
+      //request data since it does not exist
+      (async () => {
+        await requestAgendas('agendas');
+        await (() =>
+          (document.querySelector(
+            '#app'
+          ).scrollTop = this.props.appPosition))();
+      })();
     }
-    document.querySelector('#app').scrollTop = 0;
+
+    document.querySelector('#app').addEventListener('scroll', this.setPostion)
+  }
+  componentWillUnmount(){
+    document.querySelector('#app').removeEventListener('scroll', this.setPostion)
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    //Prevents scroll position from rerendering dom tree
+    if (this.props.appPosition !== nextProps.appPosition){
+      return false
+    }
+    return true
   }
 
   addId(id) {
@@ -156,21 +188,12 @@ class AgendaFeed extends Component {
     requestAgendas(this.props.nextAgendaURL);
   }
 
-  radioSelection(e) {
-    let display;
-    switch (e.target.value) {
-      case 'html':
-        display = 'HTML';
-        break;
-      case 'text':
-        display = 'Plain-text';
-        break;
-      default:
-        display = '';
+  setPostion(){
+    //Throttles setting new scroll position
+    if(this.throttler+1000 < Date.now() ){
+      this.throttler = Date.now()
+      this.props.setPosition(document.querySelector('#app').scrollTop)
     }
-    this.setState({
-      radio: display,
-    });
   }
 
   render() {
@@ -182,8 +205,6 @@ class AgendaFeed extends Component {
       agendaItems &&
       agendaItems[agendaIDs[0]] &&
       agendaItems[agendaIDs[0]]['meeting_time'];
-
-    console.log(agendaItems, 'josh');
 
     if (agendaLoadError.error) {
       return (
@@ -197,17 +218,19 @@ class AgendaFeed extends Component {
             <div
               style={{
                 textAlign: 'center',
-                paddingTop: '5rem',
               }}>
-              <Header style={{ fontSize: '2.5rem' }}>
-                Whoops! No active agendas available.
+              <div className="feed-noActiveContainer">
+                <Header
+                  className="feed-signUpHeader"
+                  style={{ alignSelf: 'center', marginTop: '20px', marginBottom: '0px', }}>
+                  There are no active issues available for public feedback at this time.
+                </Header>
+              </div>
+              <Header size="large">
+                Get notified when new issues are posted:
               </Header>
-              <Icon style={{ margin: '30px' }} name="low vision" size="huge" />
-              <div className="feed-signUpContainer" style={{}}>
-                <div
-                  style={{
-                    width: '50%',
-                  }}>
+              <div className="feed-signUpContainer" >
+                <div className="feed-signUp">
                   <Header size="large">Follow us!</Header>
                   <a
                     style={{ fontSize: '1.5rem' }}
@@ -216,11 +239,8 @@ class AgendaFeed extends Component {
                     <Icon name="twitter" size="large" /> @EngageStaMonica
                   </a>
                 </div>
-                <div className="VR" style={{}} />
-                <div
-                  style={{
-                    width: '50%',
-                  }}>
+                <div className="VR" />
+                <div className="feed-signUp">
                   <Header size="large">
                     <Icon name="mail" /> Subscribe to our newsletter!
                   </Header>
@@ -230,7 +250,7 @@ class AgendaFeed extends Component {
               </div>
               <Divider
                 style={{
-                  margin: '80px',
+                  marginTop: '80px',
                 }}
               />{' '}
               <Header
@@ -238,7 +258,7 @@ class AgendaFeed extends Component {
                   marginTop: '8rem',
                   textDecoration: 'underline',
                 }}
-                size="small">
+                size="medium">
                 BROWSE PAST ISSUES BELOW
               </Header>
             </div>
@@ -253,6 +273,7 @@ class AgendaFeed extends Component {
             );
             return (
               <div key={index}>
+
                 <div
                   className="ui text container"
                   style={{ margin: '85px 0 25px' }}>
@@ -282,7 +303,7 @@ class AgendaFeed extends Component {
               </div>
             );
           })}
-          <Grid style={{ margin: '50px' }} centered>
+          <Grid style={{ margin: '70px' }} centered>
             {agendaLoading ? (
               <Button loading basic color="black" />
             ) : (
@@ -308,11 +329,12 @@ function mapStateToProps(state) {
     agendaLoading: agendas.agendaLoading,
     agendaLoadError: agendas.agendaLoadError,
     nextAgendaURL: agendas.next,
+    appPosition: state.feedState.position,
   };
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ requestAgendas, agenda_item_received }, dispatch);
+  return bindActionCreators({ requestAgendas, agenda_item_received, setPosition }, dispatch);
 }
 
 export default connect(

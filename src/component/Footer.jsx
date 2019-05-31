@@ -35,7 +35,8 @@ const Footer = () => (
             <u>
               <a
                 href="https://www.meetup.com/hackforla/"
-                style={{ color: '#fff' }}>
+                style={{ color: '#fff' }}
+                rel="noopener noreferrer">
                 Hack for LA
               </a>
             </u>
@@ -46,26 +47,30 @@ const Footer = () => (
           <a
             href="https://www.meetup.com/hackforla/"
             target="_blank"
-            style={{ color: '#fff' }}>
+            style={{ color: '#fff' }}
+            rel="noopener noreferrer">
             <Icon name="meetup" size="huge" />
           </a>
           <a
             href="https://hackforla-slack.herokuapp.com/"
             target="_blank"
-            style={{ color: '#fff' }}>
+            style={{ color: '#fff' }}
+            rel="noopener noreferrer">
             <Icon name="slack" size="huge" />
           </a>
           <a
             href="https://github.com/hackforla"
             target="_blank"
-            style={{ color: '#fff' }}>
+            style={{ color: '#fff' }}
+            rel="noopener noreferrer">
             <Icon name="github" size="huge" />
           </a>
         </Grid>
       </div>
       <a
         style={{ display: 'block', marginBottom: '4em', marginTop: '4em' }}
-        href="mailto:engagelosangeles@gmail.com">
+        href="mailto:engagelosangeles@gmail.com"
+        rel="noopener noreferrer">
         <Button style={{ backgroundColor: '#97B87F', color: 'white' }}>
           Send us a message
         </Button>

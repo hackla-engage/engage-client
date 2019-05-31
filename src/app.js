@@ -8,6 +8,24 @@ import Routes from './routes';
 
 const store = configureStore();
 
+//SW initializer
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('sw.js')
+      .then(reg => {
+        console.log('service worker registered', reg);
+
+        const registeredSw = reg;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+} else {
+  console.warn('Service workers not supported');
+}
+
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
