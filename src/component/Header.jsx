@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Container } from 'semantic-ui-react';
+import { Menu, Dropdown, Responsive, Container, Button } from 'semantic-ui-react';
 import styles from './Header.scss';
 
 styles.link = {
@@ -19,7 +19,7 @@ const Header = () => (
       padding: '0.5em',
     }}
     id="menu">
-    <Container text>
+    <Container>
       <Menu.Menu id="brand-logo">
         <Menu.Item
           style={{
@@ -46,6 +46,10 @@ const Header = () => (
           </Menu.Item>
           <Menu.Item style={styles.link} name="howto" as={Link} to="/howto">
             How To
+          </Menu.Item>
+          <Menu.Item as={Link} to="/feed">
+            <Button size='tiny' style={{ backgroundColor: 'rgb(130, 186, 45)' , color: '#fff',
+                                        fontSize: '1.14rem', fontWeight: '400'}}>Start Engaging</Button>
           </Menu.Item>
         </Menu.Menu>
       </Responsive>
@@ -74,6 +78,11 @@ const Header = () => (
                 How To
               </Link>
             </Dropdown.Item>
+            <Dropdown.Item>
+              <Link style={styles.link} to="/feed">
+                Start Engaging
+              </Link>
+            </Dropdown.Item>           
           </Dropdown.Menu>
         </Dropdown>
       </Responsive>

@@ -59,7 +59,7 @@ const Footer = () => (
             <Icon name="slack" size="huge" />
           </a>
           <a
-            href="https://github.com/hackforla"
+            href="https://github.com/hackla-engage"
             target="_blank"
             style={{ color: '#fff' }}
             rel="noopener noreferrer">
@@ -71,7 +71,7 @@ const Footer = () => (
         style={{ display: 'block', marginBottom: '4em', marginTop: '4em' }}
         href="mailto:engagelosangeles@gmail.com"
         rel="noopener noreferrer">
-        <Button style={{ backgroundColor: '#97B87F', color: 'white' }}>
+        <Button style={{ backgroundColor: 'rgb(130, 186, 45)', color: 'white' }}>
           Send us a message
         </Button>
       </a>
