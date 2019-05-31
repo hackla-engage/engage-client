@@ -2,7 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { requestAgendas } from '../ducks/agendas';
-import {setPosition} from '../ducks/feedState'
+import { setPosition } from '../ducks/feedState';
 import agenda_item_received from '../actions/Form';
 import AgendaItemContainer from './AgendaItemContainer.jsx';
 import qs from 'query-string';
@@ -28,7 +28,7 @@ class AgendaFeed extends Component {
       agendaResults: [],
       agendaIDs: [],
       agendaItems: {},
-      
+
       pastIssues: 1,
     };
     this.addId = this.addId.bind(this);
@@ -42,11 +42,11 @@ class AgendaFeed extends Component {
     agendaIDs: [],
     agendaItems: {},
   };
-  componentDidCatch(err, info){
-    console.error(err, info)
+  componentDidCatch(err, info) {
+    console.error(err, info);
   }
   componentDidUpdate(prevProps, prevState) {
-        //sets agenda props to state
+    //sets agenda props to state
     let { agendaItems, agendaIDs, agendaResults } = this.props;
     const prevRes = prevProps.agendaResults;
     if (
@@ -100,17 +100,19 @@ class AgendaFeed extends Component {
       })();
     }
 
-    document.querySelector('#app').addEventListener('scroll', this.setPostion)
+    document.querySelector('#app').addEventListener('scroll', this.setPostion);
   }
-  componentWillUnmount(){
-    document.querySelector('#app').removeEventListener('scroll', this.setPostion)
+  componentWillUnmount() {
+    document
+      .querySelector('#app')
+      .removeEventListener('scroll', this.setPostion);
   }
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
     //Prevents scroll position from rerendering dom tree
-    if (this.props.appPosition !== nextProps.appPosition){
-      return false
+    if (this.props.appPosition !== nextProps.appPosition) {
+      return false;
     }
-    return true
+    return true;
   }
 
   addId(id) {
@@ -188,11 +190,11 @@ class AgendaFeed extends Component {
     requestAgendas(this.props.nextAgendaURL);
   }
 
-  setPostion(){
+  setPostion() {
     //Throttles setting new scroll position
-    if(this.throttler+1000 < Date.now() ){
-      this.throttler = Date.now()
-      this.props.setPosition(document.querySelector('#app').scrollTop)
+    if (this.throttler + 1000 < Date.now()) {
+      this.throttler = Date.now();
+      this.props.setPosition(document.querySelector('#app').scrollTop);
     }
   }
 
@@ -222,14 +224,19 @@ class AgendaFeed extends Component {
               <div className="feed-noActiveContainer">
                 <Header
                   className="feed-signUpHeader"
-                  style={{ alignSelf: 'center', marginTop: '20px', marginBottom: '0px', }}>
-                  There are no active issues available for public feedback at this time.
+                  style={{
+                    alignSelf: 'center',
+                    marginTop: '20px',
+                    marginBottom: '0px',
+                  }}>
+                  There are no active issues available for public feedback at
+                  this time.
                 </Header>
               </div>
               <Header size="large">
                 Get notified when new issues are posted:
               </Header>
-              <div className="feed-signUpContainer" >
+              <div className="feed-signUpContainer">
                 <div className="feed-signUp">
                   <Header size="large">Follow us!</Header>
                   <a
@@ -273,7 +280,6 @@ class AgendaFeed extends Component {
             );
             return (
               <div key={index}>
-
                 <div
                   className="ui text container"
                   style={{ margin: '85px 0 25px' }}>
@@ -334,7 +340,10 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ requestAgendas, agenda_item_received, setPosition }, dispatch);
+  return bindActionCreators(
+    { requestAgendas, agenda_item_received, setPosition },
+    dispatch
+  );
 }
 
 export default connect(

@@ -56,7 +56,10 @@ class AgendaItemContainer extends Component {
             </Link>
           </Card.Content>
           <Card.Content>
-            <Link onMouseEnter={this.setPostion} rel="noopener noreferrer" to={`/feed/${agenda_item_id}`}>
+            <Link
+              onMouseEnter={this.setPostion}
+              rel="noopener noreferrer"
+              to={`/feed/${agenda_item_id}`}>
               <Button
                 fluid
                 style={{ backgroundColor: '#192a56', color: 'white' }}>

@@ -83,23 +83,21 @@ class AgendaItem extends Component {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
     const url = this.props.history.location.pathname.split('/');
-    const id = url[url.length - 1]
+    const id = url[url.length - 1];
     //Use agenda if stored in redux
-    if(this.props.agendaItems && this.props.agendaItems[id]){
+    if (this.props.agendaItems && this.props.agendaItems[id]) {
       this.setState({
         agendaItem: this.props.agendaItems[id],
-        id
-      })
-    }else{
+        id,
+      });
+    } else {
       //If no agendas are in redux then request them.
-    getJSON(`agendas/item/${id}`)
-      .then(agendaData => {
+      getJSON(`agendas/item/${id}`).then(agendaData => {
         this.setState({
           agendaItem: { ...agendaData },
-          id
+          id,
         });
-      })
-     
+      });
     }
   }
 
