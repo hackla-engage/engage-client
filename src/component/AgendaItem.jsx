@@ -24,14 +24,9 @@ import { getJSON } from '../engage_client';
 class AgendaItem extends Component {
   constructor() {
     super();
+    this.state = {};
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
-  }
-
-  componentWillMount() {
-    if (Object.keys(this.props.agendaItems).length < 2) {
-      this.props.requestAgendas('agendas');
-    }
   }
 
   goToForm() {
@@ -39,9 +34,9 @@ class AgendaItem extends Component {
   }
 
   showForm(proCon) {
-    const { id } = this.props.match.params;
-    const agenda = this.props.agendaItems[id];
-    const { body, title, agenda_item_id } = agenda;
+    const agenda_item_id = this.state.id;
+    const agenda = this.state.agendaItem;
+    const { body, title } = agenda;
     const recommendations = agenda.recommendations[0].recommendation;
     // map to get recommendation from object and reduce array to string concatenated with <br />s
     let background = false;
@@ -77,7 +72,7 @@ class AgendaItem extends Component {
       Title: title,
       Recommendations: recommendationsArray,
       Summary: summaryArray,
-      Id: id,
+      Id: agenda_item_id,
       AgendaItemId: agenda_item_id,
       Pro: proCon,
     });
@@ -87,10 +82,27 @@ class AgendaItem extends Component {
   componentDidMount() {
     //screen position doesn't automatically reset, manual fix
     document.querySelector('#app').scrollTop = 0;
+    const url = this.props.history.location.pathname.split('/');
+    const id = url[url.length - 1];
+    //Use agenda if stored in redux
+    if (this.props.agendaItems && this.props.agendaItems[id]) {
+      this.setState({
+        agendaItem: this.props.agendaItems[id],
+        id,
+      });
+    } else {
+      //If no agendas are in redux then request them.
+      getJSON(`agendas/item/${id}`).then(agendaData => {
+        this.setState({
+          agendaItem: { ...agendaData },
+          id,
+        });
+      });
+    }
   }
 
   render() {
-    const agendaItem = this.props.agendaItems[this.props.match.params.id];
+    const agendaItem = this.state.agendaItem;
     const detailPageLink = agendaItem
       ? `http://santamonicacityca.iqm2.com/Citizens/Detail_LegiFile.aspx?Frame=&MeetingID=${
           agendaItem.id
@@ -345,9 +357,14 @@ class AgendaItem extends Component {
             </Card>
           </Container>
         ) : (
-          <Loader active inline="centered" style={{ color: 'black' }}>
-            Loading agenda...
-          </Loader>
+          <Container style={{ height: '95vh' }}>
+            <Loader
+              active
+              inline="centered"
+              style={{ color: 'black', top: '40%' }}>
+              Loading agenda...
+            </Loader>
+          </Container>
         )}
       </div>
     );

@@ -40,9 +40,9 @@ export default function reducer(state = defaultState, action) {
       const agendaItems = agendaList.reduce(
         (acc, agenda) => {
           if (acc[agenda.id]) {
-            console.log('duplicate agenda id', agenda.id);
+            console.log('duplicate agenda id', agenda.agenda_item_id);
           } else {
-            acc[agenda.id] = agenda;
+            acc[agenda.agenda_item_id] = agenda;
             return acc;
           }
         },
@@ -98,7 +98,6 @@ export function requestAgendas(requestURL) {
         const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${
           nextArray[nextArray.length - 1]
         }`;
-        console.log(nextAgendaURL);
 
         dispatch({
           type: REQUEST_AGENDAS,

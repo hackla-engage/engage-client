@@ -1,11 +1,66 @@
-#mc_embed_signup {
-  background: #fff;
-  clear: left;
-  font: 14px Helvetica, Arial, sans-serif;
-}
+
 .mailChimpFormFeed{
   max-width: 460px;
 
   margin: auto;
 }
+.feed-signUpContainer{
+  display: flex;
+  justify-content: center;
+  max-width: 850px;
+  margin: auto;
+  padding-top: 5rem;
+}
+.VR{
+  position: relative;
+margin:{
+  left:10px;
+  right:10px;
+} 
+  width: 2px;
+  background-color: rgba(34, 36, 38, 0.247);
+}
+.feed-signUp{
+  width:50%
+}
+.feed-signUpHeader{
+  font-size: 2.6rem !important;
+}
+.feed-noActiveContainer{
+  display: flex;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  flex-direction: column;
+height: auto
+}
 
+@media only screen and (max-width: 768px) {
+  .VR{
+    display: none
+  }
+  .feed-signUpContainer{
+    flex-direction: column;
+    align-items: center;
+    padding-top:2.5rem;
+    
+  }
+  .feed-signUpContainer{
+
+  }
+  .feed-signUp{
+    margin-bottom: 30px;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+  .feed-signUpHeader{
+    font-size: 1.8rem !important;
+}
+.feed-noActiveContainer{
+  padding-top: 0rem;
+  height: 88vh;
+  justify-content: center;
+  padding: 10px;
+
+}
+
+} 
