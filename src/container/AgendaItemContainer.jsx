@@ -57,7 +57,6 @@ class AgendaItemContainer extends Component {
           </Card.Content>
           <Card.Content>
             <Link
-              onMouseEnter={this.setPostion}
               rel="noopener noreferrer"
               to={`/feed/${agenda_item_id}`}>
               <Button
