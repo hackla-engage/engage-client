@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Dropdown, Responsive, Container, Button } from 'semantic-ui-react';
+import {
+  Menu,
+  Dropdown,
+  Responsive,
+  Container,
+  Button,
+} from 'semantic-ui-react';
 import styles from './Header.scss';
 
 styles.link = {
@@ -48,8 +54,16 @@ const Header = () => (
             How To
           </Menu.Item>
           <Menu.Item as={Link} to="/feed">
-            <Button size='tiny' style={{ backgroundColor: 'rgb(130, 186, 45)' , color: '#fff',
-                                        fontSize: '1.14rem', fontWeight: '400'}}>Start Engaging</Button>
+            <Button
+              size="tiny"
+              style={{
+                backgroundColor: 'rgb(130, 186, 45)',
+                color: '#fff',
+                fontSize: '1.14rem',
+                fontWeight: '400',
+              }}>
+              Start Engaging
+            </Button>
           </Menu.Item>
         </Menu.Menu>
       </Responsive>
@@ -82,7 +96,7 @@ const Header = () => (
               <Link style={styles.link} to="/feed">
                 Start Engaging
               </Link>
-            </Dropdown.Item>           
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Responsive>

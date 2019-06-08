@@ -71,7 +71,8 @@ const Footer = () => (
         style={{ display: 'block', marginBottom: '4em', marginTop: '4em' }}
         href="mailto:engagelosangeles@gmail.com"
         rel="noopener noreferrer">
-        <Button style={{ backgroundColor: 'rgb(130, 186, 45)', color: 'white' }}>
+        <Button
+          style={{ backgroundColor: 'rgb(130, 186, 45)', color: 'white' }}>
           Send us a message
         </Button>
       </a>

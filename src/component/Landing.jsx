@@ -42,13 +42,16 @@ class Landing extends Component {
             minHeight: 600,
             padding: '1em 0em',
             border: 'None',
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(../static/image/engage_hero.jpeg)',
+            backgroundImage:
+              'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(../static/image/engage_hero.jpeg)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundPosition: 'center',
           }}
           vertical>
-          <Container fluid style={{ 
-            marginTop: '12em' ,
+          <Container
+            fluid
+            style={{
+              marginTop: '12em',
             }}>
             <Header
               as="h2"
@@ -60,7 +63,7 @@ class Landing extends Component {
                 color: 'black',
                 marginBottom: '0.5em',
                 textAlign: 'center',
-                color: '#fff'
+                color: '#fff',
               }}
             />
             <p
@@ -70,7 +73,7 @@ class Landing extends Component {
                 textAlign: 'center',
                 fontWeight: '200',
                 lineHeight: '1.5em',
-                color: '#fff'
+                color: '#fff',
               }}>
               Start using Engage today and be part of the discussion! Vote and
               comment on proposals from your local government.

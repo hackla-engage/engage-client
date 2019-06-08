@@ -74,4 +74,3 @@ PositionFormFinalStep.propTypes = {
 };
 
 export default PositionFormFinalStep;
- 
