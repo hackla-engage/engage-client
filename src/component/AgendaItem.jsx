@@ -182,12 +182,19 @@ class AgendaItem extends Component {
                 <Card.Description
                   style={{
                     alignSelf: 'flex-start',
-                    textAlign:'left'
+                    textAlign: 'left',
                   }}>
                   {/* Date formatting consistency, but still is in user's local time zone :-( */}
-                  <div><strong>Date:</strong> {format(agendaDate, 'MM/DD/YYYY')}</div>
-                  <div><strong>Time:</strong> {format(agendaDate, 'hh:mm a', { locale: 'PST' })}</div>
-                  <div><strong>Department:</strong> {agendaItem.department}</div>
+                  <div>
+                    <strong>Date:</strong> {format(agendaDate, 'MM/DD/YYYY')}
+                  </div>
+                  <div>
+                    <strong>Time:</strong>{' '}
+                    {format(agendaDate, 'hh:mm a', { locale: 'PST' })}
+                  </div>
+                  <div>
+                    <strong>Department:</strong> {agendaItem.department}
+                  </div>
                 </Card.Description>
               </Card.Content>
               <Card.Content>
