@@ -1,0 +1,42 @@
+.commentingClosed{
+ font-size: 1.20rem
+}
+#agendaItemLinks{
+    flex-direction: row;
+    .agendaItemLink1{
+        text-align: right;
+        width: 50%;
+        padding-right: 2rem;
+        border-right: 1px solid;
+    }
+    .agendaItemLink2{
+        text-align: left;
+        width: 50%;
+        padding-left: 2rem;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .commentingClosed{
+        font-size: 1rem;
+font-weight: bold
+       };
+       #agendaItemLinks{
+        flex-direction: column;
+        justify-content: center;
+        .agendaItemLink1{
+            text-align: center;
+            width: 100%;
+            padding-right: 0rem;
+            border-right: 0px solid;
+        }
+        .agendaItemLink2{
+            text-align: center;
+            width: 100%;
+            padding-left: 0rem;
+            padding-top: 1rem;
+
+        }
+    }
+} 

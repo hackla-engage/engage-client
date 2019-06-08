@@ -5,7 +5,7 @@
  */
 
 export function getResource(headers, host, endpointUrl) {
-  return fetch(`${host}/${endpointUrl}/`, {
+  return fetch(`${host}/${endpointUrl}`, {
     headers,
     mode: 'cors',
     credentials: 'include',

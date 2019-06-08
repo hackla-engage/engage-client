@@ -40,23 +40,29 @@ export default function reducer(state = defaultState, action) {
       const agendaItems = agendaList.reduce(
         (acc, agenda) => {
           if (acc[agenda.id]) {
-            console.log('duplicate agenda id', agenda.id);
+            console.log('duplicate agenda id', agenda.agenda_item_id);
+          } else {
+            acc[agenda.agenda_item_id] = agenda;
+            return acc;
           }
-          acc[agenda.id] = agenda;
-          return acc;
         },
         { ...state.agendaItems }
       );
-
       const agendaIDs = Object.keys(agendaItems);
-      const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
-        const timeA = agendaItems[a].meeting_time;
-        const timeB = agendaItems[b].meeting_time;
+      const agendaIDsSortedByTime = agendaIDs
+        .sort((a, b) => {
+          const timeA = agendaItems[a].meeting_time;
+          const timeB = agendaItems[b].meeting_time;
 
-        if (timeA > timeB) return -1;
-        else if (timeA < timeB) return 1;
-        return 0;
-      });
+          if (timeA > timeB) return -1;
+          else if (timeA < timeB) return 1;
+          return 0;
+        })
+        .filter((Id, i) => {
+          if (agendaItems[Id].department === '2: Special Agenda Items')
+            return false;
+          return true;
+        });
 
       return {
         ...state,
@@ -64,7 +70,7 @@ export default function reducer(state = defaultState, action) {
         committee,
         agendaIDs: agendaIDsSortedByTime,
         agendaLoading: false,
-        agendaResults,
+        agendaResults: [...state.agendaResults, ...agendaResults],
         next,
       };
     case REQUEST_LOADING:
@@ -93,7 +99,6 @@ export function requestAgendas(requestURL) {
           (acc, result) => [...acc, ...result.items],
           []
         );
-        console.log(json.results);
         const agendaResults = json.results;
         const nextArray = json.next.split('/');
         const nextAgendaURL = `${nextArray[nextArray.length - 2]}/${
