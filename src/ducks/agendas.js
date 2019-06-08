@@ -49,14 +49,20 @@ export default function reducer(state = defaultState, action) {
         { ...state.agendaItems }
       );
       const agendaIDs = Object.keys(agendaItems);
-      const agendaIDsSortedByTime = agendaIDs.sort((a, b) => {
-        const timeA = agendaItems[a].meeting_time;
-        const timeB = agendaItems[b].meeting_time;
+      const agendaIDsSortedByTime = agendaIDs
+        .sort((a, b) => {
+          const timeA = agendaItems[a].meeting_time;
+          const timeB = agendaItems[b].meeting_time;
 
-        if (timeA > timeB) return -1;
-        else if (timeA < timeB) return 1;
-        return 0;
-      });
+          if (timeA > timeB) return -1;
+          else if (timeA < timeB) return 1;
+          return 0;
+        })
+        .filter((Id, i) => {
+          if (agendaItems[Id].department === '2: Special Agenda Items')
+            return false;
+          return true;
+        });
 
       return {
         ...state,
