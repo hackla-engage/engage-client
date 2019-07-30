@@ -117,9 +117,11 @@ class ConfirmFormContentComponent extends React.Component {
                   color="green"
                   disabled={this.props.token === null}
                   onClick={() => {
-                    this.props.handleSubmit(this.props.complete)
-                    this.props.history.push(`/feed/${this.props.AgendaItemId}/submission-confirmation`)
-                    }}>
+                    this.props.handleSubmit(this.props.complete);
+                    this.props.history.push(
+                      `/feed/${this.props.AgendaItemId}/submission-confirmation`
+                    );
+                  }}>
                   <Header as="h1" style={{ color: 'white' }}>
                     SUBMIT
                   </Header>

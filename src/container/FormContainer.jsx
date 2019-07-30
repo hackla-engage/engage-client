@@ -71,7 +71,6 @@ class FormContainer extends Component {
   }
 
   render() {
-
     return (
       <React.Fragment>
         <Route
@@ -94,38 +93,42 @@ class FormContainer extends Component {
             />
           )}
         />
-         <Route
+        <Route
           path="/feed/:id/review-submission"
-          render={() =>{
+          render={() => {
             //Will redirect if user trys to go to url and form is not filled correctly
             let location = this.props.location.pathname.split('/');
             location.pop();
             location.push('vote');
             const redirectPath = location.join('/');
 
-            return (Object.keys(this.props.complete).length === 0 || this.props.editing) && !this.props.submitted ?
-           (<Redirect to={redirectPath}/>):
-           (<ConfirmFormContentComponent
-              history={this.props.history}
-              Pro={this.props.Pro}
-              Recommendations={this.props.Recommendations}
-              AgendaItemId={this.props.AgendaItemId}
-              Id={this.props.Id}
-              Summary={this.props.Summary}
-              Title={this.props.Title}
-              content={this.props.content}
-              complete={this.props.complete}
-              onVerify={this.onVerify}
-              handleSubmit={this.handleSubmit}
-              resetForm={this.props.resetForm}
-              editingForm={this.props.editingForm}
-              scrollToAppTop={this.scrollToAppTop}
-              firstName={this.props.firstName}
-              token={this.props.token} // captcha token
-            />)}}
-          
+            return (Object.keys(this.props.complete).length === 0 ||
+              this.props.editing) &&
+              !this.props.submitted ? (
+              <Redirect to={redirectPath} />
+            ) : (
+              <ConfirmFormContentComponent
+                history={this.props.history}
+                Pro={this.props.Pro}
+                Recommendations={this.props.Recommendations}
+                AgendaItemId={this.props.AgendaItemId}
+                Id={this.props.Id}
+                Summary={this.props.Summary}
+                Title={this.props.Title}
+                content={this.props.content}
+                complete={this.props.complete}
+                onVerify={this.onVerify}
+                handleSubmit={this.handleSubmit}
+                resetForm={this.props.resetForm}
+                editingForm={this.props.editingForm}
+                scrollToAppTop={this.scrollToAppTop}
+                firstName={this.props.firstName}
+                token={this.props.token} // captcha token
+              />
+            );
+          }}
         />
-    
+
         <Route
           path="/feed/:id/submission-confirmation"
           render={() => (

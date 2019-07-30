@@ -24,8 +24,7 @@ import { getJSON } from '../engage_client';
 class AgendaItem extends Component {
   constructor() {
     super();
-    this.state = {
-    };
+    this.state = {};
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
   }
@@ -95,13 +94,13 @@ class AgendaItem extends Component {
       //If no agendas are in redux then request them.
       getJSON(`agendas/item/${id}`).then(agendaData => {
         const currentUrl = window.location.href.split('/');
-        const currentAgenda = currentUrl[currentUrl.length-1];
+        const currentAgenda = currentUrl[currentUrl.length - 1];
         //Don't update if canceled
-        if(currentAgenda == id)this.setState(
-          {
-          agendaItem: { ...agendaData },
-          id,
-        });
+        if (currentAgenda == id)
+          this.setState({
+            agendaItem: { ...agendaData },
+            id,
+          });
       });
     }
   }
@@ -117,7 +116,8 @@ class AgendaItem extends Component {
     let recommendation;
     let summaryArray;
     let showActions = false;
-    let pdfIsGenerated = this.state.agendaItem && this.state.agendaItem.pdfLocation;
+    let pdfIsGenerated =
+      this.state.agendaItem && this.state.agendaItem.pdfLocation;
 
     if (agendaItem) {
       agendaDate = new Date(agendaItem.meeting_time * 1000);
@@ -266,7 +266,7 @@ class AgendaItem extends Component {
                             width: '100%',
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignContent:'center'
+                            alignContent: 'center',
                           }}>
                           <div>
                             <div>
@@ -275,7 +275,6 @@ class AgendaItem extends Component {
                             <div
                               style={{
                                 display: 'flex',
-                                
                               }}>
                               View results of public feedback for this issue by
                               downloading this Report PDF:
@@ -286,18 +285,19 @@ class AgendaItem extends Component {
                               position: 'relative',
                               minWidth: '70px',
                               height: '70px',
-                              alignSelf:'center'
+                              alignSelf: 'center',
                             }}
                             target="_blank"
-                            href={`https://backend.engage.town${this.state.agendaItem.pdfLocation}`}
-                            >
+                            href={`https://backend.engage.town${
+                              this.state.agendaItem.pdfLocation
+                            }`}>
                             <Image
                               src="/static/image/pdf-icon.png"
                               style={{
-                                justifyContent:'center',
+                                justifyContent: 'center',
                                 position: 'relative',
                                 width: '60px',
-                              height: '60px'
+                                height: '60px',
                               }}
                             />
                           </a>
