@@ -24,13 +24,14 @@ import { getJSON } from '../engage_client';
 class AgendaItem extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+    };
     this.showForm = this.showForm.bind(this);
     this.goToForm = this.goToForm.bind(this);
   }
 
   goToForm() {
-    this.props.history.push('/form');
+    this.props.history.push(`/feed/${this.state.id}/vote`);
   }
 
   showForm(proCon) {
@@ -93,7 +94,11 @@ class AgendaItem extends Component {
     } else {
       //If no agendas are in redux then request them.
       getJSON(`agendas/item/${id}`).then(agendaData => {
-        this.setState({
+        const currentUrl = window.location.href.split('/');
+        const currentAgenda = currentUrl[currentUrl.length-1];
+        //Don't update if canceled
+        if(currentAgenda == id)this.setState(
+          {
           agendaItem: { ...agendaData },
           id,
         });
@@ -112,7 +117,7 @@ class AgendaItem extends Component {
     let recommendation;
     let summaryArray;
     let showActions = false;
-    let pdfIsGenerated = false;
+    let pdfIsGenerated = this.state.agendaItem && this.state.agendaItem.pdfLocation;
 
     if (agendaItem) {
       agendaDate = new Date(agendaItem.meeting_time * 1000);
@@ -252,6 +257,7 @@ class AgendaItem extends Component {
                         style={{
                           display: 'flex',
                           flexDirection: 'row',
+                          alignContent: 'center',
                         }}>
                         <div>>> </div>
                         <div
@@ -260,6 +266,7 @@ class AgendaItem extends Component {
                             width: '100%',
                             display: 'flex',
                             justifyContent: 'space-between',
+                            alignContent:'center'
                           }}>
                           <div>
                             <div>
@@ -268,23 +275,29 @@ class AgendaItem extends Component {
                             <div
                               style={{
                                 display: 'flex',
+                                
                               }}>
-                              View resuls of public feedback for this issue by
+                              View results of public feedback for this issue by
                               downloading this Report PDF:
                             </div>{' '}
                           </div>
                           <a
                             style={{
                               position: 'relative',
-                              width: '70px',
+                              minWidth: '70px',
                               height: '70px',
-                            }}>
+                              alignSelf:'center'
+                            }}
+                            target="_blank"
+                            href={`https://backend.engage.town${this.state.agendaItem.pdfLocation}`}
+                            >
                             <Image
                               src="/static/image/pdf-icon.png"
                               style={{
+                                justifyContent:'center',
                                 position: 'relative',
-                                width: '100%',
-                                height: '100%',
+                                width: '60px',
+                              height: '60px'
                               }}
                             />
                           </a>

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormComponent from '../component/FormComponent.jsx';
 import { setHours, setMinutes } from 'date-fns';
+import { Route, Redirect } from 'react-router-dom';
 import {
   verifiedCaptcha,
   resetForm,
@@ -70,23 +71,14 @@ class FormContainer extends Component {
   }
 
   render() {
-    if (
-      (Object.keys(this.props.complete).length === 0 || this.props.editing) &&
-      !this.props.submitted
-    ) {
-      return (
-        <div
-          style={{
-            display: 'flex',
-            minHeight: '63vh',
-            flexDirection: 'column',
-          }}>
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 50,
-            }}>
+
+    return (
+      <React.Fragment>
+        <Route
+          path="/feed/:id/vote"
+          render={() => (
             <FormComponent
+              history={this.props.history}
               Committee={this.props.Committee}
               Id={this.props.Id}
               Pro={this.props.Pro}
@@ -100,24 +92,21 @@ class FormContainer extends Component {
               returnToItem={this.returnToItem}
               scrollToAppTop={this.scrollToAppTop}
             />
-          </div>
-        </div>
-      );
-    } else if (!this.props.submitted) {
-      return (
-        <div
-          style={{
-            display: 'flex',
-            minHeight: '63vh',
-            flexDirection: 'column',
-          }}>
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 50,
-              display: this.props.firstName !== '' ? 'none' : 'block',
-            }}>
-            <ConfirmFormContentComponent
+          )}
+        />
+         <Route
+          path="/feed/:id/review-submission"
+          render={() =>{
+            //Will redirect if user trys to go to url and form is not filled correctly
+            let location = this.props.location.pathname.split('/');
+            location.pop();
+            location.push('vote');
+            const redirectPath = location.join('/');
+
+            return (Object.keys(this.props.complete).length === 0 || this.props.editing) && !this.props.submitted ?
+           (<Redirect to={redirectPath}/>):
+           (<ConfirmFormContentComponent
+              history={this.props.history}
               Pro={this.props.Pro}
               Recommendations={this.props.Recommendations}
               AgendaItemId={this.props.AgendaItemId}
@@ -131,30 +120,36 @@ class FormContainer extends Component {
               resetForm={this.props.resetForm}
               editingForm={this.props.editingForm}
               scrollToAppTop={this.scrollToAppTop}
+              firstName={this.props.firstName}
               token={this.props.token} // captcha token
+            />)}}
+          
+        />
+    
+        <Route
+          path="/feed/:id/submission-confirmation"
+          render={() => (
+            <PositionFormFinalStep
+              history={this.props.history}
+              returnToItem={this.returnToItem}
+              Id={this.props.Id}
+              complete={this.props.complete}
+              submitForm={this.props.submitForm}
+              content={this.props.content}
+              email={this.props.email}
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              zipcode={this.props.zipcode}
+              businessOwner={this.props.businessOwner}
+              childSchool={this.props.childSchool}
+              homeOwner={this.props.homeOwner}
+              resident={this.props.resident}
+              school={this.props.school}
+              works={this.props.works}
             />
-          </div>
-        </div>
-      );
-    }
-    return (
-      <PositionFormFinalStep
-        returnToItem={this.returnToItem}
-        Id={this.props.Id}
-        complete={this.props.complete}
-        submitForm={this.props.submitForm}
-        content={this.props.content}
-        email={this.props.email}
-        firstName={this.props.firstName}
-        lastName={this.props.lastName}
-        zipcode={this.props.zipcode}
-        businessOwner={this.props.businessOwner}
-        childSchool={this.props.childSchool}
-        homeOwner={this.props.homeOwner}
-        resident={this.props.resident}
-        school={this.props.school}
-        works={this.props.works}
-      />
+          )}
+        />
+      </React.Fragment>
     );
   }
 }

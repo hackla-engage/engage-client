@@ -21,10 +21,10 @@ const Routes = () => (
       <Route exact path="/howto" component={HowTo} />
       <Route exact path="/about" component={About} />
       <Route exact path="/feed" component={AgendaFeedContainer} />
-      <Route path="/feed/:id" component={AgendaItem} />
+      <Route exact path="/feed/:id" component={AgendaItem} />
       <Route path="/signin" component={SignIn} />
       <Route path="/faq" component={Faq} />
-      <Route path="/form" component={FormContainer} />
+      <Route path="/feed/:id/:form" component={FormContainer} />
       <Route path="/form-final-step" component={PositionFormFinalStep} />
       <Route path="/emailConfirmation" component={EmailConfirmation} />
     </Switch>

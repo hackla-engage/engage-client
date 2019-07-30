@@ -41,25 +41,29 @@ height: auto
   .feed-signUpContainer{
     flex-direction: column;
     align-items: center;
-    padding-top:2.5rem;
+    padding: 0px;
     
   }
-  .feed-signUpContainer{
+  .noActiveIssues{
+    padding: 10px;
 
   }
   .feed-signUp{
+    margin-top: 30px;
     margin-bottom: 30px;
     width: 100%;
     font-size: 0.8rem;
   }
   .feed-signUpHeader{
-    font-size: 1.8rem !important;
+    font-size: 2.1rem !important;
+    padding:{
+      top:20px;
+      bottom:20px;
+    }
 }
 .feed-noActiveContainer{
-  padding-top: 0rem;
-  height: 88vh;
   justify-content: center;
-  padding: 10px;
+  padding-top: 5rem;
 
 }
 

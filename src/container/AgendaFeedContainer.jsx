@@ -192,7 +192,7 @@ class AgendaFeed extends Component {
 
   setPostion() {
     //Throttles setting new scroll position
-    if (this.throttler + 1000 < Date.now()) {
+    if (this.throttler + 800 < Date.now()) {
       this.throttler = Date.now();
       this.props.setPosition(document.querySelector('#app').scrollTop);
     }
@@ -218,6 +218,7 @@ class AgendaFeed extends Component {
           {//compares most recent item to today
           recentAgendaData < Math.floor(Date.now() / 1000) ? (
             <div
+            className="noActiveIssues"
               style={{
                 textAlign: 'center',
               }}>
