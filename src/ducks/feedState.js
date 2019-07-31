@@ -9,12 +9,10 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_POSITION:
       return {
-        ...state,
         position: action.payload,
       };
     case RESET_POSITION:
       return {
-        ...state,
         position: 0,
       };
     default:
