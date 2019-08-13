@@ -87,10 +87,10 @@ class Landing extends Component {
                 primary
                 size="large"
                 style={{
-                  backgroundColor: '#192a56',
+                  backgroundColor: 'rgb(130, 186, 45)',
                   marginTop: '1rem',
                 }}>
-                Start Engaging
+                Go To Issues
               </Button>
             </Link>
           </Container>
