@@ -19,8 +19,8 @@ function TagsRequestReducer(state = initialState, action) {
     // which we dont have a case for get passed to this reducer,
     // the state won't get returned in order that it may be then
     // passed to another reducer.
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 

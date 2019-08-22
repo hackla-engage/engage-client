@@ -8,16 +8,29 @@
   "license": "MIT",
   "scripts": {
     "serve": "node index.js",
+    "servestaging": "PORT=5900 node index.js",
     "build": "webpack --mode production -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode development --open",
     "devsrv": "DEBUG=true npm run dev",
     "postinstall": "npm run build",
-    "prettier": "prettier-eslint --write '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'",
+    "prettier": "prettier --write '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'",
     "prettier-dryrun": "prettier-eslint '!public/**/*.js' 'src/**/*.js' 'src/**/*.jsx'",
     "test": "jest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write \"!public/**/*.js\" \"src/**/*.js\" \"src/**/*.jsx\"",
+      "git add"
+    ]
+  },
   "sideEffects": false,
   "dependencies": {
+    "autoprefixer": "^9.5.1",
     "b": "^2.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -32,18 +45,20 @@
     "babel-preset-react": "^6.24.1",
     "compression": "^1.7.2",
     "copy-webpack-plugin": "^4.5.0",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.11",
     "date-fns": "^1.29.0",
     "express": "^4.16.3",
     "font-awesome": "^4.7.0",
     "formik": "^0.11.11",
     "history": "^4.7.2",
-    "lodash": "^4.17.10",
-    "node-sass": "4.9.2",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
     "query-string": "^5.1.1",
-    "react": "^16.0.0",
+    "react": "^16.8.6",
     "react-async-script": "^0.9.1",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.8.6",
     "react-google-recaptcha": "^0.11.0",
     "react-hot-loader": "^1.3.0",
     "react-redux": "^5.0.6",
@@ -51,6 +66,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^3.7.2",
+    "redux-api-middleware": "^3.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
@@ -70,11 +86,15 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
+    "husky": "^1.3.1",
     "jest": "^23.6.0",
+    "lint-staged": "^8.1.5",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.16.4",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
     "react-test-renderer": "^16.5.2",
     "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.2.1"
   }
 }

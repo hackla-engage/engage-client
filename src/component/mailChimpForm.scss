@@ -1,0 +1,54 @@
+#verticalForm {
+  width: 100%;
+  padding: {
+    top: 5px;
+    bottom: 5px;
+  }
+  margin: auto;
+  form .field {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+  }
+  input {
+    border: 1px solid #bdbec3;
+  }
+  button {
+    background-color: #192a56;
+    color: #fff;
+  }
+}
+#home-page {
+  text-align: left;
+  margin-top: 0.8em;
+  max-width: 890px;
+  margin: auto;
+}
+
+#home-page .ui.large.button {
+  background-color: #192a56;
+  width: 100%;
+  color: #fff;
+  margin-top: 0.5em;
+}
+
+#home-page input {
+  border: 1px solid #bdbec3;
+  margin-top: 0.5em;
+}
+.mailChimp-message {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-name: open;
+  top: 0;
+  transform-origin: 0 0;
+}
+@keyframes open {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}

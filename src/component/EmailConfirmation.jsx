@@ -19,7 +19,14 @@ class EmailConfirmation extends Component {
   componentWillMount() {
     // get the parameters
     const parsed = qs.parse(this.props.location.search);
-    if (parsed && parsed.type && parsed.email && parsed.id && parsed.code && !this.state.codeSet) {
+    if (
+      parsed &&
+      parsed.type &&
+      parsed.email &&
+      parsed.id &&
+      parsed.code &&
+      !this.state.codeSet
+    ) {
       console.log(parsed);
       this.props.verify(parsed.email, parsed.id, parsed.code, parsed.type);
     }
@@ -30,7 +37,10 @@ class EmailConfirmation extends Component {
         <h1 id="heading">ENGAGE: Santa Monica, California </h1>
         <div className="box">
           <h2 className="emailbox"> Thank You </h2>
-          <h4 className="emailbox"> Your email is confirmed and your post has been submitted </h4>
+          <h4 className="emailbox">
+            {' '}
+            Your email is confirmed and your post has been submitted{' '}
+          </h4>
           <br />
           <a id="engagefeedlink" href="#">
             <h1> Go to the Engage Feed </h1>
@@ -56,11 +66,11 @@ function matchDispatchToProps(dispatch) {
     {
       verify,
     },
-    dispatch,
+    dispatch
   );
 }
 
 export default connect(
   mapStateToProps,
-  matchDispatchToProps,
+  matchDispatchToProps
 )(EmailConfirmation);

@@ -84,14 +84,14 @@ export const submitForm = token => (dispatch, getState) => {
     .withCredentials()
     .set('Content-Type', 'application/json')
     .send(values)
-    .then((res) => {
+    .then(res => {
       dispatch(formSubmitted(true));
     })
-    .catch((err) => {
+    .catch(err => {
       console.log('ERR SENDING FORM', err);
     });
 };
 
-export const verifiedCaptcha = token => (dispatch) => {
+export const verifiedCaptcha = token => dispatch => {
   dispatch(submitToken(token));
 };

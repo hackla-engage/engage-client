@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client
     steps:
       - checkout
@@ -15,9 +15,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: npm install
 
@@ -25,44 +25,112 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
+      # run tests!
+      - run: npm test
+  buildstaging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.12.0
+    working_directory: ~/engage-client-staging
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
       # run tests!
       - run: npm test
   deploy:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.9.0
+      - image: circleci/node:10.12.0
     working_directory: ~/engage-client
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-      - run: 
-            name: Build for deploy
-            command: |
-              npm run build
-              cd ..
-              tar cj -f engage-client.tar.bz2 engage-client
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Build for deploy
+          command: |
+            npm install
+            npm run build
+            cd ..
+            tar cj -f engage-client.tar.bz2 engage-client
       - add_ssh_keys:
-            fingerprints:
-              - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
+          fingerprints:
+            - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
       - run: ssh-keyscan -t rsa -H engage.town >> ~/.ssh/known_hosts
       - run:
-            name: Deploy over SSH
-            command: |
-                scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
-                ssh -f $SSH_USER@$SSH_HOST "./deploy-client.sh"
+          name: Deploy over SSH
+          command: |
+            scp ~/engage-client.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client.tar.bz2
+            ssh -f $SSH_USER@$SSH_HOST "./deploy-client-ci.sh"
+  deploystaging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.12.0
+    working_directory: ~/engage-client-staging
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Build for staging deployment
+          command: |
+            npm install
+            npm run build
+            cd ..
+            tar cj -f engage-client-staging.tar.bz2 engage-client-staging
+      - add_ssh_keys:
+          fingerprints:
+            - "dc:9f:48:96:a1:76:08:e3:f9:5b:2e:c1:1e:5b:06:5a"
+      - run: ssh-keyscan -t rsa -H engage.town >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy over SSH
+          command: |
+            scp ~/engage-client-staging.tar.bz2 $SSH_USER@$SSH_HOST:/home/engage/engage-client-staging.tar.bz2
+            ssh -f $SSH_USER@$SSH_HOST "./deploy-client-staging-ci.sh"
 workflows:
- version: 2
- build-and-deploy:
-   jobs:
-     - build
-     - deploy:
-         requires:
-           - build
-         filters:
-           branches:
-             only: master
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+  build-and-test:
+    jobs:
+      - buildstaging:
+          filters:
+            branches:
+              only: staging
+      - deploystaging:
+          requires:
+            - buildstaging
+          filters:
+            branches:
+              only: staging
