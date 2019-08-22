@@ -1,6 +1,6 @@
 import { VERIFIED } from '../actions/verify';
 
-const defaultState = {
+export const defaultState = {
   verified: false,
 };
 export default function(state = defaultState, action) {
