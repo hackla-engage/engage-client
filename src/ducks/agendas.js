@@ -36,13 +36,22 @@ export default function reducer(state = defaultState, action) {
       if (!agendaList || agendaList.length === 0) return;
 
       const next = action.next;
-
+      let agendaPdf = {};
       const agendaItems = agendaList.reduce(
         (acc, agenda) => {
-          if (acc[agenda.id]) {
+          if (acc[agenda.agenda_item_id]) {
             console.log('duplicate agenda id', agenda.agenda_item_id);
           } else {
+            //adds pdf location to item
+            if (agendaPdf.id !== agenda.agenda) {
+              agendaPdf.id = agenda.agenda;
+              agendaResults.forEach(agendaPayload => {
+                if (agenda.agenda === agendaPayload.id)
+                  agendaPdf.location = agendaPayload.pdf_location;
+              });
+            }
             acc[agenda.agenda_item_id] = agenda;
+            acc[agenda.agenda_item_id].pdfLocation = agendaPdf.location;
             return acc;
           }
         },

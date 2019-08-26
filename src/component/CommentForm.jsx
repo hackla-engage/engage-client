@@ -64,7 +64,6 @@ class CommentForm extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const { values, setByProps } = this.state;
-    console.log(nextProps, 'nextProps componentWillReceiveProps CommentForm');
     if (
       nextProps.complete != null &&
       Object.keys(nextProps.complete).length !== 0 &&
@@ -81,7 +80,6 @@ class CommentForm extends Component {
       values.works.value = nextProps.complete.works;
       values.school.value = nextProps.complete.school;
       this.setState({ values, setByProps: true });
-      console.log(values);
     }
   }
   handleSubmit(evt) {
@@ -117,6 +115,7 @@ class CommentForm extends Component {
       school,
     };
     this.props.completeForm(values);
+    this.props.history.push(`/feed/${this.props.id}/review-submission`);
   }
   handleCancel() {
     const values = {
@@ -238,7 +237,6 @@ class CommentForm extends Component {
     this.setState({ values });
   }
   render() {
-    console.log(this.state);
     const {
       firstName,
       lastName,
