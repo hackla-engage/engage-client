@@ -326,7 +326,6 @@ class CommentForm extends Component {
           autoheight="true"
           label="Let the council know what you think about this item (optional):"
           control="textarea"
-          rows="3"
           value={content.value}
           onChange={evt => {
             this.handleTextChange('content', evt.target.value);
