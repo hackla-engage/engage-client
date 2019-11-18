@@ -327,15 +327,11 @@ class CommentForm extends Component {
           label="Let the council know what you think about this item (optional):"
           control="textarea"
           rows="3"
-          maxLength={200}
           value={content.value}
           onChange={evt => {
             this.handleTextChange('content', evt.target.value);
           }}
         />
-        <div className="chars">
-          {200 - this.state.values.content.value.length} characters left
-        </div>
         <br />
         <br />
         <Header as="h4">Demographics:</Header>
