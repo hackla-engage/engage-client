@@ -3,16 +3,28 @@ import Recaptcha from './Recaptcha.jsx';
 import { Segment, Container, Header, Button } from 'semantic-ui-react';
 import './ConfirmFormContent.scss';
 import PropTypes from 'prop-types';
+import EmailConfirmationPopup from './EmailConfirmationPopup.jsx';
 
 class ConfirmFormContentComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+       showPopup: false
+    };
+    this.showEmailConfirmation = this.showEmailConfirmation.bind(this);
   }
+  
+  showEmailConfirmation(){
+     this.setState({showPopup: true});
+  }
+  
   componentDidMount() {
     this.props.scrollToAppTop();
   }
   render() {
     return (
+    <div>
+      {this.state.showPopup ? <EmailConfirmationPopup /> : null}
       <div
         style={{
           display: 'flex',
@@ -118,9 +130,8 @@ class ConfirmFormContentComponent extends React.Component {
                   disabled={this.props.token === null}
                   onClick={() => {
                     this.props.handleSubmit(this.props.complete);
-                    this.props.history.push(
-                      `/feed/${this.props.AgendaItemId}/submission-confirmation`
-                    );
+                    this.showEmailConfirmation();
+                    this.props.history.location.pathname = "/feed/email-confirmation";
                   }}>
                   <Header as="h1" style={{ color: 'white' }}>
                     SUBMIT
@@ -130,6 +141,7 @@ class ConfirmFormContentComponent extends React.Component {
             </Segment>
           </Container>
         </div>
+      </div>
       </div>
     );
   }
