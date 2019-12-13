@@ -1,0 +1,59 @@
+.email-confirmation-container {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 75%;
+   height: auto;
+   min-width: 200px;
+   z-index: 52;
+   max-width: 450px;
+   text-align: center;
+   color: black;
+   font-weight: 400;
+   background-color: white;
+   padding: 15px;
+   margin-right: -50%;
+   padding-bottom: 50px;
+   border-radius: 5px;
+}
+
+@media (max-width: 400px) {
+   .email-confirmation-container {
+      position: block;
+      width: 90%;
+      height: auto;
+      min-width: 200px;
+      z-index: 52;
+      max-width: 450px;
+      text-align: center;
+      color: black;
+      font-weight: 400;
+      background-color: white;
+      padding: 10px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+      border-radius: 5px;
+   }
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(54, 54, 54, 0.48);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 0px;
+  padding: 0px;
+  overflow-y: auto;
+  z-index: 51;
+}
+
+.please-confirm-email { 
+   color: red;
+   font-weight: 600;
+   font-size: 20;
+}
