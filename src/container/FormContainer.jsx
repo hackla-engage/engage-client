@@ -128,30 +128,7 @@ class FormContainer extends Component {
             );
           }}
         />
-
-        <Route
-          path="/feed/:id/submission-confirmation"
-          render={() => (
-            <PositionFormFinalStep
-              history={this.props.history}
-              returnToItem={this.returnToItem}
-              Id={this.props.Id}
-              complete={this.props.complete}
-              submitForm={this.props.submitForm}
-              content={this.props.content}
-              email={this.props.email}
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              zipcode={this.props.zipcode}
-              businessOwner={this.props.businessOwner}
-              childSchool={this.props.childSchool}
-              homeOwner={this.props.homeOwner}
-              resident={this.props.resident}
-              school={this.props.school}
-              works={this.props.works}
-            />
-          )}
-        />
+        
       </React.Fragment>
     );
   }
