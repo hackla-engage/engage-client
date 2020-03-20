@@ -288,9 +288,7 @@ class AgendaItem extends Component {
                               alignSelf: 'center',
                             }}
                             target="_blank"
-                            href={`https://backend.engage.town${
-                              this.state.agendaItem.pdfLocation
-                            }`}>
+                            href={this.state.agendaItem.pdfLocation}>
                             <Image
                               src="/static/image/pdf-icon.png"
                               style={{
