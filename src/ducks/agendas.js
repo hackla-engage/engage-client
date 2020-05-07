@@ -41,6 +41,7 @@ export default function reducer(state = defaultState, action) {
         (acc, agenda) => {
           if (acc[agenda.agenda_item_id]) {
             console.log('duplicate agenda id', agenda.agenda_item_id);
+            return acc;
           } else {
             //adds pdf location to item
             if (agendaPdf.id !== agenda.agenda) {
